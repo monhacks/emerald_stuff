@@ -1212,7 +1212,7 @@ void DrawBattleEntryBackground(void)
             break;
         }
     }
-    else if (!gSaveBlock2Ptr->optionsBattleIntro == 1)
+    else if ((!gSaveBlock2Ptr->optionsBattleIntro) == 1)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         {
