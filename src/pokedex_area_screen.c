@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bg.h"
-#include "day_night.h"
+#include "rtc.h"
 #include "event_data.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -20,7 +20,7 @@
 #include "trig.h"
 #include "pokedex_area_region_map.h"
 #include "wild_encounter.h"
-#include "constants/day_night.h"
+
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"

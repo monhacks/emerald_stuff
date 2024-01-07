@@ -7,7 +7,7 @@
 #include "battle_setup.h"
 #include "bg.h"
 #include "data.h"
-#include "day_night.h"
+#include "rtc.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -873,7 +873,7 @@ static void LoadBattleTerrainGfx(u16 terrain)
     // Copy to bg3
     LZDecompressVram(sBattleTerrainTable[terrain].tileset, (void*)BG_CHAR_ADDR(2));
     LZDecompressVram(sBattleTerrainTable[terrain].tilemap, (void*)BG_SCREEN_ADDR(26));
-    LoadCompressedPalette(sBattleTerrainTable[terrain].palette[GetCurrentTimeOfDay()], 0x20, 0x60);
+    LoadCompressedPalette(sBattleTerrainTable[terrain].palette[GetTimeOfDay()], 0x20, 0x60);
 }
 
 static void UNUSED LoadBattleTerrainEntryGfx(u16 terrain)
@@ -1486,7 +1486,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
             {
             default:
             case MAP_BATTLE_SCENE_NORMAL:
-                LoadCompressedPalette(sBattleTerrainTable[GetBattleTerrainOverride()].palette[GetCurrentTimeOfDay()], BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+                LoadCompressedPalette(sBattleTerrainTable[GetBattleTerrainOverride()].palette[GetTimeOfDay()], BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
                 break;
             case MAP_BATTLE_SCENE_GYM:
                 LoadCompressedPalette(gBattleTerrainPalette_BuildingGym, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);

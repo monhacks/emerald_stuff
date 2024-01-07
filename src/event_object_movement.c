@@ -4,7 +4,7 @@
 #include "battle_script_commands.h"
 #include "berry.h"
 #include "data.h"
-#include "day_night.h"
+
 #include "debug.h"
 #include "decoration.h"
 #include "decompress.h"
@@ -165,7 +165,7 @@ static void SpawnObjectEventOnReturnToField(u8, s16, s16);
 static void SetPlayerAvatarObjectEventIdAndObjectId(u8, u8);
 static u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct Sprite * sprite);
 static void ResetObjectEventFldEffData(struct ObjectEvent *);
-static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *, bool8 shouldTint);
+static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *);
 static u8 FindObjectEventPaletteIndexByTag(u16);
 static void _PatchObjectPalette(u16, u8);
 static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *, u8);
@@ -1604,7 +1604,7 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     objectEvent = &gObjectEvents[objectEventId];
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     if (spriteTemplate->paletteTag != TAG_NONE && spriteTemplate->paletteTag != OBJ_EVENT_PAL_TAG_DYNAMIC) {
-        LoadObjectEventPalette(spriteTemplate->paletteTag, TRUE);
+        LoadObjectEventPalette(spriteTemplate->paletteTag);
     }
 
     if (objectEvent->movementType == MOVEMENT_TYPE_INVISIBLE)
@@ -1789,7 +1789,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
         // in future this should be passed in
         paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, obj ? obj->shiny : FALSE, spriteTemplate);
     } else if (spriteTemplate->paletteTag != TAG_NONE)
-        LoadObjectEventPalette(spriteTemplate->paletteTag, FALSE);
+        LoadObjectEventPalette(spriteTemplate->paletteTag);
 
     #if OW_GFX_COMPRESS
     graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
@@ -1834,7 +1834,7 @@ u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevati
     CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, SpriteCB_VirtualObject, &spriteTemplate, &subspriteTables);
     if (spriteTemplate.paletteTag != 0xFFFF)
     {
-        LoadObjectEventPalette(spriteTemplate.paletteTag, TRUE);
+        LoadObjectEventPalette(spriteTemplate.paletteTag);
         UpdatePaletteGammaType(IndexOfSpritePaletteTag(spriteTemplate.paletteTag), GAMMA_ALT);
     }
     x += 7;
@@ -1974,7 +1974,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny) {
         spritePalette = &(shiny ? gFollowMonShinyPaletteTable : gFollowMonPaletteTable)[species];
 
     if ((paletteNum = IndexOfSpritePaletteTag(spritePalette->tag)) == 0xFF) { // Load compressed palette
-      LoadCompressedSpritePaletteDayNight(spritePalette);
+      LoadCompressedSpritePalette(spritePalette);
       paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
       if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
         UpdateSpritePaletteWithWeather(paletteNum);
@@ -2486,7 +2486,7 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
     spriteTemplate.tileTag = LoadSheetGraphicsInfo(graphicsInfo, objectEvent->graphicsId, NULL);
     #endif
     if (spriteTemplate.paletteTag != TAG_NONE && spriteTemplate.paletteTag != OBJ_EVENT_PAL_TAG_DYNAMIC)
-        LoadObjectEventPalette(spriteTemplate.paletteTag, TRUE);
+        LoadObjectEventPalette(spriteTemplate.paletteTag);
 
     i = CreateSprite(&spriteTemplate, 0, 0, 0);
     if (i != MAX_SPRITES)
@@ -2551,13 +2551,8 @@ static u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct
   sprite->inUse = FALSE;
   FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
   sprite->inUse = TRUE;
-  if (IndexOfSpritePaletteTag(spritePalette->tag) == 0xFF) {
-    sprite->oam.paletteNum = LoadSpritePaletteDayNight(spritePalette);
-  } else {
-    sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
-  }
 
-  return sprite->oam.paletteNum;
+  return LoadSpritePalette(spritePalette);
 }
 
 // Find and update based on template's paletteTag
@@ -2636,13 +2631,9 @@ static void SetBerryTreeGraphics(struct ObjectEvent *objectEvent, u8 berryId, u8
   const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
   struct Sprite *sprite = &gSprites[objectEvent->spriteId];
   UpdateSpritePalette(&sObjectEventSpritePalettes[gBerryTreePaletteTagTablePointers[berryId][berryStage]-2], sprite);
-  LoadObjectEventPalette(gBerryTreePaletteTagTablePointers[berryId][berryStage], TRUE);
-  ObjectEventSetGraphicsId(objectEvent, gBerryTreeObjectEventGraphicsIdTablePointers[berryId][berryStage]);
   sprite->oam.shape = graphicsInfo->oam->shape;
   sprite->oam.size = graphicsInfo->oam->size;
   sprite->images = gBerryTreePicTablePointers[berryId];
-  sprite->oam.paletteNum = IndexOfSpritePaletteTag(gBerryTreePaletteTagTablePointers[berryId][berryStage]);
-  UpdatePaletteGammaType(sprite->oam.paletteNum, GAMMA_ALT);
   sprite->anims = graphicsInfo->anims;
   sprite->subspriteTables = graphicsInfo->subspriteTables;
   objectEvent->inanimate = graphicsInfo->inanimate;
@@ -2675,12 +2666,6 @@ static void get_berry_tree_graphics(struct ObjectEvent *objectEvent, struct Spri
         if (berryId > ITEM_TO_BERRY(LAST_BERRY_INDEX))
             berryId = 0;
 
-        //LoadObjectEventPalette(gBerryTreePaletteTagTablePointers[berryId][berryStage]);
-        //ObjectEventSetGraphicsId(objectEvent, gBerryTreeObjectEventGraphicsIdTablePointers[berryId][berryStage]);
-        //sprite->images = gBerryTreePicTablePointers[berryId];
-        //sprite->oam.paletteNum = IndexOfSpritePaletteTag(gBerryTreePaletteTagTablePointers[berryId][berryStage]);
-        //UpdatePaletteGammaType(sprite->oam.paletteNum, GAMMA_ALT);
-        //StartSpriteAnim(sprite, berryStage);
         SetBerryTreeGraphics(objectEvent, berryId, berryStage);
         StartSpriteAnim(sprite, berryStage);
     }
@@ -2793,7 +2778,7 @@ void FreeAndReserveObjectSpritePalettes(void)
     gReservedSpritePaletteCount = OBJ_PALSLOT_COUNT;
 }
 
-u8 LoadObjectEventPalette(u16 paletteTag, bool8 shouldTint)
+u8 LoadObjectEventPalette(u16 paletteTag)
 {
     u16 i = FindObjectEventPaletteIndexByTag(paletteTag);
 
@@ -2803,19 +2788,16 @@ u8 LoadObjectEventPalette(u16 paletteTag, bool8 shouldTint)
 #else
     if (i != OBJ_EVENT_PAL_TAG_NONE)
 #endif
-        return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i], shouldTint);
+        return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i]);
 }
 
-static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette, bool8 shouldTint)
+static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette)
 {
     //u8 paletteNum;
     if (IndexOfSpritePaletteTag(spritePalette->tag) != 0xFF)
         return 0xFF;
     
-    if (shouldTint)
-        return LoadSpritePaletteDayNight(spritePalette);
-    else
-        return LoadSpritePalette(spritePalette);
+    return LoadSpritePalette(spritePalette);
     //paletteNum = LoadSpritePalette(spritePalette);
     //return paletteNum;
 }
@@ -2825,7 +2807,7 @@ void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
     // paletteTag is assumed to exist in sObjectEventSpritePalettes
     u8 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
 
-    LoadPaletteDayNight(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+    LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
 }
 
 void PatchObjectPaletteRange(const u16 *paletteTags, u8 minSlot, u8 maxSlot)

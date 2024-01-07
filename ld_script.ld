@@ -366,7 +366,6 @@ SECTIONS {
         src/sound_check_menu.o(.text);
         src/sliding_puzzle.o(.text);
         src/quests.o(.text);
-        src/day_night.o(.text);
 
     } > ROM =0
 
@@ -742,7 +741,6 @@ SECTIONS {
         src/sound_check_menu.o(.rodata);
         src/sliding_puzzle.o(.rodata);
         src/quests.o(.rodata);
-        src/day_night.o(.rodata);
     } > ROM =0
 
     song_data :

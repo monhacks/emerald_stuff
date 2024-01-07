@@ -78,16 +78,6 @@ void LoadCompressedSpritePalette(const struct CompressedSpritePalette *src)
     dest.tag = src->tag;
     LoadSpritePalette(&dest);
 }
-
-void LoadCompressedSpritePaletteDayNight(const struct CompressedSpritePalette *src)
-{
-    struct SpritePalette dest;
-
-    LZ77UnCompWram(src->data, gDecompressionBuffer);
-    dest.data = (void*) gDecompressionBuffer;
-    dest.tag = src->tag;
-    LoadSpritePaletteDayNight(&dest);
-}
 void LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag)
 {
     struct SpritePalette dest;
