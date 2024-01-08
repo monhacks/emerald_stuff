@@ -1097,6 +1097,14 @@ static void UNUSED DestroyBlendPalettesGraduallyTask(void)
     }
 }
 
+void LoadPaletteFast(const void *src, u16 offset, u16 size)
+{
+    if ((u32)src & 3)
+        return LoadPalette(src, offset, size);
+    CpuFastCopy(src, &gPlttBufferUnfaded[offset], size);
+    CpuFastCopy(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], size);
+}
+
 static void Task_BlendPalettesGradually(u8 taskId)
 {
     u32 palettes;
