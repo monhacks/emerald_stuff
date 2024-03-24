@@ -159,3 +159,4 @@
 	.include "src/pokedex_plus_hgss.o"
 	.include "src/quests.o"
 	.include "src/battle_controller_player.o"
+	.include "src/ui_startmenu_full.o"

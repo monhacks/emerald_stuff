@@ -368,7 +368,7 @@ SECTIONS {
         src/sliding_puzzle.o(.text);
         src/quests.o(.text);
         src/day_night.o(.text);
-
+        src/ui_startmenu_full.o(.text);
     } > ROM =0
 
     script_data :
@@ -744,6 +744,7 @@ SECTIONS {
         src/sliding_puzzle.o(.rodata);
         src/quests.o(.rodata);
         src/day_night.o(.rodata);
+        src/ui_startmenu_full.o(.rodata);
     } > ROM =0
 
     song_data :
