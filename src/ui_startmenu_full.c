@@ -24,6 +24,9 @@
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
+#include "dexnav.h"
+#include "quests.h"
+#include "wild_encounter.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
@@ -67,7 +70,7 @@ struct StartMenuResources
     u16 selector_x;
     u16 selector_y;
     u16 selectedMenu;
-    u16 greyMenuBoxIds[3];
+    u16 greyMenuBoxIds[4];
 };
 
 enum WindowIds
@@ -85,6 +88,8 @@ enum StartMenuBoxes
     START_MENU_CARD,
     START_MENU_MAP,
     START_MENU_OPTIONS,
+    START_MENU_DEXNAV,
+    START_MENU_QUESTS,
 };
 
 //==========EWRAM==========//
@@ -205,6 +210,7 @@ static const u16 sHP_Pal[] = INCBIN_U16("graphics/ui_startmenu_full/hpbar_pal.gb
 static const u32 sGreyMenuButtonMap_Gfx[] = INCBIN_U32("graphics/ui_startmenu_full/map_dark_sprite.4bpp.lz");
 static const u32 sGreyMenuButtonDex_Gfx[] = INCBIN_U32("graphics/ui_startmenu_full/dex_dark_sprite.4bpp.lz");
 static const u32 sGreyMenuButtonParty_Gfx[] = INCBIN_U32("graphics/ui_startmenu_full/party_dark_sprite.4bpp.lz");
+static const u32 sGreyMenuButtonGeneric_Gfx[] = INCBIN_U32("graphics/ui_startmenu_full/menu_dark_sprite.4bpp.lz");
 static const u16 sGreyMenuButton_Pal[] = INCBIN_U16("graphics/ui_startmenu_full/menu_dark.gbapal");
 
 
@@ -403,6 +409,7 @@ static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
 #define TAG_GREY_ICON_MAP 20003
 #define TAG_GREY_ICON_DEX 20005
 #define TAG_GREY_ICON_PARTY 20007
+#define TAG_GREY_ICON_GENERIC 20009
 
 static const struct OamData sOamData_GreyMenuButton =
 {
@@ -430,6 +437,13 @@ static const struct CompressedSpriteSheet sSpriteSheet_GreyMenuButtonDex =
     .data = sGreyMenuButtonDex_Gfx,
     .size = 64*32*4/2,
     .tag = TAG_GREY_ICON_DEX,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_GreyMenuButtonDexnav =
+{
+    .data = sGreyMenuButtonGeneric_Gfx,
+    .size = 64*32*4/2,
+    .tag = TAG_GREY_ICON_GENERIC,
 };
 
 static const struct SpritePalette sSpritePal_GreyMenuButton =
@@ -471,6 +485,18 @@ static const struct SpriteTemplate sSpriteTemplate_GreyMenuButtonDex =
     .callback = SpriteCallbackDummy
 };
 
+static const struct SpriteTemplate sSpriteTemplate_GreyMenuButtonDexnav =
+{
+    .tileTag = TAG_GREY_ICON_GENERIC,
+    .paletteTag = TAG_GREY_ICON,
+    .oam = &sOamData_GreyMenuButton,
+    .anims = sSpriteAnimTable_GreyMenuButton,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+
 static const struct SpriteTemplate sSpriteTemplate_GreyMenuButtonParty =
 {
     .tileTag = TAG_GREY_ICON_PARTY,
@@ -492,9 +518,10 @@ static const struct SpriteTemplate sSpriteTemplate_GreyMenuButtonParty =
 //
 #define CURSOR_LEFT_COL_X 128
 #define CURSOR_RIGHT_COL_X 128 + 64 + 8
-#define CURSOR_TOP_ROW_Y 40
-#define CURSOR_MID_ROW_Y 40 + 40
-#define CURSOR_BTM_ROW_Y 40 + 80
+#define CURSOR_TOP_ROW_Y 32
+#define CURSOR_MID_ROW_Y 32 + 32
+#define CURSOR_MID_ROW2_Y 32 + 64
+#define CURSOR_BTM_ROW_Y 32 + 96
 
 static void CreateCursor()
 {
@@ -522,9 +549,10 @@ struct SpriteCordsStruct {
 
 static void CursorCallback(struct Sprite *sprite) // Sprite callback for the cursor that updates the position every frame when the input control code updates
 {
-    struct SpriteCordsStruct spriteCords[3][2] = {
+    struct SpriteCordsStruct spriteCords[4][2] = {
         {{CURSOR_LEFT_COL_X, CURSOR_TOP_ROW_Y}, {CURSOR_RIGHT_COL_X, CURSOR_TOP_ROW_Y}},
         {{CURSOR_LEFT_COL_X, CURSOR_MID_ROW_Y}, {CURSOR_RIGHT_COL_X, CURSOR_MID_ROW_Y}},
+        {{CURSOR_LEFT_COL_X, CURSOR_MID_ROW2_Y}, {CURSOR_RIGHT_COL_X, CURSOR_MID_ROW2_Y}},
         {{CURSOR_LEFT_COL_X, CURSOR_BTM_ROW_Y}, {CURSOR_RIGHT_COL_X, CURSOR_BTM_ROW_Y}},
     };
 
@@ -547,6 +575,8 @@ static void InitCursorInPlace()
         sStartMenuDataPtr->selector_y = 0;
     else if (gSelectedMenu > 1 && gSelectedMenu <= 3)
         sStartMenuDataPtr->selector_y = 1;
+    else if (gSelectedMenu > 5 && gSelectedMenu <= 7)
+        sStartMenuDataPtr->selector_y = 3;
     else
         sStartMenuDataPtr->selector_y = 2;
 }
@@ -601,7 +631,7 @@ static void CreatePartyMonIcons()
     u8 i = 0;
     s16 x = ICON_BOX_1_START_X;
     s16 y = ICON_BOX_1_START_Y;
-    struct Pokemon *mon;
+    //struct Pokemon *mon;
     LoadMonIconPalettes();
     for(i = 0; i < gPlayerPartyCount; i++)
     {   
@@ -779,10 +809,12 @@ static void CreateGreyedMenuBoxes()
     if(!FlagGet(FLAG_SYS_POKENAV_GET))
     {
         if (sStartMenuDataPtr->greyMenuBoxIds[2] == SPRITE_NONE)
-            sStartMenuDataPtr->greyMenuBoxIds[2] = CreateSprite(&sSpriteTemplate_GreyMenuButtonMap, CURSOR_LEFT_COL_X, CURSOR_BTM_ROW_Y, 1);
+            sStartMenuDataPtr->greyMenuBoxIds[2] = CreateSprite(&sSpriteTemplate_GreyMenuButtonMap, CURSOR_LEFT_COL_X, CURSOR_MID_ROW2_Y, 1);
         gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]].invisible = FALSE;
         StartSpriteAnim(&gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]], 0);
     }
+
+    
     
     return;
 }
@@ -1403,13 +1435,13 @@ static void Task_StartMenuFullMain(u8 taskId)
     if (JOY_NEW(DPAD_UP))
     {
         if (sStartMenuDataPtr->selector_y == 0)
-            sStartMenuDataPtr->selector_y = 2;
+            sStartMenuDataPtr->selector_y = 1;
         else
             sStartMenuDataPtr->selector_y--;
     }
     if (JOY_NEW(DPAD_DOWN))
     {
-        if (sStartMenuDataPtr->selector_y == 2)
+        if (sStartMenuDataPtr->selector_y == 3)
             sStartMenuDataPtr->selector_y = 0;
         else
             sStartMenuDataPtr->selector_y++;
@@ -1467,6 +1499,21 @@ static void Task_StartMenuFullMain(u8 taskId)
                 PlaySE(SE_SELECT);
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 gTasks[taskId].func = Task_OpenOptionsMenuStartMenu;
+                break;
+            case START_MENU_DEXNAV:
+                if(FlagGet(FLAG_SYS_DEXNAV_GET))
+                {
+                PlaySE(SE_SELECT);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+                gTasks[taskId].func = Task_OpenDexNavFromStartMenu;
+                } else {
+                    PlaySE(SE_BOO);
+                }
+                break;
+            case START_MENU_QUESTS:
+                PlaySE(SE_SELECT);
+                BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
+                gTasks[taskId].func = Task_QuestMenu_OpenFromStartMenu;
                 break;
         }
     }
