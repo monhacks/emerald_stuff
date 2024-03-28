@@ -812,6 +812,11 @@ static void CreateGreyedMenuBoxes()
             sStartMenuDataPtr->greyMenuBoxIds[2] = CreateSprite(&sSpriteTemplate_GreyMenuButtonMap, CURSOR_LEFT_COL_X, CURSOR_MID_ROW2_Y, 1);
         gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]].invisible = FALSE;
         StartSpriteAnim(&gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]], 0);
+
+        if (sStartMenuDataPtr->greyMenuBoxIds[3] == SPRITE_NONE)
+            sStartMenuDataPtr->greyMenuBoxIds[3] = CreateSprite(&sSpriteTemplate_GreyMenuButtonDexnav, CURSOR_LEFT_COL_X, CURSOR_BTM_ROW_Y, 1);
+        gSprites[sStartMenuDataPtr->greyMenuBoxIds[3]].invisible = FALSE;
+        StartSpriteAnim(&gSprites[sStartMenuDataPtr->greyMenuBoxIds[3]], 0);
     }
 
     
@@ -822,7 +827,7 @@ static void CreateGreyedMenuBoxes()
 static void DestroyGreyMenuBoxes()
 {
     u8 i = 0;
-    for(i = 0; i < 3; i++)
+    for(i = 0; i < 4; i++)
     {
         DestroySprite(&gSprites[sStartMenuDataPtr->greyMenuBoxIds[i]]);
         sStartMenuDataPtr->greyMenuBoxIds[i] = SPRITE_NONE;
@@ -944,7 +949,7 @@ void StartMenuFull_Init(MainCallback callback)
         sStartMenuDataPtr->iconBoxSpriteIds[i] = SPRITE_NONE;
         sStartMenuDataPtr->iconMonSpriteIds[i] = SPRITE_NONE;
     }
-    for(i= 0; i < 3; i++)
+    for(i= 0; i < 4; i++)
     {
         sStartMenuDataPtr->greyMenuBoxIds[i] = SPRITE_NONE;
     }
@@ -1158,6 +1163,7 @@ static bool8 StartMenuFull_LoadGraphics(void) // Load the Tilesets, Tilemaps, Sp
         LoadCompressedSpriteSheet(&sSpriteSheet_GreyMenuButtonMap);
         LoadCompressedSpriteSheet(&sSpriteSheet_GreyMenuButtonDex);
         LoadCompressedSpriteSheet(&sSpriteSheet_GreyMenuButtonParty);
+        LoadCompressedSpriteSheet(&sSpriteSheet_GreyMenuButtonDexnav);
         LoadSpritePalette(&sSpritePal_GreyMenuButton);
         sStartMenuDataPtr->gfxLoadState++;
         break;
@@ -1501,12 +1507,13 @@ static void Task_StartMenuFullMain(u8 taskId)
                 gTasks[taskId].func = Task_OpenOptionsMenuStartMenu;
                 break;
             case START_MENU_DEXNAV:
-                if(FlagGet(FLAG_SYS_DEXNAV_GET))
+                if(FlagGet(FLAG_SYS_POKENAV_GET))
                 {
                 PlaySE(SE_SELECT);
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 gTasks[taskId].func = Task_OpenDexNavFromStartMenu;
-                } else {
+                } 
+                else {
                     PlaySE(SE_BOO);
                 }
                 break;
