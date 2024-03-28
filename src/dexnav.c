@@ -21,6 +21,7 @@
 #include "international_string_util.h"
 #include "m4a.h"
 #include "map_name_popup.h"
+#include "ui_startmenu_full.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
@@ -2315,7 +2316,7 @@ void Task_OpenDexNavFromStartMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        DexNavGuiInit(CB2_ReturnToFieldWithOpenMenu);
+        DexNavGuiInit(CB2_ReturnToFullScreenStartMenu);
         DestroyTask(taskId);
     }
 }
