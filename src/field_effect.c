@@ -980,9 +980,10 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
     return CreateSprite(&sSpriteTemplate_NewGameBirch, x, y, subpriority);
 }
 
-u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
+u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority, bool8 shiny)
 {
-    s32 spriteId = CreateMonPicSprite(species, FALSE, 0x8000, TRUE, x, y, 0, species);
+    int personality = shiny ? 0 : 0x8000;
+    s32 spriteId = CreateMonPicSprite(species, 0, personality, TRUE, x, y, 0, species);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(species) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
@@ -4332,7 +4333,8 @@ static void UseVsSeeker_DoPlayerAnimation(struct Task *task)
     task->data[0]++;
 }
 
-static void UseVsSeeker_ResetPlayerGraphics(struct Task *task) {
+static void UseVsSeeker_ResetPlayerGraphics(struct Task *task)
+{
     struct ObjectEvent* playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (!ObjectEventClearHeldMovementIfFinished(playerObj))

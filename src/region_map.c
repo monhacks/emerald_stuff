@@ -1024,7 +1024,7 @@ void RegionMap_GetSectionCoordsFromCurrFieldPos(u16* mapSectionId, u16* cursorPo
             sRegionMap->playerIsInCave = TRUE;
         break;
     case MAP_TYPE_UNDERGROUND:
-    case MAP_TYPE_UNKNOWN:
+    case MAP_TYPE_OUTDOOR_DUNGEON:
         if (gMapHeader.allowEscaping)
         {
             mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
@@ -1666,6 +1666,9 @@ u8 *GetMapName(u8 *dest, u16 regionMapId, u16 padLength)
 {
     u8 *str;
     u16 i;
+
+    if (DECAP_ENABLED && !DECAP_MAP_NAMES)
+        *dest++ = CHAR_FIXED_CASE;
 
     if (regionMapId == MAPSEC_SECRET_BASE)
     {

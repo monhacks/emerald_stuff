@@ -1,3 +1,4 @@
+
 .set LOCALID_CAPT_STERN, 1
 .set LOCALID_ARCHIE, 2
 .set LOCALID_GRUNT_1, 3
@@ -74,15 +75,19 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	setvar VAR_0x8004, ITEM_DEVON_PARTS
 	call Common_EventScript_PlayerHandedOverTheItem
 	msgbox SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo, MSGBOX_DEFAULT
+    giveitem ITEM_SS_TICKET
+    waitmessage
+    msgbox SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo2, MSGBOX_DEFAULT
 	closemessage
 	fadescreen FADE_TO_BLACK
 	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
-  callnative UpdateFollowingPokemon
+    callnative UpdateFollowingPokemon
 	removeobject LOCALID_CAPT_STERN
-	setflag FLAG_HIDE_ROUTE_110_TEAM_AQUA
-	call_if_eq VAR_REGISTER_BIRCH_STATE, 0, SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch
+	@ setflag FLAG_HIDE_ROUTE_110_TEAM_AQUA
+    setvar VAR_JOHTO_INTRODUCTION_STATE, 1
+	@ call_if_eq VAR_REGISTER_BIRCH_STATE, 0, SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch
 	setflag FLAG_DELIVERED_DEVON_GOODS
 	clearflag FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
@@ -361,10 +366,16 @@ SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo:
 	.string "There's no time to lose!\p"
 	.string "We have to set out on our ocean-floor\n"
 	.string "expedition really soon.\p"
-	.string "Thanks again, but now I've got\n"
-	.string "to go!\p"
-	.string "Feel free to wander around and check\n"
-	.string "out our facilities, though.$"
+	.string "Thanks again, I would like you to have\n"
+	.string "this S.S Anne ticket to show my\l"
+	.string "gratitude.$"
+
+SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo2:
+    .string "I hear they are hosting a banquet where\n"
+	.string "many trainers are gathering right now.\l"
+	.string "You can find it docked in the\l"
+    .string "north side of Slateport Market\l"
+    .string "to west of here.$"
 
 SlateportCity_OceanicMuseum_2F_Text_RemindsMeOfAbandonedShip:
 	.string "I saw a model of a ship here.\p"
@@ -438,3 +449,7 @@ SlateportCity_OceanicMuseum_2F_Text_SSAnneReplica:
 	.string "“S.S. Anne\p"
 	.string "“A replica of the luxury liner that\n"
 	.string "circles the globe.”$"
+
+oceanictestscript::
+	return
+

@@ -1,3 +1,4 @@
+
 Route115_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, Route115_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, Route115_OnTransition
@@ -143,3 +144,103 @@ Route115_Text_MeteorFallsSign:
 	.string "Meteor Falls\n"
 	.string "Fallarbor Town through here$"
 
+Route115_Falkner::
+	lock
+	msgbox Route115_Falkner_Text_0
+	faceplayer
+	applymovement 25, route115falknerPidgeotto
+	msgbox Route115_Falkner_Text_1
+	msgbox Route115_Falkner_Text_2, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq Route115_Falkner_2
+	msgbox Route115_Falkner_Text_4
+	trainerbattle_no_intro TRAINER_ROUTE115_FALKNER, Route115_Falkner_Text_5
+	msgbox Route115_Falkner_Text_6
+	msgbox Route115_Falkner_Text_7
+	msgbox Route115_Falkner_Text_8
+	giveitem ITEM_TM19, 1
+	waitmessage
+	msgbox Route115_Falkner_Text_9
+	fadescreen FADE_TO_BLACK
+	delay 30
+	closemessage
+	removeobject 24
+	removeobject 25
+	delay 30
+	fadescreen FADE_FROM_BLACK
+	setflag FLAG_HIDE_ROUTE115_FALKNER
+	release
+	end
+
+Route115_Falkner_2:
+	msgbox Route115_Falkner_Text_3
+	applymovement 24, route115falknerlookAway
+	release
+	end
+
+
+Route115_Falkner_Pidgeotto::
+	lock
+	faceplayer
+	playmoncry SPECIES_PIDGEOTTO, CRY_MODE_NORMAL
+	msgbox Route115_Falkner_Pidgeotto_Text_0
+	waitmoncry
+	applymovement 25, route115falknerPidgeotto
+	release
+	end
+
+
+route115falknerPidgeotto:
+	face_player
+	step_end
+
+route115falknerlookAway:
+	face_left
+	step_end
+
+Route115_Falkner_Text_0:
+	.string "???: The breeze is really nice here isn't\n"
+	.string "it, Pidgeotto?$"
+
+Route115_Falkner_Text_1:
+	.string "I'm Falkner from Johto. I came here to\n"
+	.string "Hoenn to train with my bird Pokémon.$"
+
+Route115_Falkner_Text_2:
+	.string "I see the same spark in your eyes that\n"
+	.string "I have for Pokémon battles. How about\l"
+	.string "we test our skills in an unofficial\l"
+	.string "match?$"
+
+Route115_Falkner_Text_3:
+	.string "I see. Well, I hope we can battle some\n"
+	.string "other time.$"
+
+Route115_Falkner_Text_4:
+	.string "Excelent, I promise to give you a battle\n"
+	.string "that soars as high as my bird Pokémon.\l"
+	.string "Let's see if you can withstand the\l"
+	.string "grace and power of the skies!$"
+
+Route115_Falkner_Text_5:
+	.string "Spectacular! You clipped our wings!$"
+
+Route115_Falkner_Text_6:
+	.string "I was right about you, that spark in\n"
+	.string "your eyes is the same I saw when I\l"
+	.string "faced another young trainer just like\l"
+	.string "you some time ago.$"
+
+Route115_Falkner_Text_7:
+	.string "I will keep travelling this land more, I\n"
+	.string "hope to battle you again another time.$"
+
+Route115_Falkner_Text_8:
+	.string "Take this as a thank you gift for our\n"
+	.string "battle.$"
+
+Route115_Falkner_Text_9:
+	.string "Good bye for now.$"
+
+Route115_Falkner_Pidgeotto_Text_0:
+	.string "Pidgeotto: Pidgeo!$"

@@ -56,6 +56,7 @@ SECTIONS {
         /* COMMON starts at 0x30022A8 */
         INCLUDE "sym_common.ld"
         *libc.a:sbrkr.o(COMMON);
+        gStackBase = .;
     } > IWRAM
 
     /* BEGIN ROM DATA */
@@ -366,7 +367,7 @@ SECTIONS {
         src/sound_check_menu.o(.text);
         src/sliding_puzzle.o(.text);
         src/quests.o(.text);
-
+        src/ui_startmenu_full.o(.text);
     } > ROM =0
 
     script_data :
@@ -741,6 +742,7 @@ SECTIONS {
         src/sound_check_menu.o(.rodata);
         src/sliding_puzzle.o(.rodata);
         src/quests.o(.rodata);
+        src/ui_startmenu_full.o(.rodata);
     } > ROM =0
 
     song_data :

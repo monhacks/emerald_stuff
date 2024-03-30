@@ -223,11 +223,7 @@ RustboroCity_DevonCorp_2F_Text_WowThatsAPokenav:
 	.string "That's a Pokénav!\p"
 	.string "It came about as a result of our\n"
 	.string "President's desire to learn about\l"
-	.string "the feelings of Pokémon.\p"
-	.string "Would you like me to describe its\n"
-	.string "features in detail?\p"
-	.string "No, no. I think you'll find out just by\n"
-	.string "trying the Pokénav out.$"
+	.string "the feelings of Pokémon.$"
 
 RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams:
 	.string "I'm trying to develop a device that\n"
@@ -311,7 +307,7 @@ script dreamResearcherQuest {
     returnqueststate(QUEST_9)
     switch(var(VAR_RESULT)) {
         case 1:
-            msgbox(format("I'm trying to develop a new program that can analyze dreams of Pokémon. However I'm missing a test subject. Could you help me find an Abra for my research? I can reward you for the trouble."), MSGBOX_YESNO)
+            msgbox(format("I'm trying to develop a new program that can analyze dreams of Pokémon. However I'm missing a test subject. Could you help me find an Abra for my research? I can reward you with our latest piece of technology, a Dexnav."), MSGBOX_YESNO)
             if (var(VAR_RESULT) == YES) {
                 msgbox(format("Many thanks! I think you can find wild Abras in Route 116."))
                 startquest(QUEST_9)
@@ -337,8 +333,12 @@ script dreamResearcherQuest {
                 fadescreen(FADE_FROM_BLACK)
                 msgbox(format("It's done, and with great results thanks to you! The time just flies by when you're working, doesn't it?"))
                 msgbox(format("You can have your Abra back, and here's the promised reward."))
-                giveitem(ITEM_WHIPPED_DREAM)
-                msgbox(format("One day I hope to be able to enter the dreams of Pokémons!"))
+				playfanfare(MUS_OBTAIN_ITEM)
+				msgbox(format("{PLAYER} received a Dexnav."))
+				msgbox(format("This device allows you to more comfortably catch lots of Pokémon! It's still in F&F alpha phase, however I believe the president would want you to have it."))
+                setflag(FLAG_SYS_DEXNAV_GET)
+				waitfanfare
+                msgbox(format("I'll continue my research and one day hope to be able to enter the dreams of Pokémons!"))
                 completequest(QUEST_9)
             } else {
                 msgbox(format("Not yet? Take your time, I have hourly wage so there's no rush. You can find Abras in Route 116."))

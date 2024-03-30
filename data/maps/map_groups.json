@@ -104,7 +104,11 @@
     "VajraPyramid",
     "VajraVillage",
     "ShamoutiIsland",
-    "RuggedRoad"
+    "RuggedRoad",
+    "MirageWaterway",
+    "OlivineCity",
+    "Route40",
+    "Route39"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -482,7 +486,12 @@
     "VajraPyramidBF4",
     "RuggedCave",
     "RuggedCave2",
-    "RuggedCave3"
+    "RuggedCave3",
+    "DarkCave",
+    "MirageUnderwater",
+    "SSAnne",
+    "SSKanne",
+    "SSAnne_rooms"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

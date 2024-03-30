@@ -968,6 +968,10 @@ gText_PlayerFoundOneTMHM::
 	.string "{PLAYER} found one {STR_VAR_1}\n"
 	.string "{STR_VAR_2}!$"
 
+gText_PlayerFoundTMHMs::
+	.string "{PLAYER} found {STR_VAR_3} {STR_VAR_1}\n"
+	.string "{STR_VAR_2}!$"
+
 gText_Sudowoodo_Attacked::
 	.string "The weird tree doesn't like the\n"
 	.string "Wailmer Pail!\p"
@@ -1206,3 +1210,21 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/BrawlyDojoRematchRoom/scripts.inc"
 
 	.include "data/maps/BrawlyDojoTrainingRoom/scripts.inc"
+
+	.include "data/maps/DarkCave/scripts.inc"
+
+	.include "data/maps/MirageWaterway/scripts.inc"
+
+	.include "data/maps/MirageUnderwater/scripts.inc"
+
+	.include "data/maps/OlivineCity/scripts.inc"
+
+	.include "data/maps/Route40/scripts.inc"
+
+	.include "data/maps/SSAnne/scripts.inc"
+
+	.include "data/maps/SSKanne/scripts.inc"
+
+	.include "data/maps/SSAnne_rooms/scripts.inc"
+
+	.include "data/maps/Route39/scripts.inc"

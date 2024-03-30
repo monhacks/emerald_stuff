@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "data.h"
 #include "graphics.h"
+#include "battle_transition.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -222,9 +223,13 @@ const union AnimCmd *const gAnims_MonPic[MAX_MON_PIC_FRAMES] =
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
 #define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
 
+const union AnimCmd *const sAnims_Trainer[] ={
+    sAnim_GeneralFrame0,
+    sAnim_GeneralFrame0,
+};
+
 #include "data/trainer_parties.h"
 #include "data/trainers.h"
-#include "data/text/move_names.h"
 #include "data/text/follower_messages.h"
 
 #include "data/pokemon_graphics/palette_table.h"

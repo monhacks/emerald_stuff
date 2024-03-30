@@ -4477,6 +4477,29 @@ extern const u32 gItemIconPalette_HearthflameMask[];
 extern const u32 gItemIcon_CornerstoneMask[];
 extern const u32 gItemIconPalette_CornerstoneMask[];
 
+extern const u32 gItemIcon_Remedy[];
+extern const u32 gItemIconPalette_Remedy[];
+extern const u32 gItemIcon_FineRemedy[];
+extern const u32 gItemIconPalette_FineRemedy[];
+extern const u32 gItemIcon_SuperbRemedy[];
+extern const u32 gItemIconPalette_SuperbRemedy[];
+extern const u32 gItemIcon_AuxBottle[];
+extern const u32 gItemIconPalette_AuxEvasion[];
+extern const u32 gItemIconPalette_AuxGuard[];
+extern const u32 gItemIconPalette_AuxPower[];
+extern const u32 gItemIcon_AuxPowerguard[];
+extern const u32 gItemIconPalette_AuxPowerguard[];
+extern const u32 gItemIcon_ChoiceDumpling[];
+extern const u32 gItemIconPalette_ChoiceDumpling[];
+extern const u32 gItemIcon_JubilifeMuffin[];
+extern const u32 gItemIconPalette_JubilifeMuffin[];
+extern const u32 gItemIcon_PokeshiDoll[];
+extern const u32 gItemIconPalette_PokeshiDoll[];
+extern const u32 gItemIcon_SwapSnack[];
+extern const u32 gItemIconPalette_SwapSnack[];
+extern const u32 gItemIcon_TwiceSpicedRadish[];
+extern const u32 gItemIconPalette_TwiceSpicedRadish[];
+
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 
@@ -4729,7 +4752,17 @@ extern const u32 gStatusPal_Icons[];
 extern const u32 gShopMenu_Gfx[];
 extern const u32 gShopMenu_Tilemap[];
 extern const u32 gShopMenu_Pal[];
+extern const u32 gShopMenu_ScrollGfx[];
+extern const u32 gShopMenu_ScrollTilemap[];
 extern const u32 gShopMenuMoney_Gfx[];
+extern const u16 gShopMenu_CursorGfx[];
+
+// shop seller mugshots
+extern const u8 gShopMenuSellerMugshotGfx_Jerry[];
+extern const u16 gShopMenuSellerMugshotPal_Jerry[];
+
+extern const u8 gShopMenuSellerMugshotGfx_Jennie[];
+extern const u16 gShopMenuSellerMugshotPal_Jennie[];
 
 extern const u32 gBattleInterface_BallStatusBarGfx[];
 extern const u8 gBattleInterface_BallDisplayGfx[];

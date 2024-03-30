@@ -1,7 +1,7 @@
 #include "global.h"
 #include "bike.h"
 #include "clock.h"
-
+#include "palette.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_effect_helpers.h"

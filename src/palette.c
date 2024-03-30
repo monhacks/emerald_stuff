@@ -85,15 +85,14 @@ static const u8 sRoundedDownGrayscaleMap[] = {
 
 void LoadCompressedPalette(const u32 *src, u16 offset, u16 size)
 {
-    LZDecompressWram(src, gPaletteDecompressionBuffer);
-    CpuCopy16(gPaletteDecompressionBuffer, &gPlttBufferUnfaded[offset], size);
-    CpuCopy16(gPaletteDecompressionBuffer, &gPlttBufferFaded[offset], size);
+    LZ77UnCompWram(src, gPaletteDecompressionBuffer);
+    LoadPalette(gPaletteDecompressionBuffer, offset, size);
 }
 
 void LoadPalette(const void *src, u16 offset, u16 size)
 {
     CpuCopy16(src, &gPlttBufferUnfaded[offset], size);
-    CpuCopy16(src, &gPlttBufferFaded[offset], size);
+    CpuCopy16(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], size);
 }
 
 void FillPalette(u16 value, u16 offset, u16 size)
@@ -1100,9 +1099,14 @@ static void UNUSED DestroyBlendPalettesGraduallyTask(void)
 void LoadPaletteFast(const void *src, u16 offset, u16 size)
 {
     if ((u32)src & 3)
-        return LoadPalette(src, offset, size);
-    CpuFastCopy(src, &gPlttBufferUnfaded[offset], size);
-    CpuFastCopy(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], size);
+    {
+        LoadPalette(src, offset, size);
+    }
+    else
+    {
+        CpuFastCopy(src, &gPlttBufferUnfaded[offset], size);
+        CpuFastCopy(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], size);
+    }
 }
 
 static void Task_BlendPalettesGradually(u8 taskId)

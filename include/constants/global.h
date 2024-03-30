@@ -4,8 +4,10 @@
 #include "config/battle.h"
 #include "config/debug.h"
 #include "config/item.h"
+#include "config/level_caps.h"
 #include "config/pokemon.h"
 #include "config/overworld.h"
+#include "config/decap.h"
 
 // Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
 // In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
@@ -59,9 +61,9 @@
 #define TV_SHOWS_COUNT 8
 #define POKE_NEWS_COUNT 16
 #define PC_ITEMS_COUNT 10
-#define BAG_ITEMS_COUNT 110
-#define BAG_KEYITEMS_COUNT 30
-#define BAG_POKEBALLS_COUNT 24
+#define BAG_ITEMS_COUNT 150
+#define BAG_KEYITEMS_COUNT 50
+#define BAG_POKEBALLS_COUNT 30
 #define BAG_TMHM_COUNT 128
 #define BAG_BERRIES_COUNT 67
 #define BAG_MEDICINE_COUNT 38
@@ -107,16 +109,13 @@
 
 // string lengths
 #define ITEM_NAME_LENGTH 14
+#define ITEM_NAME_PLURAL_LENGTH ITEM_NAME_LENGTH + 2 // 2 is used for the instance where a word's suffix becomes y->ies
 #define POKEMON_NAME_LENGTH 10
 #define POKEMON_NAME_BUFFER_SIZE max(20, POKEMON_NAME_LENGTH + 1) // Frequently used buffer size. Larger than necessary
 #define PLAYER_NAME_LENGTH 7
 #define MAIL_WORDS_COUNT 9
 #define EASY_CHAT_BATTLE_WORDS_COUNT 6
-#if B_EXPANDED_MOVE_NAMES == TRUE
-#define MOVE_NAME_LENGTH 16
-#else
-#define MOVE_NAME_LENGTH 12
-#endif
+#define MOVE_NAME_LENGTH ((B_EXPANDED_MOVE_NAMES == TRUE) ? 16 : 12)
 #define NUM_QUESTIONNAIRE_WORDS 4
 #define QUIZ_QUESTION_LEN 9
 #define WONDER_CARD_TEXT_LENGTH 40
@@ -124,11 +123,7 @@
 #define WONDER_CARD_BODY_TEXT_LINES 4
 #define WONDER_NEWS_BODY_TEXT_LINES 10
 #define TYPE_NAME_LENGTH 6
-#if B_EXPANDED_ABILITY_NAMES == TRUE
-#define ABILITY_NAME_LENGTH 16
-#else
-#define ABILITY_NAME_LENGTH 12
-#endif
+#define ABILITY_NAME_LENGTH ((B_EXPANDED_ABILITY_NAMES == TRUE) ? 16 : 12)
 #define TRAINER_NAME_LENGTH 10
 
 #define MAX_STAMP_CARD_STAMPS 7

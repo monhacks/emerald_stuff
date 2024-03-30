@@ -1,10 +1,15 @@
 Everyone who worked on the Pret disassembly and RHH expansion
+TrainerX493 and HunarPG - Glazed's Johto tiles
 Pawkkie - Various resources and shadows port of merrps
+Archie&Mudkip - New pause menu
+Mudkip - New shop menu
 quocmanh94 - HGSS berry animation
+BSBob - Map popup
+Ravepossum - Map popup, pokedex from party menu, showmonpic shinyness
 Voluptua - town map port
 Beniboy for helping with numerous issues during developement
 Skeli, Ghoulslash, HN, Karathan, McBoy, Greenphx, MGriffin, BSBob, Raymie Humbert, missiri and Tustin2121 for Quest Menu
-BelialClover for EV allocation system
+BelialClover/Rioluwott for EV allocation system, ROWE bag screen
 Paccy - his glimmering emerald was used as a base
 KingTapir - Desert Tiles
 Zeo254 - some tilesets
@@ -18,6 +23,7 @@ Sierraffinity - Day/Night System, e-Reader functionality
 Spherical Ice - Sliding puzzles
 Merrp - Following Pokemon, Shadows
 Fo0xerz - Lawrence III sprite
+Nicoswag - Ability popup design
 ghoulslash - DexNav, Auto-run, Mart Items by Badge Count, Bag Sorting, Repeated Field Medicine Use, Pokecenters don't count eggs, Overworld Expansion, givecustommon 
 ipatix - High Quality Audio Mixer
 Wyserth - Decapitalisation
@@ -32,6 +38,7 @@ Bassoonian - Pokemon date met in summary screen
 Jaizu - Keyboard swaps to lowercase after the first letter, and for some firered tiles
 Aveontrainer - Gen 3 style overworld object sprites
 Devolov - Exp all with one message
+MandL27 and Amelia - Type icons
 NotToDisturb - Object alpha shadows
 Hyo-oppa - amazing trainer sprites
 Duke - Move name instead of TM name in shops

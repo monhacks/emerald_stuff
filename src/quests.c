@@ -20,6 +20,7 @@
 #include "scanline_effect.h"
 #include "sound.h"
 #include "string_util.h"
+#include "ui_startmenu_full.h"
 #include "strings.h"
 #include "task.h"
 #include "text_window.h"
@@ -1191,12 +1192,6 @@ static const u8 sQuestMenuWindowFontColors[][4] =
 void QuestMenu_Init(u8 a0, MainCallback callback)
 {
 	u8 i;
-
-	if (a0 >= 2)
-	{
-		SetMainCallback2(callback);
-		return;
-	}
 
 	if ((sStateDataPtr = Alloc(sizeof(struct QuestMenuResources))) == NULL)
 	{
@@ -3013,7 +3008,7 @@ void Task_QuestMenu_OpenFromStartMenu(u8 taskId)
 	if (!gPaletteFade.active)
 	{
 		CleanupOverworldWindowsAndTilemaps();
-		QuestMenu_Init(tItemPcParam, CB2_ReturnToFieldWithOpenMenu);
+		QuestMenu_Init(tItemPcParam, CB2_ReturnToFullScreenStartMenu);
 		DestroyTask(taskId);
 	}
 }

@@ -223,11 +223,7 @@ RustboroCity_DevonCorp_2F_Text_WowThatsAPokenav:
 	.string "That's a Pokénav!\p"
 	.string "It came about as a result of our\n"
 	.string "President's desire to learn about\l"
-	.string "the feelings of Pokémon.\p"
-	.string "Would you like me to describe its\n"
-	.string "features in detail?\p"
-	.string "No, no. I think you'll find out just by\n"
-	.string "trying the Pokénav out.$"
+	.string "the feelings of Pokémon.$"
 
 RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams:
 	.string "I'm trying to develop a device that\n"
@@ -329,11 +325,11 @@ dreamResearcherQuest_4:
 	special CheckSpecies
 	compare VAR_RESULT, TRUE
 	goto_if_eq dreamResearcherQuest_9
-	msgbox dreamResearcherQuest_Text_10
+	msgbox dreamResearcherQuest_Text_12
 	goto dreamResearcherQuest_1
 
 dreamResearcherQuest_5:
-	msgbox dreamResearcherQuest_Text_11
+	msgbox dreamResearcherQuest_Text_13
 	goto dreamResearcherQuest_1
 
 dreamResearcherQuest_6:
@@ -356,8 +352,12 @@ dreamResearcherQuest_9:
 	fadescreen FADE_FROM_BLACK
 	msgbox dreamResearcherQuest_Text_7
 	msgbox dreamResearcherQuest_Text_8
-	giveitem ITEM_WHIPPED_DREAM
+	playfanfare MUS_OBTAIN_ITEM
 	msgbox dreamResearcherQuest_Text_9
+	msgbox dreamResearcherQuest_Text_10
+	setflag FLAG_SYS_DEXNAV_GET
+	waitfanfare
+	msgbox dreamResearcherQuest_Text_11
 	completequest QUEST_9
 	goto dreamResearcherQuest_1
 
@@ -371,8 +371,8 @@ dreamResearcherQuest_Text_0:
 	.string "that can analyze dreams of Pokémon.\l"
 	.string "However I'm missing a test subject.\l"
 	.string "Could you help me find an Abra for my\l"
-	.string "research? I can reward you for the\l"
-	.string "trouble.$"
+	.string "research? I can reward you with our\l"
+	.string "latest piece of technology, a Dexnav.$"
 
 dreamResearcherQuest_Text_1:
 	.string "Many thanks! I think you can find wild\n"
@@ -406,15 +406,26 @@ dreamResearcherQuest_Text_8:
 	.string "the promised reward.$"
 
 dreamResearcherQuest_Text_9:
-	.string "One day I hope to be able to enter the\n"
-	.string "dreams of Pokémons!$"
+	.string "{PLAYER} received a Dexnav.$"
 
 dreamResearcherQuest_Text_10:
+	.string "This device allows you to more\n"
+	.string "comfortably catch lots of Pokémon!\l"
+	.string "It's still in F&F alpha phase, however I\l"
+	.string "believe the president would want you to\l"
+	.string "have it.$"
+
+dreamResearcherQuest_Text_11:
+	.string "I'll continue my research and one day\n"
+	.string "hope to be able to enter the dreams of\l"
+	.string "Pokémons!$"
+
+dreamResearcherQuest_Text_12:
 	.string "Not yet? Take your time, I have hourly\n"
 	.string "wage so there's no rush. You can find\l"
 	.string "Abras in Route 116.$"
 
-dreamResearcherQuest_Text_11:
+dreamResearcherQuest_Text_13:
 	.string "Hi again! My research has been going\n"
 	.string "great and we're making great progress\l"
 	.string "on the dream research. We still can't\l"

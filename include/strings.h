@@ -545,10 +545,13 @@ extern const u8 gText_Plus[];
 extern const u8 gText_CryOf[];
 extern const u8 gText_SizeComparedTo[];
 extern const u8 gText_PokedexRegistration[];
+extern const u8 gText_Pokedex[];
 extern const u8 gText_NumberClear01[];
 extern const u8 gText_5MarksPokemon[];
 extern const u8 gText_UnkHeight[];
+extern const u8 gText_UnkHeightMetric[];
 extern const u8 gText_UnkWeight[];
+extern const u8 gText_UnkWeightMetric[];
 extern const u8 gText_HTHeight[];
 extern const u8 gText_WTWeight[];
 extern const u8 gText_SearchingPleaseWait[];
@@ -3724,5 +3727,8 @@ extern const u8 gText_BasePointsResetToZero[];
 
 extern const u8 gText_Fertilize[];
 extern const u8 gText_PlantBerry[];
+// BSBob map pop-ups
+extern const u8 gText_AM[];
+extern const u8 gText_PM[];
 
 #endif // GUARD_STRINGS_H

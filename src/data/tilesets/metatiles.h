@@ -255,3 +255,42 @@ const u16 gMetatileAttributes_DewfordDojo[] = INCBIN_U16("data/tilesets/secondar
 
 const u16 gMetatiles_DewfordDojoBuilding[] = INCBIN_U16("data/tilesets/secondary/dewford_dojo_building/metatiles.bin");
 const u16 gMetatileAttributes_DewfordDojoBuilding[] = INCBIN_U16("data/tilesets/secondary/dewford_dojo_building/metatile_attributes.bin");
+
+const u16 gMetatiles_Cave2[] = INCBIN_U16("data/tilesets/secondary/cave_2/metatiles.bin");
+const u16 gMetatileAttributes_Cave2[] = INCBIN_U16("data/tilesets/secondary/cave_2/metatile_attributes.bin");
+
+const u16 gMetatiles_Underwater2[] = INCBIN_U16("data/tilesets/secondary/underwater_2/metatiles.bin");
+const u16 gMetatileAttributes_Underwater2[] = INCBIN_U16("data/tilesets/secondary/underwater_2/metatile_attributes.bin");
+
+const u16 gMetatiles_JohtoGeneral[] = INCBIN_U16("data/tilesets/primary/johto_general/metatiles.bin");
+const u16 gMetatileAttributes_JohtoGeneral[] = INCBIN_U16("data/tilesets/primary/johto_general/metatile_attributes.bin");
+
+const u16 gMetatiles_JohtoSecondary[] = INCBIN_U16("data/tilesets/secondary/johto_secondary/metatiles.bin");
+const u16 gMetatileAttributes_JohtoSecondary[] = INCBIN_U16("data/tilesets/secondary/johto_secondary/metatile_attributes.bin");
+
+const u16 gMetatiles_Sky[] = INCBIN_U16("data/tilesets/primary/sky/metatiles.bin");
+const u16 gMetatileAttributes_Sky[] = INCBIN_U16("data/tilesets/primary/sky/metatile_attributes.bin");
+
+const u16 gMetatiles_JohtoOlivine[] = INCBIN_U16("data/tilesets/secondary/johto_olivine/metatiles.bin");
+const u16 gMetatileAttributes_JohtoOlivine[] = INCBIN_U16("data/tilesets/secondary/johto_olivine/metatile_attributes.bin");
+
+const u16 gMetatiles_JohtoCave[] = INCBIN_U16("data/tilesets/primary/johto_cave/metatiles.bin");
+const u16 gMetatileAttributes_JohtoCave[] = INCBIN_U16("data/tilesets/primary/johto_cave/metatile_attributes.bin");
+
+const u16 gMetatiles_JohtoCave2[] = INCBIN_U16("data/tilesets/secondary/johto_cave_2/metatiles.bin");
+const u16 gMetatileAttributes_JohtoCave2[] = INCBIN_U16("data/tilesets/secondary/johto_cave_2/metatile_attributes.bin");
+
+const u16 gMetatiles_JohtoBuilding[] = INCBIN_U16("data/tilesets/primary/johto_building/metatiles.bin");
+const u16 gMetatileAttributes_JohtoBuilding[] = INCBIN_U16("data/tilesets/primary/johto_building/metatile_attributes.bin");
+
+const u16 gMetatiles_johto_building[] = INCBIN_U16("data/tilesets/secondary/johto_building/metatiles.bin");
+const u16 gMetatileAttributes_johto_building[] = INCBIN_U16("data/tilesets/secondary/johto_building/metatile_attributes.bin");
+
+const u16 gMetatiles_johto_pokecenter[] = INCBIN_U16("data/tilesets/secondary/johto_pokecenter/metatiles.bin");
+const u16 gMetatileAttributes_johto_pokecenter[] = INCBIN_U16("data/tilesets/secondary/johto_pokecenter/metatile_attributes.bin");
+
+const u16 gMetatiles_johto_pokemart[] = INCBIN_U16("data/tilesets/secondary/johto_pokemart/metatiles.bin");
+const u16 gMetatileAttributes_johto_pokemart[] = INCBIN_U16("data/tilesets/secondary/johto_pokemart/metatile_attributes.bin");
+
+const u16 gMetatiles_SSAnne[] = INCBIN_U16("data/tilesets/secondary/ssanne/metatiles.bin");
+const u16 gMetatileAttributes_SSAnne[] = INCBIN_U16("data/tilesets/secondary/ssanne/metatile_attributes.bin");
