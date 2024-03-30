@@ -20283,6 +20283,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_HIDDEN_POWER_GROUND] =
     {
+        .name = COMPOUND_STRING("Hidden Power"),
+        .description = COMPOUND_STRING(
+            "The effectiveness varies\n"
+            "with the user."),
         .power = 60,
         .effect = EFFECT_HIT,
         .type = TYPE_GROUND,
@@ -20296,6 +20300,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_HIDDEN_POWER_GRASS] =
     {
+        .name = COMPOUND_STRING("Hidden Power"),
+        .description = COMPOUND_STRING(
+            "The effectiveness varies\n"
+            "with the user."),
         .power = 60,
         .effect = EFFECT_HIT,
         .type = TYPE_GRASS,
@@ -20309,6 +20317,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_HIDDEN_POWER_FIGHTING] =
     {
+        .name = COMPOUND_STRING("Hidden Power"),
+        .description = COMPOUND_STRING(
+            "The effectiveness varies\n"
+            "with the user."),
         .power = 60,
         .effect = EFFECT_HIT,
         .type = TYPE_FIGHTING,
@@ -20322,6 +20334,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_HIDDEN_POWER_FIRE] =
     {
+        .name = COMPOUND_STRING("Hidden Power"),
+        .description = COMPOUND_STRING(
+            "The effectiveness varies\n"
+            "with the user."),
         .power = 60,
         .effect = EFFECT_HIT,
         .type = TYPE_FIRE,
@@ -20335,6 +20351,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_HIDDEN_POWER_ROCK] =
     {
+        .name = COMPOUND_STRING("Hidden Power"),
+        .description = COMPOUND_STRING(
+            "The effectiveness varies\n"
+            "with the user."),
         .power = 60,
         .effect = EFFECT_HIT,
         .type = TYPE_ROCK,
@@ -20348,6 +20368,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_HIDDEN_POWER_ELECTRIC] =
     {
+        .name = COMPOUND_STRING("Hidden Power"),
+        .description = COMPOUND_STRING(
+            "The effectiveness varies\n"
+            "with the user."),
         .power = 60,
         .effect = EFFECT_HIT,
         .type = TYPE_ELECTRIC,
@@ -20361,6 +20385,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_HIDDEN_POWER_ICE] =
     {
+        .name = COMPOUND_STRING("Hidden Power"),
+        .description = COMPOUND_STRING(
+            "The effectiveness varies\n"
+            "with the user."),
         .power = 60,
         .effect = EFFECT_HIT,
         .type = TYPE_ICE,
@@ -20374,6 +20402,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_HIDDEN_POWER_WATER] =
     {
+        .name = COMPOUND_STRING("Hidden Power"),
+        .description = COMPOUND_STRING(
+            "The effectiveness varies\n"
+            "with the user."),
         .power = 60,
         .effect = EFFECT_HIT,
         .type = TYPE_WATER,
@@ -20387,6 +20419,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_HIDDEN_POWER_FLYING] =
     {
+        .name = COMPOUND_STRING("Hidden Power"),
+        .description = COMPOUND_STRING(
+            "The effectiveness varies\n"
+            "with the user."),
         .power = 60,
         .effect = EFFECT_HIT,
         .type = TYPE_FLYING,
