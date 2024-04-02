@@ -18,7 +18,6 @@
 #include "field_screen_effect.h"
 #include "field_specials.h"
 #include "field_weather.h"
-#include "global_trade_station.h"
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item_icon.h"
@@ -160,13 +159,6 @@ void Special_ViewWallClock(void)
 {
     gMain.savedCallback = CB2_ReturnToField;
     SetMainCallback2(CB2_ViewWallClock);
-    LockPlayerFieldControls();
-}
-
-void Special_InitGTS(void)
-{
-    gMain.savedCallback = CB2_ReturnToField;
-    SetMainCallback2(CB2_InitGlobalTradeStation);
     LockPlayerFieldControls();
 }
 
