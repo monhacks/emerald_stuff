@@ -5,6 +5,7 @@ Archie&Mudkip - New pause menu
 Mudkip - New shop menu
 quocmanh94 - HGSS berry animation
 BSBob - Map popup
+Kaixer - Pokemon sprites
 Ravepossum - Map popup, pokedex from party menu, showmonpic shinyness
 Voluptua - town map port
 Beniboy for helping with numerous issues during developement
