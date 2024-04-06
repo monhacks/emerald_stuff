@@ -50,6 +50,7 @@ static const u8 sDoorAnimTiles_General[] = INCBIN_U8("graphics/door_anims/genera
 static const u16 sDoorNullPalette6[16] = {};
 static const u8 sDoorAnimTiles_PokeCenter[] = INCBIN_U8("graphics/door_anims/poke_center.4bpp");
 static const u8 sDoorAnimTiles_PokeCenterJohto[] = INCBIN_U8("graphics/door_anims/poke_center_johto.4bpp");
+static const u8 sDoorAnimTiles_PetalburgDoor[] = INCBIN_U8("graphics/door_anims/petalburg_door.4bpp");
 static const u8 sDoorAnimTiles_Gym[] = INCBIN_U8("graphics/door_anims/gym.4bpp");
 static const u8 sDoorAnimTiles_PokeMart[] = INCBIN_U8("graphics/door_anims/poke_mart.4bpp");
 static const u8 sDoorAnimTiles_PokeMartJohto[] = INCBIN_U8("graphics/door_anims/poke_center_johto.4bpp");
@@ -254,6 +255,7 @@ static const u8 sDoorAnimPalettes_BattleDomePreBattleRoom[] = {9, 9, 7, 7, 7, 7,
 static const u8 sDoorAnimPalettes_BattleTentInterior[] = {9, 9, 9, 9, 9, 9, 9, 9};
 static const u8 sDoorAnimPalettes_TrainerHillLobbyElevator[] = {7, 7, 7, 7, 7, 7, 7, 7};
 static const u8 sDoorAnimPalettes_TrainerHillRoofElevator[] = {9, 9, 7, 7, 7, 7, 7, 7};
+static const u8 sDoorAnimPalettes_PetalBurgDoor[] = {7, 7, 7, 7};
 
 static const u8 sDoorAnimPalettes_DewfordDojoRight[] = {8, 8, 8, 8, 8, 8, 8, 8};
 static const u8 sDoorAnimPalettes_DewfordDojoLeft[] = {8, 8, 8, 8, 8, 8, 8, 8};
@@ -322,6 +324,7 @@ static const struct DoorGraphics sDoorAnimGraphicsTable[] =
     {METATILE_DewfordDojo_Door,                             DOOR_SOUND_NORMAL,  1, sDoorAnimTiles_DewfordDojo, sDoorAnimPalettes_DewfordDojoDoor},
     {METATILE_JohtoGeneral_Door_JohtoPokecenter,            DOOR_SOUND_SLIDING, 0, sDoorAnimTiles_PokeCenterJohto, sDoorAnimPalettes_PokeCenterJohto},
     {METATILE_JohtoGeneral_Door_JohtoMart,                  DOOR_SOUND_SLIDING, 0, sDoorAnimTiles_PokeCenterJohto, sDoorAnimPalettes_PokeCenterJohto},
+    {METATILE_Petalburg_Door,                               DOOR_SOUND_NORMAL,  0, sDoorAnimTiles_PetalburgDoor, sDoorAnimPalettes_PetalBurgDoor},
     {},
 };
 

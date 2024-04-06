@@ -15,6 +15,7 @@ Paccy - his glimmering emerald was used as a base
 KingTapir - Desert Tiles
 FM - Tree tiles
 Zeikaro - Nature and tree tiles
+Trevor-Zeikaro - House tiles
 Zeo254 - some tilesets
 Kyldove - ORAS style trainer frontsprites
 Flurmimon - Tiles for various tilesets
