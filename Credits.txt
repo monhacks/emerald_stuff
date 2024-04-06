@@ -13,6 +13,8 @@ Skeli, Ghoulslash, HN, Karathan, McBoy, Greenphx, MGriffin, BSBob, Raymie Humber
 BelialClover/Rioluwott for EV allocation system, ROWE bag screen
 Paccy - his glimmering emerald was used as a base
 KingTapir - Desert Tiles
+FM - Tree tiles
+Zeikaro - Nature and tree tiles
 Zeo254 - some tilesets
 Kyldove - ORAS style trainer frontsprites
 Flurmimon - Tiles for various tilesets
