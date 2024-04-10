@@ -62,8 +62,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordDojo_Indoors_EventScript_ItemSleepTalk",
+      "trainer_sight_or_berry_tree_id": "ITEM_TM88",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_RECEIVED_TM88"
     }
   ],
@@ -83,10 +83,6 @@
       "dest_warp_id": "4"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

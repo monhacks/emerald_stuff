@@ -36,8 +36,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VajraDesertTunnels_EventScript_ItemEarthPlate",
+      "trainer_sight_or_berry_tree_id": "ITEM_EARTH_PLATE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_VAJRADESERT_TUNNELS_EARTH_PLATE"
     },
     {
@@ -89,9 +89,7 @@
       "dest_warp_id": "5"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "hidden_item",

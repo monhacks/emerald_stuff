@@ -114,8 +114,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MtChimneyDepths_EventScript_ItemFlameOrb",
+      "trainer_sight_or_berry_tree_id": "ITEM_FLAME_ORB",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_MTCHIMNEY_DEPTHS_FLAME_ORB"
     },
     {
@@ -127,8 +127,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MtChimneyDepths_EventScript_ItemFlamePlate",
+      "trainer_sight_or_berry_tree_id": "ITEM_FLAME_PLATE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_MTCHIMNEY_DEPTHS_FLAME_PLATE"
     }
   ],
@@ -148,10 +148,6 @@
       "dest_warp_id": "4"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

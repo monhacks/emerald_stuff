@@ -95,7 +95,5 @@
       "script": "stepOnButton3"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }
