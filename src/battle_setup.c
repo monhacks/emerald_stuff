@@ -1603,7 +1603,7 @@ void PlayTrainerEncounterMusic(void)
         case TRAINER_ENCOUNTER_MUSIC_RICH:
             music = MUS_ENCOUNTER_RICH;
             break;
-        case TRAINER_ENCOUNTER_GGRUNT:
+        case TRAINER_ENCOUNTER_MUSIC_GGRUNT:
             music = MUS_DP_ENCOUNTER_GALACTIC;
             break;
         default:
