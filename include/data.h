@@ -140,9 +140,6 @@ struct TypeInfo
     //u16 arceusForm;
 };
 
-extern const u16 gMinigameDigits_Pal[];
-extern const u32 gMinigameDigits_Gfx[];
-
 extern const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[];
 extern const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[];
 extern const struct SpriteFrameImage gBattlerPicTable_PlayerRight[];

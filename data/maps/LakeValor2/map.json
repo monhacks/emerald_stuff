@@ -305,7 +305,5 @@
       "script": "firstTimeVista"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

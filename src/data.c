@@ -10,9 +10,7 @@
 #include "constants/trainers.h"
 #include "constants/battle_ai.h"
 
-const u16 gMinigameDigits_Pal[] = INCBIN_U16("graphics/link/minigame_digits.gbapal");
-const u32 gMinigameDigits_Gfx[] = INCBIN_U32("graphics/link/minigame_digits.4bpp.lz");
-static const u32 sMinigameDigitsThin_Gfx[] = INCBIN_U32("graphics/link/minigame_digits2.4bpp.lz"); // Unused
+
 
 #define BATTLER_OFFSET(i) (gHeap + 0x8000 + MON_PIC_SIZE * (i))
 
@@ -223,14 +221,21 @@ const union AnimCmd *const gAnims_MonPic[MAX_MON_PIC_FRAMES] =
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
 #define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
 
-const union AnimCmd *const sAnims_Trainer[] ={
+const union AnimCmd *const sAnims_Trainer[] =
+{
     sAnim_GeneralFrame0,
     sAnim_GeneralFrame0,
 };
 
 #include "data/trainer_parties.h"
-#include "data/trainers.h"
 #include "data/text/follower_messages.h"
 
 #include "data/pokemon_graphics/palette_table.h"
 #include "data/pokemon_graphics/shiny_palette_table.h"
+
+const struct Trainer gTrainers[] =
+{
+#include "data/trainers.h"
+};
+
+
