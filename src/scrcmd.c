@@ -2673,6 +2673,8 @@ bool8 ScrCmd_hideitemdesc(struct ScriptContext *ctx)
 bool8 ScrCmd_calculatemonstats(void)
 {
     s32 i;
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < PARTY_SIZE; i++) {
         CalculateMonStats(&gPlayerParty[i]);
+    }
+    return FALSE;
 }

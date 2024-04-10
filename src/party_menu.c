@@ -6742,7 +6742,7 @@ static void CursorCb_ChangeForm(u8 taskId)
     TryMultichoiceFormChange(taskId);
 }
 
-static void CursorCb_ChangeAbility(u8 taskId)
+static void UNUSED CursorCb_ChangeAbility(u8 taskId)
 {
     gSpecialVar_Result = 1;
     TryMultichoiceFormChange(taskId);

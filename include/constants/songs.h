@@ -949,11 +949,12 @@
 
 // Custom music
 #define MUS_CUSTOM_START                  (HG_MUSIC_END + 1) // 899
-#define MUS_PERSONA_FACE_MYSELF           899 // Persona I'll face myself
+#define MUS_SMT3_LARGE_MAP                899 // SMT3 Large map
+#define MUS_TEST_TRACK                    900 // Various
 
-#define MUS_CUSTOM_END                    MUS_PERSONA_FACE_MYSELF
+#define MUS_CUSTOM_END                    MUS_TEST_TRACK
 
-#define END_MUS                         MUS_CUSTOM_END
+#define END_MUS                           MUS_CUSTOM_END
 
 #define MUS_ROUTE118                      0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 

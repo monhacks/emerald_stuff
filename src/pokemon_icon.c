@@ -300,7 +300,7 @@ const u8 *GetMonIconTiles(u16 species, u32 personality)
 void TryLoadAllMonIconPalettesAtOffset(u16 offset)
 {
     s32 i;
-    const struct SpritePalette* monIconPalettePtr;
+    //const struct SpritePalette* monIconPalettePtr;
 
     if (offset <= 0x1A0)
     {

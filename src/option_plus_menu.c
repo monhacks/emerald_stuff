@@ -652,7 +652,6 @@ static void Task_OptionMenuFadeIn(u8 taskId)
 
 static void Task_OptionMenuProcessInput(u8 taskId)
 {
-    int i = 0;
     u8 optionsToDraw = min(OPTIONS_ON_SCREEN , MenuItemCount());
     if (JOY_NEW(A_BUTTON))
     {
@@ -913,7 +912,7 @@ static int ProcessInput_Options_Eleven(int selection)
 }
 
 // Process Input functions ****SPECIFIC****
-static int ProcessInput_Sound(int selection)
+static int UNUSED ProcessInput_Sound(int selection)
 {
     if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {

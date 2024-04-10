@@ -150,7 +150,7 @@ static void BattleIntroSlideEnd(u8 taskId)
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
 }
 
-static void BattleIntroNoSlide(u8 taskId)
+static void UNUSED BattleIntroNoSlide(u8 taskId)
 {
     switch (gTasks[taskId].tState)
     {

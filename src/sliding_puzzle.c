@@ -839,7 +839,7 @@ static void PlaceTile(void)
 static void RotateTile(u8 rotDir)
 {
     struct Sprite *sprite = &gSprites[sSlidingPuzzle->heldTile];
-    u8 affineAnimation;
+    u8 affineAnimation = 0;
 
     if (rotDir == ROTATE_ANTICLOCKWISE)
     {
@@ -862,7 +862,7 @@ static void RotateTile(u8 rotDir)
 
 static void CheckForSolution(void)
 {
-    u8 row, col, tile;
+    u8 row, col;
     for (row = 0; row < NUM_SLIDING_PUZZLE_ROWS; row++)
     {
         for (col = 0; col < NUM_SLIDING_PUZZLE_COLS; col++)

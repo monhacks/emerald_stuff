@@ -618,7 +618,7 @@ inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, s64 i, u3
 {
     u32 xAdd, pixelData, bits, toOrr, dummyX;
     s64 yAdd;
-    u8 *dst;
+    u8 *dst = 0;
 
     xAdd = j + width;
     yAdd = i + height;
@@ -1008,7 +1008,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
     u32 lastChar;
     s32 width;
     s32 widthHelper;
-    u8 repeats;
+    u8 repeats = 1;
 
     switch (textPrinter->state)
     {

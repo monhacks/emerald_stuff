@@ -2258,7 +2258,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 {
     u32 personalityValue;
     u8 scaledLevel;
-    s32 i, j;
+    s32 i;
     u8 monsCount;
     if (battleTypeFlags & BATTLE_TYPE_TRAINER && !(battleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
@@ -2287,6 +2287,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             u32 fixedOtId = 0;
             u32 ability = 0;
+            u8 biasedLevel = getPlayerBiasedAverageLevel(scaledLevel);
 
             if (trainer->doubleBattle == TRUE)
                 personalityValue = 0x80;
@@ -2310,7 +2311,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             }
 
             scaledLevel = GetHighestLevelInPlayerParty();
-            u8 biasedLevel = getPlayerBiasedAverageLevel(scaledLevel);
+            
             biasedLevel = scaleBiasedLevel(biasedLevel, partyData[i].lvl);
             if (gSaveBlock2Ptr->optionsLevelScaling == 1) {
                 biasedLevel = partyData[i].lvl;

@@ -2019,7 +2019,7 @@ static void RefreshPageAfterChange(u8 mode){
 	}	
 }	
 
-static void ChangeStatTask(u8 taskId)
+static void UNUSED ChangeStatTask(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -3072,7 +3072,7 @@ static void PutPageWindowTilemaps(u8 page)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 templateId)
+static u8 UNUSED AddWindowFromTemplateList(const struct WindowTemplate *template, u8 templateId)
 {
     u8 *windowIdPtr = &sMonSummaryScreen->windowIds[templateId];
     if (*windowIdPtr == WINDOW_NONE)
@@ -3357,7 +3357,8 @@ static void BufferCharacteristicString(void)
 {
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
-    u8 index, highestIV, highestValue, i, j;
+    u8 index, highestValue, i, j;
+    u8 highestIV = 0;
     u8 iv[6];
     u8 ties[6] = { 0, 0, 0, 0, 0, 0 };
 
@@ -3415,7 +3416,7 @@ static void GetMetLevelString(u8 *output)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, output);
 }
 
-static bool8 DoesMonOTMatchOwner(void)
+static bool8 UNUSED DoesMonOTMatchOwner(void)
 {
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
     u32 trainerId;
@@ -3916,7 +3917,8 @@ static void PrintBattleMoves(void)
 
 static void PrintMoveNameAndPP(u8 moveIndex)
 {
-    u32 pp, color, x;
+    u32 pp, x;
+    u32 color = 0;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
     
     if (summary->moves[moveIndex] != MOVE_NONE)
@@ -4631,7 +4633,7 @@ static void KeepMoveSelectorVisible(u8 firstSpriteId)
     }
 }
 
-static void CreateHealthBarSprites(u16 tileTag, u16 palTag)
+static void UNUSED CreateHealthBarSprites(u16 tileTag, u16 palTag)
 {
     u8 i;
     u8 spriteId;

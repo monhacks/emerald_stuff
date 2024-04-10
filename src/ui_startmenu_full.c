@@ -920,7 +920,7 @@ static void DestroyStatusSprites()
 // These next few functions are from the Ghoulslash UI Shell, they are the basic functions to init a brand new UI
 void Task_OpenStartMenuFullScreen(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    //s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();

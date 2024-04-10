@@ -2640,7 +2640,7 @@ static s32 SetInstantBarMove(struct BattleBarInfo *bar)
 
 s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
 {
-    s32 currentBarValue;
+    s32 currentBarValue = 0;
     s32 i, previousVal = 0, toLoop;
     bool32 instant;
 

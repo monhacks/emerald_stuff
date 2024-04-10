@@ -721,11 +721,11 @@ static void DoMoveRelearnerMain(void)
             else
             {
                 u16 moveId = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_MOVE1 + sMoveRelearnerStruct->moveSlot);
-                u8 oldPP;
+                //u8 oldPP;
 
                 StringCopy(gStringVar3, GetMoveName(moveId));
                 RemoveMonPPBonus(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->moveSlot);
-                oldPP = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + GetMoveSlotToReplace(), NULL);
+                //oldPP = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + GetMoveSlotToReplace(), NULL);
                 SetMonMoveSlot(&gPlayerParty[sMoveRelearnerStruct->partyMon], GetCurrentSelectedMove(), sMoveRelearnerStruct->moveSlot);
                 StringCopy(gStringVar2, GetMoveName(GetCurrentSelectedMove()));
                 PrintMessageWithPlaceholders(gText_MoveRelearnerAndPoof);
