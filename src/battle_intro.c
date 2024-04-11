@@ -115,7 +115,12 @@ void HandleIntroSlide(u8 terrain)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
     {
-        taskId = CreateTask(BattleIntroSlide3, 0);
+        if (gSaveBlock2Ptr->optionsBattleIntro == 0) {
+            taskId = CreateTask(BattleIntroSlide3, 0);
+        } else {
+            taskId = CreateTask(BattleIntroNoSlide, 0);
+        }
+        
     }
     else if (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) == SPECIES_KYOGRE)
     {
@@ -124,7 +129,11 @@ void HandleIntroSlide(u8 terrain)
     }
     else
     {
-        taskId = CreateTask(sBattleIntroSlideFuncs[terrain], 0);
+        if (gSaveBlock2Ptr->optionsBattleIntro == 0) {
+            taskId = CreateTask(sBattleIntroSlideFuncs[terrain], 0);
+        } else {
+            taskId = CreateTask(BattleIntroNoSlide, 0);
+        }
     }
 
     gTasks[taskId].tState = 0;
@@ -150,7 +159,7 @@ static void BattleIntroSlideEnd(u8 taskId)
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
 }
 
-static void UNUSED BattleIntroNoSlide(u8 taskId)
+static void BattleIntroNoSlide(u8 taskId)
 {
     switch (gTasks[taskId].tState)
     {

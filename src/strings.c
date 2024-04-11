@@ -1593,6 +1593,7 @@ const u8 gText_Frame[] = _("Frame");
 const u8 gText_OptionMenuCancel[] = _("Cancel");
 const u8 gText_Font[] = _("Font");  //tx_optionsPlus
 const u8 gText_OptionMatchCalls[] = _("Overworld calls");    //tx_optionsPlus
+const u8 gText_OptionBattleIntro[] = _("Battle intro");
 const u8 gText_OptionMenuSave[] = _("Save");
 const u8 gText_ButtonMode[] = _("Button mode");
 const u8 gText_TextSpeedSlow[] = _("Slow");
