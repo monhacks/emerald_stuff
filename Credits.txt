@@ -20,39 +20,34 @@ Trevor-Zeikaro - House tiles
 Zeo254 - some tilesets
 Kyldove - ORAS style trainer frontsprites
 Flurmimon - Tiles for various tilesets
-Arce_Havrek - Pokedex spreadsheet base
 resetes12 - Battle frontier scaling, options menu code for optional sliding animation
 Phyromatical - distortion world tileset
 SkyVotex and Banjora Marxville for tileset/palettes
-Sierraffinity - Day/Night System, e-Reader functionality
+Sierraffinity - Day/Night System
 Spherical Ice - Sliding puzzles
 Merrp - Following Pokemon, Shadows
 Fo0xerz - Lawrence III sprite
 Nicoswag - Ability popup design
+Nico - Pokemon animate after KO
 ghoulslash - DexNav, Auto-run, Mart Items by Badge Count, Bag Sorting, Repeated Field Medicine Use, Pokecenters don't count eggs, Overworld Expansion, givecustommon 
 ipatix - High Quality Audio Mixer
 Wyserth - Decapitalisation
 AsparagusEduardo - Decapitalisation, PoryMoves, More Bag Pockets, 'Move Pokemon' is the first PC option
-TheXaman - Running indoors
+TheXaman - Running indoors, Debug menu
 Lunos - Level caps, Reusable TMs, Buying TMs once, Press select to rearrange party pokemon
 Buffel Salt - LGPE-style Premier Balls, No need to water berry trees on rainy routes, fossil restoration and field specials related to it
 DizzyEgg - BW Repel System
 Zeturic - XY-style Wrapping Summary Screen, 'Move Item' option in party menu
-Bassoonian - Pokemon date met in summary screen 
 Jaizu - Keyboard swaps to lowercase after the first letter, and for some firered tiles
 Aveontrainer - Gen 3 style overworld object sprites
 Devolov - Exp all with one message
-MandL27 and Amelia - Type icons
-NotToDisturb - Object alpha shadows
-Hyo-oppa - amazing trainer sprites
+Hyo-oppa - Various sprites
 Duke - Move name instead of TM name in shops
 GriffinR - Disabled the union room check when entering Pokecenters
 CitrusBolt - DNS overrides fix from heliodor code, last used ball gfx, Summary page
 Sbird - TM serialisation, TM learnset method, fast battle intro, dynamic multichoice
 Dat.H A - Spinda Second Frame
-ShinyDragonHunter - Spinda Second Frame, Arbok variants, cleanup repo, frlg sprites
-Dreadwing93 - Arbok variant sprites
-Hbdfreitas - BW style hp bars
+ShinyDragonHunter - Entire cleanup branch, frlg sprites, music
 PokemonCrazy - Move effectiveness
 
 Ekat's tileset credits:	
