@@ -28,9 +28,7 @@
       "flag": "0"
     }
   ],
-  "warp_events": [
-
-  ],
+  "warp_events": [],
   "coord_events": [
     {
       "type": "weather",
@@ -40,7 +38,5 @@
       "weather": "COORD_EVENT_WEATHER_SNOW"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

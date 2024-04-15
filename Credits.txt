@@ -5,52 +5,56 @@ Archie&Mudkip - New pause menu
 Mudkip - New shop menu
 quocmanh94 - HGSS berry animation
 BSBob - Map popup
-Ravepossum - Map popup, pokedex from party menu, showmonpic shinyness
+Kaixer - Pokemon sprites
+Ravepossum - Map popup, pokedex from party menu, showmonpic shinyness, battle backgrounds
+Ruki - Battle backgrounds
 Voluptua - town map port
 Beniboy for helping with numerous issues during developement
 Skeli, Ghoulslash, HN, Karathan, McBoy, Greenphx, MGriffin, BSBob, Raymie Humbert, missiri and Tustin2121 for Quest Menu
 BelialClover/Rioluwott for EV allocation system, ROWE bag screen
 Paccy - his glimmering emerald was used as a base
 KingTapir - Desert Tiles
+FM - Tree tiles
+Zeikaro - Nature and tree tiles
+Trevor-Zeikaro - House tiles
 Zeo254 - some tilesets
 Kyldove - ORAS style trainer frontsprites
 Flurmimon - Tiles for various tilesets
-Arce_Havrek - Pokedex spreadsheet base
 resetes12 - Battle frontier scaling, options menu code for optional sliding animation
 Phyromatical - distortion world tileset
 SkyVotex and Banjora Marxville for tileset/palettes
-Sierraffinity - Day/Night System, e-Reader functionality
+Sierraffinity - Day/Night System
 Spherical Ice - Sliding puzzles
 Merrp - Following Pokemon, Shadows
 Fo0xerz - Lawrence III sprite
 Nicoswag - Ability popup design
+Nico - Pokemon animate after KO
 ghoulslash - DexNav, Auto-run, Mart Items by Badge Count, Bag Sorting, Repeated Field Medicine Use, Pokecenters don't count eggs, Overworld Expansion, givecustommon 
 ipatix - High Quality Audio Mixer
 Wyserth - Decapitalisation
 AsparagusEduardo - Decapitalisation, PoryMoves, More Bag Pockets, 'Move Pokemon' is the first PC option
-camthesaxman - Lati@s Soaring
-TheXaman - Running indoors
+TheXaman - Running indoors, Debug menu
 Lunos - Level caps, Reusable TMs, Buying TMs once, Press select to rearrange party pokemon
 Buffel Salt - LGPE-style Premier Balls, No need to water berry trees on rainy routes, fossil restoration and field specials related to it
 DizzyEgg - BW Repel System
 Zeturic - XY-style Wrapping Summary Screen, 'Move Item' option in party menu
-Bassoonian - Pokemon date met in summary screen 
 Jaizu - Keyboard swaps to lowercase after the first letter, and for some firered tiles
 Aveontrainer - Gen 3 style overworld object sprites
 Devolov - Exp all with one message
-MandL27 and Amelia - Type icons
-NotToDisturb - Object alpha shadows
-Hyo-oppa - amazing trainer sprites
+Hyo-oppa - Various sprites
 Duke - Move name instead of TM name in shops
 GriffinR - Disabled the union room check when entering Pokecenters
-CitrusBolt - DNS overrides fix from heliodor code, last used ball gfx, Summary page
+CitrusBolt - DNS overrides fix from heliodor code, last used ball gfx, Summary page, frlg tiles
 Sbird - TM serialisation, TM learnset method, fast battle intro, dynamic multichoice
 Dat.H A - Spinda Second Frame
-ShinyDragonHunter - Spinda Second Frame, Arbok variants, cleanup repo, frlg sprites
-Dreadwing93 - Arbok variant sprites
-Hbdfreitas - BW style hp bars
+ShinyDragonHunter - Entire cleanup branch, frlg sprites, music
 PokemonCrazy - Move effectiveness
-
+Poffin_Case - frlg tiles
+Syreldar - frlg tiles
+MrDollSteak - Male Rocket Grunt, Female Rocket Grunt, Proton, Petrel and Giovanni.
+Rizon/Falsever - DP Lucas, Ethan, Rosa, Youngster Sprites, Lass Sprites, Bug Catcher Sprites, Schoolkid Male Sprites, HGSS Female Swimmer, Gen V Male Swimmer, Gen V Female Swimmer, Gen IV Worker, HGSS Male Ace Trainer, Falkner, Clair, Roxanne
+Sky High - Gen V Cyclist Sprites, HGSS Gentleman, Gen IV Guitarist, Gen V Guitarist, Gen V Pokemon Ranger Sprites, Gen V Rich Boy, DP Snow Ace Trainer, Bruno, Crasher Wake, Gen V Lady, Gen IV Camper, Gen IV Picnicker, Gen IV Fisherman, Gen IV Ninja Boy
+Luxio//Hacks - Gen V Psychic Male
 Ekat's tileset credits:	
 Ekat
 Heartless Dragoon

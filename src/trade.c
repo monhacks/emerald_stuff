@@ -10,7 +10,6 @@
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_screen_effect.h"
-#include "global_trade_station.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
@@ -258,8 +257,6 @@ static EWRAM_DATA struct {
     /*0xFE*/ u8 wirelessWinBottom;
 } *sTradeAnim = {NULL};
 
-extern EWRAM_DATA struct GTSPokedexView *sGTSPokedexView;
-
 static bool32 IsWirelessTrade(void);
 static void CB2_CreateTradeMenu(void);
 static void VBlankCB_TradeMenu(void);
@@ -314,7 +311,6 @@ static void CB2_UpdateLinkTrade(void);
 static void CB2_WaitTradeComplete(void);
 static void CB2_SaveAndEndTrade(void);
 static void CB2_FreeTradeAnim(void);
-static void Task_GTSDeposit(u8);
 static void Task_InGameTrade(u8);
 static void CheckPartnersMonForRibbons(void);
 static void Task_AnimateWirelessSignal(u8);
@@ -4384,89 +4380,6 @@ static bool8 UNUSED DoTradeAnim_Wireless(void)
     return FALSE;
 }
 
-static void CB2_GTSDeposit(void)
-{
-        u8 otName[11];
-
-    switch (gMain.state)
-    {
-    case 0:
-        gSelectedTradeMonPositions[TRADE_PLAYER] = sGTSPokedexView->offerPokemon;
-        gSelectedTradeMonPositions[TRADE_PARTNER] = PARTY_SIZE;
-        StringCopy(gLinkPlayers[0].name, gSaveBlock2Ptr->playerName);
-        GetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, otName);
-        StringCopy(gLinkPlayers[1].name, otName);
-        gLinkPlayers[0].language = GAME_LANGUAGE;
-        gLinkPlayers[1].language = GetMonData(&gEnemyParty[0], MON_DATA_LANGUAGE);
-        sTradeAnim = AllocZeroed(sizeof(*sTradeAnim));
-        AllocateMonSpritesGfx();
-        ResetTasks();
-        ResetSpriteData();
-        FreeAllSpritePalettes();
-        SetVBlankCallback(VBlankCB_TradeAnim);
-        TradeAnimInit_LoadGfx();
-        sTradeAnim->isLinkTrade = FALSE;
-        sTradeAnim->neverRead_8C = 0;
-        sTradeAnim->state = 0;
-        sTradeAnim->texX = 64;
-        sTradeAnim->texY = 64;
-        sTradeAnim->neverRead_D8 = 0;
-        sTradeAnim->neverRead_DA = 0;
-        sTradeAnim->scrX = 120;
-        sTradeAnim->scrY = 80;
-        sTradeAnim->sXY = 256;
-        sTradeAnim->alpha = 0;
-        sTradeAnim->timer = 0;
-        gMain.state = 5;
-        break;
-    case 5:
-        LoadTradeMonPic(TRADE_PLAYER, 0);
-        gMain.state++;
-        break;
-    case 6:
-        LoadTradeMonPic(TRADE_PLAYER, 1);
-        gMain.state++;
-        break;
-    case 7:
-        LoadTradeMonPic(TRADE_PARTNER, 0);
-        ShowBg(0);
-        gMain.state++;
-        break;
-    case 8:
-        //LoadTradeMonPic(TRADE_PARTNER, 1);
-        FillWindowPixelBuffer(0, PIXEL_FILL(15));
-        PutWindowTilemap(0);
-        CopyWindowToVram(0, COPYWIN_FULL);
-        gMain.state++;
-        break;
-    case 9:
-        LoadTradeSequenceSpriteSheetsAndPalettes();
-        LoadSpriteSheet(&sPokeBallSpriteSheet);
-        LoadSpritePalette(&sPokeBallSpritePalette);
-        gMain.state++;
-        break;
-    case 10:
-        ShowBg(0);
-        gMain.state++;
-        break;
-    case 11:
-        SetTradeSequenceBgGpuRegs(5);
-        SetTradeSequenceBgGpuRegs(0);
-        BufferTradeSceneStrings();
-        gMain.state++;
-        break;
-    case 12:
-        SetMainCallback2(CB2_InGameTrade);
-        break;
-    }
-
-    RunTasks();
-    RunTextPrinters();
-    AnimateSprites();
-    BuildOamBuffer();
-    UpdatePaletteFade();
-}
-
 // Try to evolve a Pokémon received in a link trade
 // In-game trades resolve evolution during the trade sequence, in STATE_TRY_EVOLUTION
 static void CB2_TryLinkTradeEvolution(void)
@@ -4907,23 +4820,6 @@ static void CB2_FreeTradeAnim(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-}
-//
-void DoGTSDepositScene(void)
-{
-    LockPlayerFieldControls();
-    CreateTask(Task_GTSDeposit, 10);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-}
-
-static void Task_GTSDeposit(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        SetMainCallback2(CB2_GTSDeposit);
-        gFieldCallback = FieldCB_ContinueScriptHandleMusic;
-        DestroyTask(taskId);
-    }
 }
 
 void DoInGameTradeScene(void)

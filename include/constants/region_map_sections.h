@@ -105,7 +105,7 @@
 #define MAPSEC_SHAMOUTI_ISLAND              0x65
 #define MAPSEC_RUGGED_ROAD                  0x66
 #define MAPSEC_DEWFORD_DOJO                 0x67
-#define MAPSEC_ROUTE_4                      0x68
+#define MAPSEC_OLIVINE_CITY                 0x68
 #define MAPSEC_ROUTE_5                      0x69
 #define MAPSEC_ROUTE_6                      0x6A
 #define MAPSEC_ROUTE_7                      0x6B
@@ -223,30 +223,11 @@
 #define MAPSEC_DEWFORD_WOODS                0xDB
 #define MAPSEC_NONE                         0xDC
 
-#define MAPSEC_MIRAGE_SPOT_PLAIN_A          0xDD
-#define MAPSEC_MIRAGE_SPOT_PLAIN_B          0xDE
-#define MAPSEC_MIRAGE_SPOT_WOODS_A          0xDF
-#define MAPSEC_MIRAGE_SPOT_WOODS_B          0xE0
-#define MAPSEC_MIRAGE_SPOT_ASH_A            0xE1
-#define MAPSEC_MIRAGE_SPOT_ASH_B            0xE2
-#define MAPSEC_MIRAGE_SPOT_DESERT_A         0xE3
-#define MAPSEC_MIRAGE_SPOT_DESERT_B         0xE4
-#define MAPSEC_MIRAGE_SPOT_TALLGRASS_A      0xE5
-#define MAPSEC_MIRAGE_SPOT_TALLGRASS_B      0xE6
-#define MAPSEC_MIRAGE_SPOT_ISLAND_A         0xE7
-#define MAPSEC_MIRAGE_SPOT_ISLAND_B         0xE8
-#define MAPSEC_MIRAGE_SPOT_BEACH_A          0xE9
-#define MAPSEC_MIRAGE_SPOT_BEACH_B          0xEA
-#define MAPSEC_MIRAGE_SPOT_CAVE_A           0xEB
-#define MAPSEC_MIRAGE_SPOT_CAVE_B           0xEC
-#define MAPSEC_MIRAGE_SPOT_SNOW_A           0xED
-#define MAPSEC_MIRAGE_SPOT_SNOW_B           0xEE
-
 #define METLOC_SPECIAL_EGG                  0xFD
 #define METLOC_IN_GAME_TRADE                0xFE
 #define METLOC_FATEFUL_ENCOUNTER            0xFF
 
-#define KANTO_MAPSEC_START  MAPSEC_ROUTE_4
+#define KANTO_MAPSEC_START  MAPSEC_ROUTE_5
 #define KANTO_MAPSEC_END    MAPSEC_SPECIAL_AREA
 #define KANTO_MAPSEC_COUNT (KANTO_MAPSEC_END - KANTO_MAPSEC_START + 1)
 

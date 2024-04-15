@@ -557,7 +557,6 @@ gSpecials::
 	def_special CheckSavefileSize
 	def_special ScriptMenu_CreatePWTMultichoice
 	def_special GetPWTSelection
-	def_special Special_InitGTS
 	def_special TrySpecialOverworldEvo
 	def_special RtcGetDayOfWeek
 	def_special DoSlidingPuzzle

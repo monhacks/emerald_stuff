@@ -48,7 +48,5 @@
       "script": "MarineCave_End_EventScript_Kyogre"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

@@ -44,6 +44,7 @@ enum
     MENUITEM_CUSTOM_LEVEL_SCALING,
     MENUITEM_CUSTOM_FONT,
     MENUITEM_CUSTOM_MATCHCALL,
+    MENUITEM_CUSTOM_BATTLE_INTRO,
     MENUITEM_CUSTOM_CANCEL,
     MENUITEM_CUSTOM_COUNT,
 };
@@ -165,6 +166,7 @@ static void DrawChoices_LevelScaling(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_MatchCall(int selection, int y);
+static void DrawChoices_BattleIntro(int selection, int y);
 static void DrawBgWindowFrames(void);
 
 // EWRAM vars
@@ -217,6 +219,7 @@ struct // MENU_CUSTOM
     [MENUITEM_CUSTOM_LEVEL_SCALING]   = {DrawChoices_LevelScaling,   ProcessInput_Options_Two},
     [MENUITEM_CUSTOM_FONT]         = {DrawChoices_Font,        ProcessInput_Options_Two}, 
     [MENUITEM_CUSTOM_MATCHCALL]    = {DrawChoices_MatchCall,   ProcessInput_Options_Two},
+    [MENUITEM_CUSTOM_BATTLE_INTRO]    = {DrawChoices_BattleIntro,   ProcessInput_Options_Three},
     [MENUITEM_CUSTOM_CANCEL]       = {NULL, NULL},
 };
 
@@ -242,6 +245,7 @@ static const u8 *const sOptionMenuItemsNamesCustom[MENUITEM_CUSTOM_COUNT] =
     [MENUITEM_CUSTOM_LEVEL_SCALING]  = sText_LevelScaling,
     [MENUITEM_CUSTOM_FONT]        = gText_Font,
     [MENUITEM_CUSTOM_MATCHCALL]   = gText_OptionMatchCalls,
+    [MENUITEM_CUSTOM_BATTLE_INTRO]   = gText_OptionBattleIntro,
     [MENUITEM_CUSTOM_CANCEL]      = gText_OptionMenuSave,
 };
 
@@ -274,13 +278,14 @@ static bool8 CheckConditions(int selection)
     case MENU_CUSTOM:
         switch(selection)
         {
-        case MENUITEM_CUSTOM_HP_BAR:          return TRUE;
-        case MENUITEM_CUSTOM_EXP_BAR:         return TRUE;
+        case MENUITEM_CUSTOM_HP_BAR:             return TRUE;
+        case MENUITEM_CUSTOM_EXP_BAR:            return TRUE;
         case MENUITEM_CUSTOM_LEVEL_SCALING:      return TRUE;
-        case MENUITEM_CUSTOM_FONT:            return TRUE;
-        case MENUITEM_CUSTOM_MATCHCALL:       return TRUE;
-        case MENUITEM_CUSTOM_CANCEL:          return TRUE;
-        case MENUITEM_CUSTOM_COUNT:           return TRUE;
+        case MENUITEM_CUSTOM_FONT:               return TRUE;
+        case MENUITEM_CUSTOM_MATCHCALL:          return TRUE;
+        case MENUITEM_CUSTOM_BATTLE_INTRO:       return TRUE;
+        case MENUITEM_CUSTOM_CANCEL:             return TRUE;
+        case MENUITEM_CUSTOM_COUNT:              return TRUE;
         }
     }
 }
@@ -322,6 +327,8 @@ static const u8 sText_Desc_BikeOn[]             = _("Enables the BIKE theme when
 static const u8 sText_Desc_FontType[]           = _("Choose the font design.");
 static const u8 sText_Desc_OverworldCallsOn[]   = _("TRAINERs will be able to call you,\noffering rematches and info.");
 static const u8 sText_Desc_OverworldCallsOff[]  = _("You will not receive calls.\nSpecial events will still occur.");
+static const u8 sText_Desc_BattleIntro[]  = _("Battle intros are the slightly faster\nthan vanilla.");
+static const u8 sText_Desc_BattleIntroInstant[]  = _("Battle intros will skip the slide\nanimation.");
 static const u8 *const sOptionMenuItemDescriptionsCustom[MENUITEM_CUSTOM_COUNT][2] =
 {
     [MENUITEM_CUSTOM_HP_BAR]      = {sText_Desc_BattleHPBar,        sText_Empty},
@@ -329,6 +336,7 @@ static const u8 *const sOptionMenuItemDescriptionsCustom[MENUITEM_CUSTOM_COUNT][
     [MENUITEM_CUSTOM_LEVEL_SCALING]  = {sText_Desc_LevelScalingOn,        sText_Desc_LevelScalingOff},
     [MENUITEM_CUSTOM_FONT]        = {sText_Desc_FontType,           sText_Desc_FontType},
     [MENUITEM_CUSTOM_MATCHCALL]   = {sText_Desc_OverworldCallsOn,   sText_Desc_OverworldCallsOff},
+    [MENUITEM_CUSTOM_BATTLE_INTRO]   = {sText_Desc_BattleIntro,   sText_Desc_BattleIntroInstant},
     [MENUITEM_CUSTOM_CANCEL]      = {sText_Desc_Save,               sText_Empty},
 };
 
@@ -354,6 +362,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledCustom[MENUITEM_CUSTOM
     [MENUITEM_CUSTOM_LEVEL_SCALING]  = sText_Empty,
     [MENUITEM_CUSTOM_FONT]        = sText_Empty,
     [MENUITEM_CUSTOM_MATCHCALL]   = sText_Empty,
+    [MENUITEM_CUSTOM_BATTLE_INTRO]   = sText_Empty,
     [MENUITEM_CUSTOM_CANCEL]      = sText_Empty,
 };
 
@@ -599,6 +608,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel_custom[MENUITEM_CUSTOM_LEVEL_SCALING]  = gSaveBlock2Ptr->optionsLevelScaling;
         sOptions->sel_custom[MENUITEM_CUSTOM_FONT]        = gSaveBlock2Ptr->optionsCurrentFont;
         sOptions->sel_custom[MENUITEM_CUSTOM_MATCHCALL]   = gSaveBlock2Ptr->optionsDisableMatchCall;
+        sOptions->sel_custom[MENUITEM_CUSTOM_BATTLE_INTRO]   = gSaveBlock2Ptr->optionsBattleIntro;
 
         sOptions->submenu = MENU_MAIN;
 
@@ -652,7 +662,6 @@ static void Task_OptionMenuFadeIn(u8 taskId)
 
 static void Task_OptionMenuProcessInput(u8 taskId)
 {
-    int i = 0;
     u8 optionsToDraw = min(OPTIONS_ON_SCREEN , MenuItemCount());
     if (JOY_NEW(A_BUTTON))
     {
@@ -788,6 +797,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsLevelScaling     = sOptions->sel_custom[MENUITEM_CUSTOM_LEVEL_SCALING];
     gSaveBlock2Ptr->optionsCurrentFont      = sOptions->sel_custom[MENUITEM_CUSTOM_FONT];
     gSaveBlock2Ptr->optionsDisableMatchCall = sOptions->sel_custom[MENUITEM_CUSTOM_MATCHCALL];
+    gSaveBlock2Ptr->optionsBattleIntro      = sOptions->sel_custom[MENUITEM_CUSTOM_BATTLE_INTRO];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -913,7 +923,7 @@ static int ProcessInput_Options_Eleven(int selection)
 }
 
 // Process Input functions ****SPECIFIC****
-static int ProcessInput_Sound(int selection)
+static int UNUSED ProcessInput_Sound(int selection)
 {
     if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
@@ -1019,6 +1029,29 @@ static void DrawChoices_TextSpeed(int selection, int y)
     bool8 active = CheckConditions(MENUITEM_MAIN_TEXTSPEED);
     DrawChoices_Options_Four(sTextSpeedStrings, selection, y, active);
 }
+
+static const u8 sText_BattleIntroFast[] = _("Fast");
+static const u8 sText_BattleIntroInstant[] = _("None");
+
+static void DrawChoices_BattleIntro(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_CUSTOM_BATTLE_INTRO);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    if (selection == 0)
+    {
+        gSaveBlock2Ptr->optionsBattleIntro = 0;
+    }
+    else
+    {
+        gSaveBlock2Ptr->optionsBattleIntro = 1;
+    }
+
+    DrawOptionMenuChoice(sText_BattleIntroFast, 104, y, styles[0], active);
+    DrawOptionMenuChoice(sText_BattleIntroInstant, GetStringRightAlignXOffset(1, sText_BattleIntroInstant, 198), y, styles[1], active);
+}
+
 
 static void DrawChoices_BattleScene(int selection, int y)
 {

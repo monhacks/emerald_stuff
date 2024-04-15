@@ -78,13 +78,13 @@ struct TrainerMon
     u8 lvl;
     u8 ball;
     u8 friendship;
-    u8 nature : 5;
-    bool8 gender : 2;
-    bool8 isShiny : 1;
-    u8 dynamaxLevel : 4;
-    bool8 gigantamaxFactor : 1;
-    bool8 shouldDynamax : 1;
-    bool8 shouldTerastal : 1;
+    u8 nature:5;
+    bool8 gender:2;
+    bool8 isShiny:1;
+    u8 dynamaxLevel:4;
+    bool8 gigantamaxFactor:1;
+    bool8 shouldDynamax:1;
+    bool8 shouldTerastal:1;
 };
 
 #define TRAINER_PARTY(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray)
@@ -139,9 +139,6 @@ struct TypeInfo
     //u16 teraShard;
     //u16 arceusForm;
 };
-
-extern const u16 gMinigameDigits_Pal[];
-extern const u32 gMinigameDigits_Gfx[];
 
 extern const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[];
 extern const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[];

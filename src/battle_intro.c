@@ -115,7 +115,12 @@ void HandleIntroSlide(u8 terrain)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
     {
-        taskId = CreateTask(BattleIntroSlide3, 0);
+        if (gSaveBlock2Ptr->optionsBattleIntro == 0) {
+            taskId = CreateTask(BattleIntroSlide3, 0);
+        } else {
+            taskId = CreateTask(BattleIntroNoSlide, 0);
+        }
+        
     }
     else if (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) == SPECIES_KYOGRE)
     {
@@ -124,7 +129,11 @@ void HandleIntroSlide(u8 terrain)
     }
     else
     {
-        taskId = CreateTask(sBattleIntroSlideFuncs[terrain], 0);
+        if (gSaveBlock2Ptr->optionsBattleIntro == 0) {
+            taskId = CreateTask(sBattleIntroSlideFuncs[terrain], 0);
+        } else {
+            taskId = CreateTask(BattleIntroNoSlide, 0);
+        }
     }
 
     gTasks[taskId].tState = 0;
@@ -243,12 +252,12 @@ static void BattleIntroSlide1(u8 taskId)
         {
             if (gTasks[taskId].tTerrain == BATTLE_TERRAIN_LONG_GRASS)
             {
-                if (gBattle_BG1_Y != 0xFFB0)
+                if (gBattle_BG1_Y != (u16)(-80))
                     gBattle_BG1_Y -= 2;
             }
             else
             {
-                if (gBattle_BG1_Y != 0xFFC8)
+                if (gBattle_BG1_Y != (u16)(-56))
                     gBattle_BG1_Y -= 1;
             }
         }

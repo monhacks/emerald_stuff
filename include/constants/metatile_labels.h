@@ -413,7 +413,7 @@
 // gTileset_Petalburg
 #define METATILE_Petalburg_Door_BirchsLab   0x249
 #define METATILE_Petalburg_Door_Littleroot  0x248
-#define METATILE_Petalburg_Door_Oldale      0x287
+#define METATILE_Petalburg_Door_Oldale      0x2F9
 #define METATILE_Petalburg_ReflectiveWater  0x299
 
 // gTileset_PetalburgGym

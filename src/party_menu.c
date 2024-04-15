@@ -2184,7 +2184,7 @@ u8 GetAilmentFromStatus(u32 status)
     if (status & STATUS1_BURN)
         return AILMENT_BRN;
     if (status & STATUS1_FROSTBITE)
-        return AILMENT_FSB;
+        return AILMENT_FRB;
     return AILMENT_NONE;
 }
 
@@ -6742,7 +6742,7 @@ static void CursorCb_ChangeForm(u8 taskId)
     TryMultichoiceFormChange(taskId);
 }
 
-static void CursorCb_ChangeAbility(u8 taskId)
+static void UNUSED CursorCb_ChangeAbility(u8 taskId)
 {
     gSpecialVar_Result = 1;
     TryMultichoiceFormChange(taskId);

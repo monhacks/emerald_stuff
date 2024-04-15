@@ -75,7 +75,5 @@
       "script": "enterNamelessCavern"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

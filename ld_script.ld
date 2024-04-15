@@ -359,9 +359,7 @@ SECTIONS {
         src/gym_leader_rematch.o(.text);
         src/battle_transition_frontier.o(.text);
         src/international_string_util.o(.text);
-        src/soar.o(.text);
 		src/dexnav.o(.text);
-        src/global_trade_station.o(.text)
         src/pokemon_debug.o(.text);
         src/expansion_intro.o(.text);
         src/sound_check_menu.o(.text);
@@ -732,11 +730,9 @@ SECTIONS {
         src/international_string_util.o(.rodata);
         src/mystery_event_msg.o(.rodata);
         data/mystery_gift.o(.rodata);
-        src/soar.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
 		src/dexnav.o(.rodata);
-        src/global_trade_station.o(.rodata)
         src/pokemon_debug.o(.rodata);
         src/expansion_intro.o(.rodata);
         src/sound_check_menu.o(.rodata);
@@ -1638,7 +1634,8 @@ SECTIONS {
         sound/songs/midi/mus_hg_obtain_castle_points.o(.rodata);
         sound/songs/midi/mus_hg_obtain_b_points.o(.rodata);
         sound/songs/midi/mus_hg_win_minigame.o(.rodata);
-        sound/songs/midi/mus_persona_face_myself.o(.rodata);
+        sound/songs/midi/mus_smt3_large_map.o(.rodata);
+        sound/songs/midi/mus_test_track.o(.rodata);
     } > ROM =0
 
     lib_rodata :

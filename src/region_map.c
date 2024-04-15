@@ -27,6 +27,7 @@
 #include "constants/map_types.h"
 #include "constants/rgb.h"
 #include "constants/weather.h"
+#include "overworld.h"
 
 /*
  *  This file handles region maps generally, and the map used when selecting a fly destination.
@@ -122,12 +123,16 @@ static const u32 sRegionMapCursorLargeGfxLZ[] = INCBIN_U32("graphics/pokenav/reg
 const u16 sRegionMapBg_Pal[] = INCBIN_U16("graphics/pokenav/region_map/map.gbapal");
 const u32 sRegionMapBg_GfxLZ[] = INCBIN_U32("graphics/pokenav/region_map/map.8bpp.lz");
 const u32 sRegionMapBg_TilemapLZ[] = INCBIN_U32("graphics/pokenav/region_map/map.bin.lz");
+const u16 sJohtoRegionMapBg_Pal[] = INCBIN_U16("graphics/pokenav/region_map/johto_map.gbapal");
+const u32 sJohtoRegionMapBg_GfxLZ[] = INCBIN_U32("graphics/pokenav/region_map/johto_map.8bpp.lz");
+const u32 sJohtoRegionMapBg_TilemapLZ[] = INCBIN_U32("graphics/pokenav/region_map/johto_map.bin.lz");
 static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("graphics/pokenav/region_map/brendan_icon.gbapal");
 static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/region_map/brendan_icon.4bpp");
 static const u16 sRegionMapPlayerIcon_MayPal[] = INCBIN_U16("graphics/pokenav/region_map/may_icon.gbapal");
 static const u8 sRegionMapPlayerIcon_MayGfx[] = INCBIN_U8("graphics/pokenav/region_map/may_icon.4bpp");
 
 #include "data/region_map/region_map_layout.h"
+#include "data/region_map/johto_region_map_layout.h"
 #include "data/region_map/region_map_entries.h"
 
 static const u16 sRegionMap_SpecialPlaceLocations[][2] =
@@ -339,24 +344,6 @@ const u8 sMapHealLocations[][3] =
     [MAPSEC_ROUTE_132] = {MAP_GROUP(ROUTE132), MAP_NUM(ROUTE132), HEAL_LOCATION_ROUTE132},
     [MAPSEC_ROUTE_133] = {MAP_GROUP(ROUTE133), MAP_NUM(ROUTE133), HEAL_LOCATION_ROUTE133},
     [MAPSEC_ROUTE_134] = {MAP_GROUP(ROUTE134), MAP_NUM(ROUTE134), HEAL_LOCATION_ROUTE134},
-    [MAPSEC_MIRAGE_SPOT_PLAIN_A] = {MAP_GROUP(MIRAGE_SPOT_PLAIN_A), MAP_NUM(MIRAGE_SPOT_PLAIN_A), HEAL_LOCATION_MIRAGE_SPOT_PLAIN_A},
-    [MAPSEC_MIRAGE_SPOT_PLAIN_B] = {MAP_GROUP(MIRAGE_SPOT_PLAIN_B), MAP_NUM(MIRAGE_SPOT_PLAIN_B), HEAL_LOCATION_MIRAGE_SPOT_PLAIN_B},
-    [MAPSEC_MIRAGE_SPOT_WOODS_A] = {MAP_GROUP(MIRAGE_SPOT_WOODS_A), MAP_NUM(MIRAGE_SPOT_WOODS_A), HEAL_LOCATION_MIRAGE_SPOT_WOODS_A},
-    [MAPSEC_MIRAGE_SPOT_WOODS_B] = {MAP_GROUP(MIRAGE_SPOT_WOODS_B), MAP_NUM(MIRAGE_SPOT_WOODS_B), HEAL_LOCATION_MIRAGE_SPOT_WOODS_B},
-    [MAPSEC_MIRAGE_SPOT_ASH_A] = {MAP_GROUP(MIRAGE_SPOT_ASH_A), MAP_NUM(MIRAGE_SPOT_ASH_A), HEAL_LOCATION_MIRAGE_SPOT_ASH_A},
-    [MAPSEC_MIRAGE_SPOT_ASH_B] = {MAP_GROUP(MIRAGE_SPOT_ASH_B), MAP_NUM(MIRAGE_SPOT_ASH_B), HEAL_LOCATION_MIRAGE_SPOT_ASH_B},
-    [MAPSEC_MIRAGE_SPOT_DESERT_A] = {MAP_GROUP(MIRAGE_SPOT_DESERT_A), MAP_NUM(MIRAGE_SPOT_DESERT_A), HEAL_LOCATION_MIRAGE_SPOT_DESERT_A},
-    [MAPSEC_MIRAGE_SPOT_DESERT_B] = {MAP_GROUP(MIRAGE_SPOT_DESERT_B), MAP_NUM(MIRAGE_SPOT_DESERT_B), HEAL_LOCATION_MIRAGE_SPOT_DESERT_B},
-    [MAPSEC_MIRAGE_SPOT_TALLGRASS_A] = {MAP_GROUP(MIRAGE_SPOT_TALL_GRASS_A), MAP_NUM(MIRAGE_SPOT_TALL_GRASS_A), HEAL_LOCATION_MIRAGE_SPOT_TALL_GRASS_A},
-    [MAPSEC_MIRAGE_SPOT_TALLGRASS_B] = {MAP_GROUP(MIRAGE_SPOT_TALL_GRASS_B), MAP_NUM(MIRAGE_SPOT_TALL_GRASS_B), HEAL_LOCATION_MIRAGE_SPOT_TALL_GRASS_B},
-    [MAPSEC_MIRAGE_SPOT_ISLAND_A] = {MAP_GROUP(MIRAGE_SPOT_ISLAND_A), MAP_NUM(MIRAGE_SPOT_ISLAND_A), HEAL_LOCATION_MIRAGE_SPOT_ISLAND_A},
-    [MAPSEC_MIRAGE_SPOT_ISLAND_B] = {MAP_GROUP(MIRAGE_SPOT_ISLAND_B), MAP_NUM(MIRAGE_SPOT_ISLAND_B), HEAL_LOCATION_MIRAGE_SPOT_ISLAND_B},
-    [MAPSEC_MIRAGE_SPOT_BEACH_A] = {MAP_GROUP(MIRAGE_SPOT_BEACH_A), MAP_NUM(MIRAGE_SPOT_BEACH_A), HEAL_LOCATION_MIRAGE_SPOT_BEACH_A},
-    [MAPSEC_MIRAGE_SPOT_BEACH_B] = {MAP_GROUP(MIRAGE_SPOT_BEACH_B), MAP_NUM(MIRAGE_SPOT_BEACH_B), HEAL_LOCATION_MIRAGE_SPOT_BEACH_B},
-    [MAPSEC_MIRAGE_SPOT_CAVE_A] = {MAP_GROUP(MIRAGE_SPOT_CAVE_A), MAP_NUM(MIRAGE_SPOT_CAVE_A), HEAL_LOCATION_MIRAGE_SPOT_CAVE_A},
-    [MAPSEC_MIRAGE_SPOT_CAVE_B] = {MAP_GROUP(MIRAGE_SPOT_CAVE_B), MAP_NUM(MIRAGE_SPOT_CAVE_B), HEAL_LOCATION_MIRAGE_SPOT_CAVE_B},
-    [MAPSEC_MIRAGE_SPOT_SNOW_A] = {MAP_GROUP(MIRAGE_SPOT_SNOW_A), MAP_NUM(MIRAGE_SPOT_SNOW_A), HEAL_LOCATION_MIRAGE_SPOT_SNOW_A},
-    [MAPSEC_MIRAGE_SPOT_SNOW_B] = {MAP_GROUP(MIRAGE_SPOT_SNOW_B), MAP_NUM(MIRAGE_SPOT_SNOW_B), HEAL_LOCATION_MIRAGE_SPOT_SNOW_B},
     [MAPSEC_SLATEPORT_MARKET] = {MAP_GROUP(SLATEPORT_MARKET), MAP_NUM(SLATEPORT_MARKET), HEAL_LOCATION_SLATEPORT_MARKET},
     [MAPSEC_MT_CHIMNEY] = {MAP_GROUP(MT_CHIMNEY), MAP_NUM(MT_CHIMNEY), HEAL_LOCATION_MT_CHIMNEY}
 };
@@ -568,24 +555,47 @@ bool8 LoadRegionMapGfx(void)
     {
     case 0:
         if (sRegionMap->bgManaged)
-            DecompressAndCopyTileDataToVram(sRegionMap->bgNum, sRegionMapBg_GfxLZ, 0, 0, 0);
+            if (GetCurrentRegion() == REGION_HOENN) {
+                DecompressAndCopyTileDataToVram(sRegionMap->bgNum, sRegionMapBg_GfxLZ, 0, 0, 0);
+            } else {
+                DecompressAndCopyTileDataToVram(sRegionMap->bgNum, sJohtoRegionMapBg_GfxLZ, 0, 0, 0);
+            }
+            
         else
-            LZ77UnCompVram(sRegionMapBg_GfxLZ, (u16 *)BG_CHAR_ADDR(2));
+            if (GetCurrentRegion() == REGION_HOENN) {
+                LZ77UnCompVram(sRegionMapBg_GfxLZ, (u16 *)BG_CHAR_ADDR(2));
+            } else {
+                LZ77UnCompVram(sJohtoRegionMapBg_GfxLZ, (u16 *)BG_CHAR_ADDR(2));
+            }
         break;
     case 1:
         if (sRegionMap->bgManaged)
         {
-            if (!FreeTempTileDataBuffersIfPossible())
+            if (!FreeTempTileDataBuffersIfPossible()) {
+                if (GetCurrentRegion() == REGION_HOENN) {
                 DecompressAndCopyTileDataToVram(sRegionMap->bgNum, sRegionMapBg_TilemapLZ, 0, 0, 1);
+                } else {
+                    DecompressAndCopyTileDataToVram(sRegionMap->bgNum, sJohtoRegionMapBg_TilemapLZ, 0, 0, 1);
+                }
+        }
         }
         else
         {
-            LZ77UnCompVram(sRegionMapBg_TilemapLZ, (u16 *)BG_SCREEN_ADDR(28));
+            if (GetCurrentRegion() == REGION_HOENN) {
+                LZ77UnCompVram(sRegionMapBg_TilemapLZ, (u16 *)BG_SCREEN_ADDR(28));
+            } else {
+                LZ77UnCompVram(sJohtoRegionMapBg_TilemapLZ, (u16 *)BG_SCREEN_ADDR(28));
+            }
         }
         break;
     case 2:
-        if (!FreeTempTileDataBuffersIfPossible())
-            LoadPalette(sRegionMapBg_Pal, BG_PLTT_ID(7), 3 * PLTT_SIZE_4BPP);
+        if (!FreeTempTileDataBuffersIfPossible()) {
+            if (GetCurrentRegion() == REGION_HOENN) {
+                LoadPalette(sRegionMapBg_Pal, BG_PLTT_ID(7), 3 * PLTT_SIZE_4BPP);
+            } else {
+                LoadPalette(sJohtoRegionMapBg_Pal, BG_PLTT_ID(7), 3 * PLTT_SIZE_4BPP);
+            }
+        }
         break;
     case 3:
         LZ77UnCompWram(sRegionMapCursorSmallGfxLZ, sRegionMap->cursorSmallImage);
@@ -983,7 +993,12 @@ static u16 GetMapSecIdAt(u16 x, u16 y)
     }
     y -= MAPCURSOR_Y_MIN;
     x -= MAPCURSOR_X_MIN;
-    return sRegionMap_MapSectionLayout[y][x];
+    if (GetCurrentRegion() == REGION_HOENN) {
+        return sRegionMap_MapSectionLayout[y][x];
+    } else {
+        return sJohtoRegionMap_MapSectionLayout[y][x];
+    }
+    
 }
 
 void RegionMap_GetSectionCoordsFromCurrFieldPos(u16* mapSectionId, u16* cursorPosX, u16* cursorPosY, bool8* playerIsInCave)

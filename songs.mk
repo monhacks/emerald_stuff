@@ -2340,5 +2340,8 @@ $(MID_SUBDIR)/mus_hg_obtain_b_points.s: %.s: %.mid
 $(MID_SUBDIR)/mus_hg_win_minigame.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V091 -p5
 
-$(MID_SUBDIR)/mus_persona_face_myself.s: %.s: %.mid
-	$(MID) $< $@ -E -R0 -G229 -V080
+$(MID_SUBDIR)/mus_smt3_large_map.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G229 -V086
+
+$(MID_SUBDIR)/mus_test_track.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G229 -V107
