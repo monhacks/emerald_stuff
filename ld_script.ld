@@ -367,6 +367,7 @@ SECTIONS {
         src/quests.o(.text);
         src/day_night.o(.text);
         src/ui_startmenu_full.o(.text);
+        src/ui_birch_case.o(.text);
     } > ROM =0
 
     script_data :
@@ -741,6 +742,7 @@ SECTIONS {
         src/quests.o(.rodata);
         src/day_night.o(.rodata);
         src/ui_startmenu_full.o(.rodata);
+        src/ui_birch_case.o(.rodata);
     } > ROM =0
 
     song_data :
