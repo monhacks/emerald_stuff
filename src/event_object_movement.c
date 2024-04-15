@@ -1789,6 +1789,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
         // Use shininess info from follower object
         // in future this should be passed in
         paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, obj ? obj->shiny : FALSE, spriteTemplate);
+        spriteTemplate->paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
     } else if (spriteTemplate->paletteTag != TAG_NONE)
         LoadObjectEventPalette(spriteTemplate->paletteTag, FALSE);
 
@@ -2797,14 +2798,9 @@ void FreeAndReserveObjectSpritePalettes(void)
 u8 LoadObjectEventPalette(u16 paletteTag, bool8 shouldTint)
 {
     u16 i = FindObjectEventPaletteIndexByTag(paletteTag);
-
-    // FindObjectEventPaletteIndexByTag returns 0xFF on failure, not OBJ_EVENT_PAL_TAG_NONE.
-#ifdef BUGFIX
-    if (i != 0xFF)
-#else
-    if (i != OBJ_EVENT_PAL_TAG_NONE)
-#endif
-        return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i], shouldTint);
+    if (i == 0xFF)
+        return i;
+    return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i], shouldTint);
 }
 
 static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette, bool8 shouldTint)
