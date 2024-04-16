@@ -613,8 +613,8 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
 
 const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
 {
-    TRAINER_CLASS(GGRUNT_M, "Galactic Grunt"),
-    TRAINER_CLASS(GGRUNT_F, "Galactic Grunt"),
+    TRAINER_CLASS(PKMN_TRAINER_1, "{PKMN} TRAINER"),
+    TRAINER_CLASS(PKMN_TRAINER_2, "{PKMN} TRAINER"),
     TRAINER_CLASS(HIKER, "Hiker", 10),
     TRAINER_CLASS(TEAM_AQUA, "Team Aqua", 5),
     TRAINER_CLASS(PKMN_BREEDER, "{PKMN} Breeder", 10, B_TRAINER_CLASS_POKE_BALLS >= GEN_8 ? ITEM_HEAL_BALL : ITEM_FRIEND_BALL),
@@ -685,6 +685,8 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     TRAINER_CLASS(J_LEADER, "Gym Leader", 20),
     TRAINER_CLASS(SPIRIT, "Spirit"),
     TRAINER_CLASS(LAWRENCE, "Collector", 20),
+    TRAINER_CLASS(GGRUNT_M, "Galactic Grunt"),
+    TRAINER_CLASS(GGRUNT_F, "Galactic Grunt"),
 };
 
 static void (* const sTurnActionsFuncsTable[])(void) =
