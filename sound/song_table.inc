@@ -901,7 +901,7 @@ gSongTable::
 	song mus_hg_obtain_b_points, 2, 2
 	song mus_hg_win_minigame, 2, 2
 	song mus_smt3_large_map, 0, 0
-	song mus_test_track, 0, 0
+	song mus_xenoblade_battle_theme, 0, 0
 
 	.align 2
 dummy_song_header:

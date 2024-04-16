@@ -1639,7 +1639,7 @@ SECTIONS {
         sound/songs/midi/mus_hg_obtain_b_points.o(.rodata);
         sound/songs/midi/mus_hg_win_minigame.o(.rodata);
         sound/songs/midi/mus_smt3_large_map.o(.rodata);
-        sound/songs/midi/mus_test_track.o(.rodata);
+        sound/songs/midi/mus_xenoblade_battle_theme.o(.rodata);
     } > ROM =0
 
     lib_rodata :

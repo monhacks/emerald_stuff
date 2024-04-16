@@ -5469,8 +5469,8 @@ u16 GetBattleBGM(void)
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 return MUS_HG_VS_RIVAL;
             if (!StringCompare(GetTrainerNameFromId(gTrainerBattleOpponent_A), gText_BattleWallyName))
-                return MUS_DP_VS_TRAINER;
-            return MUS_VS_RIVAL;
+                return MUS_XENOBLADE_BATTLE_THEME;
+            return MUS_XENOBLADE_BATTLE_THEME;
         case TRAINER_CLASS_ELITE_FOUR:
             return MUS_VS_ELITE_FOUR;
         case TRAINER_CLASS_SALON_MAIDEN:
