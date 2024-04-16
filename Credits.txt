@@ -1,8 +1,8 @@
 Everyone who worked on the Pret disassembly and RHH expansion
 TrainerX493 and HunarPG - Glazed's Johto tiles
 Pawkkie - Various resources and shadows port of merrps
-Archie&Mudkip - New pause menu
-Mudkip - New shop menu
+Archie&Mudkip - New pause menu, start menu
+Mudkip - New shop menu, start menu
 quocmanh94 - HGSS berry animation
 BSBob - Map popup
 Kaixer - Pokemon sprites
@@ -55,6 +55,7 @@ MrDollSteak - Male Rocket Grunt, Female Rocket Grunt, Proton, Petrel and Giovann
 Rizon/Falsever - DP Lucas, Ethan, Rosa, Youngster Sprites, Lass Sprites, Bug Catcher Sprites, Schoolkid Male Sprites, HGSS Female Swimmer, Gen V Male Swimmer, Gen V Female Swimmer, Gen IV Worker, HGSS Male Ace Trainer, Falkner, Clair, Roxanne
 Sky High - Gen V Cyclist Sprites, HGSS Gentleman, Gen IV Guitarist, Gen V Guitarist, Gen V Pokemon Ranger Sprites, Gen V Rich Boy, DP Snow Ace Trainer, Bruno, Crasher Wake, Gen V Lady, Gen IV Camper, Gen IV Picnicker, Gen IV Fisherman, Gen IV Ninja Boy
 Luxio//Hacks - Gen V Psychic Male
+Grunt Lucas - start menu, pause menu
 Ekat's tileset credits:	
 Ekat
 Heartless Dragoon
