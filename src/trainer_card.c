@@ -336,6 +336,7 @@ static void VblankCb_TrainerCard(void)
     BlinkTimeColon();
     if (sData->allowDMACopy)
         DmaCopy16(3, &gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 0x140);
+    ChangeBgX(2, 64, BG_COORD_SUB); // controls the background scrolling
 }
 
 static void HblankCb_TrainerCard(void)

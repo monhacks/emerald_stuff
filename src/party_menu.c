@@ -595,6 +595,7 @@ static void VBlankCB_PartyMenu(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+    ChangeBgY(1, 128, BG_COORD_SUB);
 }
 
 static void CB2_InitPartyMenu(void)
