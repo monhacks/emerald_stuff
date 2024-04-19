@@ -12,6 +12,7 @@
 #include "battle_setup.h"
 #include "roamer.h"
 #include "tv.h"
+#include "rtc.h"
 #include "link.h"
 #include "script.h"
 #include "battle_debug.h"
@@ -528,7 +529,7 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
 static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 rod)
 {
     u8 wildMonIndex = ChooseWildMonIndex_Fishing(rod);
-    u8 wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
+    u32 wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
     u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
     UpdateChainFishingSpeciesAndStreak(wildMonSpecies);
