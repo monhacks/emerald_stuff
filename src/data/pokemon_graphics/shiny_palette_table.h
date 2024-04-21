@@ -1224,6 +1224,9 @@ const struct CompressedSpritePalette gFollowMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(FURFROU_KABUKI_TRIM, gFollowMonShinyPalette_FurfrouKabukiTrim),
     SPECIES_SHINY_PAL(FURFROU_PHARAOH_TRIM, gFollowMonShinyPalette_FurfrouPharaohTrim),
 
+    SPECIES_SHINY_PAL(LYCANROC_MIDNIGHT, gFollowMonShinyPalette_LycanrocMidnight),
+    SPECIES_SHINY_PAL(LYCANROC_DUSK, gFollowMonShinyPalette_LycanrocDusk),
+
     SPECIES_SHINY_PAL(MEOWSTIC_FEMALE, gFollowMonShinyPalette_MeowsticFemale),
 
     /* SPECIES_SHINY_PAL(AEGISLASH_BLADE, gMonShinyPalette_AegislashBlade),
@@ -1251,8 +1254,7 @@ const struct CompressedSpritePalette gFollowMonShinyPaletteTable[] =
 
     SPECIES_SHINY_PAL(ROCKRUFF_OWN_TEMPO, gMonShinyPalette_Rockruff),
 
-    SPECIES_SHINY_PAL(LYCANROC_MIDNIGHT, gFollowMonShinyPalette_LycanrocMidnight),
-    SPECIES_SHINY_PAL(LYCANROC_DUSK, gFollowMonShinyPalette_LycanrocDusk),
+    
 
     SPECIES_SHINY_PAL(WISHIWASHI_SCHOOL, gMonShinyPalette_WishiwashiSchool),
 

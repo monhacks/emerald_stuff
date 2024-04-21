@@ -4119,9 +4119,10 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId)
 {
     int boxId, boxPosition;
     struct BoxPokemon boxMon;
-    u32 species = SPECIES_BULBASAUR;
+    u32 species = SPECIES_DECIDUEYE;
     bool8 spaceAvailable = FALSE;
 
+    FlagSet(FLAG_FORCE_SHINYNESS);
     for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
     {
         for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
@@ -4130,6 +4131,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId)
             {
                 if (!spaceAvailable)
                     PlayBGM(MUS_RG_MYSTERY_GIFT);
+                
                 CreateBoxMon(&boxMon, species, 100, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
                 gPokemonStoragePtr->boxes[boxId][boxPosition] = boxMon;
                 species = (species < NUM_SPECIES - 1) ? species + 1 : 1;
@@ -4140,6 +4142,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId)
 
     // Set flag for user convenience
     FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagClear(FLAG_FORCE_SHINYNESS);
     if (spaceAvailable)
         PlayBGM(GetCurrentMapMusic());
 
