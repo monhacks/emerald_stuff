@@ -13,14 +13,11 @@
 #include "pokedex_area_screen.h"
 #include "region_map.h"
 #include "roamer.h"
-#include "strings.h"
 #include "sound.h"
 #include "string_util.h"
-#include "text_window.h"
 #include "trig.h"
 #include "pokedex_area_region_map.h"
 #include "wild_encounter.h"
-
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
@@ -105,7 +102,6 @@ static u16 GetRegionMapSectionId(u8, u8);
 static bool8 MapHasSpecies(const struct WildPokemonHeader *, u16);
 static bool8 MonListHasSpecies(const struct WildPokemonInfo *, u16, u16);
 static void DoAreaGlow(void);
-static void ClearPokedexArea(void);
 static void Task_ShowPokedexAreaScreen(u8);
 static void CreateAreaMarkerSprites(void);
 static void LoadAreaUnknownGraphics(void);
@@ -209,20 +205,6 @@ static const struct SpriteTemplate sAreaUnknownSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
-};
-
-static u8 windid;
-static const u8 sFontColor_Black[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, 5};
-
-static const struct WindowTemplate sTimeOfDayWindowTemplate =
-{
-    .bg = 1,
-    .tilemapLeft = 24,
-    .tilemapTop = 3,
-    .width = 7,
-    .height = 2,
-    .paletteNum = 0,
-    .baseBlock = 0x16C
 };
 
 static void ResetDrawAreaGlowState(void)
@@ -402,188 +384,40 @@ static bool8 MapHasSpecies(const struct WildPokemonHeader *info, u16 species)
 {
     // If this is a header for Altering Cave, skip it if it's not the current Altering Cave encounter set
     if (GetRegionMapSectionId(info->mapGroup, info->mapNum) == MAPSEC_ALTERING_CAVE)
-	{
-		sPokedexAreaScreen->alteringCaveCounter++;
-		if (sPokedexAreaScreen->alteringCaveCounter != sPokedexAreaScreen->alteringCaveId + 1)
-			return FALSE;
-	}
-	
-	if (IsNationalPokedexEnabled())
-	{
-        if ((sPokedexAreaScreen->state == TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->landMonsNatMorningInfo != NULL){
-            if (MonListHasSpecies(info->landMonsNatMorningInfo, species, 12))
-                return TRUE;
-        }
-        else if ((sPokedexAreaScreen->state == TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->landMonsMorningInfo != NULL){
-            if (MonListHasSpecies(info->landMonsMorningInfo, species, 12))
-                return TRUE;
-        }
-        else if (sPokedexAreaScreen->state == TIME_NIGHT && info->landMonsNatNightInfo != NULL){
-            if (MonListHasSpecies(info->landMonsNatNightInfo, species, 12))
-                return TRUE;
-        }
-        else if (sPokedexAreaScreen->state == TIME_NIGHT && info->landMonsNightInfo != NULL){
-            if (MonListHasSpecies(info->landMonsNightInfo, species, 12))
-                return TRUE;
-        }
-        else if (info->landMonsNatInfo != NULL){
-            if (MonListHasSpecies(info->landMonsNatInfo, species, 12))
-                return TRUE;
-        }
-        else{
-            if (MonListHasSpecies(info->landMonsInfo, species, 12))
-                return TRUE;
-        }
+    {
+        sPokedexAreaScreen->alteringCaveCounter++;
+        if (sPokedexAreaScreen->alteringCaveCounter != sPokedexAreaScreen->alteringCaveId + 1)
+            return FALSE;
+    }
 
-        if ((sPokedexAreaScreen->state == TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->waterMonsNatMorningInfo != NULL){
-            if (MonListHasSpecies(info->waterMonsNatMorningInfo, species, 12))
-                return TRUE;
-        }
-        else if ((sPokedexAreaScreen->state==TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->waterMonsMorningInfo != NULL){
-            if (MonListHasSpecies(info->waterMonsMorningInfo, species, 12))
-                return TRUE;
-        }
-        else if (sPokedexAreaScreen->state == TIME_NIGHT && info->waterMonsNatNightInfo != NULL){
-            if (MonListHasSpecies(info->waterMonsNatNightInfo, species, 12))
-                return TRUE;
-        }
-        else if (sPokedexAreaScreen->state==TIME_NIGHT && info->waterMonsNightInfo != NULL){
-            if (MonListHasSpecies(info->waterMonsNightInfo, species, 12))
-                return TRUE;
-        } 
-        else if (info->waterMonsNatInfo != NULL){
-            if (MonListHasSpecies(info->waterMonsNatInfo, species, 12))
-                return TRUE;
-        }
-        else {
-            if (MonListHasSpecies(info->waterMonsInfo, species, 12))
-                return TRUE;
-        }
-
-        if ((sPokedexAreaScreen->state == TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->fishingMonsNatMorningInfo != NULL){
-            if (MonListHasSpecies(info->fishingMonsNatMorningInfo, species, 12))
-                return TRUE;
-        }
-        else if ((sPokedexAreaScreen->state==TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->fishingMonsMorningInfo != NULL){
-            if (MonListHasSpecies(info->fishingMonsMorningInfo, species, 12))
-                return TRUE;
-        }
-        else if (sPokedexAreaScreen->state == TIME_NIGHT && info->fishingMonsNatNightInfo != NULL){
-            if (MonListHasSpecies(info->fishingMonsNatNightInfo, species, 12))
-                return TRUE;
-        }
-        else if (sPokedexAreaScreen->state==TIME_NIGHT && info->fishingMonsNightInfo != NULL){
-            if (MonListHasSpecies(info->fishingMonsNightInfo, species, 12))
-                return TRUE;
-        } 
-        else if (info->fishingMonsNatInfo != NULL){
-            if (MonListHasSpecies(info->fishingMonsNatInfo, species, 12))
-                return TRUE;
-        }
-        else {
-            if (MonListHasSpecies(info->fishingMonsInfo, species, 12))
-                return TRUE;
-        }
-
-        if ((sPokedexAreaScreen->state == TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->rockSmashMonsNatMorningInfo != NULL){
-            if (MonListHasSpecies(info->rockSmashMonsNatMorningInfo, species, 12))
-                return TRUE;
-        }
-        else if ((sPokedexAreaScreen->state==TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->rockSmashMonsMorningInfo != NULL){
-            if (MonListHasSpecies(info->rockSmashMonsMorningInfo, species, 12))
-                return TRUE;
-        }
-        else if (sPokedexAreaScreen->state == TIME_NIGHT && info->rockSmashMonsNatNightInfo != NULL){
-            if (MonListHasSpecies(info->rockSmashMonsNatNightInfo, species, 12))
-                return TRUE;
-        }
-        else if (sPokedexAreaScreen->state==TIME_NIGHT && info->rockSmashMonsNightInfo != NULL){
-            if (MonListHasSpecies(info->rockSmashMonsNightInfo, species, 12))
-                return TRUE;
-        } 
-        else if (info->rockSmashMonsNatInfo != NULL){
-            if (MonListHasSpecies(info->rockSmashMonsNatInfo, species, 12))
-                return TRUE;
-        }
-        else {
-            if (MonListHasSpecies(info->rockSmashMonsInfo, species, 12))
-                return TRUE;
-        }
-
-	}
-	else
-	{
-
-        if ((sPokedexAreaScreen->state==TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->landMonsMorningInfo != NULL){
-            if (MonListHasSpecies(info->landMonsMorningInfo, species, 12))
-			    return TRUE;
-        }
-        else if (sPokedexAreaScreen->state==TIME_NIGHT && info->landMonsNightInfo != NULL){
-            if (MonListHasSpecies(info->landMonsNightInfo, species, 12))
-			    return TRUE;
-        } 
-        else {
-            if (MonListHasSpecies(info->landMonsInfo, species, 12))
-			    return TRUE;
-        }
-
-        if ((sPokedexAreaScreen->state==TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->waterMonsMorningInfo != NULL){
-            if (MonListHasSpecies(info->waterMonsMorningInfo, species, 12))
-			    return TRUE;
-        }
-        else if (sPokedexAreaScreen->state==TIME_NIGHT && info->waterMonsNightInfo != NULL){
-            if (MonListHasSpecies(info->waterMonsNightInfo, species, 12))
-			    return TRUE;
-        } 
-        else {
-            if (MonListHasSpecies(info->waterMonsInfo, species, 12))
-			    return TRUE;
-        }
-
-        if ((sPokedexAreaScreen->state==TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->fishingMonsMorningInfo != NULL){
-            if (MonListHasSpecies(info->fishingMonsMorningInfo, species, 12))
-			    return TRUE;
-        }
-        else if (sPokedexAreaScreen->state==TIME_NIGHT && info->fishingMonsNightInfo != NULL){
-            if (MonListHasSpecies(info->fishingMonsNightInfo, species, 12))
-			    return TRUE;
-        } 
-        else {
-            if (MonListHasSpecies(info->fishingMonsInfo, species, 12))
-			    return TRUE;
-        }
-
-        if ((sPokedexAreaScreen->state==TIME_MORNING || sPokedexAreaScreen->state == TIME_EVENING) && info->rockSmashMonsMorningInfo != NULL){
-            if (MonListHasSpecies(info->rockSmashMonsMorningInfo, species, 12))
-			    return TRUE;
-        }
-        else if (sPokedexAreaScreen->state==TIME_NIGHT && info->rockSmashMonsNightInfo != NULL){
-            if (MonListHasSpecies(info->rockSmashMonsNightInfo, species, 12))
-			    return TRUE;
-        } 
-        else {
-            if (MonListHasSpecies(info->rockSmashMonsInfo, species, 12))
-			    return TRUE;
-        }
-
-	}
-	
-	return FALSE;
+    if (MonListHasSpecies(info->landMonsInfo, species, LAND_WILD_COUNT))
+        return TRUE;
+    if (MonListHasSpecies(info->waterMonsInfo, species, WATER_WILD_COUNT))
+        return TRUE;
+// When searching the fishing encounters, this incorrectly uses the size of the land encounters.
+// As a result it's reading out of bounds of the fishing encounters tables.
+#ifdef BUGFIX
+    if (MonListHasSpecies(info->fishingMonsInfo, species, FISH_WILD_COUNT))
+#else
+    if (MonListHasSpecies(info->fishingMonsInfo, species, LAND_WILD_COUNT))
+#endif
+        return TRUE;
+    if (MonListHasSpecies(info->rockSmashMonsInfo, species, ROCK_WILD_COUNT))
+        return TRUE;
+    return FALSE;
 }
 
 static bool8 MonListHasSpecies(const struct WildPokemonInfo *info, u16 species, u16 size)
 {
     u16 i;
-
     if (info != NULL)
     {
-		for (i = 0; i < size; i++)
-		{
-			if (info->wildPokemon[i].species == species)
-				return TRUE;
-		}
+        for (i = 0; i < size; i++)
+        {
+            if (info->wildPokemon[i].species == species)
+                return TRUE;
+        }
     }
-
     return FALSE;
 }
 
@@ -749,34 +583,6 @@ static void DoAreaGlow(void)
     }
 }
 
-static void UNUSED ClearPokedexArea(void)
-{
-    int i;
-
-    sPokedexAreaScreen->numOverworldAreas = 0;
-    //sPokedexAreaScreen->numSpecialAreas = 0;
-    //sPokedexAreaScreen->areaShadeOrMarkerFrameCounter = 0;
-    sPokedexAreaScreen->glowTimer = 0;
-    sPokedexAreaScreen->showingMarkers = 0;
-    sPokedexAreaScreen->markerFlashCounter = 0;
-    sPokedexAreaScreen->numAreaMarkerSprites = 0;
-    sPokedexAreaScreen->alteringCaveCounter = 0;
-    sPokedexAreaScreen->alteringCaveId = 0;
-
-    for (i = 0; i < ARRAY_COUNT(sPokedexAreaScreen->specialAreaRegionMapSectionIds); i++)
-    {
-        sPokedexAreaScreen->specialAreaRegionMapSectionIds[i] = 0;
-    }
-
-    for (i = 0; i < ARRAY_COUNT(sPokedexAreaScreen->overworldAreasWithMons); i++)
-    {
-        sPokedexAreaScreen->overworldAreasWithMons[i].mapGroup = 0;
-        sPokedexAreaScreen->overworldAreasWithMons[i].mapNum = 0;
-        sPokedexAreaScreen->overworldAreasWithMons[i].regionMapSectionId = 0;
-    }
-
-}
-
 #define tState data[0]
 
 void ShowPokedexAreaScreen(u16 species, u8 *screenSwitchState)
@@ -795,22 +601,22 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
 {
     switch (gTasks[taskId].tState)
     {
-        case 0:
-            ResetSpriteData();
-            FreeAllSpritePalettes();
-            HideBg(3);
-            HideBg(2);
-            HideBg(0);
-            break;
-        case 1:
-            SetBgAttribute(3, BG_ATTR_CHARBASEINDEX, 3);
-            LoadPokedexAreaMapGfx(&sPokedexAreaMapTemplate);
-            StringFill(sPokedexAreaScreen->charBuffer, CHAR_SPACE, 16);
-            break;
-        case 2:
-            if (TryShowPokedexAreaMap() == TRUE)
-                return;
-                PokedexAreaMapChangeBgY(-8);
+    case 0:
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        HideBg(3);
+        HideBg(2);
+        HideBg(0);
+        break;
+    case 1:
+        SetBgAttribute(3, BG_ATTR_CHARBASEINDEX, 3);
+        LoadPokedexAreaMapGfx(&sPokedexAreaMapTemplate);
+        StringFill(sPokedexAreaScreen->charBuffer, CHAR_SPACE, 16);
+        break;
+    case 2:
+        if (TryShowPokedexAreaMap() == TRUE)
+            return;
+        PokedexAreaMapChangeBgY(-8);
         break;
     case 3:
         ResetDrawAreaGlowState();
@@ -878,7 +684,7 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
             gTasks[taskId].data[1] = 1;
             PlaySE(SE_DEX_PAGE);
         }
-        else if (JOY_NEW(DPAD_RIGHT))
+        else if (JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(sPokedexAreaScreen->species), FLAG_GET_CAUGHT))
             {
@@ -898,7 +704,6 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
         if (gPaletteFade.active)
             return;
         DestroyAreaScreenSprites();
-        ClearWindowTilemap(windid);
         sPokedexAreaScreen->screenSwitchState[0] = gTasks[taskId].data[1];
         ResetPokedexAreaMapBg();
         DestroyTask(taskId);

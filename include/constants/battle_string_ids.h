@@ -711,8 +711,11 @@
 #define STRINGID_BIZARREAREACREATED                   709
 #define STRINGID_TIDYINGUPCOMPLETE                    710
 #define STRINGID_BOOSTERENERGYACTIVATES               711
+#define STRINGID_FOGCREPTUP                           712
+#define STRINGID_FOGISDEEP                            713
+#define STRINGID_FOGLIFTED                            714
 
-#define BATTLESTRINGS_COUNT                           712
+#define BATTLESTRINGS_COUNT                           715
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -764,6 +767,7 @@
 #define B_MSG_STARTED_SUNLIGHT  4
 #define B_MSG_STARTED_HAIL      5
 #define B_MSG_STARTED_SNOW      6
+#define B_MSG_STARTED_FOG       7
 
 // gRainContinuesStringIds
 #define B_MSG_RAIN_CONTINUES     0

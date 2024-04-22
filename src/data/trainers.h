@@ -12,7 +12,7 @@
     [TRAINER_NONE] =
     {
 #line 3
-        .trainerClass = TRAINER_CLASS_HIKER,
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 4
         .trainerPic = TRAINER_PIC_HIKER,
         .encounterMusic_gender = 

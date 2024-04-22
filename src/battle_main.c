@@ -613,8 +613,8 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
 
 const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
 {
-    TRAINER_CLASS(GGRUNT_M, "Galactic Grunt"),
-    TRAINER_CLASS(GGRUNT_F, "Galactic Grunt"),
+    TRAINER_CLASS(PKMN_TRAINER_1, "{PKMN} TRAINER"),
+    TRAINER_CLASS(PKMN_TRAINER_2, "{PKMN} TRAINER"),
     TRAINER_CLASS(HIKER, "Hiker", 10),
     TRAINER_CLASS(TEAM_AQUA, "Team Aqua", 5),
     TRAINER_CLASS(PKMN_BREEDER, "{PKMN} Breeder", 10, B_TRAINER_CLASS_POKE_BALLS >= GEN_8 ? ITEM_HEAL_BALL : ITEM_FRIEND_BALL),
@@ -685,6 +685,8 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     TRAINER_CLASS(J_LEADER, "Gym Leader", 20),
     TRAINER_CLASS(SPIRIT, "Spirit"),
     TRAINER_CLASS(LAWRENCE, "Collector", 20),
+    TRAINER_CLASS(GGRUNT_M, "Galactic Grunt"),
+    TRAINER_CLASS(GGRUNT_F, "Galactic Grunt"),
 };
 
 static void (* const sTurnActionsFuncsTable[])(void) =
@@ -5851,7 +5853,7 @@ static void HandleEndTurn_FinishBattle(void)
             TestRunner_Battle_AfterLastTurn();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
-        if (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE || B_RESTORE_HELD_BATTLE_ITEMS == TRUE)
+        if (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE || B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9)
             TryRestoreHeldItems();
 
         // Undo Dynamax HP multiplier before recalculating stats.
@@ -6087,7 +6089,7 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
                 gBattleStruct->dynamicMoveType = TYPE_ROCK | F_DYNAMIC_TYPE_SET;
             else if (gBattleWeather & B_WEATHER_SUN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
                 gBattleStruct->dynamicMoveType = TYPE_FIRE | F_DYNAMIC_TYPE_SET;
-            else if (gBattleWeather & (B_WEATHER_HAIL |B_WEATHER_SNOW))
+            else if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW))
                 gBattleStruct->dynamicMoveType = TYPE_ICE | F_DYNAMIC_TYPE_SET;
             else
                 gBattleStruct->dynamicMoveType = TYPE_NORMAL | F_DYNAMIC_TYPE_SET;

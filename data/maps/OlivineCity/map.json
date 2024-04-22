@@ -17,6 +17,11 @@
       "map": "MAP_ROUTE40",
       "offset": 17,
       "direction": "left"
+    },
+    {
+      "map": "MAP_ROUTE39",
+      "offset": 6,
+      "direction": "up"
     }
   ],
   "object_events": [
@@ -243,7 +248,9 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "hidden_item",

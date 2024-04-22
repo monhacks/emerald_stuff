@@ -366,6 +366,7 @@ SECTIONS {
         src/sliding_puzzle.o(.text);
         src/quests.o(.text);
         src/ui_startmenu_full.o(.text);
+        src/ui_main_menu.o(.text);
     } > ROM =0
 
     script_data :
@@ -739,6 +740,7 @@ SECTIONS {
         src/sliding_puzzle.o(.rodata);
         src/quests.o(.rodata);
         src/ui_startmenu_full.o(.rodata);
+        src/ui_main_menu.o(.rodata);
     } > ROM =0
 
     song_data :
@@ -1635,7 +1637,7 @@ SECTIONS {
         sound/songs/midi/mus_hg_obtain_b_points.o(.rodata);
         sound/songs/midi/mus_hg_win_minigame.o(.rodata);
         sound/songs/midi/mus_smt3_large_map.o(.rodata);
-        sound/songs/midi/mus_test_track.o(.rodata);
+        sound/songs/midi/mus_xenoblade_battle_theme.o(.rodata);
     } > ROM =0
 
     lib_rodata :
