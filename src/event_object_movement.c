@@ -551,6 +551,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Galactic_Commander_Mars,   OBJ_EVENT_PAL_TAG_GALACTIC_COMMANDER_MARS},
     {gObjectEventPal_Galactic_Commander_Jupiter,   OBJ_EVENT_PAL_TAG_GALACTIC_COMMANDER_JUPITER},
     {gObjectEventPal_Npc1,                  OBJ_EVENT_PAL_TAG_DYNAMIC},
+    {gObjectEventPal_Substitute,            OBJ_EVENT_PAL_TAG_SUBSTITUTE},
     {gObjectEventPaletteEmotes,             OBJ_EVENT_PAL_TAG_EMOTES},
     {NULL,                                  OBJ_EVENT_PAL_TAG_NONE},
 };
@@ -1953,16 +1954,14 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
         break;
     }
     // Try to avoid OOB access
-    #if OW_GFX_COMPRESS
+  
     if (graphicsInfo->tileTag == 0 && species < NUM_SPECIES)
-        return &gPokemonObjectGraphics[SPECIES_PORYGON];
+        return &gPokemonObjectGraphics[SPECIES_NONE];
     else if (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES)
-        return &gPokemonObjectGraphics[SPECIES_PORYGON];
+        return &gPokemonObjectGraphics[SPECIES_NONE];
     else
         return graphicsInfo;
-    #else
-    return graphicsInfo->tileTag == TAG_NONE ? graphicsInfo : &gPokemonObjectGraphics[SPECIES_PORYGON];
-    #endif
+   
 }
 
 // Find, or load, the palette for the specified pokemon info

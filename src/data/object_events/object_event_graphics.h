@@ -112,6 +112,7 @@ const u16 gObjectEventPal_Npc1[] = INCBIN_U16("graphics/object_events/palettes/n
 const u16 gObjectEventPal_Npc2[] = INCBIN_U16("graphics/object_events/palettes/npc_2.gbapal");
 const u16 gObjectEventPal_Npc3[] = INCBIN_U16("graphics/object_events/palettes/npc_3.gbapal");
 const u16 gObjectEventPal_Npc4[] = INCBIN_U16("graphics/object_events/palettes/npc_4.gbapal");
+const u16 gObjectEventPal_Substitute[] = INCBIN_U16("graphics/object_events/pics/pokemon/substitute.gbapal");
 const u16 gObjectEventPal_Npc1Reflection[] = INCBIN_U16("graphics/object_events/palettes/npc_1_reflection.gbapal");
 const u16 gObjectEventPal_Npc2Reflection[] = INCBIN_U16("graphics/object_events/palettes/npc_2_reflection.gbapal");
 const u16 gObjectEventPal_Npc3Reflection[] = INCBIN_U16("graphics/object_events/palettes/npc_3_reflection.gbapal");
@@ -422,6 +423,14 @@ const u32 gObjectEventPic_Noland[] = INCBIN_U32("graphics/object_events/pics/peo
 const u32 gObjectEventPic_Lucy[] = INCBIN_U32("graphics/object_events/pics/people/frontier_brains/lucy.4bpp");
 const u32 gObjectEventPic_Brandon[] = INCBIN_U32("graphics/object_events/pics/people/frontier_brains/brandon.4bpp");
 const u32 gObjectEventPic_AnimatedBall[] = INCBIN_U32("graphics/object_events/pics/misc/animated_ball.4bpp");
+
+// Normally, INCBIN_COMP acts like INCBIN_U32, but appends `.lz` to the file, compressing it;
+// If not compressing follower gfx, make this an alias to INCBIN_32, so gfx will *not* be compressed
+#if !(OW_GFX_COMPRESS)
+#define INCBIN_COMP INCBIN_U32
+#endif
+
+const u32 gObjectEventPic_Substitute[] = INCBIN_U32("graphics/object_events/pics/pokemon/substitute.4bpp");
 const u32 gObjectEventPic_Bulbasaur[] = INCBIN_COMP("graphics/object_events/pics/pokemon/bulbasaur.4bpp");
 const u32 gObjectEventPic_Ivysaur[] = INCBIN_COMP("graphics/object_events/pics/pokemon/ivysaur.4bpp");
 const u32 gObjectEventPic_Venusaur[] = INCBIN_COMP("graphics/object_events/pics/pokemon/venusaur.4bpp");
