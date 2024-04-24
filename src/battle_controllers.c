@@ -25,6 +25,7 @@
 #include "constants/abilities.h"
 #include "constants/songs.h"
 #include "pokemon_animation.h"
+#include "event_object_movement.h"
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;

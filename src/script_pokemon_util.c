@@ -131,7 +131,9 @@ void CreateScriptedWildMon2(u16 species, u8 level, u16 item, u8 abilityNum, u16 
     ZeroEnemyPartyMons();
     if (isShiny)
     {
-        CreateShinyMonWithNature(&gEnemyParty[0], species, level, PickWildMonNature());    
+        FlagSet(FLAG_FORCE_SHINYNESS);
+        CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
+        FlagClear(FLAG_FORCE_SHINYNESS);
     } else {
         CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
     }
@@ -288,10 +290,7 @@ u8 ScriptGiveCustomMon(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 a
     if (nature == NUM_NATURES || nature == 0xFF)
         nature = Random() % NUM_NATURES;
 
-    if (isShiny)
-        CreateShinyMonWithNature(&mon, species, level, nature);
-    else
-        CreateMonWithNature(&mon, species, level, 32, nature);
+    CreateMonWithNature(&mon, species, level, 32, nature);
 
     for (i = 0; i < NUM_STATS; i++)
     {

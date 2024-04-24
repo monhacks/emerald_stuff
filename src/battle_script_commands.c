@@ -1060,25 +1060,7 @@ static const struct PickupItem sPickupTable[] =
     { ITEM_BOTTLE_CAP,      {   _,   _,   _,   _,   _,   _,   _,   1,   1,   1, } },
 };
 
-static const u16 sRarePickupItems[] =
-{
-    ITEM_HYPER_POTION,
-    ITEM_NUGGET,
-    ITEM_KINGS_ROCK,
-    ITEM_FULL_RESTORE,
-    ITEM_ETHER,
-    ITEM_WHITE_HERB,
-    ITEM_IRON_BALL,
-    ITEM_ELIXIR,
-    ITEM_DESTINY_KNOT,
-    ITEM_LEFTOVERS,
-    ITEM_PRISM_SCALE,
-};
-
-static const u8 sPickupProbabilities[] =
-{
-    30, 40, 50, 60, 70, 80, 90, 94, 98
-};
+#undef _
 
 static const u8 sTerrainToType[BATTLE_TERRAIN_COUNT] =
 {
@@ -4440,7 +4422,7 @@ static void Cmd_getexp(void)
 
                     if (wasSentOut || holdEffect == HOLD_EFFECT_EXP_SHARE)
                     {
-                        if (gPlayerParty[*expMonId].level < GetCurrentLevelCap()) {
+                       if (gPlayerParty[*expMonId].level < GetCurrentLevelCap()) {
                             PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
                         }
                     }
@@ -9228,7 +9210,7 @@ static void Cmd_various(void)
     }
     case VARIOUS_ARENA_JUDGMENT_STRING:
     {
-        
+        CMD_ARGS(u8 id, u8 _);
         BattleStringExpandPlaceholdersToDisplayedString(gRefereeStringsTable[cmd->id]);
         BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TEXT);
         break;
@@ -9403,7 +9385,7 @@ static void Cmd_various(void)
             return;
                 }
             
-            break;
+        break;
     }
     case VARIOUS_TRY_ACTIVATE_MOXIE:    // and chilling neigh + as one ice rider
     {
@@ -10460,12 +10442,6 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr = cmd->nextInstr;
         return;
-    }
-    case VARIOUS_PHOTON_GEYSER_CHECK:
-    {
-        VARIOUS_ARGS();
-        gBattleStruct->swapDamageCategory = (GetCategoryBasedOnStats(battler) == DAMAGE_CATEGORY_SPECIAL);
-        break;
     }
     case VARIOUS_SHELL_SIDE_ARM_CHECK: // 0% chance GameFreak actually checks this way according to DaWobblefet, but this is the only functional explanation at the moment
     {
@@ -12564,9 +12540,6 @@ static void Cmd_transformdataexecution(void)
                 gBattleMons[gBattlerAttacker].pp[i] = gMovesInfo[gBattleMons[gBattlerAttacker].moves[i]].pp;
             else
                 gBattleMons[gBattlerAttacker].pp[i] = 5;
-
-            if (gBattleMons[gBattlerAttacker].moves[i] >= MOVE_HIDDEN_POWER_GROUND)
-                gBattleMons[gBattlerAttacker].moves[i] = MOVE_HIDDEN_POWER;
         }
 
         // update AI knowledge
@@ -12634,12 +12607,7 @@ static void Cmd_mimicattackcopy(void)
         if (i == MAX_MON_MOVES)
         {
             gChosenMove = 0xFFFF;
-            
-            if (gLastMoves[gBattlerTarget] >= MOVE_HIDDEN_POWER_GROUND)
-                gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = MOVE_HIDDEN_POWER;
-            else
-                gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastMoves[gBattlerTarget];
-
+            gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastMoves[gBattlerTarget];
             if (gMovesInfo[gLastMoves[gBattlerTarget]].pp < 5)
                 gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gMovesInfo[gLastMoves[gBattlerTarget]].pp;
             else
@@ -12958,11 +12926,7 @@ static void Cmd_copymovepermanently(void)
         {
             struct MovePpInfo movePpData;
 
-            if (gLastMoves[gBattlerTarget] >= MOVE_HIDDEN_POWER_GROUND)
-                gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = MOVE_HIDDEN_POWER;
-            else
-                gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastPrintedMoves[gBattlerTarget];
-            
+            gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastPrintedMoves[gBattlerTarget];
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gMovesInfo[gLastPrintedMoves[gBattlerTarget]].pp;
 
             for (i = 0; i < MAX_MON_MOVES; i++)
@@ -13777,9 +13741,9 @@ static void Cmd_trysetfutureattack(void)
 
 static void Cmd_trydobeatup(void)
 {
-
 #if B_BEAT_UP >= GEN_5
     CMD_ARGS();
+
     gBattleStruct->beatUpSlot++;
     gBattlescriptCurrInstr = cmd->nextInstr;
 #else
@@ -16045,8 +16009,7 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
 
         value *= sExperienceScalingFactors[(faintedLevel * 2) + 10];
         value /= sExperienceScalingFactors[faintedLevel + expGetterLevel + 10];
-        if (*expAmount != 0) // Mons at (hard) level cap should receive 0 exp
-            *expAmount = value + 1;
+        *expAmount = value + 1;
     }
 }
 
