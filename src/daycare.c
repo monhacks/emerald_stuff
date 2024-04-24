@@ -33,7 +33,7 @@ static void ClearDaycareMonMail(struct DaycareMail *mail);
 static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare);
 static void DaycarePrintMonInfo(u8 windowId, u32 daycareSlotId, u8 y);
 static u8 ModifyBreedingScoreForOvalCharm(u8 score);
-u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
+static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
 
 // RAM buffers used to assist with BuildEggMoveset()
 EWRAM_DATA static u16 sHatchedEggLevelUpMoves[EGG_LVL_UP_MOVES_ARRAY_COUNT] = {0};
@@ -739,7 +739,7 @@ static void InheritAbility(struct Pokemon *egg, struct BoxPokemon *father, struc
 
 // Counts the number of egg moves a Pokémon learns and stores the moves in
 // the given array.
-u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
+static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
 {
     u16 eggMoveIdx;
     u16 numEggMoves;
@@ -1124,9 +1124,6 @@ void CreateEgg(struct Pokemon *mon, u16 species, bool8 setHotSpringsLocation)
     {
         metLocation = METLOC_SPECIAL_EGG;
         SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
-    } else {
-        metLocation = GetCurrentRegionMapSectionId();
-        SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
     }
 
     isEgg = TRUE;
@@ -1144,38 +1141,6 @@ static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *
     CreateMon(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
     metLevel = 0;
     ball = ITEM_POKE_BALL;
-
-#if INHERIT_BALL == GEN_6
-    if (GetBoxMonGender(&daycare->mons[0].mon) == MON_FEMALE && GetBoxMonData(&daycare->mons[0].mon, MON_DATA_POKEBALL) != ITEM_MASTER_BALL) {
-        ball = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_POKEBALL);
-    }
-    else if (GetBoxMonGender(&daycare->mons[1].mon) == MON_FEMALE && GetBoxMonData(&daycare->mons[1].mon, MON_DATA_POKEBALL) != ITEM_MASTER_BALL) {
-        ball = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_POKEBALL);
-    }
-#endif
-
-#if INHERIT_BALL >= GEN_7
-    if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_SPECIES) == SPECIES_DITTO) {
-        if (GetBoxMonData(&daycare->mons[1].mon, MON_DATA_POKEBALL) != ITEM_MASTER_BALL) {
-            ball = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_POKEBALL);
-        }
-    }
-    else if (GetBoxMonData(&daycare->mons[1].mon, MON_DATA_SPECIES) == SPECIES_DITTO) {
-        if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_POKEBALL) != ITEM_MASTER_BALL) {
-            ball = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_POKEBALL);
-        }
-    }
-    else if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_SPECIES) == GetBoxMonData(&daycare->mons[1].mon, MON_DATA_SPECIES)) {
-        u16 rand = Random() % 2;
-        if (GetBoxMonData(&daycare->mons[rand].mon, MON_DATA_POKEBALL) != ITEM_MASTER_BALL) {
-            ball = GetBoxMonData(&daycare->mons[rand].mon, MON_DATA_POKEBALL);
-        }
-    }
-    else if (GetBoxMonGender(&daycare->mons[0].mon) == MON_FEMALE && GetBoxMonData(&daycare->mons[0].mon, MON_DATA_POKEBALL) != ITEM_MASTER_BALL) {
-        ball = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_POKEBALL);
-    }
-#endif
-
     language = LANGUAGE_JAPANESE;
     SetMonData(mon, MON_DATA_POKEBALL, &ball);
     SetMonData(mon, MON_DATA_NICKNAME, sJapaneseEggNickname);
@@ -1389,9 +1354,7 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
 
 static u8 GetDaycareCompatibilityScoreFromSave(void)
 {
-    // Changed to also store result for scripts
-    gSpecialVar_Result = GetDaycareCompatibilityScore(&gSaveBlock1Ptr->daycare);
-    return gSpecialVar_Result;
+    return GetDaycareCompatibilityScore(&gSaveBlock1Ptr->daycare);
 }
 
 void SetDaycareCompatibilityString(void)
@@ -1629,4 +1592,3 @@ static u8 ModifyBreedingScoreForOvalCharm(u8 score)
 
     return score;
 }
-

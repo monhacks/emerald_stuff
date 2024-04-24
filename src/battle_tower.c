@@ -3201,9 +3201,9 @@ static void FillPartnerParty(u16 trainerId)
 
             personality = Random32();
             if (partyData[i].gender == TRAINER_MON_MALE)
-                j = (j & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
+                personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
             else if (partyData[i].gender == TRAINER_MON_FEMALE)
-                j = (j & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
+                personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
             if (partyData[i].nature != 0)
                 ModifyPersonalityForNature(&personality, partyData[i].nature - 1);
 

@@ -604,8 +604,6 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
-extern bool8 IsAccurateGBA(void);
-
 #include "constants/game_stat.h"
 #include "global.fieldmap.h"
 #include "global.berry.h"
