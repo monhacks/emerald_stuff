@@ -481,6 +481,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     // Status Orbs
     [ITEM_FLAME_ORB] = {gItemIcon_FlameOrb, gItemIconPalette_FlameOrb},
     [ITEM_TOXIC_ORB] = {gItemIcon_ToxicOrb, gItemIconPalette_ToxicOrb},
+    [ITEM_FROST_ORB] = {gItemIcon_FrostOrb, gItemIconPalette_FrostOrb},
     // Weather Rocks
     [ITEM_DAMP_ROCK] = {gItemIcon_DampRock, gItemIconPalette_DampRock},
     [ITEM_HEAT_ROCK] = {gItemIcon_HeatRock, gItemIconPalette_HeatRock},

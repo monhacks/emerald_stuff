@@ -7248,6 +7248,21 @@ const struct Item gItemsInfo[] =
         .flingPower = 30,
     },
 
+    [ITEM_FROST_ORB] =
+    {
+        .name = _("Frost Orb"),
+        .price = (I_PRICE >= GEN_9) ? 15000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
+        .holdEffect = HOLD_EFFECT_FROST_ORB,
+        .description = COMPOUND_STRING(
+            "A bizarre orb that\n"
+            "inflicts frostbite\n"
+            "on holder in battle."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 30,
+    },
+
 // Weather Rocks
 
     [ITEM_DAMP_ROCK] =

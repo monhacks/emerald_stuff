@@ -3945,6 +3945,8 @@ extern const u32 gItemIcon_FlameOrb[];
 extern const u32 gItemIconPalette_FlameOrb[];
 extern const u32 gItemIcon_ToxicOrb[];
 extern const u32 gItemIconPalette_ToxicOrb[];
+extern const u32 gItemIcon_FrostOrb[];
+extern const u32 gItemIconPalette_FrostOrb[];
 // Weather Rocks
 extern const u32 gItemIcon_DampRock[];
 extern const u32 gItemIconPalette_DampRock[];

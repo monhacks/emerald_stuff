@@ -713,6 +713,7 @@ BattleScript_EffectFling::
 	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_POISON_POWER, BattleScript_FlingPoisonBarb
 	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_TOXIC_ORB, BattleScript_FlingToxicOrb
 	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_RESTORE_STATS, BattleScript_FlingWhiteHerb
+	jumpiflastuseditemholdeffect BS_ATTACKER, HOLD_EFFECT_FROST_ORB, BattleScript_FlingFrostOrb
 	goto BattleScript_FlingEnd
 BattleScript_EffectFlingConsumeBerry:
 	savebattleritem BS_TARGET
@@ -768,6 +769,9 @@ BattleScript_FlingWhiteHerb:
 	printstring STRINGID_PKMNSTATUSNORMAL
 	waitmessage B_WAIT_TIME_MED
 	swapattackerwithtarget
+	goto BattleScript_FlingEnd
+BattleScript_FlingFrostOrb:
+	seteffectsecondary MOVE_EFFECT_FROSTBITE
 	goto BattleScript_FlingEnd
 
 BattleScript_FlingMissed:
@@ -7528,6 +7532,12 @@ BattleScript_FlameOrb::
 	setbyte cMULTISTRING_CHOOSER, 0
 	copybyte gEffectBattler, gBattlerAttacker
 	call BattleScript_MoveEffectBurn
+	end2
+
+BattleScript_FrostOrb::
+	setbyte cMULTISTRING_CHOOSER, 0
+	copybyte gEffectBattler, gBattlerAttacker
+	call BattleScript_MoveEffectFrostbite
 	end2
 
 BattleScript_MoveEffectPoison::

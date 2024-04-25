@@ -7961,6 +7961,15 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 RecordItemEffectBattle(battler, battlerHoldEffect);
             }
             break;
+		case HOLD_EFFECT_FROST_ORB:
+            if (CanGetFrostbite(battler))
+            {
+                effect = ITEM_STATUS_CHANGE;
+                gBattleMons[battler].status1 = STATUS1_FROSTBITE;
+                BattleScriptExecute(BattleScript_FrostOrb);
+                RecordItemEffectBattle(battler, battlerHoldEffect);
+            }
+            break;
         case HOLD_EFFECT_STICKY_BARB:   // Not an orb per se, but similar effect, and needs to NOT activate with pickpocket
             if (battlerAbility != ABILITY_MAGIC_GUARD)
             {
