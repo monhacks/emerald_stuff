@@ -2087,7 +2087,8 @@ static void SetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId)
 }
 
 // In normal singles, if follower pokemon is out, have it slide in instead of being thrown
-static bool8 ShouldDoSlideInAnim(void) {
+static bool8 ShouldDoSlideInAnim(void)
+{
     struct ObjectEvent *followerObj = GetFollowerObject();
     if (!followerObj || followerObj->invisible)
         return FALSE;
@@ -2100,7 +2101,7 @@ static bool8 ShouldDoSlideInAnim(void) {
     return TRUE;
 }
 
-void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit, bool8 doSlideIn)
+void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit, bool32 doSlideIn)
 {
     u16 species;
     u32 side = GetBattlerSide(battler);
@@ -2989,7 +2990,7 @@ static void Task_StartSendOutAnim(u8 taskId)
             battlerPartner = battler ^ BIT_FLANK;
             gBattleResources->bufferA[battlerPartner][1] = gBattlerPartyIndexes[battlerPartner];
             BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerPartner]], battlerPartner);
-            StartSendOutAnim(battler, FALSE, ShouldDoSlideInAnim());
+            StartSendOutAnim(battlerPartner, FALSE, ShouldDoSlideInAnim());
         }
         else
         {
