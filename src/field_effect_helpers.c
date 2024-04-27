@@ -57,11 +57,12 @@ extern u16 gReflectionPaletteBuffer[];
 #define sReflectionVerticalOffset   data[2]
 #define sIsStillReflection          data[7]
 
-void SetUpShadow(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
-  gFieldEffectArguments[0] = objectEvent->localId;
-  gFieldEffectArguments[1] = gSaveBlock1Ptr->location.mapNum;
-  gFieldEffectArguments[2] = gSaveBlock1Ptr->location.mapGroup;
-  FldEff_Shadow();
+void SetUpShadow(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objectEvent->localId;
+    gFieldEffectArguments[1] = gSaveBlock1Ptr->location.mapNum;
+    gFieldEffectArguments[2] = gSaveBlock1Ptr->location.mapGroup;
+    FldEff_Shadow();
 }
 
 void SetUpReflection(struct ObjectEvent *objectEvent, struct Sprite *sprite, bool8 stillReflection)
@@ -192,6 +193,7 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[reflectionSprite->sReflectionObjEventId];
     struct Sprite *mainSprite = &gSprites[objectEvent->spriteId];
+
     if (!objectEvent->active || !objectEvent->hasReflection || objectEvent->localId != reflectionSprite->sReflectionObjEventLocalId)
     {
         reflectionSprite->inUse = FALSE;
@@ -272,6 +274,8 @@ u8 CreateWarpArrowSprite(void)
     if (spriteId != MAX_SPRITES)
     {
         struct Sprite *sprite = &gSprites[spriteId];
+        // Can use either gender's palette, so try to use the one that should be loaded
+        sprite->oam.paletteNum = LoadPlayerObjectEventPalette(gSaveBlock2Ptr->playerGender);
         sprite->oam.priority = 1;
         sprite->coordOffsetEnabled = TRUE;
         sprite->invisible = TRUE;
@@ -335,12 +339,12 @@ u32 FldEff_Shadow(void)
     u8 objectEventId;
     const struct ObjectEventGraphicsInfo *graphicsInfo;
     u8 spriteId;
-
-    s32 i;
-    for (i = 0; i < MAX_SPRITES; i++) {
-      // Return early if a shadow sprite already exists
-      if (gSprites[i].data[0] == gFieldEffectArguments[0] && gSprites[i].callback == UpdateShadowFieldEffect)
-        return 0;
+    u8 i;
+    for (i = 0; i < MAX_SPRITES; i++)
+    {
+        // Return early if a shadow sprite already exists
+        if (gSprites[i].data[0] == gFieldEffectArguments[0] && gSprites[i].callback == UpdateShadowFieldEffect)
+            return 0;
     }
 
     objectEventId = GetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
@@ -348,19 +352,19 @@ u32 FldEff_Shadow(void)
     LoadFieldEffectPalette_(sShadowEffectTemplateIds[graphicsInfo->shadowSize], FALSE);
     if (graphicsInfo->shadowSize == SHADOW_SIZE_NONE) // don't create a shadow at all
         return 0;
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[sShadowEffectTemplateIds[graphicsInfo->shadowSize]], 0, 0, 0x94 + 1); // higher = farther back; shadows should be behind object events
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[sShadowEffectTemplateIds[graphicsInfo->shadowSize]], 0, 0, 0x94);
     if (spriteId != MAX_SPRITES)
     {
         // SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 12));
         gSprites[spriteId].oam.objMode = 1; // BLEND
         gSprites[spriteId].coordOffsetEnabled = TRUE;
-        gSprites[spriteId].data[0] = gFieldEffectArguments[0];
-        gSprites[spriteId].data[1] = gFieldEffectArguments[1];
-        gSprites[spriteId].data[2] = gFieldEffectArguments[2];
+        gSprites[spriteId].sLocalId = gFieldEffectArguments[0];
+        gSprites[spriteId].sMapNum = gFieldEffectArguments[1];
+        gSprites[spriteId].sMapGroup = gFieldEffectArguments[2];
         #if LARGE_OW_SUPPORT
-        gSprites[spriteId].data[3] = gShadowVerticalOffsets[graphicsInfo->shadowSize];
+        gSprites[spriteId].sYOffset = gShadowVerticalOffsets[graphicsInfo->shadowSize];
         #else
-        gSprites[spriteId].data[3] = (graphicsInfo->height >> 1) - gShadowVerticalOffsets[graphicsInfo->shadowSize];
+        gSprites[spriteId].sYOffset = (graphicsInfo->height >> 1) - gShadowVerticalOffsets[graphicsInfo->shadowSize];
         #endif
     }
     return 0;
@@ -382,16 +386,12 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
         sprite->x = linkedSprite->x;
         #if LARGE_OW_SUPPORT
         // Read 'live' size from linked sprite
-        sprite->y = linkedSprite->y - linkedSprite->centerToCornerVecY - sprite->data[3];
+        sprite->y = linkedSprite->y - linkedSprite->centerToCornerVecY - sprite->sYOffset;
         #else
-        sprite->y = linkedSprite->y + sprite->data[3];
+        sprite->y = linkedSprite->y + sprite->sYOffset;
         #endif
         sprite->invisible = linkedSprite->invisible;
-        if (!objectEvent->active
-         || objectEvent->noShadow
-         || objectEvent->inHotSprings
-         || objectEvent->inSandPile
-         || gWeatherPtr->noShadows
+        if (!objectEvent->active ||  objectEvent->noShadow
          || MetatileBehavior_IsPokeGrass(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsPuddle(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsSurfableWaterOrUnderwater(objectEvent->currentMetatileBehavior)
@@ -1194,9 +1194,11 @@ u32 FldEff_SurfBlob(void)
         struct Sprite *sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->sPlayerObjId = gFieldEffectArguments[2];
-        sprite->data[3] = -1;
-        sprite->data[6] = -1;
-        sprite->data[7] = -1;
+        // Can use either gender's palette, so try to use the one that should be loaded
+        sprite->oam.paletteNum = LoadPlayerObjectEventPalette(gSaveBlock2Ptr->playerGender);
+        sprite->sVelocity = -1;
+        sprite->sPrevX = -1;
+        sprite->sPrevY = -1;
     }
     FieldEffectActiveListRemove(FLDEFF_SURF_BLOB);
     return spriteId;
@@ -1502,7 +1504,7 @@ u32 FldEff_BerryTreeGrowthSparkle(void)
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
         UpdateSpritePaletteByTemplate(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SPARKLE], sprite);
-        sprite->data[0] = FLDEFF_BERRY_TREE_GROWTH_SPARKLE;
+        sprite->sWaitFldEff = FLDEFF_BERRY_TREE_GROWTH_SPARKLE;
     }
     return spriteId;
 }
@@ -1544,7 +1546,7 @@ static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 templateIdx)
     if (spriteId != MAX_SPRITES)
     {
         struct Sprite *sprite = &gSprites[spriteId];
-        //UpdateSpritePaletteByTemplate(gFieldEffectObjectTemplatePointers[fldEffObj], sprite);
+        UpdateSpritePaletteByTemplate(gFieldEffectObjectTemplatePointers[templateIdx], sprite);
         sprite->coordOffsetEnabled ++;
         sprite->sFldEff = fldEff;
         sprite->sLocalId = gFieldEffectArguments[0];

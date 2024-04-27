@@ -1013,20 +1013,22 @@ bool8 ScrCmd_applymovement(struct ScriptContext *ctx)
     struct ObjectEvent *objEvent;
 
     // When applying script movements to follower, it may have frozen animation that must be cleared
-    if (localId == OBJ_EVENT_ID_FOLLOWER && (objEvent = GetFollowerObject()) && objEvent->frozen) {
+    if (localId == OBJ_EVENT_ID_FOLLOWER && (objEvent = GetFollowerObject()) && objEvent->frozen)
+    {
         ClearObjectEventMovement(objEvent, &gSprites[objEvent->spriteId]);
         gSprites[objEvent->spriteId].animCmdIndex = 0; // Needed to set start frame of animation
     }
-    gObjectEvents[GetObjectEventIdByLocalId(localId)].directionOverwrite = DIR_NONE;
     ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movementScript);
     sMovingNpcId = localId;
-    if (localId != OBJ_EVENT_ID_FOLLOWER && !FlagGet(FLAG_SAFE_FOLLOWER_MOVEMENT)) { // Force follower into pokeball
-      objEvent = GetFollowerObject();
-      // return early if no follower or in shadowing state
-      if (objEvent == NULL || gSprites[objEvent->spriteId].data[1] == 0)
-        return FALSE;
-      ClearObjectEventMovement(objEvent, &gSprites[objEvent->spriteId]);
-      ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_FOLLOWER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, EnterPokeballMovement);
+    // Force follower into pokeball
+    if (localId != OBJ_EVENT_ID_FOLLOWER && !FlagGet(FLAG_SAFE_FOLLOWER_MOVEMENT))
+    {
+        objEvent = GetFollowerObject();
+        // return early if no follower or in shadowing state
+        if (objEvent == NULL || gSprites[objEvent->spriteId].data[1] == 0)
+            return FALSE;
+        ClearObjectEventMovement(objEvent, &gSprites[objEvent->spriteId]);
+        ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_FOLLOWER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, EnterPokeballMovement);
     }
     return FALSE;
 }
@@ -1046,7 +1048,8 @@ bool8 ScrCmd_applymovementat(struct ScriptContext *ctx)
 
 static bool8 WaitForMovementFinish(void)
 {
-    if (ScriptMovement_IsObjectMovementFinished(sMovingNpcId, sMovingNpcMapNum, sMovingNpcMapGroup)) {
+    if (ScriptMovement_IsObjectMovementFinished(sMovingNpcId, sMovingNpcMapNum, sMovingNpcMapGroup))
+    {
         struct ObjectEvent *objEvent = GetFollowerObject();
         // If the follower is still entering the pokeball, wait for it to finish too
         // This prevents a `release` after this script command from getting the follower stuck in an intermediate state
@@ -1693,7 +1696,7 @@ bool8 ScrCmd_vmessage(struct ScriptContext *ctx)
 bool8 ScrCmd_bufferspeciesname(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
-    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u16 species = VarGet(ScriptReadHalfword(ctx)) & ((1 << 10) - 1); // ignore possible shiny / form bits
 
     StringCopy(sScriptStringVars[stringVarIndex], GetSpeciesName(species));
     return FALSE;
@@ -2201,11 +2204,11 @@ bool8 ScrCmd_playmoncry(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrFunc_playfirstmoncry(struct ScriptContext *ctx)
+bool8   ScrFunc_playfirstmoncry(struct ScriptContext *ctx)
 {
-  u16 species = GetMonData(GetFirstLiveMon(), MON_DATA_SPECIES);
-  PlayCry_Script(species, 0);
-  return FALSE;
+    u16 species = GetMonData(GetFirstLiveMon(), MON_DATA_SPECIES);
+    PlayCry_Script(species, 0);
+    return FALSE;
 }
 
 bool8 ScrCmd_waitmoncry(struct ScriptContext *ctx)

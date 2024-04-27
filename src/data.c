@@ -234,5 +234,3 @@ const struct Trainer gTrainers[] =
 {
 #include "data/trainers.h"
 };
-
-

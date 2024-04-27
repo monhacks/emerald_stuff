@@ -111,9 +111,8 @@ extern const struct SubspriteTable sOamTables_64x64[];
 extern const union AnimCmd *const sAnimTable_Following[];
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
-extern const u16 *const gBerryTreeObjectEventGraphicsIdTablePointers[];
 extern const struct SpriteFrameImage *const gBerryTreePicTablePointers[];
-extern const u16 *const gBerryTreePaletteTagTablePointers[];
+extern const u8 *const gBerryTreePaletteSlotTablePointers[];
 
 void ResetObjectEvents(void);
 u8 GetMoveDirectionAnimNum(u8 direction);
@@ -123,7 +122,6 @@ u8 GetObjectEventIdByXY(s16 x, s16 y);
 void SetObjectEventDirection(struct ObjectEvent *objectEvent, u8 direction);
 u8 GetFirstInactiveObjectEventId(void);
 void RemoveObjectEventByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup);
-void LoadPlayerObjectReflectionPalette(u16 tag, u8 slot);
 void LoadSpecialObjectReflectionPalette(u16 tag, u8 slot);
 void TryMoveObjectEventToMapCoords(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void PatchObjectPalette(u16 paletteTag, u8 paletteSlot);
@@ -139,7 +137,6 @@ struct Pokemon * GetFirstLiveMon(void);
 void UpdateFollowingPokemon(void);
 void RemoveFollowingPokemon(void);
 struct ObjectEvent * GetFollowerObject(void);
-u8 GetDirectionToFace(s16, s16, s16, s16);
 void TrySpawnObjectEvents(s16 cameraX, s16 cameraY);
 u8 CreateObjectGraphicsSprite(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subpriority);
 u8 TrySpawnObjectEvent(u8 localId, u8 mapNum, u8 mapGroup);
@@ -154,6 +151,7 @@ void ObjectEventTurnByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 direc
 const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u16 graphicsId);
 void SetObjectInvisibility(u8 localId, u8 mapNum, u8 mapGroup, bool8 invisible);
 void FreeAndReserveObjectSpritePalettes(void);
+u8 LoadPlayerObjectEventPalette(u8 gender);
 void SetObjectEventSpritePosByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void ResetObjectSubpriority(u8 localId, u8 mapNum, u8 mapGroup);
 void SetObjectSubpriority(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority);
