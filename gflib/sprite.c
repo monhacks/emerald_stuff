@@ -53,7 +53,6 @@ static void SortSprites(u32 *spritePriorities, s32 n);
 static u32 CreateSpriteAt(u32 index, const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
 static void ResetOamMatrices(void);
 static void ResetSprite(struct Sprite *sprite);
-static s16 AllocSpriteTiles(u16 tileCount);
 static void ResetAllSprites(void);
 static void BeginAnim(struct Sprite *sprite);
 static void ContinueAnim(struct Sprite *sprite);
@@ -878,11 +877,10 @@ void BeginAnim(struct Sprite *sprite)
         if (!(sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK))
             SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
-        if (sprite->usingSheet) {
-            #if OW_GFX_COMPRESS
-            if (sprite->sheetSpan)
+        if (sprite->usingSheet)
+        {
+            if (OW_GFX_COMPRESS && sprite->sheetSpan)
                 imageValue = (imageValue + 1) << sprite->sheetSpan;
-            #endif
             sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
         } else
             RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
@@ -935,10 +933,8 @@ void AnimCmd_frame(struct Sprite *sprite)
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
     if (sprite->usingSheet) {
-        #if OW_GFX_COMPRESS
-        if (sprite->sheetSpan)
+        if (OW_GFX_COMPRESS && sprite->sheetSpan)
             imageValue = (imageValue + 1) << sprite->sheetSpan;
-        #endif
         sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
     } else
         RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
@@ -973,10 +969,8 @@ void AnimCmd_jump(struct Sprite *sprite)
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
     if (sprite->usingSheet) {
-        #if OW_GFX_COMPRESS
-        if (sprite->sheetSpan)
+        if (OW_GFX_COMPRESS && sprite->sheetSpan)
             imageValue = (imageValue + 1) << sprite->sheetSpan;
-        #endif
         sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
     } else
         RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
@@ -1358,10 +1352,8 @@ void SetSpriteSheetFrameTileNum(struct Sprite *sprite)
     if (sprite->usingSheet)
     {
         s16 tileOffset = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.imageValue;
-        #if OW_GFX_COMPRESS
-        if (sprite->sheetSpan)
+        if (OW_GFX_COMPRESS && sprite->sheetSpan)
             tileOffset = (tileOffset + 1) << sprite->sheetSpan;
-        #endif
         if (tileOffset < 0)
             tileOffset = 0;
         sprite->oam.tileNum = sprite->sheetTileStart + tileOffset;
@@ -1566,7 +1558,6 @@ static u8 LoadSpritePalette_HandleDayNight(const struct SpritePalette *palette, 
 {
     u8 index = IndexOfSpritePaletteTag(palette->tag);
 
-
     if (index != 0xFF)
         return index;
 
@@ -1583,12 +1574,10 @@ static u8 LoadSpritePalette_HandleDayNight(const struct SpritePalette *palette, 
         return index;
     }
 }
-
 u8 LoadSpritePalette(const struct SpritePalette *palette)
 {
     return LoadSpritePalette_HandleDayNight(palette, FALSE);
 }
-
 
 void LoadSpritePalettes(const struct SpritePalette *palettes)
 {
@@ -1635,11 +1624,12 @@ u16 GetSpritePaletteTagByPaletteNum(u8 paletteNum)
 void FreeSpritePaletteByTag(u16 tag)
 {
     u8 index = IndexOfSpritePaletteTag(tag);
-    if (index != 0xFF) {
-      sSpritePaletteTags[index] = TAG_NONE;
-      #if DEBUG
-      FillPalette(0, index * 16 + 0x100, 32);
-      #endif
+    if (index != 0xFF)
+    {
+        sSpritePaletteTags[index] = TAG_NONE;
+        #if DEBUG
+        FillPalette(0, index * 16 + 0x100, 32);
+        #endif
     }
 }
 

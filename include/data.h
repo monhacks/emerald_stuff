@@ -165,11 +165,6 @@ extern const union AnimCmd *const sAnims_Trainer[];
 extern const struct TrainerSprite gTrainerSprites[];
 extern const struct TrainerBacksprite gTrainerBacksprites[];
 
-extern const struct CompressedSpritePalette gFollowMonPaletteTable[];
-extern const struct CompressedSpritePalette gFollowMonShinyPaletteTable[];
-extern const struct CompressedSpritePalette gFollowMonPaletteTableFemale[];
-extern const struct CompressedSpritePalette gFollowMonShinyPaletteTableFemale[];
-
 extern const struct Trainer gTrainers[];
 extern const struct Trainer gBattlePartners[];
 
