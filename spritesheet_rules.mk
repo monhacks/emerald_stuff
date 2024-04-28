@@ -799,7 +799,7 @@ $(FLDEFFGFXDIR)/record_mix_lights.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/misc/megastone_sparkle.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 	
-$(OBJEVENTGFXDIR)/pokemon/substitute.4bpp: %.4bpp: %.png
+$(POKEMONGFXDIR)/question_mark/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(POKEMONGFXDIR)/bulbasaur/follower.4bpp: %.4bpp: %.png
