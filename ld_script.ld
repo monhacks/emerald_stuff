@@ -365,7 +365,6 @@ SECTIONS {
         src/sound_check_menu.o(.text);
         src/sliding_puzzle.o(.text);
         src/quests.o(.text);
-        src/day_night.o(.text);
         src/ui_startmenu_full.o(.text);
         src/ui_main_menu.o(.text);
     } > ROM =0
@@ -740,7 +739,6 @@ SECTIONS {
         src/sound_check_menu.o(.rodata);
         src/sliding_puzzle.o(.rodata);
         src/quests.o(.rodata);
-        src/day_night.o(.rodata);
         src/ui_startmenu_full.o(.rodata);
         src/ui_main_menu.o(.rodata);
     } > ROM =0

@@ -3,9 +3,8 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "bg.h"
-#include "day_night.h"
-#include "birch_pc.h"
 #include "data.h"
+#include "birch_pc.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
@@ -1757,7 +1756,7 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
     //u8 timeOfDay;
     
     RtcCalcLocalTime();
-    //timeOfDay = GetCurrentTimeOfDay();
+    //timeOfDay = GetTimeOfDay();
 
     if (gWildMonHeaders[i].mapGroup != MAP_GROUP(UNDEFINED)) // ??? This check is nonsense.
     {

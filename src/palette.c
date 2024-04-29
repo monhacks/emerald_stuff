@@ -1,5 +1,5 @@
 #include "global.h"
-#include "day_night.h"
+
 #include "palette.h"
 #include "util.h"
 #include "decompress.h"
@@ -83,17 +83,18 @@ static const u8 sRoundedDownGrayscaleMap[] = {
 
 void LoadCompressedPalette(const u32 *src, u16 offset, u16 size)
 {
-    LoadCompressedPalette_HandleDayNight(src, offset, size, FALSE);
+    LZ77UnCompWram(src, gPaletteDecompressionBuffer);
+    LoadPalette(gPaletteDecompressionBuffer, offset, size);
 }
 
 void LoadPalette(const void *src, u16 offset, u16 size)
 {
-    LoadPalette_HandleDayNight(src, offset, size, FALSE);
+    CpuCopy16(src, &gPlttBufferUnfaded[offset], size);
+    CpuCopy16(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], size);
 }
 
 void FillPalette(u16 value, u16 offset, u16 size)
 {
-    FillDNPlttBufferWithBlack(offset, size);
     CpuFill16(value, gPlttBufferUnfaded + offset, size);
     CpuFill16(value, gPlttBufferFaded + offset, size);
 }
@@ -1002,6 +1003,19 @@ static void UNUSED DestroyBlendPalettesGraduallyTask(void)
         if (taskId == TASK_NONE)
             break;
         DestroyTask(taskId);
+    }
+}
+
+void LoadPaletteFast(const void *src, u16 offset, u16 size)
+{
+    if ((u32)src & 3)
+    {
+        LoadPalette(src, offset, size);
+    }
+    else
+    {
+        CpuFastCopy(src, &gPlttBufferUnfaded[offset], size);
+        CpuFastCopy(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], size);
     }
 }
 

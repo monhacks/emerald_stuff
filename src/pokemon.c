@@ -11,7 +11,7 @@
 #include "battle_tower.h"
 #include "battle_z_move.h"
 #include "data.h"
-#include "day_night.h"
+
 #include "dexnav.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -48,7 +48,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
-#include "constants/day_night.h"
+
 #include "constants/battle_partner.h"
 #include "constants/cries.h"
 #include "constants/event_objects.h"
@@ -4470,7 +4470,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_ITEM_NIGHT:
-                if (GetTimeOfDay() == TIME_NIGHT && evolutions[i].param == evolutionItem)
+                if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && evolutions[i].param == evolutionItem)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_ITEM_DAY:

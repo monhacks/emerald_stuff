@@ -5,7 +5,7 @@
 #include "battle_script_commands.h"
 #include "berry.h"
 #include "data.h"
-#include "day_night.h"
+
 #include "debug.h"
 #include "decoration.h"
 #include "decompress.h"
@@ -167,7 +167,7 @@ static void SpawnObjectEventOnReturnToField(u8, s16, s16);
 static void SetPlayerAvatarObjectEventIdAndObjectId(u8, u8);
 static u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct Sprite * sprite);
 static void ResetObjectEventFldEffData(struct ObjectEvent *);
-static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *, bool8 shouldTint);
+static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *);
 static u8 FindObjectEventPaletteIndexByTag(u16);
 static void _PatchObjectPalette(u16, u8);
 static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *, u8);
@@ -1672,7 +1672,7 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     objectEvent = &gObjectEvents[objectEventId];
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     if (spriteTemplate->paletteTag != TAG_NONE && spriteTemplate->paletteTag != OBJ_EVENT_PAL_TAG_DYNAMIC)
-        LoadObjectEventPalette(spriteTemplate->paletteTag, TRUE);
+        LoadObjectEventPalette(spriteTemplate->paletteTag);
 
     if (objectEvent->movementType == MOVEMENT_TYPE_INVISIBLE)
         objectEvent->invisible = TRUE;
@@ -1860,7 +1860,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     }
     else if (spriteTemplate->paletteTag != TAG_NONE)
     {
-        LoadObjectEventPalette(spriteTemplate->paletteTag, TRUE);
+        LoadObjectEventPalette(spriteTemplate->paletteTag);
     }
 
     if (OW_GFX_COMPRESS)
@@ -1907,7 +1907,7 @@ u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevati
     y += MAP_OFFSET;
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 16);
     if (spriteTemplate.paletteTag != TAG_NONE)
-        LoadObjectEventPalette(spriteTemplate.paletteTag, TRUE);
+        LoadObjectEventPalette(spriteTemplate.paletteTag);
 
     spriteId = CreateSpriteAtEnd(&spriteTemplate, x, y, 0);
     if (spriteId != MAX_SPRITES)
@@ -2008,7 +2008,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
             LZ77UnCompWram((u32*)spritePalette.data, gDecompressionBuffer);
             spritePalette.data = (void*)gDecompressionBuffer;
         }
-        paletteNum = LoadSpritePaletteDayNight(&spritePalette);
+        paletteNum = LoadSpritePalette(&spritePalette);
     }
     else
 #endif //OW_FOLLOWERS_SHARE_PALETTE
@@ -2641,7 +2641,7 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
     if (OW_GFX_COMPRESS)
         spriteTemplate.tileTag = LoadSheetGraphicsInfo(graphicsInfo, objectEvent->graphicsId, NULL);
     if (spriteTemplate.paletteTag != TAG_NONE && spriteTemplate.paletteTag != OBJ_EVENT_PAL_TAG_DYNAMIC)
-        LoadObjectEventPalette(spriteTemplate.paletteTag, TRUE);
+        LoadObjectEventPalette(spriteTemplate.paletteTag);
 
     i = CreateSprite(&spriteTemplate, 0, 0, 0);
     if (i != MAX_SPRITES)
@@ -2705,7 +2705,7 @@ static u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct
     sprite->inUse = FALSE;
     FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
     sprite->inUse = TRUE;
-    return sprite->oam.paletteNum = LoadSpritePaletteDayNight(spritePalette);
+    return sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
 }
 
 // Find and update based on template's paletteTag
@@ -2941,12 +2941,12 @@ void FreeAndReserveObjectSpritePalettes(void)
     gReservedSpritePaletteCount = OBJ_PALSLOT_COUNT;
 }
 
-u8 LoadObjectEventPalette(u16 paletteTag, bool8 shouldTint)
+u8 LoadObjectEventPalette(u16 paletteTag)
 {
     u16 i = FindObjectEventPaletteIndexByTag(paletteTag);
     if (i == 0xFF)
         return i;
-    return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i], shouldTint);
+    return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i]);
 }
 
 u8 LoadPlayerObjectEventPalette(u8 gender)
@@ -2962,24 +2962,25 @@ u8 LoadPlayerObjectEventPalette(u8 gender)
             paletteTag = FLDEFF_PAL_TAG_MAY;
             break;
     }
-    return LoadObjectEventPalette(paletteTag, TRUE);
+    return LoadObjectEventPalette(paletteTag);
 }
 
-static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette, bool8 shouldTint)
+static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette)
 {
     u8 paletteNum = IndexOfSpritePaletteTag(spritePalette->tag);
     if (paletteNum != 0xFF) // don't load twice; return
         return paletteNum;
-    paletteNum = LoadSpritePaletteDayNight(spritePalette);
+    paletteNum = LoadSpritePalette(spritePalette);
     return paletteNum;
 }
+
 
 void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
 {
     // paletteTag is assumed to exist in sObjectEventSpritePalettes
     u8 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
 
-    LoadPaletteDayNight(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+    LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
 }
 
 void PatchObjectPaletteRange(const u16 *paletteTags, u8 minSlot, u8 maxSlot)
