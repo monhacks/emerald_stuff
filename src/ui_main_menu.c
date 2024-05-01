@@ -170,6 +170,7 @@ static const struct WindowTemplate sMainMenuWindowTemplates[] =
         .paletteNum = 0,           // palette index to use for text
         .baseBlock = 1 + (18 * 2), // tile start in VRAM
     },
+    DUMMY_WIN_TEMPLATE
 };
 
 //  Positions of Hardware/GPU Windows
@@ -379,8 +380,8 @@ void MainMenu_Init(MainCallback callback)
     sMainMenuDataPtr->savedCallback = callback;
     for(i = 0; i < 6; i++)
     {
-        sMainMenuDataPtr->iconBoxSpriteIds[6] = SPRITE_NONE;
-        sMainMenuDataPtr->iconMonSpriteIds[6] = SPRITE_NONE;
+        sMainMenuDataPtr->iconBoxSpriteIds[i] = SPRITE_NONE;
+        sMainMenuDataPtr->iconMonSpriteIds[i] = SPRITE_NONE;
     }
     
     SetMainCallback2(MainMenu_RunSetup);
@@ -765,7 +766,6 @@ static void CreatePartyMonIcons()
     u8 i = 0;
     s16 x = ICON_BOX_1_START_X;
     s16 y = ICON_BOX_1_START_Y;
-    struct Pokemon *mon;
     LoadMonIconPalettes();
     for(i = 0; i < gPlayerPartyCount; i++)
     {   
@@ -800,7 +800,7 @@ static void CreatePartyMonIcons()
 #ifdef RHH_EXPANSION
             sMainMenuDataPtr->iconMonSpriteIds[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG), SpriteCB_MonIcon, x, y - 2, 0, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
 #else
-            sMainMenuDataPtr->iconMonSpriteIds[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG), SpriteCB_MonIcon, x, y - 2, 0, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), FALSE);
+            sMainMenuDataPtr->iconMonSpriteIds[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG), SpriteCB_MonIcon, x, y - 2, 0, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), TRUE);
 #endif
 
         gSprites[sMainMenuDataPtr->iconMonSpriteIds[i]].oam.priority = 0;
