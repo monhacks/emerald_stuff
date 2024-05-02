@@ -257,6 +257,10 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphir
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireMay;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lugia;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Falkner;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ruin_Maniac;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Chuck;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cynthia;
 // Begin pokemon event objects
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AnimatedBall;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Follower;
@@ -525,29 +529,12 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_BLAINE] =                   &gObjectEventGraphicsInfo_Blaine,
     [OBJ_EVENT_GFX_GIOVANNI] =                 &gObjectEventGraphicsInfo_Giovanni,
     [OBJ_EVENT_GFX_BLUE] =                     &gObjectEventGraphicsInfo_Blue,
-    [OBJ_EVENT_GFX_AZELF] =                    &gObjectEventGraphicsInfo_Azelf,
-    [OBJ_EVENT_GFX_MESPRIT] =                    &gObjectEventGraphicsInfo_Mesprit,
-    [OBJ_EVENT_GFX_UXIE] =                    &gObjectEventGraphicsInfo_Uxie,
-    [OBJ_EVENT_GFX_MEWTWO] =                    &gObjectEventGraphicsInfo_Mewtwo,
-    [OBJ_EVENT_GFX_DITTO] =                      &gObjectEventGraphicsInfo_Ditto,
     [OBJ_EVENT_GFX_GALACTIC_GRUNT_MALE] =      &gObjectEventGraphicsInfo_Galactic_Grunt_Male,
     [OBJ_EVENT_GFX_GALACTIC_GRUNT_FEMALE] =    &gObjectEventGraphicsInfo_Galactic_Grunt_Female,
     [OBJ_EVENT_GFX_GALACTIC_COMMANDER_SATURN] = &gObjectEventGraphicsInfo_Galactic_Commander_Saturn,
     [OBJ_EVENT_GFX_GALACTIC_COMMANDER_MARS]   = &gObjectEventGraphicsInfo_Galactic_Commander_Mars,
     [OBJ_EVENT_GFX_GALACTIC_COMMANDER_JUPITER] = &gObjectEventGraphicsInfo_Galactic_Commander_Jupiter,
-    [OBJ_EVENT_GFX_MAGIKARP] =                 &gObjectEventGraphicsInfo_Magikarp,
-    [OBJ_EVENT_GFX_MOLTRES] =                 &gObjectEventGraphicsInfo_Moltres,
-    [OBJ_EVENT_GFX_ZAPDOS] =                 &gObjectEventGraphicsInfo_Zapdos,
-    [OBJ_EVENT_GFX_ARTICUNO] =                 &gObjectEventGraphicsInfo_Articuno,
-    [OBJ_EVENT_GFX_ELECTRODE] =                 &gObjectEventGraphicsInfo_Electrode,
-    [OBJ_EVENT_GFX_SHAYMIN] =                   &gObjectEventGraphicsInfo_Shaymin,
     [OBJ_EVENT_GFX_CYNTHIA] =                   &gObjectEventGraphicsInfo_Cynthia,
-    [OBJ_EVENT_GFX_SANDILE] =                   &gObjectEventGraphicsInfo_Sandile,
-    [OBJ_EVENT_GFX_DARMANITAN] =                &gObjectEventGraphicsInfo_Darmanitan,
-    [OBJ_EVENT_GFX_CRUSTLE] =                   &gObjectEventGraphicsInfo_Crustle,
-    [OBJ_EVENT_GFX_MANDIBUZZ] =                 &gObjectEventGraphicsInfo_Mandibuzz,
-    [OBJ_EVENT_GFX_COFAGRIGUS] =                &gObjectEventGraphicsInfo_Cofagrigus,
-    [OBJ_EVENT_GFX_GENGAR] =                    &gObjectEventGraphicsInfo_Gengar,
     [OBJ_EVENT_GFX_RUIN_MANIAC] =                &gObjectEventGraphicsInfo_Ruin_Maniac,
     [OBJ_EVENT_GFX_CHUCK] =                     &gObjectEventGraphicsInfo_Chuck,
     [OBJ_EVENT_GFX_FALKNER] =                   &gObjectEventGraphicsInfo_Falkner,

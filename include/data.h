@@ -131,6 +131,7 @@ struct TypeInfo
     u8 palette;
     u16 zMove;
     u16 maxMove;
+    const u32 *const paletteTMHM;
     //u16 enhanceItem;
     //u16 berry;
     //u16 gem;
@@ -164,11 +165,6 @@ extern const union AnimCmd *const gAnims_MonPic[];
 extern const union AnimCmd *const sAnims_Trainer[];
 extern const struct TrainerSprite gTrainerSprites[];
 extern const struct TrainerBacksprite gTrainerBacksprites[];
-
-extern const struct CompressedSpritePalette gFollowMonPaletteTable[];
-extern const struct CompressedSpritePalette gFollowMonShinyPaletteTable[];
-extern const struct CompressedSpritePalette gFollowMonPaletteTableFemale[];
-extern const struct CompressedSpritePalette gFollowMonShinyPaletteTableFemale[];
 
 extern const struct Trainer gTrainers[];
 extern const struct Trainer gBattlePartners[];

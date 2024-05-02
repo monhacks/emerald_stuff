@@ -2,7 +2,6 @@
 #include "sprite.h"
 #include "main.h"
 #include "palette.h"
-#include "day_night.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -53,7 +52,7 @@ static void SortSprites(u32 *spritePriorities, s32 n);
 static u32 CreateSpriteAt(u32 index, const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
 static void ResetOamMatrices(void);
 static void ResetSprite(struct Sprite *sprite);
-static s16 AllocSpriteTiles(u16 tileCount);
+static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images);
 static void ResetAllSprites(void);
 static void BeginAnim(struct Sprite *sprite);
 static void ContinueAnim(struct Sprite *sprite);
@@ -89,7 +88,7 @@ static void GetAffineAnimFrame(u8 matrixNum, struct Sprite *sprite, struct Affin
 static void ApplyAffineAnimFrame(u8 matrixNum, struct AffineAnimFrameCmd *frameCmd);
 static u8 IndexOfSpriteTileTag(u16 tag);
 static void AllocSpriteTileRange(u16 tag, u16 start, u16 count);
-static void DoLoadSpritePalette(const u16 *src, u16 paletteOffset, bool32 isDayNight);
+static void DoLoadSpritePalette(const u16 *src, u16 paletteOffset);
 static void UpdateSpriteMatrixAnchorPos(struct Sprite *, s32, s32);
 
 typedef void (*AnimFunc)(struct Sprite *);
@@ -878,11 +877,10 @@ void BeginAnim(struct Sprite *sprite)
         if (!(sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK))
             SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
-        if (sprite->usingSheet) {
-            #if OW_GFX_COMPRESS
-            if (sprite->sheetSpan)
+        if (sprite->usingSheet)
+        {
+            if (OW_GFX_COMPRESS && sprite->sheetSpan)
                 imageValue = (imageValue + 1) << sprite->sheetSpan;
-            #endif
             sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
         } else
             RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
@@ -935,10 +933,8 @@ void AnimCmd_frame(struct Sprite *sprite)
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
     if (sprite->usingSheet) {
-        #if OW_GFX_COMPRESS
-        if (sprite->sheetSpan)
+        if (OW_GFX_COMPRESS && sprite->sheetSpan)
             imageValue = (imageValue + 1) << sprite->sheetSpan;
-        #endif
         sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
     } else
         RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
@@ -973,10 +969,8 @@ void AnimCmd_jump(struct Sprite *sprite)
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
     if (sprite->usingSheet) {
-        #if OW_GFX_COMPRESS
-        if (sprite->sheetSpan)
+        if (OW_GFX_COMPRESS && sprite->sheetSpan)
             imageValue = (imageValue + 1) << sprite->sheetSpan;
-        #endif
         sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
     } else
         RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
@@ -1358,10 +1352,8 @@ void SetSpriteSheetFrameTileNum(struct Sprite *sprite)
     if (sprite->usingSheet)
     {
         s16 tileOffset = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.imageValue;
-        #if OW_GFX_COMPRESS
-        if (sprite->sheetSpan)
+        if (OW_GFX_COMPRESS && sprite->sheetSpan)
             tileOffset = (tileOffset + 1) << sprite->sheetSpan;
-        #endif
         if (tileOffset < 0)
             tileOffset = 0;
         sprite->oam.tileNum = sprite->sheetTileStart + tileOffset;
@@ -1562,10 +1554,9 @@ void FreeAllSpritePalettes(void)
         sSpritePaletteTags[i] = TAG_NONE;
 }
 
-static u8 LoadSpritePalette_HandleDayNight(const struct SpritePalette *palette, bool32 isDayNight)
+u8 LoadSpritePalette(const struct SpritePalette *palette)
 {
     u8 index = IndexOfSpritePaletteTag(palette->tag);
-
 
     if (index != 0xFF)
         return index;
@@ -1579,16 +1570,10 @@ static u8 LoadSpritePalette_HandleDayNight(const struct SpritePalette *palette, 
     else
     {
         sSpritePaletteTags[index] = palette->tag;
-        DoLoadSpritePalette(palette->data, PLTT_ID(index), isDayNight);
+        DoLoadSpritePalette(palette->data, PLTT_ID(index));
         return index;
     }
 }
-
-u8 LoadSpritePalette(const struct SpritePalette *palette)
-{
-    return LoadSpritePalette_HandleDayNight(palette, FALSE);
-}
-
 
 void LoadSpritePalettes(const struct SpritePalette *palettes)
 {
@@ -1598,9 +1583,9 @@ void LoadSpritePalettes(const struct SpritePalette *palettes)
             break;
 }
 
-static void DoLoadSpritePalette(const u16 *src, u16 paletteOffset, bool32 isDayNight)
+void DoLoadSpritePalette(const u16 *src, u16 paletteOffset)
 {
-    LoadPalette_HandleDayNight(src, OBJ_PLTT_OFFSET + paletteOffset, PLTT_SIZE_4BPP, isDayNight);
+    LoadPaletteFast(src, paletteOffset + OBJ_PLTT_OFFSET, PLTT_SIZE_4BPP);
 }
 
 u8 AllocSpritePalette(u16 tag)
@@ -1635,11 +1620,12 @@ u16 GetSpritePaletteTagByPaletteNum(u8 paletteNum)
 void FreeSpritePaletteByTag(u16 tag)
 {
     u8 index = IndexOfSpritePaletteTag(tag);
-    if (index != 0xFF) {
-      sSpritePaletteTags[index] = TAG_NONE;
-      #if DEBUG
-      FillPalette(0, index * 16 + 0x100, 32);
-      #endif
+    if (index != 0xFF)
+    {
+        sSpritePaletteTags[index] = TAG_NONE;
+        #if DEBUG
+        FillPalette(0, index * 16 + 0x100, 32);
+        #endif
     }
 }
 
@@ -1743,11 +1729,6 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
     }
 
     return 0;
-}
-
-u8 LoadSpritePaletteDayNight(const struct SpritePalette *palette)
-{
-    return LoadSpritePalette_HandleDayNight(palette, TRUE);
 }
 static const u8 sSpanPerImage[4][4] =
 {

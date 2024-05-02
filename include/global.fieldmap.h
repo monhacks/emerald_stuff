@@ -44,7 +44,6 @@ struct Tileset
     /*0x0C*/ const u16 *metatiles;
     /*0x10*/ const u16 *metatileAttributes;
     /*0x14*/ TilesetCB callback;
-    /*0x18*/ const struct PaletteOverride *paletteOverrides;
 };
 
 struct MapLayout
@@ -64,7 +63,7 @@ struct BackupMapLayout
     u16 *map;
 };
 
-struct ObjectEventTemplate
+struct __attribute__((packed, aligned(4))) ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u8 kind; // Always OBJ_KIND_NORMAL in Emerald.
@@ -75,13 +74,13 @@ struct ObjectEventTemplate
     /*0x09*/ u8 movementType;
     /*0x0A*/ u16 movementRangeX:4;
              u16 movementRangeY:4;
-             //u16 padding2:8;
+             u16 unused:8;
     /*0x0C*/ u16 trainerType;
     /*0x0E*/ u16 trainerRange_berryTreeId;
     /*0x10*/ const u8 *script;
     /*0x14*/ u16 flagId;
-    /*0x16*/ //u8 padding3[2];
-};
+    /*0x16*/ u16 filler;
+}; // size = 0x18
 
 struct WarpEvent
 {
@@ -268,6 +267,9 @@ enum {
 #define PLAYER_AVATAR_FLAG_DASH         (1 << 7)
 
 #define PLAYER_AVATAR_FLAG_BIKE        (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE)
+// Player avatar flags for which follower pokemon are hidden
+#define FOLLOWER_INVISIBLE_FLAGS       (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_UNDERWATER | \
+                                        PLAYER_AVATAR_FLAG_BIKE | PLAYER_AVATAR_FLAG_FORCED_MOVE)
 
 enum
 {

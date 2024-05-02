@@ -1,5 +1,5 @@
 #include "global.h"
-#include "day_night.h"
+
 #include "data.h"
 #include "decompress.h"
 #include "event_object_movement.h"
@@ -311,9 +311,6 @@ bool8 (*const gFieldEffectScriptFuncs[])(u8 **, u32 *) =
     FieldEffectCmd_loadtiles_callnative,
     FieldEffectCmd_loadfadedpal_callnative,
      // Added for day and night system
-    FieldEffectCmd_loadpaldaynight,
-    FieldEffectCmd_loadfadedpaldaynight,
-    FieldEffectCmd_loadfadedpaldaynight_callnative,
 };
 
 static const struct OamData sOam_64x64 =
@@ -836,7 +833,7 @@ void FieldEffectScript_LoadTiles(u8 **script)
 void FieldEffectScript_LoadFadedPalette(u8 **script)
 {
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
-    LoadSpritePaletteDayNight(palette);
+    LoadSpritePalette(palette);
     UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palette->tag));
     (*script) += 4;
 }
@@ -844,7 +841,7 @@ void FieldEffectScript_LoadFadedPalette(u8 **script)
 void FieldEffectScript_LoadPalette(u8 **script)
 {
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
-    LoadSpritePaletteDayNight(palette);
+    LoadSpritePalette(palette);
     (*script) += 4;
 }
 
@@ -1411,10 +1408,10 @@ static void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
 void ReturnToFieldFromFlyMapSelect(void)
 {
     SetMainCallback2(CB2_ReturnToField);
-    gFieldCallback = FieldCallback_Fly;
+    gFieldCallback = FieldCallback_UseFly;
 }
 
-void FieldCallback_Fly(void)
+void FieldCallback_UseFly(void)
 {
     FadeInFromBlack();
     CreateTask(Task_UseFly, 0);
@@ -1642,7 +1639,8 @@ static bool8 FallWarpEffect_End(struct Task *task)
 #define tState   data[0]
 #define tGoingUp data[1]
 
-static void HideFollowerForFieldEffect(void) {
+static void HideFollowerForFieldEffect(void)
+{
     struct ObjectEvent *followerObj = GetFollowerObject();
     if (!followerObj || followerObj->invisible)
         return;
@@ -3165,7 +3163,7 @@ static void SurfFieldEffect_End(struct Task *task)
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_CONTROLLABLE;
         ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(objectEvent->movementDirection));
         if (followerObject)
-          ObjectEventClearHeldMovementIfFinished(followerObject);
+            ObjectEventClearHeldMovementIfFinished(followerObject);
         SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, BOB_PLAYER_AND_MON);
         UnfreezeObjectEvents();
         UnlockPlayerFieldControls();
@@ -3225,6 +3223,7 @@ u8 FldEff_NPCFlyOut(void)
     spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BIRD], 0x78, 0, 1);
     sprite = &gSprites[spriteId];
 
+    sprite->oam.paletteNum = LoadPlayerObjectEventPalette(gSaveBlock2Ptr->playerGender);
     sprite->oam.priority = 1;
     sprite->callback = SpriteCB_NPCFlyOut;
     sprite->data[1] = gFieldEffectArguments[0];
@@ -3408,6 +3407,7 @@ static u8 CreateFlyBirdSprite(void)
     LoadFieldEffectPalette(FLDEFFOBJ_BIRD);
     spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BIRD], 0xff, 0xb4, 0x1);
     sprite = &gSprites[spriteId];
+    sprite->oam.paletteNum = LoadPlayerObjectEventPalette(gSaveBlock2Ptr->playerGender);
     sprite->oam.priority = 1;
     sprite->callback = SpriteCB_FlyBirdLeaveBall;
     return spriteId;
@@ -4296,42 +4296,6 @@ u8 FldEff_CaveDust(void)
 #undef tMoveSteps
 #undef tObjEventId
 
-bool8 FieldEffectCmd_loadpaldaynight(u8 **script, u32 *val)
-{
-    (*script)++;
-    FieldEffectScript_LoadPaletteDayNight(script);
-    return TRUE;
-}
-
-bool8 FieldEffectCmd_loadfadedpaldaynight(u8 **script, u32 *val)
-{
-    (*script)++;
-    FieldEffectScript_LoadFadedPaletteDayNight(script);
-    return TRUE;
-}
-
-bool8 FieldEffectCmd_loadfadedpaldaynight_callnative(u8 **script, u32 *val)
-{
-    (*script)++;
-    FieldEffectScript_LoadFadedPaletteDayNight(script);
-    FieldEffectScript_CallNative(script, val);
-    return TRUE;
-}
-
-void FieldEffectScript_LoadFadedPaletteDayNight(u8 **script)
-{
-    struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
-    LoadSpritePaletteDayNight(palette);
-    UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palette->tag));
-    (*script) += 4;
-}
-
-void FieldEffectScript_LoadPaletteDayNight(u8 **script)
-{
-    struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
-    LoadSpritePaletteDayNight(palette);
-    (*script) += 4;
-}
 static void (*const sUseVsSeekerEffectFuncs[])(struct Task *task) = {
     UseVsSeeker_StopPlayerMovement,
     UseVsSeeker_DoPlayerAnimation,

@@ -304,6 +304,7 @@ void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u16 rotat
 u16 LoadSpriteSheet(const struct SpriteSheet *sheet);
 u16 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u32 frame, s32 offset);
 void LoadSpriteSheets(const struct SpriteSheet *sheets);
+s16 AllocSpriteTiles(u16 tileCount);
 u16 AllocTilesForSpriteSheet(struct SpriteSheet *sheet);
 void AllocTilesForSpriteSheets(struct SpriteSheet *sheets);
 void LoadTilesForSpriteSheet(const struct SpriteSheet *sheet);
@@ -329,8 +330,6 @@ void CopyFromSprites(u8 *dest);
 u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
 void ClearSpriteCopyRequests(void);
 void ResetAffineAnimData(void);
-u8 LoadSpritePaletteDayNight(const struct SpritePalette *palette);
-void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images);
 u32 GetSpanPerImage(u32 shape, u32 size);
 
 #endif //GUARD_SPRITE_H
