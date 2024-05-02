@@ -51,3 +51,4 @@ agbcc/
 /.vs
 tools/poryscript
 src/data/map_group_count.h
+tools/trainerproc/trainerproc
