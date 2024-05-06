@@ -4436,8 +4436,8 @@
       "name": "OneIslandFRLG_Layout",
       "width": 45,
       "height": 45,
-      "primary_tileset": "gTileset_JohtoBuilding",
-      "secondary_tileset": "gTileset_johto_pokecenter",
+      "primary_tileset": "gTileset_VajraPyramid",
+      "secondary_tileset": "gTileset_pyramidpuzzles",
       "border_filepath": "data/layouts/OneIslandFRLG/border.bin",
       "blockdata_filepath": "data/layouts/OneIslandFRLG/map.bin"
     },
