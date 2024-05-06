@@ -4835,6 +4835,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOLLOWER(Cosmog, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Cosmog, gShinyFollowerPalette_Cosmog)
         .isLegendary = TRUE,
         .tmIlliterate = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sCosmogLevelUpLearnset,
         .teachableLearnset = sCosmogTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 43, SPECIES_COSMOEM}),
@@ -4893,6 +4894,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOLLOWER(Cosmoem, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Cosmoem, gShinyFollowerPalette_Cosmoem)
         .isLegendary = TRUE,
         .tmIlliterate = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sCosmoemLevelUpLearnset,
         .teachableLearnset = sCosmoemTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL_DAY, 53, SPECIES_SOLGALEO},
@@ -4949,6 +4951,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Solgaleo)
         FOLLOWER(Solgaleo, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Solgaleo, gShinyFollowerPalette_Solgaleo)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sSolgaleoLevelUpLearnset,
         .teachableLearnset = sSolgaleoTeachableLearnset,
     },
@@ -5004,6 +5007,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Lunala)
         FOLLOWER(Lunala, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Lunala, gShinyFollowerPalette_Lunala)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sLunalaLevelUpLearnset,
         .teachableLearnset = sLunalaTeachableLearnset,
     },
@@ -5460,6 +5464,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Necrozma)
         FOLLOWER(Necrozma, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Necrozma, gShinyFollowerPalette_Necrozma)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sNecrozmaLevelUpLearnset,
         .teachableLearnset = sNecrozmaTeachableLearnset,
         .formSpeciesIdTable = sNecrozmaFormSpeciesIdTable,
@@ -5518,6 +5523,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOLLOWER(NecrozmaDuskMane, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_NecrozmaDuskMane, gShinyFollowerPalette_NecrozmaDuskMane)
         .isLegendary = TRUE,
         .cannotBeTraded = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sNecrozmaLevelUpLearnset,
         .teachableLearnset = sNecrozmaTeachableLearnset,
         .formSpeciesIdTable = sNecrozmaFormSpeciesIdTable,
@@ -5577,6 +5583,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOLLOWER(NecrozmaDawnWings, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_NecrozmaDawnWings, gShinyFollowerPalette_NecrozmaDawnWings)
         .isLegendary = TRUE,
         .cannotBeTraded = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sNecrozmaLevelUpLearnset,
         .teachableLearnset = sNecrozmaTeachableLearnset,
         .formSpeciesIdTable = sNecrozmaFormSpeciesIdTable,
@@ -5639,6 +5646,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .isLegendary = TRUE,
         .isUltraBurst = TRUE,
         .cannotBeTraded = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sNecrozmaLevelUpLearnset,
         .teachableLearnset = sNecrozmaTeachableLearnset,
         .formSpeciesIdTable = sNecrozmaFormSpeciesIdTable,
@@ -5698,6 +5706,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Magearna)
         FOLLOWER(Magearna, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Magearna, gShinyFollowerPalette_Magearna)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMagearnaLevelUpLearnset,
         .teachableLearnset = sMagearnaTeachableLearnset,
         .formSpeciesIdTable = sMagearnaFormSpeciesIdTable,
@@ -5751,6 +5760,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .iconPalIndex = 0,
         FOOTPRINT(Magearna)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMagearnaLevelUpLearnset,
         .teachableLearnset = sMagearnaTeachableLearnset,
         .formSpeciesIdTable = sMagearnaFormSpeciesIdTable,
@@ -5810,6 +5820,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Marshadow)
         FOLLOWER(Marshadow, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Marshadow, gShinyFollowerPalette_Marshadow)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMarshadowLevelUpLearnset,
         .teachableLearnset = sMarshadowTeachableLearnset,
     },
@@ -6088,6 +6099,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Zeraora)
         FOLLOWER(Zeraora, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Zeraora, gShinyFollowerPalette_Zeraora)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZeraoraLevelUpLearnset,
         .teachableLearnset = sZeraoraTeachableLearnset,
     },
@@ -6143,6 +6155,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Meltan)
         FOLLOWER(Meltan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Meltan, gShinyFollowerPalette_Meltan)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMeltanLevelUpLearnset,
         .teachableLearnset = sMeltanTeachableLearnset,
     },
@@ -6196,6 +6209,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Melmetal)
         FOLLOWER(Melmetal, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Melmetal, gShinyFollowerPalette_Melmetal)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMelmetalLevelUpLearnset,
         .teachableLearnset = sMelmetalTeachableLearnset,
         .formSpeciesIdTable = sMelmetalFormSpeciesIdTable,
@@ -6253,6 +6267,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Melmetal)
         .isMythical = TRUE,
         .isGigantamax = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMelmetalLevelUpLearnset,
         .teachableLearnset = sMelmetalTeachableLearnset,
         .formSpeciesIdTable = sMelmetalFormSpeciesIdTable,

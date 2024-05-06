@@ -6432,6 +6432,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         FOOTPRINT(Lugia)
         FOLLOWER(Lugia, SIZE_64x64, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_Lugia, gShinyFollowerPalette_Lugia)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sLugiaLevelUpLearnset,
         .teachableLearnset = sLugiaTeachableLearnset,
     },
@@ -6497,6 +6498,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         FOOTPRINT(HoOh)
         FOLLOWER(HoOh, SIZE_64x64, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_HoOh, gShinyFollowerPalette_HoOh)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sHoOhLevelUpLearnset,
         .teachableLearnset = sHoOhTeachableLearnset,
     },
@@ -6562,6 +6564,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         FOOTPRINT(Celebi)
         FOLLOWER(Celebi, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_Celebi, gShinyFollowerPalette_Celebi)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sCelebiLevelUpLearnset,
         .teachableLearnset = sCelebiTeachableLearnset,
     },

@@ -4865,6 +4865,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         FOOTPRINT(Dialga)
         FOLLOWER(Dialga, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Dialga, gShinyFollowerPalette_Dialga)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sDialgaLevelUpLearnset,
         .teachableLearnset = sDialgaTeachableLearnset,
         .formSpeciesIdTable = sDialgaFormSpeciesIdTable,
@@ -4922,6 +4923,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         //FOLLOWER(DialgaOrigin, SIZE_64x64, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_DialgaOrigin, gShinyFollowerPalette_DialgaOrigin)
         FOLLOWER(DialgaOrigin, SIZE_64x64, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_DialgaOrigin)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sDialgaLevelUpLearnset,
         .teachableLearnset = sDialgaTeachableLearnset,
         .formSpeciesIdTable = sDialgaFormSpeciesIdTable,
@@ -4988,6 +4990,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         FOOTPRINT(Palkia)
         FOLLOWER(Palkia, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Palkia, gShinyFollowerPalette_Palkia)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sPalkiaLevelUpLearnset,
         .teachableLearnset = sPalkiaTeachableLearnset,
         .formSpeciesIdTable = sPalkiaFormSpeciesIdTable,
@@ -5045,6 +5048,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         //FOLLOWER(PalkiaOrigin, SIZE_64x64, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_PalkiaOrigin, gShinyFollowerPalette_PalkiaOrigin)
         FOLLOWER(PalkiaOrigin, SIZE_64x64, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_PalkiaOrigin)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sPalkiaLevelUpLearnset,
         .teachableLearnset = sPalkiaTeachableLearnset,
         .formSpeciesIdTable = sPalkiaFormSpeciesIdTable,
@@ -5235,6 +5239,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         FOOTPRINT(Giratina)
         FOLLOWER(GiratinaAltered, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_GiratinaAltered, gShinyFollowerPalette_GiratinaAltered)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sGiratinaLevelUpLearnset,
         .teachableLearnset = sGiratinaTeachableLearnset,
         .formSpeciesIdTable = sGiratinaFormSpeciesIdTable,
@@ -5293,6 +5298,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         //FOLLOWER(GiratinaOrigin, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_GiratinaOrigin, gShinyFollowerPalette_GiratinaOrigin)
         FOLLOWER(GiratinaOrigin, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_GiratinaOrigin)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sGiratinaLevelUpLearnset,
         .teachableLearnset = sGiratinaTeachableLearnset,
         .formSpeciesIdTable = sGiratinaFormSpeciesIdTable,
@@ -5421,6 +5427,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         FOOTPRINT(Phione)
         FOLLOWER(Phione, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Phione, gShinyFollowerPalette_Phione)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sPhioneLevelUpLearnset,
         .teachableLearnset = sPhioneTeachableLearnset,
     },
@@ -5482,6 +5489,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         FOOTPRINT(Manaphy)
         FOLLOWER(Manaphy, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Manaphy, gShinyFollowerPalette_Manaphy)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sManaphyLevelUpLearnset,
         .teachableLearnset = sManaphyTeachableLearnset,
     },
@@ -5546,6 +5554,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         FOOTPRINT(Darkrai)
         FOLLOWER(Darkrai, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Darkrai, gShinyFollowerPalette_Darkrai)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sDarkraiLevelUpLearnset,
         .teachableLearnset = sDarkraiTeachableLearnset,
     },
@@ -5612,6 +5621,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         FOOTPRINT(Shaymin)
         FOLLOWER(ShayminLand, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_ShayminLand, gShinyFollowerPalette_ShayminLand)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sShayminLandLevelUpLearnset,
         .teachableLearnset = sShayminLandTeachableLearnset,
         .formSpeciesIdTable = sShayminFormSpeciesIdTable,
@@ -5674,6 +5684,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .iconPalIndex = 1,
         FOOTPRINT(Shaymin)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sShayminSkyLevelUpLearnset,
         .teachableLearnset = sShayminSkyTeachableLearnset,
         .formSpeciesIdTable = sShayminFormSpeciesIdTable,
@@ -5699,55 +5710,56 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .iconPalIndex = 1,
 #endif
 
-#define ARCEUS_SPECIES_INFO(type, typeName, iconPal)                        \
-    {                                                                       \
-        .baseHP        = 120,                                               \
-        .baseAttack    = 120,                                               \
-        .baseDefense   = 120,                                               \
-        .baseSpeed     = 120,                                               \
-        .baseSpAttack  = 120,                                               \
-        .baseSpDefense = 120,                                               \
-        .types = MON_TYPES(type),                                           \
-        .catchRate = 3,                                                     \
-        .expYield = ARCEUS_EXP_YIELD,                                       \
-        .evYield_HP = 3,                                                    \
-        .genderRatio = MON_GENDERLESS,                                      \
-        .eggCycles = 120,                                                   \
-        .friendship = 0,                                                    \
-        .growthRate = GROWTH_SLOW,                                          \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),          \
-        .abilities = { ABILITY_MULTITYPE, ABILITY_NONE, ABILITY_NONE },     \
-        .bodyColor = BODY_COLOR_WHITE,                                      \
-        .speciesName = _("Arceus"),                                         \
-        .cryId = CRY_ARCEUS,                                                \
-        .natDexNum = NATIONAL_DEX_ARCEUS,                                   \
-        .categoryName = _("Alpha"),                                         \
-        .height = 32,                                                       \
-        .weight = 3200,                                                     \
-        .description = gArceusPokedexText,                                  \
-        .pokemonScale = 256,                                                \
-        .pokemonOffset = 0,                                                 \
-        .trainerScale = 495,                                                \
-        .trainerOffset = 10,                                                \
-        .frontPic = gMonFrontPic_Arceus,                                    \
-        .frontPicSize = MON_COORDS_SIZE(64, 64),                            \
-        .frontPicYOffset = 0,                                               \
-        .frontAnimFrames = sAnims_Arceus,                                   \
-        .frontAnimId = ANIM_GROW_VIBRATE,                                   \
-        .backPic = gMonBackPic_Arceus,                                      \
-        .backPicSize = MON_COORDS_SIZE(64, 64),                             \
-        .backPicYOffset = 3,                                                \
-        .backAnimId = BACK_ANIM_GROW_STUTTER,                               \
-        .palette = gMonPalette_Arceus ##typeName,                           \
-        .shinyPalette = gMonShinyPalette_Arceus ##typeName,                 \
-        ARCEUS_ICON(typeName, iconPal)                                      \
-        FOOTPRINT(Arceus)                                                   \
+#define ARCEUS_SPECIES_INFO(type, typeName, iconPal)                    \
+    {                                                                   \
+        .baseHP        = 120,                                           \
+        .baseAttack    = 120,                                           \
+        .baseDefense   = 120,                                           \
+        .baseSpeed     = 120,                                           \
+        .baseSpAttack  = 120,                                           \
+        .baseSpDefense = 120,                                           \
+        .types = MON_TYPES(type),                                       \
+        .catchRate = 3,                                                 \
+        .expYield = ARCEUS_EXP_YIELD,                                   \
+        .evYield_HP = 3,                                                \
+        .genderRatio = MON_GENDERLESS,                                  \
+        .eggCycles = 120,                                               \
+        .friendship = 0,                                                \
+        .growthRate = GROWTH_SLOW,                                      \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),      \
+        .abilities = { ABILITY_MULTITYPE, ABILITY_NONE, ABILITY_NONE }, \
+        .bodyColor = BODY_COLOR_WHITE,                                  \
+        .speciesName = _("Arceus"),                                     \
+        .cryId = CRY_ARCEUS,                                            \
+        .natDexNum = NATIONAL_DEX_ARCEUS,                               \
+        .categoryName = _("Alpha"),                                     \
+        .height = 32,                                                   \
+        .weight = 3200,                                                 \
+        .description = gArceusPokedexText,                              \
+        .pokemonScale = 256,                                            \
+        .pokemonOffset = 0,                                             \
+        .trainerScale = 495,                                            \
+        .trainerOffset = 10,                                            \
+        .frontPic = gMonFrontPic_Arceus,                                \
+        .frontPicSize = MON_COORDS_SIZE(64, 64),                        \
+        .frontPicYOffset = 0,                                           \
+        .frontAnimFrames = sAnims_Arceus,                               \
+        .frontAnimId = ANIM_GROW_VIBRATE,                               \
+        .backPic = gMonBackPic_Arceus,                                  \
+        .backPicSize = MON_COORDS_SIZE(64, 64),                         \
+        .backPicYOffset = 3,                                            \
+        .backAnimId = BACK_ANIM_GROW_STUTTER,                           \
+        .palette = gMonPalette_Arceus ##typeName,                       \
+        .shinyPalette = gMonShinyPalette_Arceus ##typeName,             \
+        ARCEUS_ICON(typeName, iconPal)                                  \
+        FOOTPRINT(Arceus)                                               \
         FOLLOWER(Arceus ##typeName, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT) \
-        .levelUpLearnset = sArceusLevelUpLearnset,                          \
-        .teachableLearnset = sArceusTeachableLearnset,                      \
-        .formSpeciesIdTable = sArceusFormSpeciesIdTable,                    \
-        .formChangeTable = sArceusFormChangeTable,                          \
-        .isMythical = TRUE,                                                 \
+        .levelUpLearnset = sArceusLevelUpLearnset,                      \
+        .teachableLearnset = sArceusTeachableLearnset,                  \
+        .formSpeciesIdTable = sArceusFormSpeciesIdTable,                \
+        .formChangeTable = sArceusFormChangeTable,                      \
+        .isMythical = TRUE,                                             \
+        .isFrontierBanned = TRUE,                                       \
     }
 
     [SPECIES_ARCEUS_NORMAL]   = ARCEUS_SPECIES_INFO(TYPE_NORMAL,   Normal,   1),
