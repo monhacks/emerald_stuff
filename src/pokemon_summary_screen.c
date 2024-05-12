@@ -16,6 +16,7 @@
 #include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
 #include "gpu_regs.h"
+#include "pokemon_debug.h"
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
@@ -2016,6 +2017,15 @@ static void Task_HandleInput(u8 taskId)
                 PlaySE(SE_SELECT);
             }
         }
+        #if DEBUG_POKEMON_MENU == TRUE
+        else if (JOY_NEW(SELECT_BUTTON) && !gMain.inBattle)
+        {
+            sMonSummaryScreen->callback = CB2_Debug_Pokemon;
+            StopPokemonAnimations();
+            PlaySE(SE_SELECT);
+            CloseSummaryScreen(taskId);
+        }
+    #endif
     }
 }
 

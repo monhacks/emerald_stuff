@@ -15292,7 +15292,14 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconPalIndexFemale = 2,
     #endif
         FOOTPRINT(Eevee)
-        FOLLOWER(Eevee, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Eevee, gShinyFollowerPalette_Eevee)
+        FOLLOWER(
+            sPicTable_Eevee,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gFollowerPalette_Eevee,
+            gShinyFollowerPalette_Eevee
+        )
         .cannotBeTraded = TRUE,
         .allPerfectIVs = TRUE,
         .levelUpLearnset = sEeveeLevelUpLearnset,
