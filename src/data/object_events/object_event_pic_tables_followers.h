@@ -938,9 +938,9 @@ static const struct SpriteFrameImage sPicTable_Scizor[] = {
     overworld_ascending_frames(gObjectEventPic_Scizor, 4, 4),
 };
 #if P_MEGA_EVOLUTIONS
-/*static const struct SpriteFrameImage sPicTable_ScizorMega[] = {
+static const struct SpriteFrameImage sPicTable_ScizorMega[] = {
     overworld_ascending_frames(gObjectEventPic_ScizorMega, 4, 4),
-};*/
+};
 #endif //P_MEGA_EVOLUTIONS
 #endif //P_GEN_2_CROSS_EVOS
 

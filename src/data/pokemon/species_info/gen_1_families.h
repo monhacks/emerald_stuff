@@ -13783,6 +13783,14 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .iconSprite = gMonIcon_ScizorMega,
         .iconPalIndex = 0,
         FOOTPRINT(Scizor)
+        FOLLOWER(
+            sPicTable_ScizorMega,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gFollowerPalette_ScizorMega,
+            gShinyFollowerPalette_ScizorMega
+        )
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sScizorLevelUpLearnset,
         .teachableLearnset = sScizorTeachableLearnset,

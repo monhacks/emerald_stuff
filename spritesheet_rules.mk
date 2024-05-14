@@ -1519,6 +1519,9 @@ $(POKEMONGFXDIR)/qwilfish/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/scizor/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
+$(POKEMONGFXDIR)/scizor/mega/follower.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 $(POKEMONGFXDIR)/shuckle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 

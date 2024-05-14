@@ -3448,10 +3448,10 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gMonShinyPalette_ScizorMega[] = INCBIN_U32("graphics/pokemon/scizor/mega/shiny.gbapal.lz");
     const u8 gMonIcon_ScizorMega[] = INCBIN_U8("graphics/pokemon/scizor/mega/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
-    // const u32 gObjectEventPic_ScizorMega[] = INCBIN_COMP("graphics/pokemon/scizor/mega/follower.4bpp");
+    const u32 gObjectEventPic_ScizorMega[] = INCBIN_COMP("graphics/pokemon/scizor/mega/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_ScizorMega[] = INCBIN_U32("graphics/pokemon/scizor/mega/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_ScizorMega[] = INCBIN_U32("graphics/pokemon/scizor/mega/follow_shiny.gbapal.lz");
+    const u32 gFollowerPalette_ScizorMega[] = INCBIN_U32("graphics/pokemon/scizor/mega/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_ScizorMega[] = INCBIN_U32("graphics/pokemon/scizor/mega/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_MEGA_EVOLUTIONS
