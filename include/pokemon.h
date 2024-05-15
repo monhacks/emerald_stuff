@@ -811,6 +811,8 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality);
 u8 CalculatePartyCount(struct Pokemon *party);
 u16 SanitizeSpeciesId(u16 species);
 bool32 IsSpeciesEnabled(u16 species);
+u8 GetNumberOfEggMoves(struct Pokemon *mon);
+u8 GetEggMoveTutorMoves(struct Pokemon *mon, u16 *moves);
 u16 GetCryIdBySpecies(u16 species);
 u16 GetSpeciesPreEvolution(u16 species);
 void HealPokemon(struct Pokemon *mon);

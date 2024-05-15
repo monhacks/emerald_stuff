@@ -11,7 +11,7 @@
 #include "battle_tower.h"
 #include "battle_z_move.h"
 #include "data.h"
-
+#include "daycare.h"
 #include "dexnav.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -5287,6 +5287,70 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
                     moves[numMoves++] = learnset[i].move;
             }
         }
+    }
+
+    return numMoves;
+}
+
+
+u8 GetNumberOfEggMoves(struct Pokemon *mon)
+{
+    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
+    u16 learnedMoves[MAX_MON_MOVES];
+    u8 numMoves = 0;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
+    u16 firstStage = GetEggSpecies(species);
+    u8 numEggMoves = GetEggMovesSpecies(firstStage, eggMoveBuffer);
+    u16 moves[numEggMoves];
+    int i, j;
+    bool8 hasMonMove = FALSE;
+
+    if (species == SPECIES_EGG)
+        return 0;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+
+    for (i = 0; i < numEggMoves; i++)
+    {
+        hasMonMove = FALSE;
+
+        for (j = 0; j < MAX_MON_MOVES; j++){
+            if(learnedMoves[j] == eggMoveBuffer[i])
+                hasMonMove = TRUE;
+        }
+
+        if(!hasMonMove)
+            moves[numMoves++] = eggMoveBuffer[i];
+    }
+
+    return numMoves;
+}
+
+u8 GetEggMoveTutorMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[4];
+    u8 numMoves = 0;
+    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
+    u16 firsStage = GetEggSpecies(species);
+    u16 numEggMoves = GetEggMovesSpecies(firsStage, eggMoveBuffer);
+    int i, j;
+    bool8 hasMonMove = FALSE;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+
+    for (i = 0; i < numEggMoves; i++)
+    {
+        hasMonMove = FALSE;
+
+        for (j = 0; j < MAX_MON_MOVES; j++){
+            if(learnedMoves[j] == eggMoveBuffer[i])
+                hasMonMove = TRUE;
+        }
+
+        if(!hasMonMove)
+            moves[numMoves++] = eggMoveBuffer[i];
     }
 
     return numMoves;

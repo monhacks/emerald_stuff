@@ -28,6 +28,7 @@ SkyVotex and Banjora Marxville for tileset/palettes
 Sierraffinity - Day/Night System
 Spherical Ice - Sliding puzzles
 Merrp - Following Pokemon, Shadows
+PCG - Egg move tutor
 Fo0xerz - Lawrence III sprite
 Nicoswag - Ability popup design
 Nico - Pokemon animate after KO
