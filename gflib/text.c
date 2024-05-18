@@ -1023,7 +1023,6 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
     u32 currChar, nextChar;
-    u32 lastChar;
     s32 width;
     s32 widthHelper;
     u8 repeats = 1;
