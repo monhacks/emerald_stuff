@@ -7592,7 +7592,9 @@ BattleScript_MoveEffectConfusion::
 
 BattleScript_MoveEffectRecoil::
 	jumpifmove MOVE_STRUGGLE, BattleScript_DoRecoil
-	jumpifability BS_ATTACKER, ABILITY_ROCK_HEAD | ABILITY_UNSTOPPABLE, BattleScript_RecoilEnd
+	jumpifability BS_ATTACKER, ABILITY_ROCK_HEAD, BattleScript_RecoilEnd
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_RecoilEnd
+	jumpifability BS_ATTACKER, ABILITY_UNSTOPPABLE, BattleScript_RecoilEnd
 BattleScript_DoRecoil::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE | HITMARKER_IGNORE_DISGUISE
 	healthbarupdate BS_ATTACKER
