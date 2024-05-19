@@ -630,7 +630,8 @@ void ShowStartMenu(void)
         PlayerFreeze();
         StopPlayerAvatar();
     }
-    else{
+    CreateStartMenuTask(Task_ShowStartMenu);
+    /* else{
         CreateStartMenuTask(Task_ShowStartMenu);
         LockPlayerFieldControls();
         return;
@@ -642,7 +643,7 @@ void ShowStartMenu(void)
         return;
     }
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_OpenStartMenuFullScreen, 0);
+    CreateTask(Task_OpenStartMenuFullScreen, 0); */
     LockPlayerFieldControls();
 }
 
@@ -946,6 +947,10 @@ static bool8 SaveCallback(void)
     case SAVE_IN_PROGRESS:
         return FALSE;
     case SAVE_CANCELED: // Back to start menu
+        ClearDialogWindowAndFrameToTransparent(0, FALSE);
+        InitStartMenu();
+        gMenuCallback = HandleStartMenuInput;
+        return FALSE;
     case SAVE_SUCCESS:
     case SAVE_ERROR:    // Close start menu
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
