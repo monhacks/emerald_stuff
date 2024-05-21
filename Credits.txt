@@ -6,7 +6,8 @@ Mudkip - New shop menu, start menu, options menu dark theme
 quocmanh94 - HGSS berry animation
 BSBob - Map popup
 Kaixer - Pokemon sprites
-Ravepossum - Map popup, pokedex from party menu, showmonpic shinyness, battle backgrounds
+Ravepossum - Map popup, pokedex from party menu, showmonpic shinyness, battle backgrounds, bw summary screen
+Againsts, Sphericalice, Vexx, Buffelsaft, Dizzyegg, Zeturic, Greenphx9, Skeli for bw summary screen
 Ruki - Battle backgrounds
 Voluptua - town map port
 Beniboy for helping with numerous issues during developement

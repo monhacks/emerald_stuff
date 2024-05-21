@@ -8137,6 +8137,8 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
+        .iconPic = gItemIcon_FrostOrb,
+        .iconPalette = gItemIconPalette_FrostOrb,
     },
 
 // Weather Rocks

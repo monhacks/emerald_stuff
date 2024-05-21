@@ -290,6 +290,7 @@ static const u8 sMenuCursorDimensions[][2] =
     [FONT_NARROWER]       = { 8,  15 },
     [FONT_SMALL_NARROWER] = { 8,   8 },
     [FONT_SHORT_NARROW]   = { 8,  14 },
+    [FONT_BW_SUMMARY_SCREEN] = { 8,  14 },
 };
 
 static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
@@ -2218,7 +2219,7 @@ static const s8 sNarrowerFontIds[] =
     [FONT_NARROWER] = -1,
     [FONT_SMALL_NARROWER] = -1,
     [FONT_SHORT_NARROW] = -1,
-    [FONT_BW_SUMMARY_SCREEN] = { 8,  14 },
+    [FONT_BW_SUMMARY_SCREEN] = FONT_BW_SUMMARY_SCREEN,
 };
 
 // If the narrowest font ID doesn't fit the text, we still return that
