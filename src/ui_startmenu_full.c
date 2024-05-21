@@ -93,7 +93,7 @@ enum StartMenuBoxes
 };
 
 //==========EWRAM==========//
-static EWRAM_DATA struct StartMenuResources *sStartMenuDataPtr = NULL;
+static EWRAM_INIT struct StartMenuResources *sStartMenuDataPtr = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 static EWRAM_DATA u8 gSelectedMenu = 0; // holds the position of the menu so that it persists in memory, 
