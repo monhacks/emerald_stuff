@@ -3396,7 +3396,7 @@ static const u8 sSummaryInfoPageIcon[]  = INCBIN_U8("graphics/interface/summary_
 static void BufferNatureString(void)
 {
     struct PokemonSummaryScreenData *sumStruct = sMonSummaryScreen;
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gNatureNamePointers[sumStruct->summary.mintNature]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gNaturesInfo[sumStruct->summary.nature].name);
 }
 
 static void BufferCharacteristicString(void)
@@ -3623,7 +3623,7 @@ static void PrintSkillsPage(void)
     s64 numHPBarTicks;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
     static const u8 sText_Help_Bar[] = _("{DPAD_LEFTRIGHT} Add / Remove 4 EVs\n{L_BUTTON}{R_BUTTON} Add / Remove 64 EVs");
-    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.mintNature];
+    const u8 *natureMod = gNaturesInfo[sMonSummaryScreen->summary.mintNature].name;
     //static const u8 sText_Evs_Disabled[] = _("0");
     u8 offset = 0;
 

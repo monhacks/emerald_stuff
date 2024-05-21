@@ -14,6 +14,7 @@
 #include "item_use.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
+#include "graphics.h"
 #include "constants/battle.h"
 #include "item_icon.h"
 #include "pokemon_summary_screen.h"
@@ -21,6 +22,7 @@
 #include "party_menu.h"
 #include "overworld.h"
 #include "constants/items.h"
+#include "constants/moves.h"
 #include "constants/item_effects.h"
 #include "constants/hold_effects.h"
 

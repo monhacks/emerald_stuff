@@ -4682,11 +4682,15 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 else
                     nature = gSaveBlock1Ptr->frontier.domePlayerPartyData[i].nature;
 
-                if (gNatureStatTable[nature][j] > 0)
+                if (gNaturesInfo[nature].statUp == gNaturesInfo[nature].statDown)
+                {
+                    allocatedArray[j + NUM_STATS + 1] += allocatedArray[j + 1];
+                }
+                else if (gNaturesInfo[nature].statUp == j + 1)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 110) / 100;
                 }
-                else if (gNatureStatTable[nature][j] < 0)
+                else if (gNaturesInfo[nature].statDown == j + 1)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 90) / 100;
                     allocatedArray[j + NUM_STATS + NUM_NATURE_STATS + 2]++;
@@ -4719,11 +4723,16 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
             for (j = 0; j < NUM_NATURE_STATS; j++)
             {
                 nature = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].nature;
-                if (gNatureStatTable[nature][j] > 0)
+
+                if (gNaturesInfo[nature].statUp == gNaturesInfo[nature].statDown)
+                {
+                    allocatedArray[j + NUM_STATS + 1] += allocatedArray[j + 1];
+                }
+                else if (gNaturesInfo[nature].statUp == j + 1)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 110) / 100;
                 }
-                else if (gNatureStatTable[nature][j] < 0)
+                else if (gNaturesInfo[nature].statDown == j + 1)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 90) / 100;
                     allocatedArray[j + NUM_STATS + NUM_NATURE_STATS + 2]++;
