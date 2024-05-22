@@ -2341,7 +2341,10 @@ $(MID_SUBDIR)/mus_hg_win_minigame.s: %.s: %.mid
 	$(MID) $< $@ -E -R0 -G229 -V091 -p5
 
 $(MID_SUBDIR)/mus_smt3_large_map.s: %.s: %.mid
-	$(MID) $< $@ -E -R5 -G229 -V086
+	$(MID) $< $@ -E -R5 -G191 -V086
 
 $(MID_SUBDIR)/mus_xenoblade_battle_theme.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G149 -V107
+
+$(MID_SUBDIR)/mus_bw_gym_interior.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G013 -V080
