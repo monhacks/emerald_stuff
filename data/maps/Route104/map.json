@@ -98,7 +98,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 28,
-      "y": 74,
+      "y": 70,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -384,11 +384,11 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 18,
-      "y": 67,
+      "y": 65,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT",
-      "movement_range_x": 5,
-      "movement_range_y": 6,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "Route104_EventScript_Billy",
@@ -471,6 +471,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route104_EventScript_Rival",
       "flag": "FLAG_HIDE_ROUTE_104_RIVAL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 21,
+      "y": 74,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_SWAMPERTITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ROUTE104_SWAMPERTITE"
     }
   ],
   "warp_events": [
@@ -609,8 +622,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 16,
-      "y": 72,
+      "x": 25,
+      "y": 67,
       "elevation": 3,
       "item": "ITEM_ANTIDOTE",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_ANTIDOTE"

@@ -5849,7 +5849,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .shinyPalette = gMonShinyPalette_GiratinaAltered,
         .iconSprite = gMonIcon_GiratinaAltered,
         .iconPalIndex = 0,
-        FOOTPRINT(Giratina)
+        FOOTPRINT(GiratinaAltered)
         FOLLOWER(
             sPicTable_GiratinaAltered,
             SIZE_64x64,
@@ -5914,7 +5914,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .shinyPalette = gMonShinyPalette_GiratinaOrigin,
         .iconSprite = gMonIcon_GiratinaOrigin,
         .iconPalIndex = 0,
-        FOOTPRINT(Giratina)
+        FOOTPRINT(GiratinaOrigin)
         FOLLOWER(
             sPicTable_GiratinaOrigin,
             SIZE_64x64,

@@ -3953,8 +3953,8 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .levelUpLearnset = sBasculinWhiteStripedLevelUpLearnset,
         .teachableLearnset = sBasculinWhiteStripedTeachableLearnset,
         .formSpeciesIdTable = sBasculinFormSpeciesIdTable,
-        .evolutions = EVOLUTION({EVO_LEVEL_RECOIL_DAMAGE_MALE, 294, SPECIES_BASCULEGION_MALE},
-                                {EVO_LEVEL_RECOIL_DAMAGE_FEMALE, 294, SPECIES_BASCULEGION_FEMALE}),
+        .evolutions = EVOLUTION({EVO_RECOIL_DAMAGE_MALE, 294, SPECIES_BASCULEGION_MALE},
+                                {EVO_RECOIL_DAMAGE_FEMALE, 294, SPECIES_BASCULEGION_FEMALE}),
     },
 
     [SPECIES_BASCULEGION_MALE] =
@@ -4005,7 +4005,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .shinyPalette = gMonShinyPalette_BasculegionMale,
         .iconSprite = gMonIcon_BasculegionMale,
         .iconPalIndex = 1,
-        //FOOTPRINT(Basculegion),
+        FOOTPRINT(Basculegion)
         FOLLOWER(
             sPicTable_BasculegionMale,
             SIZE_32x32,
@@ -4066,7 +4066,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .shinyPalette = gMonShinyPalette_BasculegionFemale,
         .iconSprite = gMonIcon_BasculegionFemale,
         .iconPalIndex = 0,
-        //FOOTPRINT(Basculegion),
+        FOOTPRINT(Basculegion)
         FOLLOWER(
             sPicTable_BasculegionFemale,
             SIZE_32x32,
@@ -9865,7 +9865,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .shinyPalette = gMonShinyPalette_Kingambit,
         .iconSprite = gMonIcon_Kingambit,
         .iconPalIndex = 0,
-        //FOOTPRINT(Kingambit)
+        FOOTPRINT(Kingambit)
         .levelUpLearnset = sKingambitLevelUpLearnset,
         .teachableLearnset = sKingambitTeachableLearnset,
     },
