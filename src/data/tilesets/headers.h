@@ -1144,3 +1144,14 @@ const struct Tileset gTileset_SSAnne =
     .metatileAttributes = gMetatileAttributes_SSAnne,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_Volcano =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Volcano,
+    .palettes = gTilesetPalettes_Volcano,
+    .metatiles = gMetatiles_Volcano,
+    .metatileAttributes = gMetatileAttributes_Volcano,
+    .callback = NULL,
+};

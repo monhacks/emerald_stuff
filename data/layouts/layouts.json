@@ -5020,6 +5020,16 @@
       "secondary_tileset": "gTileset_JohtoOlivine",
       "border_filepath": "data/layouts/Route39/border.bin",
       "blockdata_filepath": "data/layouts/Route39/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_VOLCANO",
+      "name": "DewfordVolcano_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Volcano",
+      "border_filepath": "data/layouts/DewfordVolcano/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordVolcano/map.bin"
     }
   ]
 }
