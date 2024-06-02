@@ -24,7 +24,7 @@
     .followerShinyPalette = DEFAULT_2(NULL, __VA_ARGS__),
 #else
 #define FOLLOWER_PAL(...)
-#endif
+#endif //OW_FOLLOWERS_SHARE_PALETTE == FALSE
 
 #define FOLLOWER(picTable, _size, shadow, _tracks, ...)                                     \
 .followerData = {                                                                           \
@@ -48,7 +48,7 @@
     FOLLOWER_PAL(__VA_ARGS__)
 #else
 #define FOLLOWER(picTable, _size, shadow, _tracks, ...)
-#endif
+#endif //OW_FOLLOWERS_ENABLED
 
 // Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
@@ -98,10 +98,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .shinyPalette = gMonShinyPalette_CircledQuestionMark,
         .iconSprite = gMonIcon_QuestionMark,
         .iconPalIndex = 0,
+        FOOTPRINT(QuestionMark)
     #if OW_FOLLOWERS_ENABLED
         .followerData = {TAG_NONE, OBJ_EVENT_PAL_TAG_SUBSTITUTE, OBJ_EVENT_PAL_TAG_NONE, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, COMP, TRACKS_FOOT, &gObjectEventBaseOam_32x32, sOamTables_32x32, sAnimTable_Following, sPicTable_Substitute, gDummySpriteAffineAnimTable},
     #endif
-        FOOTPRINT(QuestionMark)
         .levelUpLearnset = sNoneLevelUpLearnset,
         .teachableLearnset = sNoneTeachableLearnset,
         .eggMoveLearnset = sNoneEggMoveLearnset,

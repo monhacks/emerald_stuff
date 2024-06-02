@@ -10932,6 +10932,9 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gMonBackPic_GiratinaOrigin[] = INCBIN_U32("graphics/pokemon/giratina/origin/back.4bpp.lz");
     const u32 gMonShinyPalette_GiratinaOrigin[] = INCBIN_U32("graphics/pokemon/giratina/origin/shiny.gbapal.lz");
     const u8 gMonIcon_GiratinaOrigin[] = INCBIN_U8("graphics/pokemon/giratina/origin/icon.4bpp");
+#if P_FOOTPRINTS
+    const u8 gMonFootprint_GiratinaOrigin[] = INCBIN_U8("graphics/pokemon/giratina/origin/footprint.1bpp");
+#endif //P_FOOTPRINTS
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_GiratinaOrigin[] = INCBIN_COMP("graphics/pokemon/giratina/origin/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
@@ -10939,9 +10942,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gShinyFollowerPalette_GiratinaOrigin[] = INCBIN_U32("graphics/pokemon/giratina/origin/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_GiratinaOrigin[] = INCBIN_U8("graphics/pokemon/giratina/origin/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #endif //P_FAMILY_GIRATINA
 
 #if P_FAMILY_CRESSELIA
@@ -20220,6 +20220,9 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gMonFrontPic_MausholdFamilyOfThree[] = INCBIN_U32("graphics/pokemon/maushold/front.4bpp.lz");
     const u32 gMonBackPic_MausholdFamilyOfThree[] = INCBIN_U32("graphics/pokemon/maushold/back.4bpp.lz");
     const u8 gMonIcon_MausholdFamilyOfThree[] = INCBIN_U8("graphics/pokemon/maushold/icon.4bpp");
+#if P_FOOTPRINTS
+    const u8 gMonFootprint_MausholdFamilyOfThree[] = INCBIN_U8("graphics/pokemon/maushold/footprint.1bpp");
+#endif //P_FOOTPRINTS
 #if OW_FOLLOWERS_ENABLED
     // const u32 gObjectEventPic_MausholdFamilyOfThree[] = INCBIN_COMP("graphics/pokemon/maushold/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
@@ -20227,13 +20230,13 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     // const u32 gShinyFollowerPalette_MausholdFamilyOfThree[] = INCBIN_U32("graphics/pokemon/maushold/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_MausholdFamilyOfThree[] = INCBIN_U8("graphics/pokemon/maushold/footprint.1bpp");
-#endif //P_FOOTPRINTS
 
     const u32 gMonFrontPic_MausholdFamilyOfFour[] = INCBIN_U32("graphics/pokemon/maushold/four/front.4bpp.lz");
     const u32 gMonBackPic_MausholdFamilyOfFour[] = INCBIN_U32("graphics/pokemon/maushold/four/back.4bpp.lz");
     const u8 gMonIcon_MausholdFamilyOfFour[] = INCBIN_U8("graphics/pokemon/maushold/four/icon.4bpp");
+#if P_FOOTPRINTS
+    const u8 gMonFootprint_MausholdFamilyOfFour[] = INCBIN_U8("graphics/pokemon/maushold/four/footprint.1bpp");
+#endif //P_FOOTPRINTS
 #if OW_FOLLOWERS_ENABLED
     // const u32 gObjectEventPic_MausholdFamilyOfFour[] = INCBIN_COMP("graphics/pokemon/maushold/four/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
@@ -20241,9 +20244,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     // const u32 gShinyFollowerPalette_MausholdFamilyOfFour[] = INCBIN_U32("graphics/pokemon/maushold/four/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_MausholdFamilyOfFour[] = INCBIN_U8("graphics/pokemon/maushold/four/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #endif //P_FAMILY_TANDEMAUS
 
 #if P_FAMILY_FIDOUGH
@@ -21513,6 +21513,9 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gMonBackPic_GimmighoulRoaming[] = INCBIN_U32("graphics/pokemon/gimmighoul/roaming/back.4bpp.lz");
     const u32 gMonShinyPalette_GimmighoulRoaming[] = INCBIN_U32("graphics/pokemon/gimmighoul/roaming/shiny.gbapal.lz");
     const u8 gMonIcon_GimmighoulRoaming[] = INCBIN_U8("graphics/pokemon/gimmighoul/roaming/icon.4bpp");
+#if P_FOOTPRINTS
+    const u8 gMonFootprint_GimmighoulRoaming[] = INCBIN_U8("graphics/pokemon/gimmighoul/roaming/footprint.1bpp");
+#endif //P_FOOTPRINTS
 #if OW_FOLLOWERS_ENABLED
     // const u32 gObjectEventPic_GimmighoulRoaming[] = INCBIN_COMP("graphics/pokemon/gimmighoul/roaming/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
@@ -21520,9 +21523,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     // const u32 gShinyFollowerPalette_GimmighoulRoaming[] = INCBIN_U32("graphics/pokemon/gimmighoul/roaming/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_GimmighoulRoaming[] = INCBIN_U8("graphics/pokemon/gimmighoul/roaming/footprint.1bpp");
-#endif //P_FOOTPRINTS
 
     const u32 gMonFrontPic_Gholdengo[] = INCBIN_U32("graphics/pokemon/gholdengo/front.4bpp.lz");
     const u32 gMonPalette_Gholdengo[] = INCBIN_U32("graphics/pokemon/gholdengo/normal.gbapal.lz");
@@ -21938,10 +21938,10 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //P_FAMILY_IRON_CROWN
 
 #if P_FAMILY_TERAPAGOS
-    // const u32 gMonFrontPic_TerapagosNormal[] = INCBIN_U32("graphics/pokemon/terapagos/front.4bpp.lz");
-    // const u32 gMonPalette_TerapagosNormal[] = INCBIN_U32("graphics/pokemon/terapagos/normal.gbapal.lz");
-    // const u32 gMonBackPic_TerapagosNormal[] = INCBIN_U32("graphics/pokemon/terapagos/back.4bpp.lz");
-    // const u32 gMonShinyPalette_TerapagosNormal[] = INCBIN_U32("graphics/pokemon/terapagos/shiny.gbapal.lz");
+    const u32 gMonFrontPic_TerapagosNormal[] = INCBIN_U32("graphics/pokemon/terapagos/anim_front.4bpp.lz");
+    const u32 gMonPalette_TerapagosNormal[] = INCBIN_U32("graphics/pokemon/terapagos/normal.gbapal.lz");
+    const u32 gMonBackPic_TerapagosNormal[] = INCBIN_U32("graphics/pokemon/terapagos/back.4bpp.lz");
+    const u32 gMonShinyPalette_TerapagosNormal[] = INCBIN_U32("graphics/pokemon/terapagos/shiny.gbapal.lz");
     const u8 gMonIcon_TerapagosNormal[] = INCBIN_U8("graphics/pokemon/terapagos/icon.4bpp");
 #if P_FOOTPRINTS
     const u8 gMonFootprint_TerapagosNormal[] = INCBIN_U8("graphics/pokemon/terapagos/footprint.1bpp");
@@ -21954,11 +21954,14 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
-    // const u32 gMonFrontPic_TerapagosTerastal[] = INCBIN_U32("graphics/pokemon/terapagos/terastal/front.4bpp.lz");
-    // const u32 gMonPalette_TerapagosTerastal[] = INCBIN_U32("graphics/pokemon/terapagos/terastal/normal.gbapal.lz");
-    // const u32 gMonBackPic_TerapagosTerastal[] = INCBIN_U32("graphics/pokemon/terapagos/terastal/back.4bpp.lz");
-    // const u32 gMonShinyPalette_TerapagosTerastal[] = INCBIN_U32("graphics/pokemon/terapagos/terastal/shiny.gbapal.lz");
+    const u32 gMonFrontPic_TerapagosTerastal[] = INCBIN_U32("graphics/pokemon/terapagos/terastal/anim_front.4bpp.lz");
+    const u32 gMonPalette_TerapagosTerastal[] = INCBIN_U32("graphics/pokemon/terapagos/terastal/normal.gbapal.lz");
+    const u32 gMonBackPic_TerapagosTerastal[] = INCBIN_U32("graphics/pokemon/terapagos/terastal/back.4bpp.lz");
+    const u32 gMonShinyPalette_TerapagosTerastal[] = INCBIN_U32("graphics/pokemon/terapagos/terastal/shiny.gbapal.lz");
     const u8 gMonIcon_TerapagosTerastal[] = INCBIN_U8("graphics/pokemon/terapagos/terastal/icon.4bpp");
+#if P_FOOTPRINTS
+    const u8 gMonFootprint_TerapagosTerastal[] = INCBIN_U8("graphics/pokemon/terapagos/terastal/footprint.1bpp");
+#endif //P_FOOTPRINTS
 #if OW_FOLLOWERS_ENABLED
     // const u32 gObjectEventPic_TerapagosTerastal[] = INCBIN_COMP("graphics/pokemon/terapagos/terastal/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
@@ -21966,15 +21969,15 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     // const u32 gShinyFollowerPalette_TerapagosTerastal[] = INCBIN_U32("graphics/pokemon/terapagos/terastal/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_TerapagosTerastal[] = INCBIN_U8("graphics/pokemon/terapagos/terastal/footprint.1bpp");
-#endif //P_FOOTPRINTS
 
     // const u32 gMonFrontPic_TerapagosStellar[] = INCBIN_U32("graphics/pokemon/terapagos/stellar/front.4bpp.lz");
     // const u32 gMonPalette_TerapagosStellar[] = INCBIN_U32("graphics/pokemon/terapagos/stellar/normal.gbapal.lz");
     // const u32 gMonBackPic_TerapagosStellar[] = INCBIN_U32("graphics/pokemon/terapagos/stellar/back.4bpp.lz");
     // const u32 gMonShinyPalette_TerapagosStellar[] = INCBIN_U32("graphics/pokemon/terapagos/stellar/shiny.gbapal.lz");
     const u8 gMonIcon_TerapagosStellar[] = INCBIN_U8("graphics/pokemon/terapagos/stellar/icon.4bpp");
+#if P_FOOTPRINTS
+    const u8 gMonFootprint_TerapagosStellar[] = INCBIN_U8("graphics/pokemon/terapagos/stellar/footprint.1bpp");
+#endif //P_FOOTPRINTS
 #if OW_FOLLOWERS_ENABLED
     // const u32 gObjectEventPic_TerapagosStellar[] = INCBIN_COMP("graphics/pokemon/terapagos/stellar/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
@@ -21982,9 +21985,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     // const u32 gShinyFollowerPalette_TerapagosStellar[] = INCBIN_U32("graphics/pokemon/terapagos/stellar/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_TerapagosStellar[] = INCBIN_U8("graphics/pokemon/terapagos/stellar/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #endif //P_FAMILY_TERAPAGOS
 
 #if P_FAMILY_PECHARUNT

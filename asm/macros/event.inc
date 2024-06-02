@@ -1495,7 +1495,7 @@
 	@ Prepares to start a wild battle against a 'species' at 'level' holding 'item' with moves 'move1' 'move2' 'move3' move4' ability 'ability' and 'isShiny'.
 	@ Running this command will not affect normal wild battles. You start the prepared battle with dowildbattle.
 	.macro setwildbattle2 species:req, level:req, item=ITEM_NONE, abilityNum:req, move1:req, move2:req, move3:req, move4:req, isShiny:req
-	.byte 0xec
+	.byte 0xeb
 	.2byte \species
 	.byte \level
 	.2byte \item
@@ -1804,7 +1804,7 @@
   .endm
 
 	.macro givecustommon species:req, level:req, item, ball, nature, abilityNum, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny
-    .byte 0xe4
+    .byte 0xe3
     .2byte \species
     .byte \level
     .ifb \item
@@ -1918,19 +1918,19 @@
 
 	@ Checks if any of the party can learn a TM (used for ow HM moves)
 	.macro canlearntm tm:req
-	.byte 0xe5
+	.byte 0xe4
 	.2byte \tm
 	.endm
 
 
     .macro questmenu case:req, questId:req
-    .byte 0xe6
+    .byte 0xe5
     .byte \case
     .byte \questId
     .endm
 
     .macro subquestmenu case:req, parentId:req, childId:req
-    .byte 0xe7
+    .byte 0xe6
     .byte \case
     .2byte \parentId
     .2byte \childId
@@ -1938,7 +1938,7 @@
 
     @ Check the quest state and return a number associated with quest state
     .macro returnqueststate questId:req
-    .byte 0xe8
+    .byte 0xe7
     .byte \questId
     .endm
     
@@ -2076,7 +2076,7 @@
     .endm
 
 	.macro showdescription
-	.byte 0xe9
+	.byte 0xe8
 	.endm
 
 	.macro showitemdesc
@@ -2090,16 +2090,16 @@
 	.endm
 
 	.macro hideitemdesc
-	.byte 0xea
+	.byte 0xe9
 	.endm
 
 	@ re-calculates mon party
     .macro calculatemonstats
-    .byte 0xeb
+    .byte 0xea
     .endm
 
 	.macro _dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req argv:vararg
-	.byte 0xed
+	.byte 0xec
 	.2byte \left
 	.2byte \top
 	.byte \ignoreBPress
@@ -2121,7 +2121,7 @@
 	.endm
 
 	.macro dynmultipush name:req, id:req
-	.byte 0xee
+	.byte 0xed
 	.4byte \name
 	.2byte \id
 	.endm
@@ -2500,4 +2500,43 @@
 	callnative SetTeraType
 	.byte \type
 	.2byte \slot
+	.endm
+
+	@ Saves species and forms of Daycare Pokémon to specific vars. Saves the amount of Daycare mon to VAR_RESULT.
+	.macro getdaycaregfx varSpecies1:req varSpecies2:req varForm1:req varForm2:req
+	callnative GetDaycareGraphics
+	.2byte \varSpecies1
+	.2byte \varSpecies2
+	.2byte \varForm1
+	.2byte \varForm2
+	.endm
+
+	@ Plays the cry of the first alive party member.
+	.macro playfirstmoncry
+	callnative PlayFirstMonCry
+	.endm
+
+	@ Buffers the nickname of the first alive party member.
+	.macro bufferlivemonnickname out:req
+	callnative BufferFirstLiveMonNickname
+	.byte \out
+	.endm
+
+	@ Executes Follower actions
+	.macro getfolloweraction
+	callnative GetFollowerAction
+	.endm
+
+	@ Checks if Field move is being used by the current follower.
+	.macro isfollowerfieldmoveuser var:req
+	callnative IsFollowerFieldMoveUser
+	.2byte \var
+	.endm
+
+	@ Saves the direction from where source object event would need to turn to to face the target into the specified var.
+	.macro getdirectiontoface var:req, sourceId:req, targetId:req
+	callnative GetDirectionToFaceScript
+	.2byte \var
+	.byte \sourceId
+	.byte \targetId
 	.endm

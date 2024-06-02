@@ -7507,7 +7507,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .shinyPalette = gMonShinyPalette_EnamorusIncarnate,
         .iconSprite = gMonIcon_EnamorusIncarnate,
         .iconPalIndex = 1,
-        //FOOTPRINT(Enamorus)
+        FOOTPRINT(Enamorus)
         FOLLOWER(
             sPicTable_EnamorusIncarnate,
             SIZE_64x64,
