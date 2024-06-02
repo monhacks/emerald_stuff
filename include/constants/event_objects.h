@@ -242,7 +242,7 @@
 #define OBJ_EVENT_GFX_HOOH                       238
 #define OBJ_EVENT_GFX_TM_BALL                    239
 #define OBJ_EVENT_GFX_MEGASTONE_SPARKLE          240
-#define OBJ_EVENT_GFX_ANIMATED_BALL              241
+#define OBJ_EVENT_GFX_POKE_BALL                  241
 #define OBJ_EVENT_GFX_OW_MON                     242
 #define OBJ_EVENT_GFX_BROCK                      243
 #define OBJ_EVENT_GFX_MISTY                      244
@@ -381,6 +381,7 @@
 #define LOCALID_BATTLE_FRONTIER_MART_CLERK 1
 #define LOCALID_SLATEPORT_ENERGY_GURU 25
 
+// Moved from src/event_object_movement.c so that they're accesible from other files.
 #define OBJ_EVENT_PAL_TAG_BRENDAN                 0x1100
 #define OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION      0x1101
 #define OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION       0x1102
@@ -500,7 +501,7 @@
 #define OBJ_EVENT_PAL_TAG_EMOTES                  0x8002
 // Not a real OW palette tag; used for the white flash applied to followers
 #define OBJ_EVENT_PAL_TAG_WHITE                   (OBJ_EVENT_PAL_TAG_NONE - 1)
-#define OBJ_EVENT_PAL_TAG_NONE 0x11FF
+#define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
 // This + localId is used as the tileTag
 // for compressed graphicsInfos
