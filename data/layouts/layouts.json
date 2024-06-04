@@ -5027,9 +5027,19 @@
       "width": 25,
       "height": 25,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Volcano",
+      "secondary_tileset": "gTileset_Beach",
       "border_filepath": "data/layouts/DewfordVolcano/border.bin",
       "blockdata_filepath": "data/layouts/DewfordVolcano/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_BAR",
+      "name": "DewfordBar_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Bar",
+      "border_filepath": "data/layouts/DewfordBar/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordBar/map.bin"
     }
   ]
 }

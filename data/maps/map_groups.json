@@ -135,7 +135,8 @@
     "BrawlyDojoEVRoom",
     "BrawlyDojoEVRoom2",
     "BrawlyDojoRematchRoom",
-    "BrawlyDojoTrainingRoom"
+    "BrawlyDojoTrainingRoom",
+    "DewfordBar"
   ],
   "gMapGroup_IndoorLavaridge": [
     "LavaridgeTown_HerbShop",

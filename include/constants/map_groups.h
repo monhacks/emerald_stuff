@@ -105,6 +105,7 @@
 #define MAP_BRAWLY_DOJO_EVROOM2            (8 | (3 << 8))
 #define MAP_BRAWLY_DOJO_REMATCH_ROOM       (9 | (3 << 8))
 #define MAP_BRAWLY_DOJO_TRAINING_ROOM      (10 | (3 << 8))
+#define MAP_DEWFORD_BAR                    (11 | (3 << 8))
 
 // gMapGroup_IndoorLavaridge
 #define MAP_LAVARIDGE_TOWN_HERB_SHOP         (0 | (4 << 8))

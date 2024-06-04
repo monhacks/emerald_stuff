@@ -297,3 +297,6 @@ const u16 gMetatileAttributes_SSAnne[] = INCBIN_U16("data/tilesets/secondary/ssa
 
 const u16 gMetatiles_Volcano[] = INCBIN_U16("data/tilesets/secondary/volcano/metatiles.bin");
 const u16 gMetatileAttributes_Volcano[] = INCBIN_U16("data/tilesets/secondary/volcano/metatile_attributes.bin");
+
+const u16 gMetatiles_Bar[] = INCBIN_U16("data/tilesets/secondary/bar/metatiles.bin");
+const u16 gMetatileAttributes_Bar[] = INCBIN_U16("data/tilesets/secondary/bar/metatile_attributes.bin");
