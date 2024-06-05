@@ -148,6 +148,9 @@ static const u8 sDoorAnimTiles_DewfordDojoLeft[]  = INCBIN_U8("graphics/door_ani
 static const u16 sDoorNullPalette51[16] = {};
 static const u8 sDoorAnimTiles_DewfordDojo[]  = INCBIN_U8("graphics/door_anims/dewford_dojo_door.4bpp");
 static const u16 sDoorNullPalette52[16] = {};
+static const u8 sDoorAnimTiles_OlivineDoor[]  = INCBIN_U8("graphics/door_anims/olivine_door.4bpp");
+static const u16 sDoorNullPalette53[16] = {};
+
 
 static const struct DoorAnimFrame sDoorOpenAnimFrames[] =
 {
@@ -259,6 +262,7 @@ static const u8 sDoorAnimPalettes_TrainerHillRoofElevator[] = {9, 9, 7, 7, 7, 7,
 static const u8 sDoorAnimPalettes_DewfordDojoRight[] = {8, 8, 8, 8, 8, 8, 8, 8};
 static const u8 sDoorAnimPalettes_DewfordDojoLeft[] = {8, 8, 8, 8, 8, 8, 8, 8};
 static const u8 sDoorAnimPalettes_DewfordDojoDoor[] = {6, 6, 6, 6, 6, 6, 6, 6};
+static const u8 sDoorAnimPalettes_OlivineDoor[] = {8, 8, 8, 8, 8, 8, 8, 8};
 
 static const struct DoorGraphics sDoorAnimGraphicsTable[] =
 {
@@ -323,6 +327,7 @@ static const struct DoorGraphics sDoorAnimGraphicsTable[] =
     {METATILE_DewfordDojo_Door,                             DOOR_SOUND_NORMAL,  1, sDoorAnimTiles_DewfordDojo, sDoorAnimPalettes_DewfordDojoDoor},
     {METATILE_JohtoGeneral_Door_JohtoPokecenter,            DOOR_SOUND_SLIDING, 0, sDoorAnimTiles_PokeCenterJohto, sDoorAnimPalettes_PokeCenterJohto},
     {METATILE_JohtoGeneral_Door_JohtoMart,                  DOOR_SOUND_SLIDING, 0, sDoorAnimTiles_PokeCenterJohto, sDoorAnimPalettes_PokeCenterJohto},
+    {METATILE_JohtoOlivine_OlivineDoor,                     DOOR_SOUND_NORMAL,  0, sDoorAnimTiles_OlivineDoor, sDoorAnimPalettes_OlivineDoor},
     {},
 };
 
