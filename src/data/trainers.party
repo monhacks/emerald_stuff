@@ -11024,13 +11024,21 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move / Try To Faint / Setup First Turn
 
-Wingull
-Level: 13
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+Lombre
+Level: 16
+IVs: 13 HP / 13 Atk / 13 Def / 13 SpA / 13 SpD / 13 Spe
 
-Chikorita
-Level: 15
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+Wattrel
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Rockruff
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Bayleef
+Level: 16
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_MAXIE_MAGMA_HIDEOUT ===
 Name: Maxie
@@ -14172,13 +14180,21 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move / Try To Faint / Check Viability
 
-Lotad
-Level: 13
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+Lombre
+Level: 16
+IVs: 13 HP / 13 Atk / 13 Def / 13 SpA / 13 SpD / 13 Spe
 
-Torchic
-Level: 15
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+Wattrel
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Rockruff
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Combusken
+Level: 16
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_MAY_RUSTBORO_TORCHIC ===
 Name: May
@@ -14189,13 +14205,21 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move / Try To Faint / Check Viability
 
-Torkoal
-Level: 13
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+Lombre
+Level: 16
+IVs: 13 HP / 13 Atk / 13 Def / 13 SpA / 13 SpD / 13 Spe
 
-Mudkip
-Level: 15
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+Wattrel
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Rockruff
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Prinplup
+Level: 16
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ROXANNE_2 ===
 Name: Roxanne

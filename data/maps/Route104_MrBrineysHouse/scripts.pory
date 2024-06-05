@@ -1,0 +1,20 @@
+mapscripts Route104_MrBrineysHouse_MapScripts {}
+
+script MrBrineysHouse_Woman {
+    lock
+    faceplayer
+    msgbox(format("This house used to be owned by a renowned sailor, but he sold it to me and my husband a year ago. If you are looking for a way to Dewford, you can get there now by just walking."))
+    waitmessage
+    release
+    end
+}
+
+script MrBrineysHouse_Pelipper {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PELIPPER, CRY_MODE_NORMAL)
+    msgbox(format("Peelipp!"))
+    waitmoncry
+    release
+    end
+}

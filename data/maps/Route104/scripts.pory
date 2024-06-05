@@ -1,4 +1,4 @@
-
+raw `
 @ NOTE: Route 104's sail to Dewford script references local IDs from Dewford's map.
 @  These are labeled in DewfordTown/scripts.inc
 .set LOCALID_RIVAL, 32
@@ -135,7 +135,6 @@ Route104_EventScript_MayDefeated::
 	applymovement LOCALID_RIVAL, rivalExitstoTown104
     waitmovement 0
     removeobject LOCALID_RIVAL
-	clearflag FLAG_HIDE_RIVAL_POKECENTER
 	call_if_eq VAR_0x8008, 0, Route104_EventScript_RestoreMusic
     releaseall
 	end
@@ -198,7 +197,6 @@ Route104_EventScript_BrendanDefeated::
 	applymovement LOCALID_RIVAL, rivalExitstoTown104
     waitmovement 0
     removeobject LOCALID_RIVAL
-	clearflag FLAG_HIDE_RIVAL_POKECENTER
 	call_if_eq VAR_0x8008, 0, Route104_EventScript_RestoreMusic
     releaseall
 	end
@@ -1167,42 +1165,24 @@ Route104_Text_BrendanPostBattle2:
 	.string "then head to the next gym, you should\l"
 	.string "stay on your toes, next time we won't\l"
 	.string "lose!$"
+`
 
-rivalWalksToPlayerRoute104:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
+movement rivalWalksToPlayerRoute104 {
+    walk_left*8
+    walk_down
+    step_end
+}
 
-rivalExitstoTown104:
-	walk_up
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	step_end
+movement rivalExitstoTown104 {
+    walk_up
+    walk_right*8
+    step_end
+}
 
-ladyRoute104::
-	lock
-	faceplayer
-	msgbox ladyRoute104_Text_0
-	release
-	end
-
-
-ladyRoute104_Text_0:
-	.string "The only way to Dewford used to be via a\n"
-	.string "boat or surf. However that changed\l"
-	.string "when small islands emerged from\l"
-	.string "underwater as a result of climate\l"
-	.string "changes in Hoenn few years ago.$"
+script ladyRoute104 {
+    lock
+    faceplayer
+    msgbox(format("The only way to Dewford used to be via a boat or surf. However that changed when small islands emerged from underwater as a result of climate changes in Hoenn few years ago."))
+    release
+    end
+}

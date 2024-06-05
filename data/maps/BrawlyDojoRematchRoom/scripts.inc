@@ -40,6 +40,7 @@ BrawlyDojoBrawlyNPC_1:
 	playse SE_EXIT
 	removeobject 4
 	addvar VAR_DEWFORD_TOWN_STATE, 1
+	setflag FLAG_HIDE_RIVAL_POKECENTER
 	release
 	end
 

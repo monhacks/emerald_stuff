@@ -306,5 +306,6 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_ITEM_PIDGEOTITE
 	setflag FLAG_STONE_SELLER
 	setflag FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE
+	setflag FLAG_HIDE_RIVAL_POKECENTER
 	call EventScript_ResetAllBerries
 	end
