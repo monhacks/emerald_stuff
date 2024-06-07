@@ -1166,3 +1166,25 @@ const struct Tileset gTileset_Bar =
     .metatileAttributes = gMetatileAttributes_Bar,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_wintercenter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_wintercenter,
+    .palettes = gTilesetPalettes_wintercenter,
+    .metatiles = gMetatiles_wintercenter,
+    .metatileAttributes = gMetatileAttributes_wintercenter,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_gen4center =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_gen4center,
+    .palettes = gTilesetPalettes_gen4center,
+    .metatiles = gMetatiles_gen4center,
+    .metatileAttributes = gMetatileAttributes_gen4center,
+    .callback = NULL,
+};

@@ -4436,8 +4436,8 @@
       "name": "OneIslandFRLG_Layout",
       "width": 45,
       "height": 45,
-      "primary_tileset": "gTileset_VajraPyramid",
-      "secondary_tileset": "gTileset_pyramidpuzzles",
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_johto_pokecenter",
       "border_filepath": "data/layouts/OneIslandFRLG/border.bin",
       "blockdata_filepath": "data/layouts/OneIslandFRLG/map.bin"
     },
@@ -4934,8 +4934,8 @@
     {
       "id": "LAYOUT_DARK_CAVE",
       "name": "DarkCave_Layout",
-      "width": 20,
-      "height": 20,
+      "width": 22,
+      "height": 22,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave2",
       "border_filepath": "data/layouts/DarkCave/border.bin",

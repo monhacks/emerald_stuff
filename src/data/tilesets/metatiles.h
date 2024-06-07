@@ -300,3 +300,9 @@ const u16 gMetatileAttributes_Volcano[] = INCBIN_U16("data/tilesets/secondary/vo
 
 const u16 gMetatiles_Bar[] = INCBIN_U16("data/tilesets/secondary/bar/metatiles.bin");
 const u16 gMetatileAttributes_Bar[] = INCBIN_U16("data/tilesets/secondary/bar/metatile_attributes.bin");
+
+const u16 gMetatiles_wintercenter[] = INCBIN_U16("data/tilesets/secondary/wintercenter/metatiles.bin");
+const u16 gMetatileAttributes_wintercenter[] = INCBIN_U16("data/tilesets/secondary/wintercenter/metatile_attributes.bin");
+
+const u16 gMetatiles_gen4center[] = INCBIN_U16("data/tilesets/secondary/gen_4center/metatiles.bin");
+const u16 gMetatileAttributes_gen4center[] = INCBIN_U16("data/tilesets/secondary/gen_4center/metatile_attributes.bin");
