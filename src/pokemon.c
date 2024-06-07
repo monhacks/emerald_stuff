@@ -2655,7 +2655,11 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     case MON_DATA_TERA_TYPE:
     {
-        if (boxMon->teraType == TYPE_NONE)
+        if (gSpeciesInfo[boxMon->species].forceTeraType)
+            {
+                retVal = gSpeciesInfo[boxMon->species].forceTeraType;
+            }
+            else if (boxMon->teraType == TYPE_NONE) // Tera Type hasn't been modified so we can just use the personality
         {
             const u8 *types = gSpeciesInfo[boxMon->species].types;
             retVal = (boxMon->personality & 0x1) == 0 ? types[0] : types[1];
@@ -5270,40 +5274,6 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
                     moves[numMoves++] = learnset[i].move;
             }
         }
-    }
-
-    return numMoves;
-}
-
-
-u8 GetNumberOfEggMoves(struct Pokemon *mon)
-{
-    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
-    u16 learnedMoves[MAX_MON_MOVES];
-    u8 numMoves = 0;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
-    u16 firstStage = GetEggSpecies(species);
-    u8 numEggMoves = GetEggMovesSpecies(firstStage, eggMoveBuffer);
-    u16 moves[numEggMoves];
-    int i, j;
-    bool8 hasMonMove = FALSE;
-
-    if (species == SPECIES_EGG)
-        return 0;
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
-
-    for (i = 0; i < numEggMoves; i++)
-    {
-        hasMonMove = FALSE;
-
-        for (j = 0; j < MAX_MON_MOVES; j++){
-            if(learnedMoves[j] == eggMoveBuffer[i])
-                hasMonMove = TRUE;
-        }
-
-        if(!hasMonMove)
-            moves[numMoves++] = eggMoveBuffer[i];
     }
 
     return numMoves;

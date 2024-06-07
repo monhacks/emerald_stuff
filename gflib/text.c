@@ -1094,6 +1094,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 
         currChar = *textPrinter->printerTemplate.currentChar;
         textPrinter->printerTemplate.currentChar++;
+        nextChar = *textPrinter->printerTemplate.currentChar;
 
         switch (currChar)
         {
