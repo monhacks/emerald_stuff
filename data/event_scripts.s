@@ -1215,3 +1215,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/DewfordVolcano/scripts.inc"
 
 	.include "data/maps/DewfordBar/scripts.inc"
+
+	.include "data/maps/Sewer/scripts.inc"

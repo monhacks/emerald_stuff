@@ -1188,3 +1188,25 @@ const struct Tileset gTileset_gen4center =
     .metatileAttributes = gMetatileAttributes_gen4center,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_Sewer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Sewer,
+    .palettes = gTilesetPalettes_Sewer,
+    .metatiles = gMetatiles_Sewer,
+    .metatileAttributes = gMetatileAttributes_Sewer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_Sewer_Clear =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Sewer_Clear,
+    .palettes = gTilesetPalettes_Sewer_Clear,
+    .metatiles = gMetatiles_Sewer_Clear,
+    .metatileAttributes = gMetatileAttributes_Sewer_Clear,
+    .callback = NULL,
+};

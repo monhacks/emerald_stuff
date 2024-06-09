@@ -493,7 +493,8 @@
     "SSAnne",
     "SSKanne",
     "SSAnne_rooms",
-    "DewfordVolcano"
+    "DewfordVolcano",
+    "Sewer"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

@@ -1,4 +1,4 @@
-
+raw `
 Route105_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, Route105_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, Route105_OnTransition
@@ -181,22 +181,13 @@ DewfordTown_Text_FishingAdvice:
 	.string "immediately, but with bigger catches,\l"
 	.string "you need to time the pulls on your Rod\l"
 	.string "to haul them in.$"
+    `
 
-Route105_GirlWithMarill::
-	msgbox Route105_GirlWithMarill_Text_0, MSGBOX_NPC
-	return
+script Route105_GirlWithMarill {
+    msgbox(format("We're almost at the famous Dewford Dojo, there we can train to heart's content!"), MSGBOX_NPC)
+}
 
-
-Route105GirlsMarill::
-	playmoncry SPECIES_MARILL, CRY_MODE_NORMAL
-	msgbox Route105GirlsMarill_Text_0, MSGBOX_NPC
-	return
-
-
-Route105_GirlWithMarill_Text_0:
-	.string "We're almost at the famous Dewford\n"
-	.string "Dojo, there we can train to heart's\l"
-	.string "content!$"
-
-Route105GirlsMarill_Text_0:
-	.string "Marii!$"
+script Route105GirlsMarill {
+    playmoncry(SPECIES_MARILL, CRY_MODE_NORMAL)
+    msgbox(format("Marii!"), MSGBOX_NPC)
+}

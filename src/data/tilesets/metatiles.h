@@ -306,3 +306,9 @@ const u16 gMetatileAttributes_wintercenter[] = INCBIN_U16("data/tilesets/seconda
 
 const u16 gMetatiles_gen4center[] = INCBIN_U16("data/tilesets/secondary/gen_4center/metatiles.bin");
 const u16 gMetatileAttributes_gen4center[] = INCBIN_U16("data/tilesets/secondary/gen_4center/metatile_attributes.bin");
+
+const u16 gMetatiles_Sewer[] = INCBIN_U16("data/tilesets/secondary/sewer/metatiles.bin");
+const u16 gMetatileAttributes_Sewer[] = INCBIN_U16("data/tilesets/secondary/sewer/metatile_attributes.bin");
+
+const u16 gMetatiles_Sewer_Clear[] = INCBIN_U16("data/tilesets/secondary/sewer_clear/metatiles.bin");
+const u16 gMetatileAttributes_Sewer_Clear[] = INCBIN_U16("data/tilesets/secondary/sewer_clear/metatile_attributes.bin");

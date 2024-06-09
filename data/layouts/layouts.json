@@ -5014,7 +5014,7 @@
     {
       "id": "LAYOUT_ROUTE39",
       "name": "Route39_Layout",
-      "width": 30,
+      "width": 26,
       "height": 70,
       "primary_tileset": "gTileset_JohtoGeneral",
       "secondary_tileset": "gTileset_JohtoOlivine",
@@ -5040,6 +5040,16 @@
       "secondary_tileset": "gTileset_Bar",
       "border_filepath": "data/layouts/DewfordBar/border.bin",
       "blockdata_filepath": "data/layouts/DewfordBar/map.bin"
+    },
+    {
+      "id": "LAYOUT_SEWER",
+      "name": "Sewer_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Sewer_Clear",
+      "border_filepath": "data/layouts/Sewer/border.bin",
+      "blockdata_filepath": "data/layouts/Sewer/map.bin"
     }
   ]
 }
