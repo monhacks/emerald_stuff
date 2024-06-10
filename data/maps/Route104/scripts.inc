@@ -135,7 +135,6 @@ Route104_EventScript_MayDefeated::
 	applymovement LOCALID_RIVAL, rivalExitstoTown104
     waitmovement 0
     removeobject LOCALID_RIVAL
-	clearflag FLAG_HIDE_RIVAL_POKECENTER
 	call_if_eq VAR_0x8008, 0, Route104_EventScript_RestoreMusic
     releaseall
 	end
@@ -198,7 +197,6 @@ Route104_EventScript_BrendanDefeated::
 	applymovement LOCALID_RIVAL, rivalExitstoTown104
     waitmovement 0
     removeobject LOCALID_RIVAL
-	clearflag FLAG_HIDE_RIVAL_POKECENTER
 	call_if_eq VAR_0x8008, 0, Route104_EventScript_RestoreMusic
     releaseall
 	end

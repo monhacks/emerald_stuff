@@ -1087,3 +1087,10 @@ void UpdatePaletteGammaType(u8 index, u8 gammaType)
     if (index != 0xFF)
         sBasePaletteColorMapTypes[index + 16] = gammaType;
 }
+bool32 IsWeatherAlphaBlend(void)
+{
+    return (gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL
+         || gWeatherPtr->currWeather == WEATHER_FOG_DIAGONAL
+         || gWeatherPtr->currWeather == WEATHER_UNDERWATER_BUBBLES
+         || gWeatherPtr->currWeather == WEATHER_UNDERWATER);
+}
