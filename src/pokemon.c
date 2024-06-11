@@ -5279,36 +5279,6 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
-u8 GetEggMoveTutorMoves(struct Pokemon *mon, u16 *moves)
-{
-    u16 learnedMoves[4];
-    u8 numMoves = 0;
-    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
-    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
-    u16 firsStage = GetEggSpecies(species);
-    u16 numEggMoves = GetEggMovesSpecies(firsStage, eggMoveBuffer);
-    int i, j;
-    bool8 hasMonMove = FALSE;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
-
-    for (i = 0; i < numEggMoves; i++)
-    {
-        hasMonMove = FALSE;
-
-        for (j = 0; j < MAX_MON_MOVES; j++){
-            if(learnedMoves[j] == eggMoveBuffer[i])
-                hasMonMove = TRUE;
-        }
-
-        if(!hasMonMove)
-            moves[numMoves++] = eggMoveBuffer[i];
-    }
-
-    return numMoves;
-}
-
 u8 GetMoveTutorMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[4];
@@ -6390,20 +6360,24 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                 case FORM_CHANGE_ITEM_USE:
                     if (arg == formChanges[i].param1)
                     {
+                        bool32 pass = TRUE;
                         switch (formChanges[i].param2)
                         {
                         case DAY:
-                            if (GetTimeOfDay() != TIME_NIGHT)
-                                targetSpecies = formChanges[i].targetSpecies;
+                            if (GetTimeOfDay() == TIME_NIGHT)
+                                pass = FALSE;
                             break;
                         case NIGHT:
-                            if (GetTimeOfDay() == TIME_NIGHT)
-                                targetSpecies = formChanges[i].targetSpecies;
-                            break;
-                        default:
-                            targetSpecies = formChanges[i].targetSpecies;
+                            if (GetTimeOfDay() != TIME_NIGHT)
+                                pass = FALSE;
                             break;
                         }
+
+                        if (formChanges[i].param3 != STATUS1_NONE && GetBoxMonData(boxMon, MON_DATA_STATUS, NULL) & formChanges[i].param3)
+                            pass = FALSE;
+
+                        if (pass)
+                            targetSpecies = formChanges[i].targetSpecies;
                     }
                     break;
                 case FORM_CHANGE_ITEM_USE_MULTICHOICE:
