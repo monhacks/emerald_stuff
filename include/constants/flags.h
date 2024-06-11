@@ -688,8 +688,8 @@
 #define FLAG_OBTAINED_KUBFU  0x285 
 #define FLAG_HIDE_ROUTE115_FALKNER  0x286
 #define FLAG_ROUTE104_SWAMPERTITE  0x287
-#define FLAG_ROUTE105_TM20  0x288 // Unused Flag
-#define FLAG_HIDE_RIVAL_POKECENTER  0x289 // Unused Flag
+#define FLAG_ROUTE105_TM20  0x288 // Route 105 safeguard
+#define FLAG_HIDE_RIVAL_POKECENTER  0x289 // Hide rival in pokecenter after player reaches dewford
 #define FLAG_UNUSED_0x28A  0x28A // Unused Flag
 #define FLAG_UNUSED_0x28B  0x28B // Unused Flag
 #define FLAG_UNUSED_0x28C  0x28C // Unused Flag
