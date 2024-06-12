@@ -18133,7 +18133,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Giga Impact
 
 === TRAINER_GGRUNT_1 ===
-Name: 
+Name: Grunt
 Class: Ggrunt M
 Pic: Ggrunt M
 Gender: Male
@@ -18156,7 +18156,7 @@ Level: 33
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_GGRUNT_2 ===
-Name: 
+Name: Grunt
 Class: Ggrunt F
 Pic: Ggrunt F
 Gender: Male
@@ -18190,7 +18190,7 @@ EVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 Shiny: No
 
 === TRAINER_GGRUNT_3 ===
-Name: 
+Name: Grunt
 Class: Ggrunt M
 Pic: Ggrunt M
 Gender: Male
@@ -18282,7 +18282,7 @@ Shiny: No
 - Aurora Beam
 
 === TRAINER_VERITY_GRUNT_1 ===
-Name: 
+Name: Grunt
 Class: Ggrunt M
 Pic: Ggrunt M
 Gender: Male
@@ -18305,7 +18305,7 @@ Level: 61
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_VERITY_GRUNT_2 ===
-Name: 
+Name: Grunt
 Class: Ggrunt F
 Pic: Ggrunt F
 Gender: Female
@@ -18328,7 +18328,7 @@ Level: 63
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_VERITY_GRUNT_3 ===
-Name: 
+Name: Grunt
 Class: Ggrunt F
 Pic: Ggrunt F
 Gender: Female

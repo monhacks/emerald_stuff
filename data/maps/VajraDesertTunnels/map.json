@@ -41,7 +41,7 @@
       "flag": "FLAG_VAJRADESERT_TUNNELS_EARTH_PLATE"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SANDILE",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(SANDILE)",
       "x": 17,
       "y": 23,
       "elevation": 0,

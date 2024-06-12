@@ -380,11 +380,11 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     TRAINER_CLASS(G_ADMIN, "Galactic Admin", 20),
     TRAINER_CLASS(PKMN_TRAINER, "{PKMN} Trainer"),
     TRAINER_CLASS(K_LEADER, "Gym Leader", 20),
-    TRAINER_CLASS(J_LEADER, "Gym Leader", 20),
     TRAINER_CLASS(SPIRIT, "Spirit"),
     TRAINER_CLASS(LAWRENCE, "Collector", 20),
-    TRAINER_CLASS(GGRUNT_M, "Galactic Grunt"),
-    TRAINER_CLASS(GGRUNT_F, "Galactic Grunt"),
+    TRAINER_CLASS(J_LEADER, "Gym Leader", 20),
+    TRAINER_CLASS(GGRUNT_M, "Galactic"),
+    TRAINER_CLASS(GGRUNT_F, "Galactic"),
 };
 
 static void (* const sTurnActionsFuncsTable[])(void) =

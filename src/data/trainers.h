@@ -43330,6 +43330,8 @@ F_TRAINER_FEMALE |
 #line 18135
     [TRAINER_GGRUNT_1] =
     {
+#line 18136
+        .trainerName = _("Grunt"),
 #line 18137
         .trainerClass = TRAINER_CLASS_GGRUNT_M,
 #line 18138
@@ -43383,6 +43385,8 @@ F_TRAINER_FEMALE |
 #line 18158
     [TRAINER_GGRUNT_2] =
     {
+#line 18159
+        .trainerName = _("Grunt"),
 #line 18160
         .trainerClass = TRAINER_CLASS_GGRUNT_F,
 #line 18161
@@ -43460,6 +43464,8 @@ F_TRAINER_FEMALE |
 #line 18192
     [TRAINER_GGRUNT_3] =
     {
+#line 18193
+        .trainerName = _("Grunt"),
 #line 18194
         .trainerClass = TRAINER_CLASS_GGRUNT_M,
 #line 18195
@@ -43672,6 +43678,8 @@ F_TRAINER_FEMALE |
 #line 18284
     [TRAINER_VERITY_GRUNT_1] =
     {
+#line 18285
+        .trainerName = _("Grunt"),
 #line 18286
         .trainerClass = TRAINER_CLASS_GGRUNT_M,
 #line 18287
@@ -43725,6 +43733,8 @@ F_TRAINER_FEMALE |
 #line 18307
     [TRAINER_VERITY_GRUNT_2] =
     {
+#line 18308
+        .trainerName = _("Grunt"),
 #line 18309
         .trainerClass = TRAINER_CLASS_GGRUNT_F,
 #line 18310
@@ -43780,6 +43790,8 @@ F_TRAINER_FEMALE |
 #line 18330
     [TRAINER_VERITY_GRUNT_3] =
     {
+#line 18331
+        .trainerName = _("Grunt"),
 #line 18332
         .trainerClass = TRAINER_CLASS_GGRUNT_F,
 #line 18333

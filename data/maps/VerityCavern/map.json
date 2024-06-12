@@ -67,7 +67,7 @@
       "flag": "FLAG_HIDE_VERITY_GRUNTS"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MESPRIT",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(MESPRIT)",
       "x": 21,
       "y": 17,
       "elevation": 0,

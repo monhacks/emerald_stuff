@@ -254,32 +254,15 @@
 #define OBJ_EVENT_GFX_BLAINE                     250
 #define OBJ_EVENT_GFX_GIOVANNI                   251
 #define OBJ_EVENT_GFX_BLUE                       252
-#define OBJ_EVENT_GFX_AZELF                      253
-#define OBJ_EVENT_GFX_GALACTIC_GRUNT_MALE        254
-#define OBJ_EVENT_GFX_GALACTIC_GRUNT_FEMALE      255
-#define OBJ_EVENT_GFX_GALACTIC_COMMANDER_SATURN  256
-#define OBJ_EVENT_GFX_MAGIKARP                   257
-#define OBJ_EVENT_GFX_MOLTRES                    258
-#define OBJ_EVENT_GFX_ZAPDOS                     259
-#define OBJ_EVENT_GFX_ARTICUNO                   260
-#define OBJ_EVENT_GFX_ELECTRODE                  261
-#define OBJ_EVENT_GFX_GALACTIC_COMMANDER_MARS    262
-#define OBJ_EVENT_GFX_GALACTIC_COMMANDER_JUPITER 263
-#define OBJ_EVENT_GFX_MESPRIT                    264
-#define OBJ_EVENT_GFX_UXIE                       265
-#define OBJ_EVENT_GFX_MEWTWO                     266
-#define OBJ_EVENT_GFX_DITTO                      267
-#define OBJ_EVENT_GFX_SHAYMIN                    268
-#define OBJ_EVENT_GFX_CYNTHIA                    269
-#define OBJ_EVENT_GFX_SANDILE                    270
-#define OBJ_EVENT_GFX_DARMANITAN                 271
-#define OBJ_EVENT_GFX_CRUSTLE                    272
-#define OBJ_EVENT_GFX_MANDIBUZZ                  273
-#define OBJ_EVENT_GFX_COFAGRIGUS                 274
-#define OBJ_EVENT_GFX_RUIN_MANIAC                275
-#define OBJ_EVENT_GFX_GENGAR                     276
-#define OBJ_EVENT_GFX_CHUCK                      277
-#define OBJ_EVENT_GFX_FALKNER                    278
+#define OBJ_EVENT_GFX_GALACTIC_GRUNT_MALE        253
+#define OBJ_EVENT_GFX_GALACTIC_GRUNT_FEMALE      254
+#define OBJ_EVENT_GFX_GALACTIC_COMMANDER_SATURN  255
+#define OBJ_EVENT_GFX_GALACTIC_COMMANDER_MARS    256
+#define OBJ_EVENT_GFX_GALACTIC_COMMANDER_JUPITER 257
+#define OBJ_EVENT_GFX_CYNTHIA                    258
+#define OBJ_EVENT_GFX_RUIN_MANIAC                259
+#define OBJ_EVENT_GFX_CHUCK                      260
+#define OBJ_EVENT_GFX_FALKNER                    261
 
 
 // NOTE: By default, the max value for NUM_OBJ_EVENT_GFX is 239.
@@ -291,7 +274,7 @@
 // object graphics that can be removed. If more graphics are needed, anything that
 // stores graphics ids will need to be increased in size. See wiki entry below:
 // https://github.com/pret/pokeemerald/wiki/Feature-Branches#overworld-expansion
-#define NUM_OBJ_EVENT_GFX                        279
+#define NUM_OBJ_EVENT_GFX                        262
 
 
 // These are dynamic object gfx ids.
