@@ -105,6 +105,7 @@
 #define MAP_BRAWLY_DOJO_EVROOM2            (8 | (3 << 8))
 #define MAP_BRAWLY_DOJO_REMATCH_ROOM       (9 | (3 << 8))
 #define MAP_BRAWLY_DOJO_TRAINING_ROOM      (10 | (3 << 8))
+#define MAP_DEWFORD_BAR                    (11 | (3 << 8))
 
 // gMapGroup_IndoorLavaridge
 #define MAP_LAVARIDGE_TOWN_HERB_SHOP         (0 | (4 << 8))
@@ -461,6 +462,8 @@
 #define MAP_SSANNE                 (9 | (25 << 8))
 #define MAP_SSKANNE                (10 | (25 << 8))
 #define MAP_SSANNE_ROOMS           (11 | (25 << 8))
+#define MAP_DEWFORD_VOLCANO        (12 | (25 << 8))
+#define MAP_SEWER                  (13 | (25 << 8))
 
 // gMapGroup_IndoorDynamic
 #define MAP_SECRET_BASE_RED_CAVE1    (0 | (26 << 8))

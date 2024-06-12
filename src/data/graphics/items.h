@@ -1292,6 +1292,9 @@ const u32 gItemIconPalette_FlameOrb[] = INCBIN_U32("graphics/items/icon_palettes
 const u32 gItemIcon_ToxicOrb[] = INCBIN_U32("graphics/items/icons/toxic_orb.4bpp.lz");
 const u32 gItemIconPalette_ToxicOrb[] = INCBIN_U32("graphics/items/icon_palettes/toxic_orb.gbapal.lz");
 
+const u32 gItemIcon_FrostOrb[] = INCBIN_U32("graphics/items/icons/frost_orb.4bpp.lz");
+const u32 gItemIconPalette_FrostOrb[] = INCBIN_U32("graphics/items/icon_palettes/frost_orb.gbapal.lz");
+
 // Weather Rocks
 
 const u32 gItemIcon_DampRock[] = INCBIN_U32("graphics/items/icons/damp_rock.4bpp.lz");
@@ -2027,6 +2030,9 @@ const u32 gItemIconPalette_DarkTeraShard[] = INCBIN_U32("graphics/items/icon_pal
 const u32 gItemIconPalette_DragonTeraShard[] = INCBIN_U32("graphics/items/icon_palettes/dragon_tera_shard.gbapal.lz");
 const u32 gItemIconPalette_SteelTeraShard[] = INCBIN_U32("graphics/items/icon_palettes/steel_tera_shard.gbapal.lz");
 const u32 gItemIconPalette_FairyTeraShard[] = INCBIN_U32("graphics/items/icon_palettes/fairy_tera_shard.gbapal.lz");
+
+const u32 gItemIcon_StellarTeraShard[] = INCBIN_U32("graphics/items/icons/stellar_tera_shard.4bpp.lz");
+const u32 gItemIconPalette_StellarTeraShard[] = INCBIN_U32("graphics/items/icon_palettes/stellar_tera_shard.gbapal.lz");
 
 // Mochi
 

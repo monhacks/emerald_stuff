@@ -93,14 +93,7 @@ void AgbMain()
 {
     *(vu16 *)BG_PLTT = RGB_WHITE; // Set the backdrop to white on startup
     InitGpuRegManager();
-    // Setup waitstates for all ROM mirrors
-    if (DECAP_ENABLED && DECAP_MIRRORING)
-        REG_WAITCNT = WAITCNT_PREFETCH_ENABLE
-            | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3
-            | WAITCNT_WS1_S_1 | WAITCNT_WS1_N_3
-            | WAITCNT_WS2_S_1 | WAITCNT_WS2_N_3;
-    else
-        REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
+    REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
     InitKeys();
     InitIntrHandlers();
     m4aSoundInit();
@@ -494,14 +487,4 @@ void DoSoftReset(void)
 void ClearPokemonCrySongs(void)
 {
     CpuFill16(0, gPokemonCrySongs, MAX_POKEMON_CRIES * sizeof(struct PokemonCrySong));
-}
-
-// TODO: Needs to be updated if compiling for a different processor than the GBA's
-bool8 IsAccurateGBA(void) { // tests to see whether running on either an accurate emulator in >=2020, or real hardware
-  u32 code[5] = {0xFF1EE12F, 0xE1DF00B0, 0xE12FFF1E, 0xAAAABBBB, 0xCCCCDDDD}; // ARM: _;ldrh r0, [pc];bx lr
-  u32 func = (u32) &code[0];
-  if (func & 3) // not word aligned; safer to just return false here
-    return FALSE;
-  func = (func & ~3) | 0x2; // misalign PC to test PC-relative loading
-  return ((u32 (*)(void)) func)() == code[3] >> 16;
 }

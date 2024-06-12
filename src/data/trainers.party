@@ -1,6 +1,6 @@
 === TRAINER_NONE ===
 Name: 
-Class: Hiker
+Class: Pkmn Trainer 1
 Pic: Hiker
 Gender: Male
 Music: Male
@@ -783,28 +783,28 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 === TRAINER_FOSTER ===
 Name: Foster
-Class: Ruin Maniac
-Pic: Ruin Maniac
+Class: Bug Maniac
+Pic: Bug Maniac
 Gender: Male
-Music: Hiker
+Music: Suspicious
 Double Battle: No
 AI: Check Bad Move
 
-Sandshrew
-Level: 25
+Farfetchd
+Level: 16
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
-- Dig
+- Wing Attack
 - Slash
 - Sand Attack
-- Poison Sting
+- Tail Whip
 
-Sandslash
-Level: 25
+Whirlipede
+Level: 17
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
-- Dig
-- Slash
-- Sand Attack
 - Poison Sting
+- Rollout
+- Defense Curl
+- String Shot
 
 === TRAINER_DUSTY_2 ===
 Name: Dusty
@@ -8118,16 +8118,20 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_IMANI ===
 Name: Imani
-Class: Swimmer F
-Pic: Swimmer F
+Class: Aroma Lady
+Pic: Aroma Lady
 Gender: Female
-Music: Swimmer
+Music: Female
 Double Battle: No
 AI: Check Bad Move
 
-Marill
-Level: 26
+Budew
+Level: 16
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Roselia
+Level: 17
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 
 === TRAINER_KYLA ===
 Name: Kyla
@@ -11024,13 +11028,21 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move / Try To Faint / Setup First Turn
 
-Wingull
-Level: 13
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+Lombre
+Level: 16
+IVs: 13 HP / 13 Atk / 13 Def / 13 SpA / 13 SpD / 13 Spe
 
-Chikorita
-Level: 15
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+Wattrel
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Rockruff
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Bayleef
+Level: 16
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_MAXIE_MAGMA_HIDEOUT ===
 Name: Maxie
@@ -13627,11 +13639,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Sandshrew
-Level: 25
+Level: 17
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
-Sandshrew
-Level: 25
+Stunfisk
+Level: 18
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 === TRAINER_JOSUE ===
@@ -13644,11 +13656,11 @@ Double Battle: No
 AI: Check Bad Move
 
 Taillow
-Level: 25
+Level: 17
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
-Wingull
-Level: 25
+Swellow
+Level: 17
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 === TRAINER_CAMRON ===
@@ -14172,13 +14184,21 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move / Try To Faint / Check Viability
 
-Lotad
-Level: 13
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+Lombre
+Level: 16
+IVs: 13 HP / 13 Atk / 13 Def / 13 SpA / 13 SpD / 13 Spe
 
-Torchic
-Level: 15
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+Wattrel
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Rockruff
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Combusken
+Level: 16
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_MAY_RUSTBORO_TORCHIC ===
 Name: May
@@ -14189,13 +14209,21 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move / Try To Faint / Check Viability
 
-Torkoal
-Level: 13
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+Lombre
+Level: 16
+IVs: 13 HP / 13 Atk / 13 Def / 13 SpA / 13 SpD / 13 Spe
 
-Mudkip
-Level: 15
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+Wattrel
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Rockruff
+Level: 16
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+
+Prinplup
+Level: 16
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ROXANNE_2 ===
 Name: Roxanne
@@ -18105,7 +18133,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Giga Impact
 
 === TRAINER_GGRUNT_1 ===
-Name: 
+Name: Grunt
 Class: Ggrunt M
 Pic: Ggrunt M
 Gender: Male
@@ -18128,7 +18156,7 @@ Level: 33
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_GGRUNT_2 ===
-Name: 
+Name: Grunt
 Class: Ggrunt F
 Pic: Ggrunt F
 Gender: Male
@@ -18162,7 +18190,7 @@ EVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 Shiny: No
 
 === TRAINER_GGRUNT_3 ===
-Name: 
+Name: Grunt
 Class: Ggrunt M
 Pic: Ggrunt M
 Gender: Male
@@ -18254,7 +18282,7 @@ Shiny: No
 - Aurora Beam
 
 === TRAINER_VERITY_GRUNT_1 ===
-Name: 
+Name: Grunt
 Class: Ggrunt M
 Pic: Ggrunt M
 Gender: Male
@@ -18277,7 +18305,7 @@ Level: 61
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_VERITY_GRUNT_2 ===
-Name: 
+Name: Grunt
 Class: Ggrunt F
 Pic: Ggrunt F
 Gender: Female
@@ -18300,7 +18328,7 @@ Level: 63
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_VERITY_GRUNT_3 ===
-Name: 
+Name: Grunt
 Class: Ggrunt F
 Pic: Ggrunt F
 Gender: Female

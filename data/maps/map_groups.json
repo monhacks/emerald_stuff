@@ -135,7 +135,8 @@
     "BrawlyDojoEVRoom",
     "BrawlyDojoEVRoom2",
     "BrawlyDojoRematchRoom",
-    "BrawlyDojoTrainingRoom"
+    "BrawlyDojoTrainingRoom",
+    "DewfordBar"
   ],
   "gMapGroup_IndoorLavaridge": [
     "LavaridgeTown_HerbShop",
@@ -491,7 +492,9 @@
     "MirageUnderwater",
     "SSAnne",
     "SSKanne",
-    "SSAnne_rooms"
+    "SSAnne_rooms",
+    "DewfordVolcano",
+    "Sewer"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

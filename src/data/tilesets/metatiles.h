@@ -294,3 +294,21 @@ const u16 gMetatileAttributes_johto_pokemart[] = INCBIN_U16("data/tilesets/secon
 
 const u16 gMetatiles_SSAnne[] = INCBIN_U16("data/tilesets/secondary/ssanne/metatiles.bin");
 const u16 gMetatileAttributes_SSAnne[] = INCBIN_U16("data/tilesets/secondary/ssanne/metatile_attributes.bin");
+
+const u16 gMetatiles_Volcano[] = INCBIN_U16("data/tilesets/secondary/volcano/metatiles.bin");
+const u16 gMetatileAttributes_Volcano[] = INCBIN_U16("data/tilesets/secondary/volcano/metatile_attributes.bin");
+
+const u16 gMetatiles_Bar[] = INCBIN_U16("data/tilesets/secondary/bar/metatiles.bin");
+const u16 gMetatileAttributes_Bar[] = INCBIN_U16("data/tilesets/secondary/bar/metatile_attributes.bin");
+
+const u16 gMetatiles_wintercenter[] = INCBIN_U16("data/tilesets/secondary/wintercenter/metatiles.bin");
+const u16 gMetatileAttributes_wintercenter[] = INCBIN_U16("data/tilesets/secondary/wintercenter/metatile_attributes.bin");
+
+const u16 gMetatiles_gen4center[] = INCBIN_U16("data/tilesets/secondary/gen_4center/metatiles.bin");
+const u16 gMetatileAttributes_gen4center[] = INCBIN_U16("data/tilesets/secondary/gen_4center/metatile_attributes.bin");
+
+const u16 gMetatiles_Sewer[] = INCBIN_U16("data/tilesets/secondary/sewer/metatiles.bin");
+const u16 gMetatileAttributes_Sewer[] = INCBIN_U16("data/tilesets/secondary/sewer/metatile_attributes.bin");
+
+const u16 gMetatiles_Sewer_Clear[] = INCBIN_U16("data/tilesets/secondary/sewer_clear/metatiles.bin");
+const u16 gMetatileAttributes_Sewer_Clear[] = INCBIN_U16("data/tilesets/secondary/sewer_clear/metatile_attributes.bin");

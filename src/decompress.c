@@ -3,7 +3,7 @@
 #include "data.h"
 #include "decompress.h"
 #include "pokemon.h"
-#include "pokemon_debug.h"
+#include "pokemon_sprite_visualizer.h"
 #include "text.h"
 
 EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[0x4000] = {0};
@@ -18,6 +18,28 @@ void LZDecompressVram(const u32 *src, void *dest)
     LZ77UnCompVram(src, dest);
 }
 
+// Checks if `ptr` is likely LZ77 data
+// Checks word-alignment, min/max size, and header byte
+// Returns uncompressed size if true, 0 otherwise
+u32 IsLZ77Data(const void *ptr, u32 minSize, u32 maxSize)
+{
+    const u8 *data = ptr;
+    u32 size;
+    // Compressed data must be word aligned
+    if (((u32)ptr) & 3)
+        return 0;
+    // Check LZ77 header byte
+    // See https://problemkaputt.de/gbatek.htm#biosdecompressionfunctions
+    if (data[0] != 0x10)
+        return 0;
+
+    // Read 24-bit uncompressed size
+    size = data[1] | (data[2] << 8) | (data[3] << 16);
+    if (size >= minSize && size <= maxSize)
+        return size;
+    return 0;
+}
+
 u16 LoadCompressedSpriteSheet(const struct CompressedSpriteSheet *src)
 {
     struct SpriteSheet dest;
@@ -30,23 +52,14 @@ u16 LoadCompressedSpriteSheet(const struct CompressedSpriteSheet *src)
 }
 
 // This can be used for either compressed or uncompressed sprite sheets
-u16 LoadCompressedSpriteSheetByTemplate(const struct SpriteTemplate *template, s32 offset) {
+u16 LoadCompressedSpriteSheetByTemplate(const struct SpriteTemplate *template, s32 offset)
+{
     struct SpriteTemplate myTemplate;
     struct SpriteFrameImage myImage;
-    const u8 *data = template->images->data;
     u32 size;
 
-    // (Heuristic) Check for LZ77 header
-    // See https://problemkaputt.de/gbatek.htm#biosdecompressionfunctions
-    // data[3] could be nonzero; but this would mean data >= 65536 bytes,
-    // which is 2048 tiles, far too big in practice
-    if (data[0] != 0x10 || data[3] != 0) // not compressed
-        return LoadSpriteSheetByTemplate(template, 0, offset);
-
-    // read uncompressed size from header
-    size = T1_READ_16(&data[1]);
-    // too big for compression buffer, so probably not compressed
-    if (size >= ARRAY_COUNT(gDecompressionBuffer))
+    // Check for LZ77 header and read uncompressed size, or fallback if not compressed (zero size)
+    if ((size = IsLZ77Data(template->images->data, TILE_SIZE_4BPP, sizeof(gDecompressionBuffer))) == 0)
         return LoadSpriteSheetByTemplate(template, 0, offset);
 
     LZ77UnCompWram(template->images->data, gDecompressionBuffer);
@@ -77,16 +90,6 @@ void LoadCompressedSpritePalette(const struct CompressedSpritePalette *src)
     dest.data = (void *) gDecompressionBuffer;
     dest.tag = src->tag;
     LoadSpritePalette(&dest);
-}
-
-void LoadCompressedSpritePaletteDayNight(const struct CompressedSpritePalette *src)
-{
-    struct SpritePalette dest;
-
-    LZ77UnCompWram(src->data, gDecompressionBuffer);
-    dest.data = (void*) gDecompressionBuffer;
-    dest.tag = src->tag;
-    LoadSpritePaletteDayNight(&dest);
 }
 void LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag)
 {

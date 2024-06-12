@@ -950,9 +950,10 @@
 // Custom music
 #define MUS_CUSTOM_START                  (HG_MUSIC_END + 1) // 899
 #define MUS_SMT3_LARGE_MAP                899 // SMT3 Large map
-#define MUS_TEST_TRACK                    900 // Various
+#define MUS_XENOBLADE_BATTLE_THEME        900 // Xenoblade 1 DLC battle theme
+#define MUS_BW_GYM_INTERIOR               901 // BW gym interior
 
-#define MUS_CUSTOM_END                    MUS_TEST_TRACK
+#define MUS_CUSTOM_END                    MUS_BW_GYM_INTERIOR
 
 #define END_MUS                           MUS_CUSTOM_END
 

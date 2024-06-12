@@ -336,8 +336,8 @@
 
 #define RS_FACILITY_CLASSES_COUNT               0x4D
 
-#define TRAINER_CLASS_GGRUNT_M       0x0  // Galactic Grunt M
-#define TRAINER_CLASS_GGRUNT_F       0x1  // Galactic Grunt F
+#define TRAINER_CLASS_PKMN_TRAINER_1 0x0  // Unused
+#define TRAINER_CLASS_PKMN_TRAINER_2 0x1  // Unused
 #define TRAINER_CLASS_HIKER          0x2
 #define TRAINER_CLASS_TEAM_AQUA      0x3
 #define TRAINER_CLASS_PKMN_BREEDER   0x4
@@ -406,9 +406,11 @@
 #define TRAINER_CLASS_PKMN_TRAINER   0x43
 #define TRAINER_CLASS_K_LEADER       0x44
 #define TRAINER_CLASS_SPIRIT         0x45
-#define TRAINER_CLASS_LAWRENCE      0x46
-#define TRAINER_CLASS_J_LEADER     0x47
-#define TRAINER_CLASS_COUNT       0x48
+#define TRAINER_CLASS_LAWRENCE       0x46
+#define TRAINER_CLASS_J_LEADER       0x47
+#define TRAINER_CLASS_GGRUNT_M       0x48  // Galactic Grunt M
+#define TRAINER_CLASS_GGRUNT_F       0x49  // Galactic Grunt F
+#define TRAINER_CLASS_COUNT          0x4a
 
 #define TRAINER_ENCOUNTER_MUSIC_MALE         0 // standard male encounter music
 #define TRAINER_ENCOUNTER_MUSIC_FEMALE       1 // standard female encounter music

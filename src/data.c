@@ -230,12 +230,7 @@ const union AnimCmd *const sAnims_Trainer[] =
 #include "data/trainer_parties.h"
 #include "data/text/follower_messages.h"
 
-#include "data/pokemon_graphics/palette_table.h"
-#include "data/pokemon_graphics/shiny_palette_table.h"
-
 const struct Trainer gTrainers[] =
 {
 #include "data/trainers.h"
 };
-
-

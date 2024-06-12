@@ -21,7 +21,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_MANDIBUZZ",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_MANDIBUZZ",
       "x": 7,
       "y": 91,
       "elevation": 3,
@@ -34,7 +34,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_DARMANITAN",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_DARMANITAN",
       "x": 16,
       "y": 40,
       "elevation": 1,
@@ -47,7 +47,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SANDILE",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_SANDILE",
       "x": 25,
       "y": 40,
       "elevation": 0,
@@ -60,7 +60,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SANDILE",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_SANDILE",
       "x": 21,
       "y": 63,
       "elevation": 0,
@@ -73,7 +73,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SANDILE",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_SANDILE",
       "x": 12,
       "y": 27,
       "elevation": 0,
@@ -86,7 +86,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SANDILE",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_SANDILE",
       "x": 26,
       "y": 62,
       "elevation": 0,
@@ -99,7 +99,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_CRUSTLE",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_CRUSTLE",
       "x": 16,
       "y": 5,
       "elevation": 0,
@@ -112,7 +112,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_DARMANITAN",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_DARMANITAN",
       "x": 46,
       "y": 63,
       "elevation": 1,
@@ -125,7 +125,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SANDILE",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_SANDILE",
       "x": 15,
       "y": 92,
       "elevation": 0,
@@ -138,7 +138,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_DARMANITAN",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_DARMANITAN",
       "x": 11,
       "y": 70,
       "elevation": 2,
@@ -151,7 +151,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MANDIBUZZ",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_MANDIBUZZ",
       "x": 37,
       "y": 28,
       "elevation": 4,
@@ -164,7 +164,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_CRUSTLE",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_CRUSTLE",
       "x": 44,
       "y": 79,
       "elevation": 0,
@@ -177,7 +177,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_DARMANITAN",
+      "graphics_id": "OBJ_EVENT_GFX_MON_BASE+SPECIES_DARMANITAN",
       "x": 44,
       "y": 12,
       "elevation": 3,
@@ -352,7 +352,9 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

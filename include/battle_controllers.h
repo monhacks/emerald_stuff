@@ -101,6 +101,7 @@ enum {
 #define RET_MEGA_EVOLUTION (1 << 7)
 #define RET_ULTRA_BURST    (1 << 6)
 #define RET_DYNAMAX        (1 << 5)
+#define RET_TERASTAL       (1 << 4)
 
 struct UnusedControllerStruct
 {
@@ -261,52 +262,7 @@ void BattleControllerComplete(u32 battler); // Can be used for all the controlle
 void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.
 void BtlController_TerminatorNop(u32 battler); // Dummy function at the end of the table.
 void BattleControllerDummy(u32 battler);
-void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit);
-void Controller_WaitForString(u32 battler);
-void Controller_WaitForHealthBar(u32 battler);
-
-// handlers
-void BtlController_HandleGetMonData(u32 battler);
-void BtlController_HandleGetRawMonData(u32 battler);
-void BtlController_HandleSetMonData(u32 battler);
-void BtlController_HandleSetRawMonData(u32 battler);
-void BtlController_HandleLoadMonSprite(u32 battler, void (*controllerCallback)(u32 battler));
-void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(u32 battler));
-void BtlController_HandleReturnMonToBall(u32 battler);
-void BtlController_HandleDrawTrainerPic(u32 battlerId, u32 trainerPicId, bool32 isFrontPic, s16 xPos, s16 yPos, s32 subpriority);
-void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId);
-void BtlController_HandleTrainerSlideBack(u32 battlerId, s16 data0, bool32 startAnim);
-void BtlController_HandleFaintAnimation(u32 battler);
-void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
-void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
-void BtlController_HandleMoveAnimation(u32 battler, bool32 updateTvData);
-void BtlController_HandlePrintString(u32 battler, bool32 updateTvData, bool32 arenaPtsDeduct);
-void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText);
-void DoStatusIconUpdate(u32 battler);
-void BtlController_HandleStatusIconUpdate(u32 battler);
-void BtlController_HandleStatusAnimation(u32 battler);
-void BtlController_HandleClearUnkVar(u32 battler);
-void BtlController_HandleSetUnkVar(u32 battler);
-void BtlController_HandleClearUnkFlag(u32 battler);
-void BtlController_HandleToggleUnkFlag(u32 battler);
-void BtlController_HandleHitAnimation(u32 battler);
-void BtlController_HandlePlaySE(u32 battler);
-void BtlController_HandlePlayFanfareOrBGM(u32 battler);
-void BtlController_HandleFaintingCry(u32 battler);
-void BtlController_HandleIntroSlide(u32 battler);
-void BtlController_HandleSpriteInvisibility(u32 battler);
-bool32 TwoPlayerIntroMons(u32 battlerId); // Double battle with both player pokemon active.
-bool32 TwoOpponentIntroMons(u32 battlerId); // Double battle with both opponent pokemon active.
-void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, const u32 *trainerPal, s16 framesToWait, void (*controllerCallback)(u32 battler));
-void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay);
-void BtlController_HandleHidePartyStatusSummary(u32 battler);
-void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 updateTvData);
-
-void BattleControllerComplete(u32 battler); // Can be used for all the controllers.
-void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.
-void BtlController_TerminatorNop(u32 battler); // Dummy function at the end of the table.
-void BattleControllerDummy(u32 battler);
-void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit);
+void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit, bool32 doSlideIn);
 void Controller_WaitForString(u32 battler);
 void Controller_WaitForHealthBar(u32 battler);
 

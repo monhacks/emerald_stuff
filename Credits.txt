@@ -1,20 +1,25 @@
 Everyone who worked on the Pret disassembly and RHH expansion
-TrainerX493 and HunarPG - Glazed's Johto tiles
+WesleyFG - Johto tiles
 Pawkkie - Various resources and shadows port of merrps
-Archie&Mudkip - New pause menu, bich case
-Mudkip - New shop menu, birch case
+Archie&Mudkip - New pause menu, start menu, birch case
+Mudkip - New shop menu, start menu, options menu dark theme, birch case
 quocmanh94 - HGSS berry animation
 BSBob - Map popup
 Kaixer - Pokemon sprites
-Ravepossum - Map popup, pokedex from party menu, showmonpic shinyness, battle backgrounds
+Ravepossum - Map popup, pokedex from party menu, showmonpic shinyness, battle backgrounds, bw summary screen
+Againsts, Sphericalice, Vexx, Buffelsaft, Dizzyegg, Zeturic, Greenphx9, Skeli for bw summary screen
 Ruki - Battle backgrounds
 Voluptua - town map port
+Meejle - fixed pokemon logo
 Beniboy for helping with numerous issues during developement
 Skeli, Ghoulslash, HN, Karathan, McBoy, Greenphx, MGriffin, BSBob, Raymie Humbert, missiri and Tustin2121 for Quest Menu
 BelialClover/Rioluwott for EV allocation system, ROWE bag screen
 Paccy - his glimmering emerald was used as a base
 KingTapir - Desert Tiles
 FM - Tree tiles
+DestvoL - Lugia mega, partner gardevoir sprites
+Nikeligo - Frostbite orb code
+Tectonic fangame team - ability ideas, frostbite orb icon
 Zeikaro - Nature and tree tiles
 Trevor-Zeikaro - House tiles
 Zeo254 - some tilesets
@@ -26,6 +31,7 @@ SkyVotex and Banjora Marxville for tileset/palettes
 Sierraffinity - Day/Night System
 Spherical Ice - Sliding puzzles
 Merrp - Following Pokemon, Shadows
+PCG - Egg move tutor
 Fo0xerz - Lawrence III sprite
 Nicoswag - Ability popup design
 Nico - Pokemon animate after KO
@@ -40,7 +46,7 @@ DizzyEgg - BW Repel System
 Zeturic - XY-style Wrapping Summary Screen, 'Move Item' option in party menu
 Jaizu - Keyboard swaps to lowercase after the first letter, and for some firered tiles
 Aveontrainer - Gen 3 style overworld object sprites
-Devolov - Exp all with one message
+Devolov - Exp all with one message, skip copyright
 Hyo-oppa - Various sprites
 Duke - Move name instead of TM name in shops
 GriffinR - Disabled the union room check when entering Pokecenters
@@ -55,6 +61,8 @@ MrDollSteak - Male Rocket Grunt, Female Rocket Grunt, Proton, Petrel and Giovann
 Rizon/Falsever - DP Lucas, Ethan, Rosa, Youngster Sprites, Lass Sprites, Bug Catcher Sprites, Schoolkid Male Sprites, HGSS Female Swimmer, Gen V Male Swimmer, Gen V Female Swimmer, Gen IV Worker, HGSS Male Ace Trainer, Falkner, Clair, Roxanne
 Sky High - Gen V Cyclist Sprites, HGSS Gentleman, Gen IV Guitarist, Gen V Guitarist, Gen V Pokemon Ranger Sprites, Gen V Rich Boy, DP Snow Ace Trainer, Bruno, Crasher Wake, Gen V Lady, Gen IV Camper, Gen IV Picnicker, Gen IV Fisherman, Gen IV Ninja Boy
 Luxio//Hacks - Gen V Psychic Male
+Grunt Lucas - start menu, pause menu
+Jackson Wilking - Xenoblade battle theme
 Ekat's tileset credits:	
 Ekat
 Heartless Dragoon

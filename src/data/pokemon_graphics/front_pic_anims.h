@@ -2023,6 +2023,8 @@ static const union AnimCmd sAnim_Eevee_1[] =
 PLACEHOLDER_ANIM_SINGLE_FRAME(EeveeGigantamax);
 #endif //P_GIGANTAMAX_FORMS
 
+PLACEHOLDER_ANIM_SINGLE_FRAME(EeveePartner);
+
 static const union AnimCmd sAnim_Vaporeon_1[] =
 {
     ANIMCMD_FRAME(1, 40),
@@ -2894,13 +2896,7 @@ static const union AnimCmd sAnim_Mismagius_1[] =
 #endif //P_FAMILY_MISDREAVUS
 
 #if P_FAMILY_UNOWN
-static const union AnimCmd sAnim_Unown_1[] =
-{
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END,
-};
+PLACEHOLDER_ANIM_SINGLE_FRAME(Unown);
 #endif //P_FAMILY_UNOWN
 
 #if P_FAMILY_WOBBUFFET
@@ -3387,6 +3383,7 @@ static const union AnimCmd sAnim_Lugia_1[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
+PLACEHOLDER_ANIM_SINGLE_FRAME(LugiaMega);
 #endif //P_FAMILY_LUGIA
 
 #if P_FAMILY_HO_OH
@@ -3771,6 +3768,10 @@ static const union AnimCmd sAnim_Gardevoir_1[] =
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END,
 };
+
+PLACEHOLDER_ANIM_SINGLE_FRAME(RaltsPartner);
+PLACEHOLDER_ANIM_SINGLE_FRAME(KirliaPartner);
+PLACEHOLDER_ANIM_SINGLE_FRAME(GardevoirPartner);
 
 #if P_MEGA_EVOLUTIONS
 PLACEHOLDER_ANIM_SINGLE_FRAME(GardevoirMega);
@@ -10126,8 +10127,20 @@ PLACEHOLDER_ANIM_SINGLE_FRAME(IronCrown);
 #endif //P_FAMILY_IRON_CROWN
 
 #if P_FAMILY_TERAPAGOS
-PLACEHOLDER_ANIM_SINGLE_FRAME(TerapagosNormal);
-PLACEHOLDER_ANIM_SINGLE_FRAME(TerapagosTerastal);
+static const union AnimCmd sAnim_TerapagosNormal_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+static const union AnimCmd sAnim_TerapagosTerastal_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
 PLACEHOLDER_ANIM_SINGLE_FRAME(TerapagosStellar);
 #endif //P_FAMILY_TERAPAGOS
 
@@ -10662,6 +10675,7 @@ SINGLE_ANIMATION(Eevee);
 #if P_GIGANTAMAX_FORMS
 SINGLE_ANIMATION(EeveeGigantamax);
 #endif //P_GIGANTAMAX_FORMS
+SINGLE_ANIMATION(EeveePartner);
 SINGLE_ANIMATION(Vaporeon);
 SINGLE_ANIMATION(Jolteon);
 SINGLE_ANIMATION(Flareon);
@@ -10998,6 +11012,7 @@ SINGLE_ANIMATION(TyranitarMega);
 #endif //P_FAMILY_LARVITAR
 #if P_FAMILY_LUGIA
 SINGLE_ANIMATION(Lugia);
+SINGLE_ANIMATION(LugiaMega);
 #endif //P_FAMILY_LUGIA
 #if P_FAMILY_HO_OH
 SINGLE_ANIMATION(HoOh);
@@ -11071,6 +11086,10 @@ SINGLE_ANIMATION(Pelipper);
 SINGLE_ANIMATION(Ralts);
 SINGLE_ANIMATION(Kirlia);
 SINGLE_ANIMATION(Gardevoir);
+SINGLE_ANIMATION(RaltsPartner);
+SINGLE_ANIMATION(KirliaPartner);
+SINGLE_ANIMATION(GardevoirPartner);
+
 #if P_MEGA_EVOLUTIONS
 SINGLE_ANIMATION(GardevoirMega);
 #endif //P_MEGA_EVOLUTIONS

@@ -56,7 +56,6 @@ SECTIONS {
         /* COMMON starts at 0x30022A8 */
         INCLUDE "sym_common.ld"
         *libc.a:sbrkr.o(COMMON);
-        gStackBase = .;
     } > IWRAM
 
     /* BEGIN ROM DATA */
@@ -361,13 +360,14 @@ SECTIONS {
         src/international_string_util.o(.text);
 		src/dexnav.o(.text);
         src/pokemon_debug.o(.text);
+        src/pokemon_sprite_visualizer.o(.text);
         src/expansion_intro.o(.text);
         src/sound_check_menu.o(.text);
         src/sliding_puzzle.o(.text);
         src/quests.o(.text);
-        src/day_night.o(.text);
         src/ui_startmenu_full.o(.text);
         src/ui_birch_case.o(.text);
+        src/ui_main_menu.o(.text);
     } > ROM =0
 
     script_data :
@@ -736,13 +736,14 @@ SECTIONS {
         data/sound_data.o(.rodata);
 		src/dexnav.o(.rodata);
         src/pokemon_debug.o(.rodata);
+        src/pokemon_sprite_visualizer.o(.rodata);
         src/expansion_intro.o(.rodata);
         src/sound_check_menu.o(.rodata);
         src/sliding_puzzle.o(.rodata);
         src/quests.o(.rodata);
-        src/day_night.o(.rodata);
         src/ui_startmenu_full.o(.rodata);
         src/ui_birch_case.o(.rodata);
+        src/ui_main_menu.o(.rodata);
     } > ROM =0
 
     song_data :
@@ -1639,7 +1640,8 @@ SECTIONS {
         sound/songs/midi/mus_hg_obtain_b_points.o(.rodata);
         sound/songs/midi/mus_hg_win_minigame.o(.rodata);
         sound/songs/midi/mus_smt3_large_map.o(.rodata);
-        sound/songs/midi/mus_test_track.o(.rodata);
+        sound/songs/midi/mus_xenoblade_battle_theme.o(.rodata);
+        sound/songs/midi/mus_bw_gym_interior.o(.rodata);
     } > ROM =0
 
     lib_rodata :

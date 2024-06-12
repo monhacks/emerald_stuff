@@ -1,3 +1,4 @@
+
 Route106_MapScripts::
 	.byte 0
 
@@ -46,3 +47,11 @@ Route106_Text_TrainerTips:
 	.string "Advice on catching Pokémon with a Rod:\n"
 	.string "Press the A Button if you get a bite.$"
 
+Rotue106SignRoute105::
+	msgbox Rotue106SignRoute105_Text_0, MSGBOX_SIGN
+	return
+
+
+Rotue106SignRoute105_Text_0:
+	.string "{UP_ARROW} Route 105\n"
+	.string "{RIGHT_ARROW} Route 106$"

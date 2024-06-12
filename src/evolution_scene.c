@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_message.h"
 #include "bg.h"
+#include "bw_summary_screen.h"
 #include "data.h"
 #include "decompress.h"
 #include "evolution_scene.h"
@@ -572,8 +573,8 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
         RemoveBagItem(ball, 1);
     #endif
 
-        for (i = MON_DATA_COOL_RIBBON; i < MON_DATA_COOL_RIBBON + CONTEST_CATEGORIES_COUNT; i++)
-            SetMonData(&gPlayerParty[gPlayerPartyCount], i, &data);
+        /* for (i = MON_DATA_COOL_RIBBON; i < MON_DATA_COOL_RIBBON + CONTEST_CATEGORIES_COUNT; i++)
+            SetMonData(&gPlayerParty[gPlayerPartyCount], i, &data); */
         for (i = MON_DATA_CHAMPION_RIBBON; i <= MON_DATA_WORLD_RIBBON; i++)
             SetMonData(&gPlayerParty[gPlayerPartyCount], i, &data);
 
@@ -967,9 +968,18 @@ static void Task_EvolutionScene(u8 taskId)
             if (!gPaletteFade.active)
             {
                 FreeAllWindowBuffers();
-                ShowSelectMovePokemonSummaryScreen(gPlayerParty, gTasks[taskId].tPartyId,
-                            gPlayerPartyCount - 1, CB2_EvolutionSceneLoadGraphics,
-                            gMoveToLearn);
+                if (BW_SUMMARY_SCREEN)
+                {
+                    ShowSelectMovePokemonSummaryScreen_BW(gPlayerParty, gTasks[taskId].tPartyId,
+                                gPlayerPartyCount - 1, CB2_EvolutionSceneLoadGraphics,
+                                gMoveToLearn);
+                }
+                else
+                {
+                    ShowSelectMovePokemonSummaryScreen(gPlayerParty, gTasks[taskId].tPartyId,
+                                gPlayerPartyCount - 1, CB2_EvolutionSceneLoadGraphics,
+                                gMoveToLearn);
+                }
                 gTasks[taskId].tLearnMoveState++;
             }
             break;
@@ -1349,9 +1359,18 @@ static void Task_TradeEvolutionScene(u8 taskId)
                 Free(GetBgTilemapBuffer(0));
                 FreeAllWindowBuffers();
 
-                ShowSelectMovePokemonSummaryScreen(gPlayerParty, gTasks[taskId].tPartyId,
-                            gPlayerPartyCount - 1, CB2_TradeEvolutionSceneLoadGraphics,
-                            gMoveToLearn);
+                if (BW_SUMMARY_SCREEN)
+                {
+                    ShowSelectMovePokemonSummaryScreen_BW(gPlayerParty, gTasks[taskId].tPartyId,
+                                gPlayerPartyCount - 1, CB2_TradeEvolutionSceneLoadGraphics,
+                                gMoveToLearn);
+                }
+                else
+                {
+                    ShowSelectMovePokemonSummaryScreen(gPlayerParty, gTasks[taskId].tPartyId,
+                                gPlayerPartyCount - 1, CB2_TradeEvolutionSceneLoadGraphics,
+                                gMoveToLearn);
+                }
                 gTasks[taskId].tLearnMoveState++;
             }
             break;

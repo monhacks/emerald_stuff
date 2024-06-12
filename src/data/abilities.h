@@ -1276,6 +1276,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Fur Coat"),
         .description = COMPOUND_STRING("Raises Defense."),
         .aiRating = 7,
+        .breakable = TRUE,
     },
 
     [ABILITY_MAGICIAN] =
@@ -1601,6 +1602,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Disguise"),
         .description = COMPOUND_STRING("Decoy protects it once."),
         .aiRating = 8,
+        .breakable = TRUE,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
@@ -1902,6 +1904,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Gulp Missile"),
         .description = COMPOUND_STRING("If hit, spits prey from sea."),
         .aiRating = 3,
+        .cantBeCopied = TRUE,
         .cantBeSuppressed = TRUE,
         .cantBeOverwritten = TRUE,
         .failsOnImposter = TRUE,
@@ -2265,6 +2268,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
+        .cantBeSuppressed = TRUE,
     },
 
     [ABILITY_ELECTROMORPHOSIS] =
@@ -2519,7 +2523,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .breakable = TRUE,
     },
 
-    [ABILITY_EMBODY_ASPECT_TEAL] =
+    [ABILITY_EMBODY_ASPECT_TEAL_MASK] =
     {
     #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("Embody Aspect"),
@@ -2534,7 +2538,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .failsOnImposter = TRUE,
     },
 
-    [ABILITY_EMBODY_ASPECT_HEARTHFLAME] =
+    [ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK] =
     {
     #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("Embody Aspect"),
@@ -2549,7 +2553,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .failsOnImposter = TRUE,
     },
 
-    [ABILITY_EMBODY_ASPECT_WELLSPRING] =
+    [ABILITY_EMBODY_ASPECT_WELLSPRING_MASK] =
     {
     #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("Embody Aspect"),
@@ -2564,7 +2568,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .failsOnImposter = TRUE,
     },
 
-    [ABILITY_EMBODY_ASPECT_CORNERSTONE] =
+    [ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK] =
     {
     #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("Embody Aspect"),
@@ -2648,4 +2652,27 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+
+    [ABILITY_GUARDIAN_OF_SEA] =
+    {
+    #if B_EXPANDED_ABILITY_NAMES == TRUE
+        .name = _("Guardian of Sea"),
+    #else
+        .name = _("Sea Guardian"),
+    #endif
+        .description = COMPOUND_STRING("Summons rain and enhances defenses\nduring it."),
+        .aiRating = 8,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+        .cantBeSuppressed = TRUE,
+    }, 
+
+    [ABILITY_SOUL_RESONANCE] =
+    {
+        .name = _("Soul Resonance"),
+        .description = COMPOUND_STRING("Boosts the Pokémon's most proficient\nstat when it knocks out a target."),
+        .aiRating = 7,
+    },
+
 };

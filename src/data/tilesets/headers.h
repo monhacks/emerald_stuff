@@ -7,7 +7,6 @@ const struct Tileset gTileset_General =
     .metatiles = gMetatiles_General,
     .metatileAttributes = gMetatileAttributes_General,
     .callback = InitTilesetAnim_General,
-    .paletteOverrides = gTilesetPalOverrides_General,
 };
 
 const struct Tileset gTileset_Petalburg =
@@ -19,7 +18,6 @@ const struct Tileset gTileset_Petalburg =
     .metatiles = gMetatiles_Petalburg,
     .metatileAttributes = gMetatileAttributes_Petalburg,
     .callback = InitTilesetAnim_Petalburg,
-    .paletteOverrides = gTilesetPalOverrides_Petalburg,
 };
 
 const struct Tileset gTileset_Rustboro =
@@ -31,7 +29,6 @@ const struct Tileset gTileset_Rustboro =
     .metatiles = gMetatiles_Rustboro,
     .metatileAttributes = gMetatileAttributes_Rustboro,
     .callback = InitTilesetAnim_Rustboro,
-    .paletteOverrides = gTilesetPalOverrides_Rustboro,
 };
 
 const struct Tileset gTileset_Dewford =
@@ -54,7 +51,6 @@ const struct Tileset gTileset_Slateport =
     .metatiles = gMetatiles_Slateport,
     .metatileAttributes = gMetatileAttributes_Slateport,
     .callback = InitTilesetAnim_Slateport,
-    .paletteOverrides = gTilesetPalOverrides_Slateport,
 };
 
 const struct Tileset gTileset_Mauville =
@@ -66,7 +62,6 @@ const struct Tileset gTileset_Mauville =
     .metatiles = gMetatiles_Mauville,
     .metatileAttributes = gMetatileAttributes_Mauville,
     .callback = InitTilesetAnim_Mauville,
-    .paletteOverrides = gTilesetPalOverrides_Mauville,
 };
 
 const struct Tileset gTileset_Lavaridge =
@@ -89,7 +84,6 @@ const struct Tileset gTileset_Fallarbor =
     .metatiles = gMetatiles_Fallarbor,
     .metatileAttributes = gMetatileAttributes_Fallarbor,
     .callback = InitTilesetAnim_Fallarbor,
-    .paletteOverrides = gTilesetPalOverrides_Fallarbor,
 };
 
 const struct Tileset gTileset_Fortree =
@@ -112,7 +106,6 @@ const struct Tileset gTileset_Lilycove =
     .metatiles = gMetatiles_Lilycove,
     .metatileAttributes = gMetatileAttributes_Lilycove,
     .callback = InitTilesetAnim_Lilycove,
-    .paletteOverrides = gTilesetPalOverrides_Lilycove,
 };
 
 const struct Tileset gTileset_Mossdeep =
@@ -124,7 +117,6 @@ const struct Tileset gTileset_Mossdeep =
     .metatiles = gMetatiles_Mossdeep,
     .metatileAttributes = gMetatileAttributes_Mossdeep,
     .callback = InitTilesetAnim_Mossdeep,
-    .paletteOverrides = gTilesetPalOverrides_Mossdeep,
 };
 
 const struct Tileset gTileset_EverGrande =
@@ -136,7 +128,6 @@ const struct Tileset gTileset_EverGrande =
     .metatiles = gMetatiles_EverGrande,
     .metatileAttributes = gMetatileAttributes_EverGrande,
     .callback = InitTilesetAnim_EverGrande,
-    .paletteOverrides = gTilesetPalOverrides_EverGrande,
 };
 
 const struct Tileset gTileset_Pacifidlog =
@@ -159,7 +150,6 @@ const struct Tileset gTileset_Sootopolis =
     .metatiles = gMetatiles_Sootopolis,
     .metatileAttributes = gMetatileAttributes_Sootopolis,
     .callback = InitTilesetAnim_Sootopolis,
-    .paletteOverrides = gTilesetPalOverrides_Sootopolis,
 };
 
 const struct Tileset gTileset_BattleFrontierOutsideWest =
@@ -1043,7 +1033,6 @@ const struct Tileset gTileset_JohtoGeneral =
     .metatiles = gMetatiles_JohtoGeneral,
     .metatileAttributes = gMetatileAttributes_JohtoGeneral,
     .callback = InitTilesetAnim_Johto_General,
-    .paletteOverrides = gTilesetPalOverrides_GeneralJohto,
 };
 
 const struct Tileset gTileset_JohtoSecondary =
@@ -1077,7 +1066,6 @@ const struct Tileset gTileset_JohtoOlivine =
     .metatiles = gMetatiles_JohtoOlivine,
     .metatileAttributes = gMetatileAttributes_JohtoOlivine,
     .callback = NULL,
-    .paletteOverrides = gTilesetPalOverrides_JohtoOlivine,
 };
 
 const struct Tileset gTileset_JohtoCave =
@@ -1154,5 +1142,71 @@ const struct Tileset gTileset_SSAnne =
     .palettes = gTilesetPalettes_SSAnne,
     .metatiles = gMetatiles_SSAnne,
     .metatileAttributes = gMetatileAttributes_SSAnne,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_Volcano =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Volcano,
+    .palettes = gTilesetPalettes_Volcano,
+    .metatiles = gMetatiles_Volcano,
+    .metatileAttributes = gMetatileAttributes_Volcano,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_Bar =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Bar,
+    .palettes = gTilesetPalettes_Bar,
+    .metatiles = gMetatiles_Bar,
+    .metatileAttributes = gMetatileAttributes_Bar,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_wintercenter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_wintercenter,
+    .palettes = gTilesetPalettes_wintercenter,
+    .metatiles = gMetatiles_wintercenter,
+    .metatileAttributes = gMetatileAttributes_wintercenter,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_gen4center =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_gen4center,
+    .palettes = gTilesetPalettes_gen4center,
+    .metatiles = gMetatiles_gen4center,
+    .metatileAttributes = gMetatileAttributes_gen4center,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_Sewer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Sewer,
+    .palettes = gTilesetPalettes_Sewer,
+    .metatiles = gMetatiles_Sewer,
+    .metatileAttributes = gMetatileAttributes_Sewer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_Sewer_Clear =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Sewer_Clear,
+    .palettes = gTilesetPalettes_Sewer_Clear,
+    .metatiles = gMetatiles_Sewer_Clear,
+    .metatileAttributes = gMetatileAttributes_Sewer_Clear,
     .callback = NULL,
 };

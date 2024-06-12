@@ -52,6 +52,7 @@
             .isShiny = TRUE,
 #line 18
             .dynamaxLevel = 5,
+            .shouldDynamax = TRUE,
             .moves = {
 #line 19
                 MOVE_AIR_SLASH,
@@ -71,7 +72,6 @@
 #line 25
             .lvl = 5,
             .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
             {
 #line 29
@@ -82,7 +82,6 @@
 #line 30
             .lvl = 5,
             .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },

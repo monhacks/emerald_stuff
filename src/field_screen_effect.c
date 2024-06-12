@@ -432,10 +432,11 @@ static void Task_WaitForFadeShowStartMenu(u8 taskId)
     if (WaitForWeatherFadeIn() == TRUE)
     {
         DestroyTask(taskId);
-        if (GetSafariZoneFlag() || InBattlePyramid() || InBattlePike() || InUnionRoom() || InMultiPartnerRoom())
+        CreateTask(Task_ShowStartMenu, 80);
+        /* if (GetSafariZoneFlag() || InBattlePyramid() || InBattlePike() || InUnionRoom() || InMultiPartnerRoom())
             CreateTask(Task_ShowStartMenu, 80);
         else        
-            CreateTask(Task_OpenStartMenuFullScreen, 80);
+            CreateTask(Task_OpenStartMenuFullScreen, 80); */
     }
 }
 
@@ -696,9 +697,11 @@ static void Task_DoDoorWarp(u8 taskId)
         FreezeObjectEvents();
         PlayerGetDestCoords(x, y);
         PlaySE(GetDoorSoundEffect(*x, *y - 1));
-        if (followerObject) { // Put follower into pokeball
-          ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
-          ObjectEventSetHeldMovement(followerObject, MOVEMENT_ACTION_ENTER_POKEBALL);
+        if (followerObject)
+        {
+            // Put follower into pokeball
+            ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
+            ObjectEventSetHeldMovement(followerObject, MOVEMENT_ACTION_ENTER_POKEBALL);
         }
         task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
         task->tState = 1;

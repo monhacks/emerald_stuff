@@ -5,17 +5,6 @@
 #include "constants/trainers.h"
 
 #define SPECIES_SHINY_TAG 5000
-#define N_FOLLOWER_HAPPY_MESSAGES 31
-#define N_FOLLOWER_NEUTRAL_MESSAGES 14
-#define N_FOLLOWER_SAD_MESSAGES 3
-#define N_FOLLOWER_UPSET_MESSAGES 3
-#define N_FOLLOWER_ANGRY_MESSAGES 5
-#define N_FOLLOWER_PENSIVE_MESSAGES 20
-#define N_FOLLOWER_LOVE_MESSAGES 10
-#define N_FOLLOWER_SURPRISE_MESSAGES 20
-#define N_FOLLOWER_CURIOUS_MESSAGES 7
-#define N_FOLLOWER_MUSIC_MESSAGES 14
-#define N_FOLLOWER_POISONED_MESSAGES 1
 
 #define MAX_TRAINER_ITEMS 4
 
@@ -81,7 +70,8 @@ struct TrainerMon
     u8 nature:5;
     bool8 gender:2;
     bool8 isShiny:1;
-    u8 dynamaxLevel:4;
+    u8 dynamaxLevel:3;
+    u8 teraType:5;
     bool8 gigantamaxFactor:1;
     bool8 shouldDynamax:1;
     bool8 shouldTerastal:1;
@@ -111,18 +101,6 @@ struct TrainerClass
     u8 money;
     u16 ball;
 };
-
-struct FollowerMsgInfo {
-    const u8 *text;
-    const u8 *script;
-};
-
-struct FollowerMessagePool
-{
-    const struct FollowerMsgInfo * messages;
-    const u8 * script;
-    u16 length;
-};
 struct TypeInfo
 {
     u8 name[TYPE_NAME_LENGTH + 1];
@@ -130,6 +108,10 @@ struct TypeInfo
     u8 palette;
     u16 zMove;
     u16 maxMove;
+    u16 teraTypeRGBValue;    // Most values pulled from the Tera type icon palette.
+    u16 damageCategory:2;    // Used for B_PHYSICAL_SPECIAL_SPLIT <= GEN_3
+    u16 padding:14;
+    const u32 *const paletteTMHM;
     //u16 enhanceItem;
     //u16 berry;
     //u16 gem;
@@ -139,6 +121,22 @@ struct TypeInfo
     //u16 teraShard;
     //u16 arceusForm;
 };
+
+struct FollowerMsgInfo
+{
+    const u8 *text;
+    const u8 *script;
+};
+
+struct FollowerMessagePool
+{
+    const struct FollowerMsgInfo *messages;
+    const u8 *script;
+    u16 length;
+};
+
+extern const u16 gMinigameDigits_Pal[];
+extern const u32 gMinigameDigits_Gfx[];
 
 extern const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[];
 extern const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[];
@@ -163,11 +161,6 @@ extern const union AnimCmd *const gAnims_MonPic[];
 extern const union AnimCmd *const sAnims_Trainer[];
 extern const struct TrainerSprite gTrainerSprites[];
 extern const struct TrainerBacksprite gTrainerBacksprites[];
-
-extern const struct CompressedSpritePalette gFollowMonPaletteTable[];
-extern const struct CompressedSpritePalette gFollowMonShinyPaletteTable[];
-extern const struct CompressedSpritePalette gFollowMonPaletteTableFemale[];
-extern const struct CompressedSpritePalette gFollowMonShinyPaletteTableFemale[];
 
 extern const struct Trainer gTrainers[];
 extern const struct Trainer gBattlePartners[];
@@ -207,14 +200,14 @@ static inline const u8 GetTrainerClassFromId(u16 trainerId)
 static inline const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
     if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
-        return gTrainerClasses[gBattlePartners[trainerId].trainerClass].name;
+        return gTrainerClasses[gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerClass].name;
     return gTrainerClasses[GetTrainerClassFromId(trainerId)].name;
 }
 
 static inline const u8 *GetTrainerNameFromId(u16 trainerId)
 {
     if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
-        return gBattlePartners[trainerId].trainerName;
+        return gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
     return gTrainers[SanitizeTrainerId(trainerId)].trainerName;
 }
 

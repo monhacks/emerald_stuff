@@ -3,6 +3,7 @@
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "bg.h"
+#include "bw_summary_screen.h"
 #include "cable_club.h"
 #include "data.h"
 #include "daycare.h"
@@ -212,50 +213,50 @@ static EWRAM_DATA struct {
 } *sTradeMenu = NULL;
 
 static EWRAM_DATA struct {
-    /*0x00*/ struct Pokemon tempMon; // Used as a temp variable when swapping Pokémon
-    /*0x64*/ u32 timer;
-    /*0x68*/ u32 monPersonalities[2];
-    /*0x70*/ u8 monMetGame[2];
-    /*0x72*/ u8 playerFinishStatus;
-    /*0x73*/ u8 partnerFinishStatus;
-    /*0x74*/ u16 linkData[10];
-    /*0x88*/ u8 linkTimeoutZero1;
-    /*0x89*/ u8 linkTimeoutZero2;
-    /*0x8A*/ u16 linkTimeoutTimer;
-    /*0x8C*/ u16 neverRead_8C;
-    /*0x8E*/ u8 monSpriteIds[2];
-    /*0x90*/ u8 connectionSpriteId1; // Multi-purpose sprite ids used during the transfer sequence
-    /*0x91*/ u8 connectionSpriteId2;
-    /*0x92*/ u8 cableEndSpriteId;
-    /*0x93*/ u8 scheduleLinkTransfer;
-    /*0x94*/ u16 state;
-    /*0x96*/ u8 filler_96[0xD2 - 0x96];
-    /*0xD2*/ u8 releasePokeballSpriteId;
-    /*0xD3*/ u8 bouncingPokeballSpriteId;
-    /*0xD4*/ u16 texX;
-    /*0xD6*/ u16 texY;
-    /*0xD8*/ u16 neverRead_D8;
-    /*0xDA*/ u16 neverRead_DA;
-    /*0xDC*/ u16 scrX;
-    /*0xDE*/ u16 scrY;
-    /*0xE0*/ s16 bg1vofs;
-    /*0xE2*/ s16 bg1hofs;
-    /*0xE4*/ s16 bg2vofs;
-    /*0xE6*/ s16 bg2hofs;
-    /*0xE8*/ u16 sXY;
-    /*0xEA*/ u16 gbaScale;
-    /*0xEC*/ u16 alpha;
-    /*0xEE*/ bool8 isLinkTrade;
-    /*0xF0*/ u16 monSpecies[2];
-    /*0xF4*/ u16 cachedMapMusic;
-    /*0xF6*/ u8 textColors[3];
-    /*0xF9*/ u8 filler_F9;
-    /*0xFA*/ bool8 isCableTrade;
-    /*0xFB*/ u8 wirelessWinLeft;
-    /*0xFC*/ u8 wirelessWinTop;
-    /*0xFD*/ u8 wirelessWinRight;
-    /*0xFE*/ u8 wirelessWinBottom;
-} *sTradeAnim = {NULL};
+    struct Pokemon tempMon; // Used as a temp variable when swapping Pokémon
+    u32 timer;
+    u32 monPersonalities[2];
+    u8 filler_70[2];
+    u8 playerFinishStatus;
+    u8 partnerFinishStatus;
+    u16 linkData[10];
+    u8 linkTimeoutZero1;
+    u8 linkTimeoutZero2;
+    u16 linkTimeoutTimer;
+    u16 neverRead_8C;
+    u8 monSpriteIds[2];
+    u8 connectionSpriteId1; // Multi-purpose sprite ids used during the transfer sequence
+    u8 connectionSpriteId2;
+    u8 cableEndSpriteId;
+    u8 scheduleLinkTransfer;
+    u16 state;
+    u8 filler_96[0x3C];
+    u8 releasePokeballSpriteId;
+    u8 bouncingPokeballSpriteId;
+    u16 texX;
+    u16 texY;
+    u16 neverRead_D8;
+    u16 neverRead_DA;
+    u16 scrX;
+    u16 scrY;
+    s16 bg1vofs;
+    s16 bg1hofs;
+    s16 bg2vofs;
+    s16 bg2hofs;
+    u16 sXY;
+    u16 gbaScale;
+    u16 alpha;
+    bool8 isLinkTrade;
+    u16 monSpecies[2];
+    u16 cachedMapMusic;
+    u8 textColors[3];
+    u8 filler_F9;
+    bool8 isCableTrade;
+    u8 wirelessWinLeft;
+    u8 wirelessWinTop;
+    u8 wirelessWinRight;
+    u8 wirelessWinBottom;
+} *sTradeAnim = NULL;
 
 static bool32 IsWirelessTrade(void);
 static void CB2_CreateTradeMenu(void);
@@ -1548,9 +1549,19 @@ static void CB_ShowTradeMonSummaryScreen(void)
     if (!gPaletteFade.active)
     {
         if (sTradeMenu->cursorPosition < PARTY_SIZE)
-            ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gPlayerParty, sTradeMenu->cursorPosition, sTradeMenu->partyCounts[TRADE_PLAYER] - 1, CB2_ReturnToTradeMenu);
+        {
+            if (BW_SUMMARY_SCREEN)
+                ShowPokemonSummaryScreen_BW(SUMMARY_MODE_LOCK_MOVES, gPlayerParty, sTradeMenu->cursorPosition, sTradeMenu->partyCounts[TRADE_PLAYER] - 1, CB2_ReturnToTradeMenu);
+            else
+                ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gPlayerParty, sTradeMenu->cursorPosition, sTradeMenu->partyCounts[TRADE_PLAYER] - 1, CB2_ReturnToTradeMenu);
+        }
         else
-            ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gEnemyParty, sTradeMenu->cursorPosition - PARTY_SIZE, sTradeMenu->partyCounts[TRADE_PARTNER] - 1, CB2_ReturnToTradeMenu);
+        {
+            if (BW_SUMMARY_SCREEN)
+                ShowPokemonSummaryScreen_BW(SUMMARY_MODE_LOCK_MOVES, gEnemyParty, sTradeMenu->cursorPosition - PARTY_SIZE, sTradeMenu->partyCounts[TRADE_PARTNER] - 1, CB2_ReturnToTradeMenu);
+            else
+                ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gEnemyParty, sTradeMenu->cursorPosition - PARTY_SIZE, sTradeMenu->partyCounts[TRADE_PARTNER] - 1, CB2_ReturnToTradeMenu);
+        }
         FreeAllWindowBuffers();
     }
 }
@@ -2763,8 +2774,7 @@ static u32 TradeGetMultiplayerId(void)
     return 0;
 }
 
-static void 
-LoadTradeMonPic(u8 whichParty, u8 state)
+static void LoadTradeMonPic(u8 whichParty, u8 state)
 {
     int pos = 0;
     struct Pokemon *mon = NULL;
@@ -3064,7 +3074,7 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
     {
         u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
         u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-        species = SpeciesToNationalPokedexNum(GET_BASE_SPECIES_ID(species));
+        species = SpeciesToNationalPokedexNum(species);
         GetSetPokedexFlag(species, FLAG_SET_SEEN);
         HandleSetPokedexFlag(species, FLAG_SET_CAUGHT, personality);
     }
@@ -3888,7 +3898,7 @@ static bool8 DoTradeAnim_Cable(void)
 #define tCounter           data[1]
 #define tSignalComingBack  data[2]
 
-static bool8 UNUSED DoTradeAnim_Wireless(void)
+static bool8 DoTradeAnim_Wireless(void)
 {
     u16 evoTarget;
 

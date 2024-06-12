@@ -8,6 +8,7 @@ PetalburgCity_PokemonCenter_1F_MapScripts::
 PetalburgCity_PokemonCenter_1F_OnTransition:
 	setrespawn HEAL_LOCATION_PETALBURG_CITY
 	call Common_EventScript_UpdateBrineyLocation
+	call Common_EventScript_SetupRivalGfxId
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_Nurse::
@@ -53,6 +54,34 @@ PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType::
 PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType::
 	msgbox PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType, MSGBOX_DEFAULT
 	return
+
+PetalburgCity_PokemonCenter_1F_EventScript_RivalResting::
+	lock
+	faceplayer
+	checkplayergender
+	compare VAR_RESULT, MALE
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_RivalResting2
+	msgbox PetalburgCity_PokemonCenter_1F_RivalText_1
+	goto PetalburgCity_PokemonCenter_1F_EventScript_RivalResting3
+
+
+PetalburgCity_PokemonCenter_1F_EventScript_RivalResting2:
+	msgbox PetalburgCity_PokemonCenter_1F_RivalText_0
+	goto PetalburgCity_PokemonCenter_1F_EventScript_RivalResting3
+
+PetalburgCity_PokemonCenter_1F_EventScript_RivalResting3:
+	releaseall
+	end
+
+PetalburgCity_PokemonCenter_1F_RivalText_0:
+	.string "May: Oh, hey {PLAYER}, we're still\n"
+	.string "taking a break before heading out. Can\l"
+	.string "never be too prepared, right?$"
+
+PetalburgCity_PokemonCenter_1F_RivalText_1:
+	.string "Brendan: Oh, hey {PLAYER}, we're still\n"
+	.string "taking a break before heading out. Can\l"
+	.string "never be too prepared, right?$"
 
 PetalburgCity_PokemonCenter_1F_Text_PCStorageSystem:
 	.string "That PC-based Pokémon Storage\n"

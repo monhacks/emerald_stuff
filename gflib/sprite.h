@@ -225,9 +225,9 @@ struct Sprite
              // is (offset + 1) << sheetSpan;
              // (This allows using frame-based anim tables for sheet sprites)
              u16 sheetSpan:3;
-            //  u16 flags_4:1;                 //0x10
-            //  u16 flags_5:1;                 //0x20
-            //  u16 flags_6:1;                 //0x40
+             //  u16 flags_4:1;             //0x10
+             //  u16 flags_5:1;             //0x20
+             //  u16 flags_6:1;             //0x40
              u16 flags_7:1;                 //0x80
     /*0x3F*/ u16 hFlip:1;                   //1
              u16 vFlip:1;                   //2
@@ -304,6 +304,7 @@ void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u16 rotat
 u16 LoadSpriteSheet(const struct SpriteSheet *sheet);
 u16 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u32 frame, s32 offset);
 void LoadSpriteSheets(const struct SpriteSheet *sheets);
+s16 AllocSpriteTiles(u16 tileCount);
 u16 AllocTilesForSpriteSheet(struct SpriteSheet *sheet);
 void AllocTilesForSpriteSheets(struct SpriteSheet *sheets);
 void LoadTilesForSpriteSheet(const struct SpriteSheet *sheet);
@@ -329,8 +330,6 @@ void CopyFromSprites(u8 *dest);
 u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
 void ClearSpriteCopyRequests(void);
 void ResetAffineAnimData(void);
-u8 LoadSpritePaletteDayNight(const struct SpritePalette *palette);
-void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images);
 u32 GetSpanPerImage(u32 shape, u32 size);
 
 #endif //GUARD_SPRITE_H

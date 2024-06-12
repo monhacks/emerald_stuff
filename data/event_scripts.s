@@ -19,7 +19,6 @@
 #include "constants/coins.h"
 #include "constants/contest.h"
 #include "constants/daycare.h"
-#include "constants/day_night.h"
 #include "constants/decorations.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
@@ -582,6 +581,7 @@ gStdScripts_End::
 	.include "data/scripts/new_game.inc"
 	.include "data/scripts/hall_of_fame.inc"
 
+	.include "data/scripts/config.inc"
 	.include "data/scripts/debug.inc"
 
 EventScript_WhiteOut::
@@ -727,7 +727,7 @@ Common_EventScript_OutOfCenterPartyHeal::
 	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
-  callnative UpdateFollowingPokemon
+	callnative UpdateFollowingPokemon
 	fadescreen FADE_FROM_BLACK
 	return
 
@@ -1081,7 +1081,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/move_tutors.inc"
 	.include "data/scripts/trainer_hill.inc"
 	.include "data/scripts/test_signpost.inc"
-  .include "data/scripts/follower.inc"
+	.include "data/scripts/follower.inc"
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
@@ -1211,3 +1211,9 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/SSAnne_rooms/scripts.inc"
 
 	.include "data/maps/Route39/scripts.inc"
+
+	.include "data/maps/DewfordVolcano/scripts.inc"
+
+	.include "data/maps/DewfordBar/scripts.inc"
+
+	.include "data/maps/Sewer/scripts.inc"

@@ -119,7 +119,7 @@ struct ListBuffer1 {
 };
 
 struct ListBuffer2 {
-    u8 name[MAX_POCKET_ITEMS][ITEM_NAME_LENGTH + 10];
+    u8 name[MAX_POCKET_ITEMS][max(ITEM_NAME_LENGTH, MOVE_NAME_LENGTH) + 15];
 };
 
 struct TempWallyBag {
@@ -225,7 +225,7 @@ static void ConfirmSell(u8);
 static void CancelSell(u8);
 static void Task_FadeAndCloseBagMenuIfMulch(u8 taskId);
 
-//bag sort
+#if I_BAG_SORT == TRUE
 static void Task_LoadBagSortOptions(u8 taskId);
 static void ItemMenu_SortByName(u8 taskId);
 static void ItemMenu_SortByType(u8 taskId);
@@ -238,6 +238,7 @@ static void Merge(struct ItemSlot* array, u32 low, u32 mid, u32 high, s8 (*compa
 static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
 static s8 CompareItemsByMost(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
 static s8 CompareItemsByType(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
+#endif // I_BAG_SORT == TRUE
 // Key item wheel
 static void Task_KeyItemWheel(u8 taskId);
 
@@ -321,9 +322,11 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_SHOW]              = {gMenuText_Show,     {ItemMenu_Show}},
     [ACTION_GIVE_FAVOR_LADY]   = {gMenuText_Give2,    {ItemMenu_GiveFavorLady}},
     [ACTION_CONFIRM_QUIZ_LADY] = {gMenuText_Confirm,  {ItemMenu_ConfirmQuizLady}},
+#if I_BAG_SORT == TRUE
     [ACTION_BY_NAME]           = {sMenuText_ByName,   {ItemMenu_SortByName}},
     [ACTION_BY_TYPE]           = {sMenuText_ByType,   {ItemMenu_SortByType}},
     [ACTION_BY_AMOUNT]         = {sMenuText_ByAmount, {ItemMenu_SortByAmount}},
+#endif // I_BAG_SORT == TRUE
     [ACTION_DUMMY]             = {gText_EmptyString2, {NULL}}
 };
 
@@ -771,7 +774,8 @@ void ResetBagScrollPositions(void)
 
 void CB2_BagMenuFromStartMenu(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToFullScreenStartMenu);
+    GoToBagMenu(ITEMMENULOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToFieldWithOpenMenu);
+    //GoToBagMenu(ITEMMENULOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToFullScreenStartMenu);
 }
 
 void CB2_BagMenuFromBattle(void)
@@ -1061,7 +1065,7 @@ static bool8 LoadBagMenu_Graphics(void)
     break;
     case 3:
         if (!IsWallysBag() && gSaveBlock2Ptr->playerGender != MALE)
-            LoadCompressedPalette(gBagScreenFemale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+            LoadCompressedPalette(gBagScreenMale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP); // gBagScreenFemale_Pal
         else
             LoadCompressedPalette(gBagScreenMale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         gBagMenu->graphicsLoadState++;
@@ -1139,10 +1143,12 @@ static void LoadBagItemListBuffers(u8 pocketId)
 
 static void GetItemName(u8 *dest, u16 itemId)
 {
+    u8 *end;
     switch (gBagPosition.pocket)
     {
     case TMHM_POCKET:
-        StringCopy(gStringVar2, GetMoveName(ItemIdToBattleMoveId(itemId)));
+        end = StringCopy(gStringVar2, GetMoveName(ItemIdToBattleMoveId(itemId)));
+        PrependFontIdToFit(gStringVar2, end, FONT_NARROW, 73);
         if (itemId >= ITEM_HM01)
         {
             // Get HM number
@@ -1158,11 +1164,13 @@ static void GetItemName(u8 *dest, u16 itemId)
         break;
     case BERRIES_POCKET:
         ConvertIntToDecimalStringN(gStringVar1, itemId - FIRST_BERRY_INDEX + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-        CopyItemName(itemId, gStringVar2);
+        end = CopyItemName(itemId, gStringVar2);
+        PrependFontIdToFit(gStringVar2, end, FONT_NARROW, 73);
         StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
         break;
     default:
-        CopyItemName(itemId, dest);
+        end = CopyItemName(itemId, dest);
+        PrependFontIdToFit(dest, end, FONT_NARROW, 88);
         break;
     }
 }
@@ -1171,7 +1179,7 @@ static void BagMenu_MoveCursorCallback(s32 itemIndex, bool8 onInit, struct ListM
 {
     if (onInit != TRUE)
     {
-        PlaySE(SE_SELECT);
+        PlaySE(SE_RG_BAG_CURSOR);
         ShakeBagSprite();
     }
     if (gBagMenu->toSwapPos == NOT_SWAPPING)
@@ -1462,9 +1470,7 @@ static void Task_BagMenu_HandleInput(u8 taskId)
     u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
     s32 listPosition;
     
-    //Scrolling BG
-    ChangeBgX(3, Q_8_8(-0.25), 2);
-    ChangeBgY(3, Q_8_8(-0.25), 2);
+    ChangeBgY(3, 128, BG_COORD_SUB);
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
     {
@@ -1490,23 +1496,23 @@ static void Task_BagMenu_HandleInput(u8 taskId)
                 }
                 return;
             }
+        #if I_BAG_SORT == TRUE
             else if (JOY_NEW(START_BUTTON))
             {
                 if ((gBagMenu->numItemStacks[gBagPosition.pocket] - 1) <= 1) //can't sort with 0 or 1 item in bag
                 {
-                    static const u8 sText_NothingToSort[] = _("There's nothing to sort!");
                     PlaySE(SE_FAILURE);
-                    DisplayItemMessage(taskId, 1, sText_NothingToSort, HandleErrorMessage);
+                    //DisplayItemMessage(taskId, FONT_NORMAL, gText_NothingChanged, HandleErrorMessage);
                     break;
                 }
-                
+
                 data[1] = GetItemListPosition(gBagPosition.pocket);
                 data[2] = BagGetQuantityByPocketPosition(gBagPosition.pocket + 1, data[1]);
                 if (gBagPosition.cursorPosition[gBagPosition.pocket] == gBagMenu->numItemStacks[gBagPosition.pocket] - 1)
                     break;
                 else
                     gSpecialVar_ItemId = BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1]);
-                
+
                 PlaySE(SE_SELECT);
                 BagDestroyPocketScrollArrowPair();
                 BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
@@ -1514,6 +1520,7 @@ static void Task_BagMenu_HandleInput(u8 taskId)
                 gTasks[taskId].func = Task_LoadBagSortOptions;
                 return;
             }
+        #endif // I_BAG_SORT == TRUE
             break;
         }
 
@@ -1629,8 +1636,8 @@ static void Task_SwitchBagPocket(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    ChangeBgX(3, Q_8_8(-0.25), 2);
-    ChangeBgY(3, Q_8_8(-0.25), 2);
+    //ChangeBgX(3, Q_8_8(-0.25), 2);
+    ChangeBgY(3,128, BG_COORD_SUB);
 
     if (!MenuHelpers_IsLinkActive() && !IsWallysBag())
     {
@@ -1728,8 +1735,8 @@ static void Task_HandleSwappingItemsInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    ChangeBgX(3, Q_8_8(-0.25), 2);
-    ChangeBgY(3, Q_8_8(-0.25), 2);
+    //ChangeBgX(3, Q_8_8(-0.25), 2);
+    ChangeBgY(3,128, BG_COORD_SUB);
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -1945,7 +1952,8 @@ static void OpenContextMenu(u8 taskId)
     }
     else
     {
-        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        u8 *end = CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
         StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
         FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
         BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar4, 3, 1, 0, 0, 0, COLORID_NORMAL);
@@ -1986,8 +1994,8 @@ static void Task_ItemContext_Normal(u8 taskId)
 
 static void Task_ItemContext_SingleRow(u8 taskId)
 {
-    ChangeBgX(3, Q_8_8(-0.25), 2);
-    ChangeBgY(3, Q_8_8(-0.25), 2);
+    //ChangeBgX(3, Q_8_8(-0.25), 2);
+    ChangeBgY(3,128, BG_COORD_SUB);
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -2010,8 +2018,8 @@ static void Task_ItemContext_SingleRow(u8 taskId)
 
 static void Task_ItemContext_MultipleRows(u8 taskId)
 {
-    ChangeBgX(3, Q_8_8(-0.25), 2);
-    ChangeBgY(3, Q_8_8(-0.25), 2);
+    //ChangeBgX(3, Q_8_8(-0.25), 2);
+    ChangeBgY(3,128, BG_COORD_SUB);
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         s8 cursorPos = Menu_GetCursorPos();
@@ -2116,7 +2124,8 @@ static void ItemMenu_Toss(u8 taskId)
     }
     else
     {
-        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, 2);
+        WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
         StringExpandPlaceholders(gStringVar4, gText_TossHowManyVar1s);
         FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
         BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar4, 3, 1, 0, 0, 0, COLORID_NORMAL);
@@ -2129,7 +2138,8 @@ static void AskTossItems(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    CopyItemName(gSpecialVar_ItemId, gStringVar1);
+    u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, tItemCount);
+    WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
     ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_ConfirmTossItems);
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
@@ -2213,7 +2223,8 @@ static void ConfirmToss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    CopyItemName(gSpecialVar_ItemId, gStringVar1);
+    u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, tItemCount);
+    WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
     ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayVar2Var1s);
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
@@ -2731,7 +2742,8 @@ static void Task_ItemContext_Deposit(u8 taskId)
     }
     else
     {
-        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, 2);
+        WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
         StringExpandPlaceholders(gStringVar4, gText_DepositHowManyVar1);
         FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
         BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar4, 3, 1, 0, 0, 0, COLORID_NORMAL);
@@ -2778,7 +2790,8 @@ static void TryDepositItem(u8 taskId)
     else if (AddPCItem(gSpecialVar_ItemId, tItemCount) == TRUE)
     {
         // Successfully deposited
-        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, tItemCount);
+        WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
         ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
         StringExpandPlaceholders(gStringVar4, gText_DepositedVar2Var1s);
         BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar4, 3, 1, 0, 0, 0, COLORID_NORMAL);
@@ -3128,6 +3141,7 @@ static void PrintTMHMMoveData(u16 itemId)
 }
 
 // bag sorting
+#if I_BAG_SORT == TRUE
 enum BagSortOptions
 {
     SORT_ALPHABETICALLY,
@@ -3228,7 +3242,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_PARALYZE_HEAL] = ITEM_TYPE_STATUS_RECOVERY,
     [ITEM_FULL_HEAL] = ITEM_TYPE_STATUS_RECOVERY,
     [ITEM_LAVA_COOKIE] = ITEM_TYPE_STATUS_RECOVERY,
-    
+
     [ITEM_ETHER] = ITEM_TYPE_PP_RECOVERY,
     [ITEM_MAX_ETHER] = ITEM_TYPE_PP_RECOVERY,
     [ITEM_ELIXIR] = ITEM_TYPE_PP_RECOVERY,
@@ -3243,7 +3257,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_PP_UP] = ITEM_TYPE_STAT_BOOST_DRINK,
     [ITEM_ZINC] = ITEM_TYPE_STAT_BOOST_DRINK,
     [ITEM_PP_MAX] = ITEM_TYPE_STAT_BOOST_DRINK,
-    
+
     [ITEM_MACHO_BRACE] = ITEM_TYPE_STAT_BOOST_HELD_ITEM,
 
     [ITEM_SUN_STONE] = ITEM_TYPE_EVOLUTION_STONE,
@@ -3252,23 +3266,22 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_THUNDER_STONE] = ITEM_TYPE_EVOLUTION_STONE,
     [ITEM_WATER_STONE] = ITEM_TYPE_EVOLUTION_STONE,
     [ITEM_LEAF_STONE] = ITEM_TYPE_EVOLUTION_STONE,
-    
+
     [ITEM_KINGS_ROCK] = ITEM_TYPE_EVOLUTION_ITEM,
     [ITEM_DEEP_SEA_TOOTH] = ITEM_TYPE_EVOLUTION_ITEM,
     [ITEM_DEEP_SEA_SCALE] = ITEM_TYPE_EVOLUTION_ITEM,
     [ITEM_EVERSTONE] = ITEM_TYPE_EVOLUTION_ITEM,
     [ITEM_METAL_COAT] = ITEM_TYPE_EVOLUTION_ITEM,
     [ITEM_DRAGON_SCALE] = ITEM_TYPE_EVOLUTION_ITEM,
-    [ITEM_UPGRADE] = ITEM_TYPE_EVOLUTION_ITEM,
-    
+    [ITEM_UP_GRADE] = ITEM_TYPE_EVOLUTION_ITEM,
+
     [ITEM_GUARD_SPEC] = ITEM_TYPE_BATTLE_ITEM,
     [ITEM_DIRE_HIT] = ITEM_TYPE_BATTLE_ITEM,
     [ITEM_X_ATTACK] = ITEM_TYPE_BATTLE_ITEM,
-    [ITEM_X_DEFENSE] = ITEM_TYPE_BATTLE_ITEM,
-    [ITEM_X_SP_ATK] = ITEM_TYPE_BATTLE_ITEM,
-    [ITEM_X_SP_DEF] = ITEM_TYPE_BATTLE_ITEM,
+    [ITEM_X_DEFEND] = ITEM_TYPE_BATTLE_ITEM,
     [ITEM_X_SPEED] = ITEM_TYPE_BATTLE_ITEM,
     [ITEM_X_ACCURACY] = ITEM_TYPE_BATTLE_ITEM,
+    [ITEM_X_SPECIAL] = ITEM_TYPE_BATTLE_ITEM,
     [ITEM_POKE_DOLL] = ITEM_TYPE_BATTLE_ITEM,
     [ITEM_FLUFFY_TAIL] = ITEM_TYPE_BATTLE_ITEM,
 
@@ -3308,19 +3321,20 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_LUCKY_PUNCH] = ITEM_TYPE_HELD_ITEM,
     [ITEM_METAL_POWDER] = ITEM_TYPE_HELD_ITEM,
     [ITEM_THICK_CLUB] = ITEM_TYPE_HELD_ITEM,
-    
+    [ITEM_STICK] = ITEM_TYPE_HELD_ITEM,
+
     [ITEM_SEA_INCENSE] = ITEM_TYPE_INCENSE,
     [ITEM_LAX_INCENSE] = ITEM_TYPE_INCENSE,
-    
+
     [ITEM_RED_ORB] = ITEM_TYPE_MEGA_STONE,
     [ITEM_BLUE_ORB] = ITEM_TYPE_MEGA_STONE,
-    
+
     [ITEM_BLUE_FLUTE] = ITEM_TYPE_FLUTE,
     [ITEM_YELLOW_FLUTE] = ITEM_TYPE_FLUTE,
     [ITEM_RED_FLUTE] = ITEM_TYPE_FLUTE,
     [ITEM_BLACK_FLUTE] = ITEM_TYPE_FLUTE,
     [ITEM_WHITE_FLUTE] = ITEM_TYPE_FLUTE,
-    
+
     [ITEM_SHOAL_SALT] = ITEM_TYPE_SELLABLE,
     [ITEM_SHOAL_SHELL] = ITEM_TYPE_SELLABLE,
     [ITEM_TINY_MUSHROOM] = ITEM_TYPE_SELLABLE,
@@ -3330,7 +3344,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_STARDUST] = ITEM_TYPE_SELLABLE,
     [ITEM_STAR_PIECE] = ITEM_TYPE_SELLABLE,
     [ITEM_NUGGET] = ITEM_TYPE_SELLABLE,
-   
+
     [ITEM_RED_SHARD] = ITEM_TYPE_SHARD,
     [ITEM_BLUE_SHARD] = ITEM_TYPE_SHARD,
     [ITEM_YELLOW_SHARD] = ITEM_TYPE_SHARD,
@@ -3352,7 +3366,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_DREAM_MAIL] = ITEM_TYPE_MAIL,
     [ITEM_FAB_MAIL] = ITEM_TYPE_MAIL,
     [ITEM_RETRO_MAIL] = ITEM_TYPE_MAIL,
-    
+
     #ifdef ITEM_EXPANSION
         [ITEM_HONEY] = ITEM_TYPE_STATUS_RECOVERY,
         [ITEM_BIG_MALASADA] = ITEM_TYPE_STATUS_RECOVERY,
@@ -3362,9 +3376,9 @@ static const u16 sItemsByType[ITEMS_COUNT] =
         [ITEM_SHALOUR_SABLE] = ITEM_TYPE_STATUS_RECOVERY,
         [ITEM_OLD_GATEAU] = ITEM_TYPE_STATUS_RECOVERY,
         [ITEM_HEAL_POWDER] = ITEM_TYPE_STATUS_RECOVERY,
-        
+
         [ITEM_SWEET_HEART] = ITEM_TYPE_HEALTH_RECOVERY,
-        
+
         [ITEM_ADAMANT_ORB] = ITEM_TYPE_HELD_ITEM,
         [ITEM_LUSTROUS_ORB] = ITEM_TYPE_HELD_ITEM,
         [ITEM_GRISEOUS_ORB] = ITEM_TYPE_HELD_ITEM,
@@ -3479,7 +3493,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
         [ITEM_DRAGON_GEM] = ITEM_TYPE_GEM,
         [ITEM_DARK_GEM] = ITEM_TYPE_GEM,
         [ITEM_FAIRY_GEM] = ITEM_TYPE_GEM,
-        
+
         [ITEM_LUCK_INCENSE] = ITEM_TYPE_INCENSE,
         [ITEM_FULL_INCENSE] = ITEM_TYPE_INCENSE,
         [ITEM_ODD_INCENSE] = ITEM_TYPE_INCENSE,
@@ -3487,7 +3501,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
         [ITEM_ROCK_INCENSE] = ITEM_TYPE_INCENSE,
         [ITEM_ROSE_INCENSE] = ITEM_TYPE_INCENSE,
         [ITEM_WAVE_INCENSE] = ITEM_TYPE_INCENSE,
-        
+
         [ITEM_VENUSAURITE] = ITEM_TYPE_MEGA_STONE,
         [ITEM_CHARIZARDITE_X] = ITEM_TYPE_MEGA_STONE,
         [ITEM_CHARIZARDITE_Y] = ITEM_TYPE_MEGA_STONE,
@@ -3536,7 +3550,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
         [ITEM_AUDINITE] = ITEM_TYPE_MEGA_STONE,
         [ITEM_DIANCITE] = ITEM_TYPE_MEGA_STONE,
         [ITEM_ULTRANECROZIUM_Z] =  ITEM_TYPE_MEGA_STONE,
-        
+
         [ITEM_NORMALIUM_Z] = ITEM_TYPE_Z_CRYSTAL,
         [ITEM_FIGHTINIUM_Z] = ITEM_TYPE_Z_CRYSTAL,
         [ITEM_FLYINIUM_Z] = ITEM_TYPE_Z_CRYSTAL,
@@ -3571,12 +3585,12 @@ static const u16 sItemsByType[ITEMS_COUNT] =
         [ITEM_SNORLIUM_Z] = ITEM_TYPE_Z_CRYSTAL,
         [ITEM_SOLGANIUM_Z] = ITEM_TYPE_Z_CRYSTAL,
         [ITEM_TAPUNIUM_Z] = ITEM_TYPE_Z_CRYSTAL,
-        
+
         [ITEM_RED_NECTAR] = ITEM_TYPE_NECTAR,
         [ITEM_YELLOW_NECTAR] = ITEM_TYPE_NECTAR,
         [ITEM_PINK_NECTAR] = ITEM_TYPE_NECTAR,
         [ITEM_PURPLE_NECTAR] = ITEM_TYPE_NECTAR,
-        
+
         [ITEM_ABILITY_CAPSULE] = ITEM_TYPE_STAT_BOOST_DRINK,
         [ITEM_HEALTH_FEATHER] = ITEM_TYPE_STAT_BOOST_FEATHER,
         [ITEM_MUSCLE_FEATHER] = ITEM_TYPE_STAT_BOOST_FEATHER,
@@ -3585,20 +3599,20 @@ static const u16 sItemsByType[ITEMS_COUNT] =
         [ITEM_CLEVER_FEATHER] = ITEM_TYPE_STAT_BOOST_FEATHER,
         [ITEM_SWIFT_FEATHER] = ITEM_TYPE_STAT_BOOST_FEATHER,
         [ITEM_PRETTY_FEATHER] = ITEM_TYPE_STAT_BOOST_FEATHER,
-        
+
         [ITEM_POWER_BRACER] = ITEM_TYPE_STAT_BOOST_HELD_ITEM,
         [ITEM_POWER_BELT] = ITEM_TYPE_STAT_BOOST_HELD_ITEM,
         [ITEM_POWER_LENS] = ITEM_TYPE_STAT_BOOST_HELD_ITEM,
         [ITEM_POWER_BAND] = ITEM_TYPE_STAT_BOOST_HELD_ITEM,
         [ITEM_POWER_ANKLET] = ITEM_TYPE_STAT_BOOST_HELD_ITEM,
         [ITEM_POWER_WEIGHT] = ITEM_TYPE_STAT_BOOST_HELD_ITEM,
-        
+
         [ITEM_DAWN_STONE] = ITEM_TYPE_EVOLUTION_STONE,
         [ITEM_DUSK_STONE] = ITEM_TYPE_EVOLUTION_STONE,
         [ITEM_SHINY_STONE] = ITEM_TYPE_EVOLUTION_STONE,
         [ITEM_ICE_STONE] = ITEM_TYPE_EVOLUTION_STONE,
         [ITEM_OVAL_STONE] = ITEM_TYPE_EVOLUTION_STONE,
-        
+
         [ITEM_PROTECTOR] = ITEM_TYPE_EVOLUTION_ITEM,
         [ITEM_MAGMARIZER] = ITEM_TYPE_EVOLUTION_ITEM,
         [ITEM_PRISM_SCALE] = ITEM_TYPE_EVOLUTION_ITEM,
@@ -3609,7 +3623,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
         [ITEM_REAPER_CLOTH] = ITEM_TYPE_EVOLUTION_ITEM,
         [ITEM_DUBIOUS_DISC] = ITEM_TYPE_EVOLUTION_ITEM,
         [ITEM_ELECTIRIZER] = ITEM_TYPE_EVOLUTION_ITEM,
-        
+
         [ITEM_RARE_BONE] = ITEM_TYPE_SELLABLE,
         [ITEM_PEARL_STRING] = ITEM_TYPE_SELLABLE,
         [ITEM_BIG_NUGGET] = ITEM_TYPE_SELLABLE,
@@ -3626,7 +3640,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
         [ITEM_RELIC_BAND] = ITEM_TYPE_RELIC,
         [ITEM_RELIC_STATUE] = ITEM_TYPE_RELIC,
         [ITEM_RELIC_CROWN] = ITEM_TYPE_RELIC,
-        
+
         [ITEM_ROOT_FOSSIL] = ITEM_TYPE_FOSSIL,
         [ITEM_CLAW_FOSSIL] = ITEM_TYPE_FOSSIL,
         [ITEM_SKULL_FOSSIL] = ITEM_TYPE_FOSSIL,
@@ -3635,10 +3649,6 @@ static const u16 sItemsByType[ITEMS_COUNT] =
         [ITEM_PLUME_FOSSIL] = ITEM_TYPE_FOSSIL,
         [ITEM_JAW_FOSSIL] = ITEM_TYPE_FOSSIL,
         [ITEM_SAIL_FOSSIL] = ITEM_TYPE_FOSSIL,
-
-        [ITEM_MODEST_MINT] = ITEM_TYPE_FIELD_USE,
-        [ITEM_MILD_MINT] = ITEM_TYPE_FIELD_USE,
-        [ITEM_NAIVE_MINT] = ITEM_TYPE_FIELD_USE,
     #endif
 };
 
@@ -3664,11 +3674,11 @@ static void AddBagSortSubMenu(void)
             gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortItems);
             break;
     }
-    
+
     StringExpandPlaceholders(gStringVar4, sText_SortItemsHow);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     BagMenu_Print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
-    
+
     if (gBagMenu->contextMenuNumItems == 2)
         PrintContextMenuItems(BagMenu_AddWindow(ITEMWIN_1x2));
     else if (gBagMenu->contextMenuNumItems == 4)
@@ -3713,7 +3723,7 @@ static void SortBagItems(u8 taskId)
     u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 
     RemoveContextWindow();
-    
+
     SortItemsInBag(gBagPosition.pocket, tSortType);
     DestroyListMenuTask(data[0], scrollPos, cursorPos);
     UpdatePocketListPosition(gBagPosition.pocket);
@@ -3728,8 +3738,6 @@ static void SortBagItems(u8 taskId)
 
 static void Task_SortFinish(u8 taskId)
 {
-    //s16* data = gTasks[taskId].data;
-
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         RemoveItemMessageWindow(4);
@@ -3741,7 +3749,6 @@ static void SortItemsInBag(u8 pocket, u8 type)
 {
     struct ItemSlot* itemMem;
     u16 itemAmount;
-    //s8 (*func)(struct ItemSlot*, struct ItemSlot*);
 
     switch (pocket)
     {
@@ -3798,7 +3805,7 @@ static void SortItemsInBag(u8 pocket, u8 type)
 static void MergeSort(struct ItemSlot* array, u32 low, u32 high, s8 (*comparator)(struct ItemSlot*, struct ItemSlot*))
 {
     u32 mid;
-    
+
     if (high <= low)
         return;
 
@@ -3896,3 +3903,5 @@ static s8 CompareItemsByType(struct ItemSlot* itemSlot1, struct ItemSlot* itemSl
 
     return CompareItemsAlphabetically(itemSlot1, itemSlot2); //Items are of same type so sort alphabetically
 }
+
+#endif // I_BAG_SORT == TRUE

@@ -142,5 +142,7 @@
       "script": "BrawlyDojoBrawlyNPC"
     }
   ],
-  "bg_events": []
+  "bg_events": [
+
+  ]
 }

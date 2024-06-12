@@ -93,7 +93,7 @@ enum StartMenuBoxes
 };
 
 //==========EWRAM==========//
-static EWRAM_DATA struct StartMenuResources *sStartMenuDataPtr = NULL;
+static EWRAM_INIT struct StartMenuResources *sStartMenuDataPtr = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 static EWRAM_DATA u8 gSelectedMenu = 0; // holds the position of the menu so that it persists in memory, 
@@ -169,6 +169,7 @@ static const struct WindowTemplate sStartMenuWindowTemplates[] =
         .paletteNum = 0,   // palette index to use for text
         .baseBlock = 1 + (9 * 15) + (30 * 2),     // tile start in VRAM
     },
+    DUMMY_WIN_TEMPLATE
 };
 
 
@@ -666,7 +667,7 @@ static void CreatePartyMonIcons()
 #ifdef POKEMON_EXPANSION
             sStartMenuDataPtr->iconMonSpriteIds[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG), SpriteCB_MonIcon, x, y, 0, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
 #else
-            sStartMenuDataPtr->iconMonSpriteIds[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG), SpriteCB_MonIcon, x, y, 0, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), FALSE);
+            sStartMenuDataPtr->iconMonSpriteIds[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG), SpriteCB_MonIcon, x, y, 0, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY), TRUE);
 #endif
 
         gSprites[sStartMenuDataPtr->iconMonSpriteIds[i]].oam.priority = 0;
