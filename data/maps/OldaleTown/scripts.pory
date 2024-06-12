@@ -401,6 +401,13 @@ OldaleTown_Text_TownSign:
 	.string "“Where things start off scarce.”$"
 
 `
+script testStarterChoice {
+	lock
+   callnative(StartNewPokeballCaseUI)
+   waitstate
+   release
+   end
+}
 
 script multichoiceTest {
     lock 

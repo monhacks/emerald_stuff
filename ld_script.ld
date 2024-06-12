@@ -366,6 +366,7 @@ SECTIONS {
         src/sliding_puzzle.o(.text);
         src/quests.o(.text);
         src/ui_startmenu_full.o(.text);
+        src/ui_birch_case.o(.text);
         src/ui_main_menu.o(.text);
     } > ROM =0
 
@@ -741,6 +742,7 @@ SECTIONS {
         src/sliding_puzzle.o(.rodata);
         src/quests.o(.rodata);
         src/ui_startmenu_full.o(.rodata);
+        src/ui_birch_case.o(.rodata);
         src/ui_main_menu.o(.rodata);
     } > ROM =0
 

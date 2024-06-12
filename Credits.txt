@@ -1,8 +1,8 @@
 Everyone who worked on the Pret disassembly and RHH expansion
 WesleyFG - Johto tiles
 Pawkkie - Various resources and shadows port of merrps
-Archie&Mudkip - New pause menu, start menu
-Mudkip - New shop menu, start menu, options menu dark theme
+Archie&Mudkip - New pause menu, start menu, birch case
+Mudkip - New shop menu, start menu, options menu dark theme, birch case
 quocmanh94 - HGSS berry animation
 BSBob - Map popup
 Kaixer - Pokemon sprites

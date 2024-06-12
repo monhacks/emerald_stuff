@@ -2499,6 +2499,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             gFollowerPalette_RaltsPartner,
             gShinyFollowerPalette_RaltsPartner
         )
+        .allPerfectIVs = TRUE,
         .levelUpLearnset = sRaltsLevelUpLearnset,
         .teachableLearnset = sRaltsTeachableLearnset,
         .eggMoveLearnset = sRaltsEggMoveLearnset,

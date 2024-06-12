@@ -400,6 +400,14 @@ OldaleTown_Text_TownSign:
 	.string "Oldale Town\n"
 	.string "“Where things start off scarce.”$"
 
+testStarterChoice::
+	lock
+	callnative StartNewPokeballCaseUI
+	waitstate
+	release
+	end
+
+
 multichoiceTest::
 	lock
 	faceplayer
