@@ -207,11 +207,11 @@ SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normal
 
         if (ability == ABILITY_CONTRARY) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda cut its own HP and maximized ATTACK!"); //Message stays the same
+            MESSAGE("Foe Spinda cut its own HP and maximized Attack!"); //Message stays the same
         }
         else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Foe Spinda cut its own HP and maximized ATTACK!");
+            MESSAGE("Foe Spinda cut its own HP and maximized Attack!");
         }
 
         HP_BAR(player, captureDamage: &results[i].damageAfter);

@@ -72,7 +72,6 @@
 #line 25
             .lvl = 5,
             .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
             {
 #line 29
@@ -83,7 +82,6 @@
 #line 30
             .lvl = 5,
             .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },

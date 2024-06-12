@@ -1996,6 +1996,16 @@ static const struct SpriteFrameImage sPicTable_Kirlia[] = {
 static const struct SpriteFrameImage sPicTable_Gardevoir[] = {
     overworld_ascending_frames(gObjectEventPic_Gardevoir, 4, 4),
 };
+
+static const struct SpriteFrameImage sPicTable_RaltsPartner[] = {
+    overworld_ascending_frames(gObjectEventPic_RaltsPartner, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_KirliaPartner[] = {
+    overworld_ascending_frames(gObjectEventPic_KirliaPartner, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_GardevoirPartner[] = {
+    overworld_ascending_frames(gObjectEventPic_GardevoirPartner, 4, 4),
+};
 #if P_MEGA_EVOLUTIONS
 /*static const struct SpriteFrameImage sPicTable_GardevoirMega[] = {
     overworld_ascending_frames(gObjectEventPic_GardevoirMega, 4, 4),

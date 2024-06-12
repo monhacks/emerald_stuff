@@ -7113,6 +7113,17 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
+    const u32 gMonFrontPic_RaltsPartner[] = INCBIN_U32("graphics/pokemon/ralts/special/anim_front.4bpp.lz");
+    const u32 gMonPalette_RaltsPartner[] = INCBIN_U32("graphics/pokemon/ralts/special/normal.gbapal.lz");
+    const u32 gMonBackPic_RaltsPartner[] = INCBIN_U32("graphics/pokemon/ralts/special/back.4bpp.lz");
+    const u32 gMonShinyPalette_RaltsPartner[] = INCBIN_U32("graphics/pokemon/ralts/special/shiny.gbapal.lz");
+    const u8 gMonIcon_RaltsPartner[] = INCBIN_U8("graphics/pokemon/ralts/special/icon.4bpp");
+
+    const u32 gObjectEventPic_RaltsPartner[] = INCBIN_COMP("graphics/pokemon/ralts/special/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_RaltsPartner[] = INCBIN_U32("graphics/pokemon/ralts/special/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_RaltsPartner[] = INCBIN_U32("graphics/pokemon/ralts/special/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
     const u32 gMonFrontPic_Kirlia[] = INCBIN_U32("graphics/pokemon/kirlia/anim_front.4bpp.lz");
     const u32 gMonPalette_Kirlia[] = INCBIN_U32("graphics/pokemon/kirlia/normal.gbapal.lz");
     const u32 gMonBackPic_Kirlia[] = INCBIN_U32("graphics/pokemon/kirlia/back.4bpp.lz");
@@ -7129,6 +7140,17 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
+    const u32 gMonFrontPic_KirliaPartner[] = INCBIN_U32("graphics/pokemon/kirlia/special/anim_front.4bpp.lz");
+    const u32 gMonPalette_KirliaPartner[] = INCBIN_U32("graphics/pokemon/kirlia/special/normal.gbapal.lz");
+    const u32 gMonBackPic_KirliaPartner[] = INCBIN_U32("graphics/pokemon/kirlia/special/back.4bpp.lz");
+    const u32 gMonShinyPalette_KirliaPartner[] = INCBIN_U32("graphics/pokemon/kirlia/special/shiny.gbapal.lz");
+    const u8 gMonIcon_KirliaPartner[] = INCBIN_U8("graphics/pokemon/kirlia/special/icon.4bpp");
+    const u32 gObjectEventPic_KirliaPartner[] = INCBIN_COMP("graphics/pokemon/kirlia/special/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_KirliaPartner[] = INCBIN_U32("graphics/pokemon/kirlia/special/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_KirliaPartner[] = INCBIN_U32("graphics/pokemon/kirlia/special/follow_shiny.gbapal.lz");
+#endif
+
     const u32 gMonFrontPic_Gardevoir[] = INCBIN_U32("graphics/pokemon/gardevoir/anim_front.4bpp.lz");
     const u32 gMonPalette_Gardevoir[] = INCBIN_U32("graphics/pokemon/gardevoir/normal.gbapal.lz");
     const u32 gMonBackPic_Gardevoir[] = INCBIN_U32("graphics/pokemon/gardevoir/back.4bpp.lz");
@@ -7144,6 +7166,17 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gShinyFollowerPalette_Gardevoir[] = INCBIN_U32("graphics/pokemon/gardevoir/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
+
+    const u32 gMonFrontPic_GardevoirPartner[] = INCBIN_U32("graphics/pokemon/gardevoir/special/front.4bpp.lz");
+    const u32 gMonPalette_GardevoirPartner[] = INCBIN_U32("graphics/pokemon/gardevoir/special/normal.gbapal.lz");
+    const u32 gMonBackPic_GardevoirPartner[] = INCBIN_U32("graphics/pokemon/gardevoir/special/back.4bpp.lz");
+    const u32 gMonShinyPalette_GardevoirPartner[] = INCBIN_U32("graphics/pokemon/gardevoir/special/shiny.gbapal.lz");
+    const u8 gMonIcon_GardevoirPartner[] = INCBIN_U8("graphics/pokemon/gardevoir/special/icon.4bpp");
+    const u32 gObjectEventPic_GardevoirPartner[] = INCBIN_COMP("graphics/pokemon/gardevoir/special/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_GardevoirPartner[] = INCBIN_U32("graphics/pokemon/gardevoir/special/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_GardevoirPartner[] = INCBIN_U32("graphics/pokemon/gardevoir/special/follow_shiny.gbapal.lz");
+#endif
 
 #if P_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_GardevoirMega[] = INCBIN_U32("graphics/pokemon/gardevoir/mega/front.4bpp.lz");

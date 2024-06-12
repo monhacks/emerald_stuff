@@ -9555,7 +9555,8 @@ static void Cmd_various(void)
         VARIOUS_ARGS();
 
         i = GetHighestStatId(battler);
-        if (GetBattlerAbility(battler) == ABILITY_BEAST_BOOST
+        if ((GetBattlerAbility(battler) == ABILITY_BEAST_BOOST
+            || GetBattlerAbility(battler) == ABILITY_SOUL_RESONANCE)
             && HasAttackerFaintedTarget()
             && !NoAliveMonsForEitherParty()
             && CompareStat(gBattlerAttacker, i, MAX_STAT_STAGE, CMP_LESS_THAN))

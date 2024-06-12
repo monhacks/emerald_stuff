@@ -2443,6 +2443,195 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .formChangeTable = sGardevoirFormChangeTable,
     },
 
+    [SPECIES_RALTS_PARTNER] =
+    {
+        .baseHP        = 28,
+        .baseAttack    = 25,
+        .baseDefense   = 25,
+        .baseSpeed     = 40,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 35,
+        .types = MON_TYPES(TYPE_PSYCHIC, RALTS_FAMILY_TYPE2),
+        .catchRate = 235,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 40 : 70,
+        .evYield_SpAttack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 35,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = RALTS_FAMILY_EGG_GROUPS,
+        .abilities = { ABILITY_SYNCHRONIZE, ABILITY_TRACE, ABILITY_TELEPATHY },
+        .bodyColor = BODY_COLOR_WHITE,
+        .speciesName = _("Ralts"),
+        .cryId = CRY_RALTS,
+        .natDexNum = NATIONAL_DEX_RALTS,
+        .categoryName = _("Feeling"),
+        .height = 4,
+        .weight = 66,
+        .description = COMPOUND_STRING(
+            "A Ralts has the power to sense the\n"
+            "emotions of people and Pokémon with the\n"
+            "horns on its head. It takes cover if it\n"
+            "senses any hostility."),
+        .pokemonScale = 457,
+        .pokemonOffset = -3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_RaltsPartner,
+        .frontPicSize = MON_COORDS_SIZE(24, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_RaltsPartner,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
+        .backPic = gMonBackPic_RaltsPartner,
+        .backPicSize = MON_COORDS_SIZE(32, 40),
+        .backPicYOffset = 13,
+        .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
+        .palette = gMonPalette_RaltsPartner,
+        .shinyPalette = gMonShinyPalette_RaltsPartner,
+        .iconSprite = gMonIcon_Ralts,
+        .iconPalIndex = 5,
+        FOOTPRINT(Ralts)
+        FOLLOWER(
+            sPicTable_RaltsPartner,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gFollowerPalette_RaltsPartner,
+            gShinyFollowerPalette_RaltsPartner
+        )
+        .levelUpLearnset = sRaltsLevelUpLearnset,
+        .teachableLearnset = sRaltsTeachableLearnset,
+        .eggMoveLearnset = sRaltsEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_KIRLIA_PARTNER}),
+    },
+
+    [SPECIES_KIRLIA_PARTNER] =
+    {
+        .baseHP        = 38,
+        .baseAttack    = 35,
+        .baseDefense   = 35,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 55,
+        .types = MON_TYPES(TYPE_PSYCHIC, RALTS_FAMILY_TYPE2),
+        .catchRate = 120,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 97 : 140,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 35,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = RALTS_FAMILY_EGG_GROUPS,
+        .abilities = { ABILITY_SYNCHRONIZE, ABILITY_TRACE, ABILITY_TELEPATHY },
+        .bodyColor = BODY_COLOR_WHITE,
+        .speciesName = _("Kirlia"),
+        .cryId = CRY_KIRLIA,
+        .natDexNum = NATIONAL_DEX_KIRLIA,
+        .categoryName = _("Emotion"),
+        .height = 8,
+        .weight = 202,
+        .description = COMPOUND_STRING(
+            "A Kirlia has the psychic power to create \n"
+            "a rip in the dimensions and see into the\n"
+            "future. It is said to dance with pleasure\n"
+            "on sunny mornings."),
+        .pokemonScale = 354,
+        .pokemonOffset = 0,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_KirliaPartner,
+        .frontPicSize = MON_COORDS_SIZE(32, 56),
+        .frontPicYOffset = 6,
+        .frontAnimFrames = sAnims_KirliaPartner,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_KirliaPartner,
+        .backPicSize = MON_COORDS_SIZE(48, 56),
+        .backPicYOffset = 6,
+        .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
+        .palette = gMonPalette_KirliaPartner,
+        .shinyPalette = gMonShinyPalette_KirliaPartner,
+        .iconSprite = gMonIcon_KirliaPartner,
+        .iconPalIndex = 5,
+        FOOTPRINT(Kirlia)
+        FOLLOWER(
+            sPicTable_KirliaPartner,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gFollowerPalette_KirliaPartner,
+            gShinyFollowerPalette_KirliaPartner
+        )
+        .levelUpLearnset = sKirliaLevelUpLearnset,
+        .teachableLearnset = sKirliaTeachableLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_GARDEVOIR_PARTNER}),
+    },
+
+    [SPECIES_GARDEVOIR_PARTNER] =
+    {
+        .baseHP        = 68,
+        .baseAttack    = 120,
+        .baseDefense   = 65,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 120,
+        .baseSpDefense = 110,
+        .types = MON_TYPES(TYPE_PSYCHIC, RALTS_FAMILY_TYPE2),
+        .catchRate = 45,
+    #if P_UPDATED_EXP_YIELDS >= GEN_8
+        .expYield = 259,
+    #elif P_UPDATED_EXP_YIELDS >= GEN_5
+        .expYield = 233,
+    #else
+        .expYield = 208,
+    #endif
+        .evYield_SpAttack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 35,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = RALTS_FAMILY_EGG_GROUPS,
+        .abilities = { ABILITY_SYNCHRONIZE, ABILITY_TRACE, ABILITY_SOUL_RESONANCE },
+        .bodyColor = BODY_COLOR_PURPLE,
+        .speciesName = _("Gardevoir"),
+        .cryId = CRY_GARDEVOIR,
+        .natDexNum = NATIONAL_DEX_GARDEVOIR,
+        .categoryName = _("Embrace"),
+        .height = 16,
+        .weight = 484,
+        .description = COMPOUND_STRING(
+            "It apparently does not feel the pull of\n"
+            "gravity because it supports itself with\n"
+            "psychic power. It will give its life to\n"
+            "protect its Trainer."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_GardevoirPartner,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_GardevoirPartner,
+        .frontAnimId = ANIM_GROW_IN_STAGES,
+        .backPic = gMonBackPic_GardevoirPartner,
+        .backPicSize = MON_COORDS_SIZE(48, 56),
+        .backPicYOffset = 6,
+        .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
+        .palette = gMonPalette_GardevoirPartner,
+        .shinyPalette = gMonShinyPalette_GardevoirPartner,
+        .iconSprite = gMonIcon_GardevoirPartner,
+        .iconPalIndex = 0,
+        FOOTPRINT(Gardevoir)
+        FOLLOWER(
+            sPicTable_GardevoirPartner,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gFollowerPalette_GardevoirPartner,
+            gShinyFollowerPalette_GardevoirPartner
+        )
+        .levelUpLearnset = sGardevoirLevelUpLearnset,
+        .teachableLearnset = sGardevoirTeachableLearnset,
+    },
+
 #if P_MEGA_EVOLUTIONS
     [SPECIES_GARDEVOIR_MEGA] =
     {

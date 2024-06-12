@@ -17,6 +17,7 @@ BelialClover/Rioluwott for EV allocation system, ROWE bag screen
 Paccy - his glimmering emerald was used as a base
 KingTapir - Desert Tiles
 FM - Tree tiles
+DestvoL - Lugia mega, partner gardevoir sprites
 Nikeligo - Frostbite orb code
 Tectonic fangame team - ability ideas, frostbite orb icon
 Zeikaro - Nature and tree tiles

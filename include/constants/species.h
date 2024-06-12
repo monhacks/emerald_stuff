@@ -1632,8 +1632,11 @@
 
 // Custom start
 #define SPECIES_LUGIA_MEGA                              1524
+#define SPECIES_RALTS_PARTNER                           1525
+#define SPECIES_KIRLIA_PARTNER                          1526
+#define SPECIES_GARDEVOIR_PARTNER                       1527
 
-#define SPECIES_EGG SPECIES_LUGIA_MEGA + 1
+#define SPECIES_EGG SPECIES_GARDEVOIR_PARTNER + 1
 
 #define NUM_SPECIES SPECIES_EGG
 

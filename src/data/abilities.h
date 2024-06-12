@@ -2667,4 +2667,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeTraced = TRUE,
         .cantBeSuppressed = TRUE,
     }, 
+
+    [ABILITY_SOUL_RESONANCE] =
+    {
+        .name = _("Soul Resonance"),
+        .description = COMPOUND_STRING("Boosts the Pokémon's most proficient\nstat when it knocks out a target."),
+        .aiRating = 7,
+    },
+
 };
