@@ -2652,4 +2652,19 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+
+    [ABILITY_GUARDIAN_OF_SEA] =
+    {
+    #if B_EXPANDED_ABILITY_NAMES == TRUE
+        .name = _("Guardian of Sea"),
+    #else
+        .name = _("Sea Guardian"),
+    #endif
+        .description = COMPOUND_STRING("Summons rain and enhances defenses\nduring it."),
+        .aiRating = 8,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+        .cantBeSuppressed = TRUE,
+    }, 
 };

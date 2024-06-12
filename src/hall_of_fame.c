@@ -625,6 +625,10 @@ u16 getHallofFameSpecies(u8 num){
             if(item == ITEM_TYRANITARITE)
                 return SPECIES_TYRANITAR_MEGA;
         break;
+        case SPECIES_LUGIA:
+            if (item == ITEM_DEEP_SEA_SCALE)
+                return SPECIES_LUGIA_MEGA;
+        break;
         case SPECIES_VENUSAUR:
             if(item == ITEM_VENUSAURITE)
                 return SPECIES_VENUSAUR_MEGA;

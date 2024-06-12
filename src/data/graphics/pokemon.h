@@ -6472,6 +6472,12 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gShinyFollowerPalette_Lugia[] = INCBIN_U32("graphics/pokemon/lugia/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
+
+    const u32 gMonFrontPic_LugiaMega[] = INCBIN_U32("graphics/pokemon/lugia/mega/front.4bpp.lz");
+    const u32 gMonPalette_LugiaMega[] = INCBIN_U32("graphics/pokemon/lugia/mega/normal.gbapal.lz");
+    const u32 gMonBackPic_LugiaMega[] = INCBIN_U32("graphics/pokemon/lugia/mega/back.4bpp.lz");
+    const u32 gMonShinyPalette_LugiaMega[] = INCBIN_U32("graphics/pokemon/lugia/mega/shiny.gbapal.lz");
+    const u8 gMonIcon_LugiaMega[] = INCBIN_U8("graphics/pokemon/lugia/icon.4bpp");
 #endif //P_FAMILY_LUGIA
 
 #if P_FAMILY_HO_OH

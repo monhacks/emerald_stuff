@@ -264,6 +264,15 @@ static const struct FormChange sTyranitarFormChangeTable[] = {
 };
 #endif //P_FAMILY_LARVITAR
 
+#if P_FAMILY_LUGIA
+static const struct FormChange sLugiaFormChangeTable[] = {
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,    SPECIES_LUGIA_MEGA, ITEM_DEEP_SEA_SCALE},
+#endif
+    {FORM_CHANGE_TERMINATOR},
+};
+#endif //P_FAMILY_LARVITAR
+
 #if P_FAMILY_TREECKO
 static const struct FormChange sSceptileFormChangeTable[] = {
 #if P_MEGA_EVOLUTIONS
