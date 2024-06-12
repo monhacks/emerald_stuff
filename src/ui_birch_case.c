@@ -132,17 +132,17 @@ struct MonChoiceData{ // This is the format used to define a mon, everything lef
 //
 static const struct MonChoiceData sStarterChoices[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 5, ITEM_ORAN_BERRY},
-    [BALL_TOP_SECOND]       = {SPECIES_TREECKO, 5, ITEM_ORAN_BERRY},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_TORCHIC, 5, ITEM_ORAN_BERRY},
+    [BALL_TOP_FIRST]        = {SPECIES_NONE, 5},
+    [BALL_TOP_SECOND]       = {SPECIES_NONE, 5},
+    [BALL_MIDDLE_FIRST]     = {SPECIES_PIKACHU_PARTNER, 5, ITEM_ORAN_BERRY},
 
-    [BALL_TOP_THIRD]        = {SPECIES_CHIKORITA, 5, ITEM_ORAN_BERRY},
-    [BALL_TOP_FOURTH]       = {SPECIES_TOTODILE, 5, ITEM_ORAN_BERRY},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_CYNDAQUIL, 5, ITEM_ORAN_BERRY},
+    [BALL_TOP_THIRD]        = {SPECIES_NONE, 5},
+    [BALL_TOP_FOURTH]       = {SPECIES_NONE, 5},
+    [BALL_MIDDLE_THIRD]     = {SPECIES_RALTS_PARTNER, 5, ITEM_ORAN_BERRY},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_BULBASAUR, 5, ITEM_ORAN_BERRY},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_CHARMANDER, 5, ITEM_ORAN_BERRY},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_SQUIRTLE, 5, ITEM_ORAN_BERRY},
+    [BALL_MIDDLE_SECOND]    = {SPECIES_EEVEE_PARTNER, 5, ITEM_ORAN_BERRY},
+    [BALL_BOTTOM_FIRST]     = {SPECIES_NONE, 5},
+    [BALL_BOTTOM_SECOND]    = {SPECIES_NONE, 5},
 };
 
 //==========EWRAM==========//
@@ -198,6 +198,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .paletteNum = 15,   // palette index to use for text
         .baseBlock = 1,     // tile start in VRAM
     },
+    DUMMY_WIN_TEMPLATE
 };
 
 
@@ -460,16 +461,9 @@ static void ChangePositionUpdateSpriteAnims(u16 oldPosition, u8 taskId) // turn 
 
 static void BirchCase_GiveMon() // Function that calls the GiveMon function pulled from Expansion by Lunos and Ghoulslash
 {
-    u8 *evs = (u8 *) sStarterChoices[sBirchCaseDataPtr->handPosition].evs;
-    u8 *ivs = (u8 *) sStarterChoices[sBirchCaseDataPtr->handPosition].ivs;
-    u16 *moves = (u16 *) sStarterChoices[sBirchCaseDataPtr->handPosition].moves;
     FlagSet(FLAG_SYS_POKEMON_GET);
-    gSpecialVar_Result = BirchCase_GiveMonParameterized(sStarterChoices[sBirchCaseDataPtr->handPosition].species, sStarterChoices[sBirchCaseDataPtr->handPosition].level, \
-                sStarterChoices[sBirchCaseDataPtr->handPosition].item, sStarterChoices[sBirchCaseDataPtr->handPosition].ball, \
-                sStarterChoices[sBirchCaseDataPtr->handPosition].nature, sStarterChoices[sBirchCaseDataPtr->handPosition].abilityNum, \
-                sStarterChoices[sBirchCaseDataPtr->handPosition].gender, evs, ivs, moves, \
-                sStarterChoices[sBirchCaseDataPtr->handPosition].ggMaxFactor, sStarterChoices[sBirchCaseDataPtr->handPosition].teraType,\
-                sStarterChoices[sBirchCaseDataPtr->handPosition].isShinyExpansion);
+    gSpecialVar_Result = ScriptGiveMon(sStarterChoices[sBirchCaseDataPtr->handPosition].species, sStarterChoices[sBirchCaseDataPtr->handPosition].level, \
+                sStarterChoices[sBirchCaseDataPtr->handPosition].item);
 }
 
 //==========FUNCTIONS==========//
@@ -809,6 +803,7 @@ static void Task_DelayedSpriteLoad(u8 taskId) // wait 4 frames after changing th
             SampleUi_DrawMonIcon(sStarterChoices[sBirchCaseDataPtr->handPosition].species);
         gTasks[taskId].func = Task_BirchCaseMain;
         sBirchCaseDataPtr->movingSelector = FALSE;
+        PlayCry_Normal(sStarterChoices[sBirchCaseDataPtr->handPosition].species, 0);
         return;
     }
     else
