@@ -444,7 +444,7 @@
 #define OBJ_EVENT_PAL_TAG_BRAWLY                 0x1158
 #define OBJ_EVENT_PAL_TAG_FALKNER                0x1159
 
-#if OW_MON_POKEBALLS
+#if OW_FOLLOWERS_POKEBALLS
 // Vanilla
 #define OBJ_EVENT_PAL_TAG_BALL_MASTER             0x2150
 #define OBJ_EVENT_PAL_TAG_BALL_ULTRA              0x2151
@@ -478,7 +478,7 @@
 #define OBJ_EVENT_PAL_TAG_BALL_BEAST              0x2169
 // Gen VIII
 #define OBJ_EVENT_PAL_TAG_BALL_STRANGE            0x216A
-#endif
+#endif //OW_FOLLOWERS_POKEBALLS
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611
 #define OBJ_EVENT_PAL_TAG_EMOTES                  0x8002

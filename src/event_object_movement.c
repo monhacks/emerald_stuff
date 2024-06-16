@@ -552,7 +552,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Galactic_Commander_Mars,   OBJ_EVENT_PAL_TAG_GALACTIC_COMMANDER_MARS},
     {gObjectEventPal_Galactic_Commander_Jupiter,   OBJ_EVENT_PAL_TAG_GALACTIC_COMMANDER_JUPITER},
     {gObjectEventPal_Npc1,                  OBJ_EVENT_PAL_TAG_DYNAMIC},
-#if OW_MON_POKEBALLS
+#if OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_BALL_MASTER},
     {gObjectEventPal_UltraBall,             OBJ_EVENT_PAL_TAG_BALL_ULTRA},
     {gObjectEventPal_GreatBall,             OBJ_EVENT_PAL_TAG_BALL_GREAT},
@@ -583,7 +583,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     #ifdef ITEM_STRANGE_BALL
     {gObjectEventPal_StrangeBall,           OBJ_EVENT_PAL_TAG_BALL_STRANGE},
     #endif //ITEM_STRANGE_BALL
-#endif //OW_MON_POKEBALLS
+#endif //OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_Substitute,            OBJ_EVENT_PAL_TAG_SUBSTITUTE},
     {gObjectEventPaletteEmotes,             OBJ_EVENT_PAL_TAG_EMOTES},
     {NULL,                                  OBJ_EVENT_PAL_TAG_NONE},
@@ -1995,25 +1995,25 @@ struct ObjectEvent *GetFollowerObject(void)
 static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, u8 form)
 {
     const struct ObjectEventGraphicsInfo *graphicsInfo = NULL;
-#if OW_FOLLOWERS_ENABLED
+#if OW_POKEMON_OBJECT_EVENTS
     switch (species)
     {
     case SPECIES_UNOWN: // Letters >A are defined as species >= NUM_SPECIES, so are not contiguous with A
         form %= NUM_UNOWN_FORMS;
-        graphicsInfo = &gSpeciesInfo[form ? SPECIES_UNOWN_B + form - 1 : species].followerData;
+        graphicsInfo = &gSpeciesInfo[form ? SPECIES_UNOWN_B + form - 1 : species].overworldData;
         break;
     default:
-        graphicsInfo = &gSpeciesInfo[species].followerData;
+        graphicsInfo = &gSpeciesInfo[species].overworldData;
         break;
     }
     // Try to avoid OOB or undefined access
     if ((graphicsInfo->tileTag == 0 && species < NUM_SPECIES) || (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES))
     {
         if (OW_SUBSTITUTE_PLACEHOLDER)
-            return &gSpeciesInfo[SPECIES_NONE].followerData;
+            return &gSpeciesInfo[SPECIES_NONE].overworldData;
         return NULL;
     }
-#endif
+#endif // OW_POKEMON_OBJECT_EVENTS
     return graphicsInfo;
 }
 
@@ -2022,9 +2022,9 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
 {
     u32 paletteNum;
     // Use standalone palette, unless entry is OOB or NULL (fallback to front-sprite-based)
-#if OW_FOLLOWERS_ENABLED == TRUE && OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    if ((shiny && gSpeciesInfo[species].followerPalette)
-    || (!shiny && gSpeciesInfo[species].followerShinyPalette))
+#if OW_POKEMON_OBJECT_EVENTS == TRUE && OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+    if ((shiny && gSpeciesInfo[species].overworldPalette)
+    || (!shiny && gSpeciesInfo[species].overworldShinyPalette))
     {
         struct SpritePalette spritePalette;
         u16 palTag = shiny ? (species + SPECIES_SHINY_TAG + OBJ_EVENT_PAL_TAG_DYNAMIC) : (species + OBJ_EVENT_PAL_TAG_DYNAMIC);
@@ -2033,9 +2033,9 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
             return paletteNum;
         spritePalette.tag = palTag;
         if (shiny)
-            spritePalette.data = gSpeciesInfo[species].followerShinyPalette;
+            spritePalette.data = gSpeciesInfo[species].overworldShinyPalette;
         else
-            spritePalette.data = gSpeciesInfo[species].followerPalette;
+            spritePalette.data = gSpeciesInfo[species].overworldPalette;
         
         // Check if pal data must be decompressed
         if (IsLZ77Data(spritePalette.data, PLTT_SIZE_4BPP, PLTT_SIZE_4BPP))
@@ -2047,7 +2047,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
         paletteNum = LoadSpritePalette(&spritePalette);
     }
     else
-#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_POKEMON_OBJECT_EVENTS == TRUE && OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
     {
         // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
         // so that palette tags do not overlap
@@ -2194,7 +2194,8 @@ void UpdateFollowingPokemon(void)
     // 1. GetFollowerInfo returns FALSE
     // 2. Map is indoors and gfx is larger than 32x32
     // 3. flag is set
-    if (OW_FOLLOWERS_ENABLED == FALSE
+    if (OW_POKEMON_OBJECT_EVENTS == FALSE
+     || OW_FOLLOWERS_ENABLED == FALSE
      || !GetFollowerInfo(&species, &form, &shiny)
      || SpeciesToGraphicsInfo(species, form) == NULL
      || (gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, form)->oam->size > ST_OAM_SIZE_2)
@@ -5440,7 +5441,7 @@ bool8 MovementType_FollowPlayer_Moving(struct ObjectEvent *objectEvent, struct S
     else if (objectEvent->movementActionId < MOVEMENT_ACTION_EXIT_POKEBALL)
     {
         UpdateFollowerTransformEffect(objectEvent, sprite);
-        if (OW_MON_BOBBING == TRUE && (sprite->data[5] & 7) == 2)
+        if (OW_FOLLOWERS_BOBBING == TRUE && (sprite->data[5] & 7) == 2)
             sprite->y2 ^= -1;
     }
     return FALSE;
@@ -5463,7 +5464,7 @@ bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *objectEvent, struct Spri
         // finish movement action
         objectEvent->singleMovementActive = 0;
     }
-    else if (OW_MON_BOBBING == TRUE && (sprite->data[3] & 7) == 2)
+    else if (OW_FOLLOWERS_BOBBING == TRUE && (sprite->data[3] & 7) == 2)
     {
         sprite->y2 ^= -1;
     }
@@ -5507,7 +5508,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
         ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_EXIT_POKEBALL);
         objectEvent->singleMovementActive = 1;
         sprite->sTypeFuncId = 2;
-        if (OW_MON_BOBBING == TRUE)
+        if (OW_FOLLOWERS_BOBBING == TRUE)
             sprite->y2 = 0;
         return TRUE;
     }
@@ -5548,7 +5549,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
         else
         {
             objectEvent->movementActionId = GetWalkNormalMovementAction(direction);
-            if (OW_MON_BOBBING == TRUE)
+            if (OW_FOLLOWERS_BOBBING == TRUE)
                 sprite->y2 = -1;
         }
     }
@@ -5572,7 +5573,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     else
     {
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkNormalMovementAction(direction));
-        if (OW_MON_BOBBING == TRUE)
+        if (OW_FOLLOWERS_BOBBING == TRUE)
             sprite->y2 = -1;
     }
     #endif
@@ -7319,7 +7320,7 @@ static u8 LoadFillColorPalette(u16 color, u16 paletteTag, struct Sprite *sprite)
 
 static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent)
 {
-    #if OW_MON_POKEBALLS
+    #if OW_FOLLOWERS_POKEBALLS
     u32 ball = BALL_POKE;
     if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
     {
@@ -7337,7 +7338,7 @@ static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent)
             return;
         }
     }
-    #endif
+    #endif //OW_FOLLOWERS_POKEBALLS
     ObjectEventSetGraphicsId(objEvent, OBJ_EVENT_GFX_POKE_BALL);
 }
 
