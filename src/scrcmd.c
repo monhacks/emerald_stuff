@@ -2649,3 +2649,8 @@ bool8 ScrCmd_calculatemonstats(void)
     }
     return FALSE;
 }
+
+void ScriptSetDoubleBattleFlag(struct ScriptContext *ctx)
+{
+    sIsScriptedWildDouble = TRUE;
+}
