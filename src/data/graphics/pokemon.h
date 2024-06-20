@@ -6466,10 +6466,10 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonFootprint_Lugia[] = INCBIN_U8("graphics/pokemon/lugia/footprint.1bpp");
 #endif //P_FOOTPRINTS
 #if OW_POKEMON_OBJECT_EVENTS
-    const u32 gObjectEventPic_Lugia[] = INCBIN_COMP("graphics/pokemon/lugia/follower.4bpp");
+    const u32 gObjectEventPic_Lugia[] = INCBIN_COMP("graphics/pokemon/lugia/overworld.4bpp");
 #if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
-    const u32 gOverworldPalette_Lugia[] = INCBIN_U32("graphics/pokemon/lugia/follow_normal.gbapal.lz");
-    const u32 gShinyOverworldPalette_Lugia[] = INCBIN_U32("graphics/pokemon/lugia/follow_shiny.gbapal.lz");
+    const u32 gOverworldPalette_Lugia[] = INCBIN_U32("graphics/pokemon/lugia/overworld_normal.gbapal.lz");
+    const u32 gShinyOverworldPalette_Lugia[] = INCBIN_U32("graphics/pokemon/lugia/overworld_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
