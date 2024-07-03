@@ -752,7 +752,7 @@ void InitBattleBgsVideo(void)
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON | DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
 }
 
-void LoadBattleMenuWindowGfx(void)
+void LoadBattleMenuWindowGfx(void) // TODO
 {
     LoadUserWindowBorderGfx(2, 0x12, BG_PLTT_ID(1));
     LoadUserWindowBorderGfx(2, 0x22, BG_PLTT_ID(1));
