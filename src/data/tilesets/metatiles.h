@@ -312,3 +312,6 @@ const u16 gMetatileAttributes_Sewer[] = INCBIN_U16("data/tilesets/secondary/sewe
 
 const u16 gMetatiles_Sewer_Clear[] = INCBIN_U16("data/tilesets/secondary/sewer_clear/metatiles.bin");
 const u16 gMetatileAttributes_Sewer_Clear[] = INCBIN_U16("data/tilesets/secondary/sewer_clear/metatile_attributes.bin");
+
+const u16 gMetatiles_underwater2[] = INCBIN_U16("data/tilesets/primary/underwater_2/metatiles.bin");
+const u16 gMetatileAttributes_underwater2[] = INCBIN_U16("data/tilesets/primary/underwater_2/metatile_attributes.bin");

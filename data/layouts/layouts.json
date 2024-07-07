@@ -4956,7 +4956,7 @@
       "name": "MirageUnderwater_Layout",
       "width": 30,
       "height": 70,
-      "primary_tileset": "gTileset_General",
+      "primary_tileset": "gTileset_underwater2",
       "secondary_tileset": "gTileset_Underwater2",
       "border_filepath": "data/layouts/MirageUnderwater/border.bin",
       "blockdata_filepath": "data/layouts/MirageUnderwater/map.bin"
