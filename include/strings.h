@@ -327,6 +327,11 @@ extern const u8 gText_OptionFontFireRed[];  //tx_optionsPlus
 extern const u8 gText_OptionFontEmerald[];  //tx_optionsPlus
 extern const u8 gText_OptionMatchCalls[];   //tx_optionsPlus
 extern const u8 gText_OptionBattleIntro[];   //tx_optionsPlus
+extern const u8 gText_BattleSpeed1X[];   //tx_optionsPlus
+extern const u8 gText_BattleSpeed2X[];   //tx_optionsPlus
+extern const u8 gText_BattleSpeed3X[];   //tx_optionsPlus
+extern const u8 gText_BattleSpeed4X[];   //tx_optionsPlus
+
 extern const u8 gText_OptionMenuSave[];
 extern const u8 gText_ButtonMode[];
 

@@ -41,8 +41,7 @@ enum
 
 enum
 {
-    MENUITEM_CUSTOM_HP_BAR,
-    MENUITEM_CUSTOM_EXP_BAR,
+    MENUITEM_CUSTOM_BATTLE_SPEED,
     MENUITEM_CUSTOM_LEVEL_SCALING,
     MENUITEM_CUSTOM_FONT,
     MENUITEM_CUSTOM_MATCHCALL,
@@ -174,6 +173,7 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 act
 static void DrawChoices_Options_Four(const u8 *const *const strings, int selection, int y, bool8 active);
 static void ReDrawAll(void);
 static void DrawChoices_TextSpeed(int selection, int y);
+static void DrawChoices_BattleSpeed(int selection, int y);
 static void DrawChoices_BattleScene(int selection, int y);
 static void DrawChoices_BattleStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
@@ -242,8 +242,7 @@ struct // MENU_CUSTOM
     int (*processInput)(int selection);
 } static const sItemFunctionsCustom[MENUITEM_CUSTOM_COUNT] =
 {
-    [MENUITEM_CUSTOM_HP_BAR]       = {DrawChoices_BarSpeed,    ProcessInput_Options_Eleven},
-    [MENUITEM_CUSTOM_EXP_BAR]      = {DrawChoices_BarSpeed,    ProcessInput_Options_Eleven},
+    [MENUITEM_CUSTOM_BATTLE_SPEED]       = {DrawChoices_BattleSpeed,    ProcessInput_Options_Four},
     [MENUITEM_CUSTOM_LEVEL_SCALING]   = {DrawChoices_LevelScaling,   ProcessInput_Options_Two},
     [MENUITEM_CUSTOM_FONT]         = {DrawChoices_Font,        ProcessInput_Options_Two}, 
     [MENUITEM_CUSTOM_MATCHCALL]    = {DrawChoices_MatchCall,   ProcessInput_Options_Two},
@@ -252,8 +251,7 @@ struct // MENU_CUSTOM
 };
 
 // Menu left side option names text
-static const u8 sText_HpBar[]       = _("Hp Bar");
-static const u8 sText_ExpBar[]      = _("Exp Bar");
+static const u8 sText_BattleSpeed[]       = _("Battle Speed");
 static const u8 sText_LevelScaling[]   = _("Level Scaling");
 static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
@@ -268,8 +266,7 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 
 static const u8 *const sOptionMenuItemsNamesCustom[MENUITEM_CUSTOM_COUNT] =
 {
-    [MENUITEM_CUSTOM_HP_BAR]      = sText_HpBar,
-    [MENUITEM_CUSTOM_EXP_BAR]     = sText_ExpBar,
+    [MENUITEM_CUSTOM_BATTLE_SPEED]      = sText_BattleSpeed,
     [MENUITEM_CUSTOM_LEVEL_SCALING]  = sText_LevelScaling,
     [MENUITEM_CUSTOM_FONT]        = gText_Font,
     [MENUITEM_CUSTOM_MATCHCALL]   = gText_OptionMatchCalls,
@@ -306,8 +303,7 @@ static bool8 CheckConditions(int selection)
     case MENU_CUSTOM:
         switch(selection)
         {
-        case MENUITEM_CUSTOM_HP_BAR:             return TRUE;
-        case MENUITEM_CUSTOM_EXP_BAR:            return TRUE;
+        case MENUITEM_CUSTOM_BATTLE_SPEED:       return TRUE;
         case MENUITEM_CUSTOM_LEVEL_SCALING:      return TRUE;
         case MENUITEM_CUSTOM_FONT:               return TRUE;
         case MENUITEM_CUSTOM_MATCHCALL:          return TRUE;
@@ -344,7 +340,7 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 };
 
 // Custom
-static const u8 sText_Desc_BattleHPBar[]        = _("Choose how fast the HP BAR will get\ndrained in battles.");
+static const u8 sText_Desc_BattleSpeed[]        = _("Choose how fast the battle animations\nplay out.");
 static const u8 sText_Desc_BattleExpBar[]       = _("Choose how fast the EXP BAR will get\nfilled in battles.");
 static const u8 sText_Desc_LevelScalingOn[]        = _("Trainers scale to average level\n of your party.");
 static const u8 sText_Desc_LevelScalingOff[]       = _("Trainer teams do not scale.");
@@ -359,8 +355,7 @@ static const u8 sText_Desc_BattleIntro[]  = _("Battle intros are the slightly fa
 static const u8 sText_Desc_BattleIntroInstant[]  = _("Battle intros will skip the slide\nanimation.");
 static const u8 *const sOptionMenuItemDescriptionsCustom[MENUITEM_CUSTOM_COUNT][2] =
 {
-    [MENUITEM_CUSTOM_HP_BAR]      = {sText_Desc_BattleHPBar,        sText_Empty},
-    [MENUITEM_CUSTOM_EXP_BAR]     = {sText_Desc_BattleExpBar,       sText_Empty},
+    [MENUITEM_CUSTOM_BATTLE_SPEED]      = {sText_Desc_BattleSpeed,        sText_Empty},
     [MENUITEM_CUSTOM_LEVEL_SCALING]  = {sText_Desc_LevelScalingOn,        sText_Desc_LevelScalingOff},
     [MENUITEM_CUSTOM_FONT]        = {sText_Desc_FontType,           sText_Desc_FontType},
     [MENUITEM_CUSTOM_MATCHCALL]   = {sText_Desc_OverworldCallsOn,   sText_Desc_OverworldCallsOff},
@@ -385,8 +380,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
 static const u8 sText_Desc_Disabled_BattleHPBar[]   = _("Only active if xyz.");
 static const u8 *const sOptionMenuItemDescriptionsDisabledCustom[MENUITEM_CUSTOM_COUNT] =
 {
-    [MENUITEM_CUSTOM_HP_BAR]      = sText_Desc_Disabled_BattleHPBar,
-    [MENUITEM_CUSTOM_EXP_BAR]     = sText_Empty,
+    [MENUITEM_CUSTOM_BATTLE_SPEED]      = sText_Empty,
     [MENUITEM_CUSTOM_LEVEL_SCALING]  = sText_Empty,
     [MENUITEM_CUSTOM_FONT]        = sText_Empty,
     [MENUITEM_CUSTOM_MATCHCALL]   = sText_Empty,
@@ -412,7 +406,7 @@ static const u8 *const OptionTextDescription(void)
         if (!CheckConditions(menuItem))
             return sOptionMenuItemDescriptionsDisabledMain[menuItem];
         selection = sOptions->sel_custom[menuItem];
-        if (menuItem == MENUITEM_CUSTOM_HP_BAR || menuItem == MENUITEM_CUSTOM_EXP_BAR)
+        if (menuItem == MENUITEM_CUSTOM_BATTLE_SPEED)
             selection = 0;
         return sOptionMenuItemDescriptionsCustom[menuItem][selection];
     }
@@ -691,8 +685,7 @@ void CB2_InitOptionPlusMenu(void)
         sOptions->sel[MENUITEM_MAIN_BUTTONMODE]  = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
 
-        sOptions->sel_custom[MENUITEM_CUSTOM_HP_BAR]      = gSaveBlock2Ptr->optionsHpBarSpeed;
-        sOptions->sel_custom[MENUITEM_CUSTOM_EXP_BAR]     = gSaveBlock2Ptr->optionsExpBarSpeed;
+        sOptions->sel_custom[MENUITEM_CUSTOM_BATTLE_SPEED]      = gSaveBlock2Ptr->optionsBattleSpeed;
         sOptions->sel_custom[MENUITEM_CUSTOM_LEVEL_SCALING]  = gSaveBlock2Ptr->optionsLevelScaling;
         sOptions->sel_custom[MENUITEM_CUSTOM_FONT]        = gSaveBlock2Ptr->optionsCurrentFont;
         sOptions->sel_custom[MENUITEM_CUSTOM_MATCHCALL]   = gSaveBlock2Ptr->optionsDisableMatchCall;
@@ -901,8 +894,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_MAIN_BUTTONMODE];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
 
-    gSaveBlock2Ptr->optionsHpBarSpeed       = sOptions->sel_custom[MENUITEM_CUSTOM_HP_BAR];
-    gSaveBlock2Ptr->optionsExpBarSpeed      = sOptions->sel_custom[MENUITEM_CUSTOM_EXP_BAR];
+    gSaveBlock2Ptr->optionsBattleSpeed      = sOptions->sel_custom[MENUITEM_CUSTOM_BATTLE_SPEED];
     gSaveBlock2Ptr->optionsLevelScaling     = sOptions->sel_custom[MENUITEM_CUSTOM_LEVEL_SCALING];
     gSaveBlock2Ptr->optionsCurrentFont      = sOptions->sel_custom[MENUITEM_CUSTOM_FONT];
     gSaveBlock2Ptr->optionsDisableMatchCall = sOptions->sel_custom[MENUITEM_CUSTOM_MATCHCALL];
@@ -1151,6 +1143,7 @@ static void ReDrawAll(void)
 static const u8 sText_Faster[] = _("Faster");
 static const u8 sText_Instant[] = _("Instant");
 static const u8 *const sTextSpeedStrings[] = {gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast, sText_Faster};
+static const u8 *const sBattleSpeedStrings[] = {gText_BattleSpeed1X, gText_BattleSpeed2X, gText_BattleSpeed3X, gText_BattleSpeed4X};
 static void DrawChoices_TextSpeed(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_MAIN_TEXTSPEED);
@@ -1223,20 +1216,24 @@ static void DrawChoices_ButtonMode(int selection, int y)
 }
 
 static const u8 sText_Normal[] = _("Normal");
-static void DrawChoices_BarSpeed(int selection, int y) //HP and EXP
+
+static void DrawChoices_BattleSpeed(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_CUSTOM_EXP_BAR);
+    bool8 active = CheckConditions(MENUITEM_CUSTOM_BATTLE_SPEED);
 
     if (selection == 0)
-         DrawOptionMenuChoice(sText_Normal, 104, y, 1, active);
-    else if (selection < 10)
     {
-        u8 textPlus[] = _("+1{0x77}{0x77}{0x77}{0x77}{0x77}"); // 0x77 is to clear INSTANT text
-        textPlus[1] = CHAR_0 + selection;
-        DrawOptionMenuChoice(textPlus, 104, y, 1, active);
-    }
-    else
-        DrawOptionMenuChoice(sText_Instant, 104, y, 1, active);
+        gSaveBlock2Ptr->optionsBattleSpeed = 0;    
+    } else if (selection == 1)
+    {
+        gSaveBlock2Ptr->optionsBattleSpeed = 1; 
+    } else if (selection == 2)
+    {
+        gSaveBlock2Ptr->optionsBattleSpeed = 2;
+    } else {
+        gSaveBlock2Ptr->optionsBattleSpeed = 3;
+    }  
+    DrawChoices_Options_Four(sBattleSpeedStrings, selection, y, active);
 }
 
 static void DrawChoices_LevelScaling(int selection, int y)
