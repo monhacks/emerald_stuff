@@ -930,7 +930,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
             HandleLoadSpecialPokePic(FALSE,
                                      gMonSpritesGfxPtr->spritesGfx[position],
                                      targetSpecies,
-                                     gTransformedPersonalities[battlerAtk]);
+                                     personalityValue);
         }
         else
         {
@@ -948,7 +948,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
             HandleLoadSpecialPokePic(TRUE,
                                      gMonSpritesGfxPtr->spritesGfx[position],
                                      targetSpecies,
-                                     gTransformedPersonalities[battlerAtk]);
+                                     personalityValue);
         }
     }
     src = gMonSpritesGfxPtr->spritesGfx[position];
