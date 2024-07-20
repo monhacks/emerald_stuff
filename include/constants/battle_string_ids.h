@@ -670,7 +670,7 @@
 #define STRINGID_CURRENTMOVECANTSELECT                668
 #define STRINGID_TARGETISBEINGSALTCURED               669
 #define STRINGID_TARGETISHURTBYSALTCURE               670
-#define STRINGID_OPPORTUNISTCOPIED                    671
+#define STRINGID_OPPORTUNISTCOPIED                    671 // Unused
 #define STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP      672
 #define STRINGID_SHARPSTEELFLOATS                     673
 #define STRINGID_SHARPSTEELDMG                        674
@@ -716,6 +716,7 @@
 #define STRINGID_FOGLIFTED                            714
 #define STRINGID_PKMNTERASTALLIZEDINTO                715
 #define STRINGID_PKMNMADESHELLGLEAM                   716
+
 
 #define BATTLESTRINGS_COUNT                           717
 
