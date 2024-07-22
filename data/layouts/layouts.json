@@ -5050,6 +5050,26 @@
       "secondary_tileset": "gTileset_Sewer_Clear",
       "border_filepath": "data/layouts/Sewer/border.bin",
       "blockdata_filepath": "data/layouts/Sewer/map.bin"
+    },
+    {
+      "id": "LAYOUT_REEF",
+      "name": "Reef_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Reef",
+      "border_filepath": "data/layouts/Reef/border.bin",
+      "blockdata_filepath": "data/layouts/Reef/map.bin"
+    },
+    {
+      "id": "LAYOUT_ASPERTIA_CITY",
+      "name": "AspertiaCity_Layout",
+      "width": 30,
+      "height": 30,
+      "primary_tileset": "gTileset_JohtoGeneral",
+      "secondary_tileset": "gTileset_JohtoOlivine",
+      "border_filepath": "data/layouts/AspertiaCity/border.bin",
+      "blockdata_filepath": "data/layouts/AspertiaCity/map.bin"
     }
   ]
 }

@@ -2367,3 +2367,22 @@ const u16 gTilesetPalettes_underwater2[][16] =
 };
 
 const u32 gTilesetTiles_underwater2[] = INCBIN_U32("data/tilesets/primary/underwater_2/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_Reef[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/reef/palettes/12.gbapal"),
+};
+
+const u32 gTilesetTiles_Reef[] = INCBIN_U32("data/tilesets/secondary/reef/tiles.4bpp.lz");

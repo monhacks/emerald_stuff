@@ -78,6 +78,7 @@
 #define MAP_OLIVINE_CITY             (69 | (0 << 8))
 #define MAP_ROUTE40                  (70 | (0 << 8))
 #define MAP_ROUTE39                  (71 | (0 << 8))
+#define MAP_ASPERTIA_CITY            (72 | (0 << 8))
 
 // gMapGroup_IndoorLittleroot
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))
@@ -464,6 +465,7 @@
 #define MAP_SSANNE_ROOMS           (11 | (25 << 8))
 #define MAP_DEWFORD_VOLCANO        (12 | (25 << 8))
 #define MAP_SEWER                  (13 | (25 << 8))
+#define MAP_REEF                   (14 | (25 << 8))
 
 // gMapGroup_IndoorDynamic
 #define MAP_SECRET_BASE_RED_CAVE1    (0 | (26 << 8))

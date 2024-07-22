@@ -108,7 +108,8 @@
     "MirageWaterway",
     "OlivineCity",
     "Route40",
-    "Route39"
+    "Route39",
+    "AspertiaCity"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -494,7 +495,8 @@
     "SSKanne",
     "SSAnne_rooms",
     "DewfordVolcano",
-    "Sewer"
+    "Sewer",
+    "Reef"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

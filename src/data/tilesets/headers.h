@@ -1221,3 +1221,14 @@ const struct Tileset gTileset_underwater2 =
     .metatileAttributes = gMetatileAttributes_underwater2,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_Reef =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Reef,
+    .palettes = gTilesetPalettes_Reef,
+    .metatiles = gMetatiles_Reef,
+    .metatileAttributes = gMetatileAttributes_Reef,
+    .callback = NULL,
+};

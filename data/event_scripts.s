@@ -1217,3 +1217,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/DewfordBar/scripts.inc"
 
 	.include "data/maps/Sewer/scripts.inc"
+
+	.include "data/maps/Reef/scripts.inc"
+
+	.include "data/maps/AspertiaCity/scripts.inc"
