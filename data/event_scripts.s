@@ -1220,4 +1220,4 @@ EventScript_VsSeekerChargingDone::
 
 	.include "data/maps/Reef/scripts.inc"
 
-	.include "data/maps/AspertiaCity/scripts.inc"
+	.include "data/maps/LehtiTown/scripts.inc"

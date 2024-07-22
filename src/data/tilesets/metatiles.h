@@ -318,3 +318,6 @@ const u16 gMetatileAttributes_underwater2[] = INCBIN_U16("data/tilesets/primary/
 
 const u16 gMetatiles_Reef[] = INCBIN_U16("data/tilesets/secondary/reef/metatiles.bin");
 const u16 gMetatileAttributes_Reef[] = INCBIN_U16("data/tilesets/secondary/reef/metatile_attributes.bin");
+
+const u16 gMetatiles_LehtiTown[] = INCBIN_U16("data/tilesets/secondary/lehti_town/metatiles.bin");
+const u16 gMetatileAttributes_LehtiTown[] = INCBIN_U16("data/tilesets/secondary/lehti_town/metatile_attributes.bin");

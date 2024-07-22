@@ -5062,14 +5062,14 @@
       "blockdata_filepath": "data/layouts/Reef/map.bin"
     },
     {
-      "id": "LAYOUT_ASPERTIA_CITY",
-      "name": "AspertiaCity_Layout",
-      "width": 30,
-      "height": 30,
-      "primary_tileset": "gTileset_JohtoGeneral",
-      "secondary_tileset": "gTileset_JohtoOlivine",
-      "border_filepath": "data/layouts/AspertiaCity/border.bin",
-      "blockdata_filepath": "data/layouts/AspertiaCity/map.bin"
+      "id": "LAYOUT_LEHTI_TOWN",
+      "name": "LehtiTown_Layout",
+      "width": 46,
+      "height": 38,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LehtiTown",
+      "border_filepath": "data/layouts/LehtiTown/border.bin",
+      "blockdata_filepath": "data/layouts/LehtiTown/map.bin"
     }
   ]
 }

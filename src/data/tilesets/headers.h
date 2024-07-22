@@ -1232,3 +1232,14 @@ const struct Tileset gTileset_Reef =
     .metatileAttributes = gMetatileAttributes_Reef,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_LehtiTown =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LehtiTown,
+    .palettes = gTilesetPalettes_LehtiTown,
+    .metatiles = gMetatiles_LehtiTown,
+    .metatileAttributes = gMetatileAttributes_LehtiTown,
+    .callback = NULL,
+};

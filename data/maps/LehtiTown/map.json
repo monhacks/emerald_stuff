@@ -1,8 +1,8 @@
 {
-  "id": "MAP_ASPERTIA_CITY",
-  "name": "AspertiaCity",
-  "layout": "LAYOUT_ASPERTIA_CITY",
-  "music": "MUS_DUMMY",
+  "id": "MAP_LEHTI_TOWN",
+  "name": "LehtiTown",
+  "layout": "LAYOUT_LEHTI_TOWN",
+  "music": "MUS_HG_NEW_BARK",
   "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
