@@ -296,6 +296,13 @@
 #define METATILE_Lavaridge_NormalGrass          0x206
 #define METATILE_Lavaridge_RockWall             0x274
 
+// gTileset_LehtiTown
+#define METATILE_LehtiTown_Cabbage       0x237
+#define METATILE_LehtiTown_Carrot        0x23F
+#define METATILE_LehtiTown_Door          0x211
+#define METATILE_LehtiTown_Door2         0x269
+#define METATILE_LehtiTown_LehtiTownLab  0x277
+
 // gTileset_Lilycove
 #define METATILE_Lilycove_Door             0x246
 #define METATILE_Lilycove_Door_DeptStore   0x30C
