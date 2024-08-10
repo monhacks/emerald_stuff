@@ -274,16 +274,14 @@ static const u8 sText_Miss[] = _("Miss");
 
 static const u8 *const sBlenderOpponentsNames[] =
 {
-    [BLENDER_MISTER] = sText_Mister,
-    [BLENDER_LADDIE] = sText_Laddie,
-    [BLENDER_LASSIE] = sText_Lassie,
-    [BLENDER_MASTER] = sText_Master,
-    [BLENDER_DUDE]   = sText_Dude,
-    [BLENDER_MISS]   = sText_Miss
+    [BLENDER_MISTER] = COMPOUND_STRING("MISTER"),
+    [BLENDER_LADDIE] = COMPOUND_STRING("LADDIE"),
+    [BLENDER_LASSIE] = COMPOUND_STRING("LASSIE"),
+    [BLENDER_MASTER] = COMPOUND_STRING("MASTER"),
+    [BLENDER_DUDE]   = COMPOUND_STRING("DUDE"),
+    [BLENDER_MISS]   = COMPOUND_STRING("MISS"),
 };
 
-static const u8 sText_PressAToStart[] = _("Press the A Button to start.");
-static const u8 sText_PleaseWaitAWhile[] = _("Please wait a while.");
 static const u8 sText_CommunicationStandby[] = _("Communication standby…");
 static const u8 sText_WouldLikeToBlendAnotherBerry[] = _("Would you like to blend another Berry?");
 static const u8 sText_RunOutOfBerriesForBlending[] = _("You've run out of Berries for\nblending in the Berry Blender.\p");
@@ -291,7 +289,6 @@ static const u8 sText_YourPokeblockCaseIsFull[] = _("Your {POKEBLOCK} Case is fu
 static const u8 sText_HasNoBerriesToPut[] = _(" has no Berries to put in\nthe Berry Blender.");
 static const u8 sText_ApostropheSPokeblockCaseIsFull[] = _("'s {POKEBLOCK} Case is full.\p");
 static const u8 sText_BlendingResults[] = _("Results of blending");
-static const u8 sText_BerryUsed[] = _("Berry used");
 static const u8 sText_SpaceBerry[] = _(" Berry");
 static const u8 sText_Time[] = _("Time:");
 static const u8 sText_Min[] = _(" min. ");
@@ -300,7 +297,6 @@ static const u8 sText_MaximumSpeed[] = _("Maximum speed");
 static const u8 sText_RPM[] = _(" RPM");
 static const u8 sText_Dot[] = _(".");
 static const u8 sText_NewLine[] = _("\n");
-static const u8 sText_Space[] = _(" ");
 static const u8 sText_Ranking[] = _("Ranking");
 static const u8 sText_TheLevelIs[] = _("The level is ");
 static const u8 sText_TheFeelIs[] = _(", and the feel is ");
