@@ -79,6 +79,7 @@
 #define MAP_ROUTE40                  (70 | (0 << 8))
 #define MAP_ROUTE39                  (71 | (0 << 8))
 #define MAP_LEHTI_TOWN               (72 | (0 << 8))
+#define MAP_LEHTI_ROAD               (73 | (0 << 8))
 
 // gMapGroup_IndoorLittleroot
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))

@@ -5070,6 +5070,16 @@
       "secondary_tileset": "gTileset_LehtiTown",
       "border_filepath": "data/layouts/LehtiTown/border.bin",
       "blockdata_filepath": "data/layouts/LehtiTown/map.bin"
+    },
+    {
+      "id": "LAYOUT_LEHTI_ROAD",
+      "name": "LehtiRoad_Layout",
+      "width": 34,
+      "height": 31,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LehtiTown",
+      "border_filepath": "data/layouts/LehtiRoad/border.bin",
+      "blockdata_filepath": "data/layouts/LehtiRoad/map.bin"
     }
   ]
 }

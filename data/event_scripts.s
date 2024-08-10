@@ -1294,3 +1294,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/Reef/scripts.inc"
 
 	.include "data/maps/LehtiTown/scripts.inc"
+
+	.include "data/maps/LehtiRoad/scripts.inc"
