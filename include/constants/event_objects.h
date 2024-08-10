@@ -263,6 +263,7 @@
 #define OBJ_EVENT_GFX_RUIN_MANIAC                259
 #define OBJ_EVENT_GFX_CHUCK                      260
 #define OBJ_EVENT_GFX_FALKNER                    261
+#define OBJ_EVENT_GFX_ITEM_BOX                   262
 
 
 // NOTE: By default, the max value for NUM_OBJ_EVENT_GFX is 239.
@@ -274,7 +275,7 @@
 // object graphics that can be removed. If more graphics are needed, anything that
 // stores graphics ids will need to be increased in size. See wiki entry below:
 // https://github.com/pret/pokeemerald/wiki/Feature-Branches#overworld-expansion
-#define NUM_OBJ_EVENT_GFX                        262
+#define NUM_OBJ_EVENT_GFX                        263
 
 
 // These are dynamic object gfx ids.
@@ -444,6 +445,7 @@
 #define OBJ_EVENT_PAL_TAG_CHUCK                  0x1157
 #define OBJ_EVENT_PAL_TAG_BRAWLY                 0x1158
 #define OBJ_EVENT_PAL_TAG_FALKNER                0x1159
+#define OBJ_EVENT_PAL_TAG_ITEM_BOX               0x115A
 
 #if OW_FOLLOWERS_POKEBALLS
 // Vanilla

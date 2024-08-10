@@ -139,7 +139,7 @@ Std_FindItem::
 	return
 
 EventScript_PickUpItem::
-	removeobject VAR_LAST_TALKED
+	
 	additem VAR_0x8004, VAR_0x8005
 	copyvar VAR_0x8006 VAR_0x8004
 	specialvar VAR_RESULT, BufferTMHMMoveName
@@ -154,6 +154,7 @@ EventScript_PickUpItem::
 	pyramid_inchallenge
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
+	removeobject VAR_LAST_TALKED
 	hideitemdesc
 	return
 
