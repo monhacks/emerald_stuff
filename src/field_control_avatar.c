@@ -459,6 +459,11 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_PictureBookShelf;
     if (MetatileBehavior_IsBookShelf(metatileBehavior) == TRUE)
         return EventScript_BookShelf;
+    if (MetatileBehavior_IsCarrot(metatileBehavior) == TRUE)
+        return EventScript_Carrot;
+    if (MetatileBehavior_IsCabbage(metatileBehavior) == TRUE)
+        return EventScript_Cabbage;
+    
     if (MetatileBehavior_IsPokeCenterBookShelf(metatileBehavior) == TRUE)
         return EventScript_PokemonCenterBookShelf;
     if (MetatileBehavior_IsVase(metatileBehavior) == TRUE)

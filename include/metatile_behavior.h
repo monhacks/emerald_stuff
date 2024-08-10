@@ -151,6 +151,8 @@ bool8 MetatileBehavior_IsLongGrassSouthEdge(u8);
 bool8 MetatileBehavior_IsTrainerHillTimer(u8);
 bool8 MetatileBehavior_IsRockClimbable(u8 metatileBehavior);
 bool8 MetatileBehavior_IsRockStairs(u8);
+bool8 MetatileBehavior_IsCarrot(u8);
+bool8 MetatileBehavior_IsCabbage(u8);
 //sideways stairs
 bool8 MetatileBehavior_IsSidewaysStairsRightSide(u8);
 bool8 MetatileBehavior_IsSidewaysStairsLeftSide(u8);

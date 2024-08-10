@@ -1161,6 +1161,8 @@ EventScript_VsSeekerChargingDone::
     .include "data/scripts/dexnav.inc"
 	.include "data/scripts/sandpit.inc"
 	.include "data/scripts/vajrapyramid.inc"
+	.include "data/text/outdoor_objects.inc"
+	.include "data/scripts/outdoor_objects.inc"
     
 
 	.include "data/maps/OneIsland/scripts.inc"

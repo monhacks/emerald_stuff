@@ -1317,6 +1317,22 @@ bool8 MetatileBehavior_IsBookShelf(u8 metatileBehavior)
         return FALSE;
 }
 
+bool8 MetatileBehavior_IsCarrot(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_CARROT)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsCabbage(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_CABBAGE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 bool8 MetatileBehavior_isSandpitSW(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SANDPIT_SW)
