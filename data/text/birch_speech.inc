@@ -1,7 +1,7 @@
 gText_Birch_Welcome::
 	.string "Hi! Sorry to keep you waiting!\p"
 	.string "Welcome to the world of Pokémon!\p"
-	.string "My name is Birch.\p"
+	.string "My name is Wally.\p"
 	.string "But everyone calls me the Pokémon\n"
 	.string "Professor.\p"
 	.string "$"
@@ -45,7 +45,7 @@ gText_Birch_SoItsPlayer::
 gText_Birch_YourePlayer::
 	.string "Ah, okay!\p"
 	.string "You're {PLAYER}{KUN} who's moving to my\n"
-	.string "hometown of Littleroot.\l"
+	.string "hometown of Lehti.\l"
 	.string "I get it now!\p"
 	.string "$"
 
