@@ -1,0 +1,37 @@
+mapscripts LehtiTown_PlayersHouse_0F_MapScripts {}
+
+script lehtiTown_PlayerMom {
+    lock
+    faceplayer
+    msgbox(format("TODO"), MSGBOX_NPC)
+    release
+    end
+}
+
+script lehtiTown_Swinub {
+    lock
+    msgbox(format("Zzz... Mom's Swinub is sleeping peacefully."), MSGBOX_SIGN)
+    release
+    end
+}
+
+script lehtiTown_Kitchen {
+    msgbox(format("The scent of freshly cooked food fills the air, yummy!"), MSGBOX_SIGN)
+}
+
+script lehtiTown_Window {
+    msgbox(format("You peer out of the window and see a pidgey sitting on the roof!"), MSGBOX_SIGN)
+}
+
+script lehtiTown_KitchenDrink {
+    lock
+    msgbox(format("You drank some of mom's specialty hot chocolate..."), MSGBOX_DEFAULT)
+    msgbox(format("Alright, time to go!"), MSGBOX_DEFAULT)
+    closemessage
+    release
+    end
+}
+
+script lehtiTown_TV {
+    msgbox(format("A shady looking business man named Tanaka is hosting a Shopping Channel on the TV... You decide not to purchase anything."), MSGBOX_SIGN)
+}

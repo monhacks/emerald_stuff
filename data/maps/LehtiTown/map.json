@@ -170,8 +170,8 @@
       "x": 14,
       "y": 9,
       "elevation": 0,
-      "dest_map": "MAP_LEHTI_TOWN",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_LEHTI_TOWN_PLAYERS_HOUSE_0F",
+      "dest_warp_id": "1"
     },
     {
       "x": 12,

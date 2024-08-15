@@ -5080,6 +5080,26 @@
       "secondary_tileset": "gTileset_LehtiTown",
       "border_filepath": "data/layouts/LehtiRoad/border.bin",
       "blockdata_filepath": "data/layouts/LehtiRoad/map.bin"
+    },
+    {
+      "id": "LAYOUT_LEHTI_TOWN_PLAYERS_HOUSE_1F",
+      "name": "LehtiTown_PlayersHouse_1F_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_JohtoBuilding",
+      "secondary_tileset": "gTileset_JohtoSecondary",
+      "border_filepath": "data/layouts/LehtiTown_PlayersHouse_1F/border.bin",
+      "blockdata_filepath": "data/layouts/LehtiTown_PlayersHouse_1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_LEHTI_TOWN_PLAYERS_HOUSE_0F",
+      "name": "LehtiTown_PlayersHouse_0F_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_JohtoBuilding",
+      "secondary_tileset": "gTileset_JohtoSecondary",
+      "border_filepath": "data/layouts/LehtiTown_PlayersHouse_0F/border.bin",
+      "blockdata_filepath": "data/layouts/LehtiTown_PlayersHouse_0F/map.bin"
     }
   ]
 }

@@ -1,6 +1,7 @@
 {
   "group_order": [
     "gMapGroup_TownsAndRoutes",
+    "gMapGroup_IndoorLehti",
     "gMapGroup_IndoorLittleroot",
     "gMapGroup_IndoorOldale",
     "gMapGroup_IndoorDewford",
@@ -111,6 +112,10 @@
     "Route39",
     "LehtiTown",
     "LehtiRoad"
+  ],
+  "gMapGroup_IndoorLehti": [
+    "LehtiTown_PlayersHouse_1F",
+    "LehtiTown_PlayersHouse_0F"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",

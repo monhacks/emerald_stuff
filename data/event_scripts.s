@@ -1298,3 +1298,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/LehtiTown/scripts.inc"
 
 	.include "data/maps/LehtiRoad/scripts.inc"
+
+	.include "data/maps/LehtiTown_PlayersHouse_1F/scripts.inc"
+
+	.include "data/maps/LehtiTown_PlayersHouse_0F/scripts.inc"
