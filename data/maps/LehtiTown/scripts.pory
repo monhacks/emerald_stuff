@@ -1,1 +1,44 @@
 mapscripts LehtiTown_MapScripts {}
+
+
+script LehtiTownTechnologyGuy {
+    msgbox(format("Technology is amazing! You can connect to the internet with Game Boy games!"), MSGBOX_NPC)
+    end
+}
+
+script LehtiTownGirl {
+
+}
+
+script LehtiTownOldWoman {
+
+}
+
+script LehtiTownFisherman {
+
+}
+
+script LehtiTownWallyStarterScene {
+
+}
+
+script LehtiTownPlayerMailbox {
+
+}
+
+script LehtiTownRivalMailbox {
+
+}
+
+script LehtiTownLabSign {
+
+}
+
+script LehtiTownLabMailbox {
+
+}
+
+script LehtiTownRailwaySign {
+
+}
+
