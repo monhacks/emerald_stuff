@@ -45,4 +45,4 @@ LehtiTownRailwaySign::
 
 LehtiTownTechnologyGuy_Text_0:
 	.string "Technology is amazing! You can connect\n"
-	.string "to the internet with Gameboy games!$"
+	.string "to the internet with Game Boy games!$"

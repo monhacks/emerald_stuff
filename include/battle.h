@@ -801,6 +801,7 @@ struct BattleStruct
     u8 distortedTypeMatchups;
     u8 categoryOverride; // for Z-Moves and Max Moves
     u32 stellarBoostFlags[NUM_BATTLE_SIDES]; // stored as a bitfield of flags for all types for each side
+    u8 fickleBeamBoosted:1;
 };
 
 // The palaceFlags member of struct BattleStruct contains 1 flag per move to indicate which moves the AI should consider,
@@ -1135,6 +1136,13 @@ static inline u32 GetBattlerSide(u32 battler)
     return GetBattlerPosition(battler) & BIT_SIDE;
 }
 
+static inline struct Pokemon* GetBattlerData(u32 battlerId)
+{
+    u32 index = gBattlerPartyIndexes[battlerId];
+
+    return (GetBattlerSide(battlerId) == B_SIDE_OPPONENT) ? &gEnemyParty[index] : &gPlayerParty[index];
+}
+
 static inline struct Pokemon *GetSideParty(u32 side)
 {
     return (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
@@ -1143,6 +1151,11 @@ static inline struct Pokemon *GetSideParty(u32 side)
 static inline struct Pokemon *GetBattlerParty(u32 battler)
 {
     return GetSideParty(GetBattlerSide(battler));
+}
+
+static inline bool32 IsDoubleBattle(void)
+{
+    return gBattleTypeFlags & BATTLE_TYPE_DOUBLE;
 }
 
 #endif // GUARD_BATTLE_H

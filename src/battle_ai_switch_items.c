@@ -82,7 +82,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
         return FALSE;
 
     // Double Battles aren't included in AI_FLAG_SMART_MON_CHOICE. Defaults to regular switch in logic
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
         return FALSE;
 
 	opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(battler));
@@ -242,7 +242,7 @@ static bool32 ShouldSwitchIfWonderGuard(u32 battler, bool32 emitResult)
     struct Pokemon *party = NULL;
     u16 move;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
         return FALSE;
 
     opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(battler));
@@ -318,7 +318,7 @@ static bool32 FindMonThatAbsorbsOpponentsMove(u32 battler, bool32 emitResult)
     if (IS_MOVE_STATUS(gLastLandedMoves[battler]))
         return FALSE;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
     {
         battlerIn1 = battler;
         if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))])
@@ -707,7 +707,7 @@ static bool32 HasSuperEffectiveMoveAgainstOpponents(u32 battler, bool32 noRng)
             }
         }
     }
-    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+    if (!IsDoubleBattle())
         return FALSE;
 
     opposingBattler = GetBattlerAtPosition(BATTLE_PARTNER(opposingPosition));
@@ -765,7 +765,7 @@ static bool32 FindMonWithFlagsAndSuperEffective(u32 battler, u16 flags, u32 modu
     if (IS_MOVE_STATUS(gLastLandedMoves[battler]))
         return FALSE;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
     {
         battlerIn1 = battler;
         if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))])
@@ -846,7 +846,7 @@ static bool32 CanMonSurviveHazardSwitchin(u32 battler)
     // Battler will faint to hazards, check to see if another mon can clear them
     if (hazardDamage > battlerHp)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        if (IsDoubleBattle())
         {
             battlerIn1 = battler;
             if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))])
@@ -881,7 +881,9 @@ static bool32 CanMonSurviveHazardSwitchin(u32 battler)
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 aiMove = GetMonData(&party[i], MON_DATA_MOVE1 + j, NULL);
-                if (aiMove == MOVE_RAPID_SPIN || aiMove == MOVE_DEFOG || aiMove == MOVE_MORTAL_SPIN || aiMove == MOVE_TIDY_UP)
+                if (MoveHasAdditionalEffectSelf(aiMove, MOVE_EFFECT_RAPID_SPIN)
+                 || (B_DEFOG_EFFECT_CLEARING >= GEN_6 && gMovesInfo[aiMove].effect == EFFECT_DEFOG)
+                 || gMovesInfo[aiMove].effect == EFFECT_TIDY_UP)
                 {
                     // Have a mon that can clear the hazards, so switching out is okay
                     return TRUE;
@@ -1023,7 +1025,7 @@ bool32 ShouldSwitch(u32 battler, bool32 emitResult)
 
     availableToSwitch = 0;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
     {
         battlerIn1 = battler;
         if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))])
@@ -1140,7 +1142,7 @@ void AI_TrySwitchOrUseItem(u32 battler)
                 s32 monToSwitchId = AI_DATA->mostSuitableMonId[battler];
                 if (monToSwitchId == PARTY_SIZE)
                 {
-                    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+                    if (!IsDoubleBattle())
                     {
                         battlerIn1 = GetBattlerAtPosition(battlerPosition);
                         battlerIn2 = battlerIn1;
@@ -2040,7 +2042,7 @@ u32 GetMostSuitableMonToSwitchInto(u32 battler, bool32 switchAfterMonKOd)
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         return gBattlerPartyIndexes[battler] + 1;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
     {
         battlerIn1 = battler;
         if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))])
@@ -2074,7 +2076,7 @@ u32 GetMostSuitableMonToSwitchInto(u32 battler, bool32 switchAfterMonKOd)
 
     // Split ideal mon decision between after previous mon KO'd (prioritize offensive options) and after switching active mon out (prioritize defensive options), and expand the scope of both.
     // Only use better mon selection if AI_FLAG_SMART_MON_CHOICES is set for the trainer.
-    if (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_MON_CHOICES && !(gBattleTypeFlags & BATTLE_TYPE_DOUBLE)) // Double Battles aren't included in AI_FLAG_SMART_MON_CHOICE. Defaults to regular switch in logic
+    if (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_MON_CHOICES && !IsDoubleBattle()) // Double Battles aren't included in AI_FLAG_SMART_MON_CHOICE. Defaults to regular switch in logic
     {
         bestMonId = GetBestMonIntegrated(party, firstId, lastId, battler, opposingBattler, battlerIn1, battlerIn2, switchAfterMonKOd);
         return bestMonId;

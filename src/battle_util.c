@@ -222,7 +222,7 @@ void HandleAction_UseMove(void)
     {
         gBattleStruct->moveTarget[gBattlerAttacker] = gBattlerTarget = gSideTimers[side].followmeTarget; // follow me moxie fix
     }
-    else if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    else if (IsDoubleBattle()
            && gSideTimers[side].followmeTimer == 0
            && (gMovesInfo[gCurrentMove].power != 0 || (moveTarget != MOVE_TARGET_USER && moveTarget != MOVE_TARGET_ALL_BATTLERS))
            && ((GetBattlerAbility(*(gBattleStruct->moveTarget + gBattlerAttacker)) != ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
@@ -306,8 +306,7 @@ void HandleAction_UseMove(void)
             gBattlerTarget = battler;
         }
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-          && moveTarget & MOVE_TARGET_RANDOM)
+	else if (IsDoubleBattle() && moveTarget & MOVE_TARGET_RANDOM)
     {
         if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
         {
@@ -337,8 +336,7 @@ void HandleAction_UseMove(void)
         else
             gBattlerTarget = gBattlerAttacker;
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-          && moveTarget == MOVE_TARGET_FOES_AND_ALLY)
+	else if (IsDoubleBattle() && moveTarget == MOVE_TARGET_FOES_AND_ALLY)
     {
         for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
         {
@@ -3745,7 +3743,7 @@ bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2
     u32 i, side, playerId, flankId;
     struct Pokemon *party;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+    if (!IsDoubleBattle())
         return FALSE;
 
     side = GetBattlerSide(battler);
@@ -4062,6 +4060,54 @@ static inline bool32 HadMoreThanHalfHpNowDoesnt(u32 battler)
              && gBattleMons[battler].hp <= cutoff);
 }
 
+#define ANIM_STAT_HP      0
+#define ANIM_STAT_ATK     1
+#define ANIM_STAT_DEF     2
+#define ANIM_STAT_SPATK   3
+#define ANIM_STAT_SPDEF   4
+#define ANIM_STAT_SPEED   5
+#define ANIM_STAT_ACC     6
+#define ANIM_STAT_EVASION 7
+static void ChooseStatBoostAnimation(u32 battler)
+{
+    u32 stat;
+    bool32 statBuffMoreThan1 = FALSE;
+    u32 static const statsOrder[NUM_BATTLE_STATS] =
+    {
+        [ANIM_STAT_HP]      = STAT_HP,
+        [ANIM_STAT_ATK]     = STAT_ATK,
+        [ANIM_STAT_DEF]     = STAT_DEF,
+        [ANIM_STAT_SPATK]   = STAT_SPATK,
+        [ANIM_STAT_SPDEF]   = STAT_SPDEF,
+        [ANIM_STAT_SPEED]   = STAT_SPEED,
+        [ANIM_STAT_ACC]     = STAT_ACC,
+        [ANIM_STAT_EVASION] = STAT_EVASION,
+    };
+    gBattleScripting.animArg1 = 0;
+
+    for (stat = 1; stat < NUM_BATTLE_STATS; stat++) // Start loop at 1 to avoid STAT_HP
+    {
+        if ((gQueuedStatBoosts[battler].stats & (1 << statsOrder[stat])) == 0)
+            continue;
+
+        if (!statBuffMoreThan1)
+            statBuffMoreThan1 = ((gQueuedStatBoosts[battler].stats & (1 << statsOrder[stat])) > 1);
+
+        if (gBattleScripting.animArg1 != 0) // Already set in a different stat so now boosting multiple stats
+            gBattleScripting.animArg1 = (statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS2 : STAT_ANIM_MULTIPLE_PLUS1);
+        else
+            gBattleScripting.animArg1 = GET_STAT_BUFF_ID((statsOrder[stat] + 1)) + (statBuffMoreThan1 ? STAT_ANIM_PLUS2 : STAT_ANIM_PLUS1);
+    }
+}
+#undef ANIM_STAT_HP
+#undef ANIM_STAT_ATK
+#undef ANIM_STAT_DEF
+#undef ANIM_STAT_SPATK
+#undef ANIM_STAT_SPDEF
+#undef ANIM_STAT_SPEED
+#undef ANIM_STAT_ACC
+#undef ANIM_STAT_EVASION
+
 u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg)
 {
     u32 effect = 0;
@@ -4329,7 +4375,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 target1 = GetBattlerAtPosition(side);
                 target2 = GetBattlerAtPosition(side + BIT_FLANK);
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                if (IsDoubleBattle())
                 {
                     if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0
                         && !gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
@@ -5189,7 +5235,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                   && BlocksPrankster(move, gBattlerAttacker, gBattlerTarget, TRUE)
                   && !(IS_MOVE_STATUS(move) && (gLastUsedAbility == ABILITY_MAGIC_BOUNCE || gProtectStructs[gBattlerTarget].bounceMove)))
             {
-                if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(moveTarget & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
+                if (!IsDoubleBattle() || !(moveTarget & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
                     CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
                 gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
                 battleScriptBlocksMove = BattleScript_DarkTypePreventsPrankster;
@@ -5530,6 +5576,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && TARGET_TURN_DAMAGED
              && !IS_BATTLER_OF_TYPE(battler, moveType)
              && moveType != TYPE_STELLAR
+             && moveType != TYPE_MYSTERY
              && IsBattlerAlive(battler))
             {
                 SET_BATTLER_TYPE(battler, moveType);
@@ -6014,6 +6061,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
 
                 // Edge case for dance moves that hit multiply targets
                 gHitMarker &= ~HITMARKER_NO_ATTACKSTRING;
+                SetTypeBeforeUsingMove(gCalledMove, battler);
 
                 // Make sure that the target isn't an ally - if it is, target the original user
                 if (GetBattlerSide(gBattlerTarget) == GetBattlerSide(gBattlerAttacker))
@@ -6037,40 +6085,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             case ABILITY_OPPORTUNIST:
                 if (gProtectStructs[battler].activateOpportunist == 2)
                 {
-                    bool32 statBuffMoreThan1 = FALSE;
-                    bool32 handleSpeedAnimLater = FALSE;
                     gBattleScripting.animArg1 = 0;
                     gBattleScripting.battler = battler;
                     gProtectStructs[battler].activateOpportunist--;
-
-                    for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
-                    {
-                        if ((gQueuedStatBoosts[battler].stats & (1 << i)) == 0)
-                            continue;
-
-                        if (i == STAT_SPEED)
-                        {
-                            handleSpeedAnimLater = TRUE;
-                            continue;
-                        }
-
-                        if (!statBuffMoreThan1)
-                            statBuffMoreThan1 = ((gQueuedStatBoosts[battler].stats & (1 << i)) > 1);
-
-                        if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
-                            gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
-                        else
-                            gBattleScripting.animArg1 = GET_STAT_BUFF_ID((i + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
-
-                    }
-                    if (handleSpeedAnimLater)
-                    {
-                        if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
-                            gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
-                        else
-                            gBattleScripting.animArg1 = GET_STAT_BUFF_ID((STAT_SPEED + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
-                    }
-
+                    ChooseStatBoostAnimation(battler);
                     BattleScriptPushCursorAndCallback(BattleScript_OpportunistCopyStatChange);
                     effect = 1;
                 }
@@ -7019,43 +7037,11 @@ static u8 TryConsumeMirrorHerb(u32 battler, bool32 execute)
 
     if (gProtectStructs[battler].eatMirrorHerb)
     {
-        u32 i;
-        bool32 statBuffMoreThan1 = FALSE;
-        bool32 handleSpeedAnimLater = FALSE;
-        gBattleScripting.animArg1 = 0;
 
         gLastUsedItem = gBattleMons[battler].item;
         gBattleScripting.battler = battler;
         gProtectStructs[battler].eatMirrorHerb = 0;
-
-        for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
-        {
-            if ((gQueuedStatBoosts[battler].stats & (1 << i)) == 0)
-                continue;
-
-            if (i == STAT_SPEED)
-            {
-                handleSpeedAnimLater = TRUE;
-                continue;
-            }
-
-            if (!statBuffMoreThan1)
-                statBuffMoreThan1 = ((gQueuedStatBoosts[battler].stats & (1 << i)) > 1);
-
-            if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
-                gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
-            else
-                gBattleScripting.animArg1 = GET_STAT_BUFF_ID((i + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
-
-        }
-        if (handleSpeedAnimLater)
-        {
-            if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
-                gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
-            else
-                gBattleScripting.animArg1 = GET_STAT_BUFF_ID((STAT_SPEED + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
-        }
-
+        ChooseStatBoostAnimation(battler);
         if (execute)
         {
             BattleScriptExecute(BattleScript_MirrorHerbCopyStatChangeEnd2);
@@ -8273,7 +8259,7 @@ u32 SetRandomTarget(u32 battler)
         [B_SIDE_OPPONENT] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT},
     };
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
     {
         target = GetBattlerAtPosition(targets[GetBattlerSide(battler)][Random() % 2]);
         if (!IsBattlerAlive(target))
@@ -8291,6 +8277,7 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
 {
     u8 targetBattler = 0;
     u32 moveTarget, side;
+    u32 moveType = GetMoveType(move);
 
     if (setTarget != NO_TARGET_OVERRIDE)
         moveTarget = setTarget - 1;
@@ -8308,7 +8295,7 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
         else
         {
             targetBattler = SetRandomTarget(gBattlerAttacker);
-            if (gMovesInfo[move].type == TYPE_ELECTRIC
+            if (moveType == TYPE_ELECTRIC
                 && IsAbilityOnOpposingSide(gBattlerAttacker, ABILITY_LIGHTNING_ROD)
                 && GetBattlerAbility(targetBattler) != ABILITY_LIGHTNING_ROD)
             {
@@ -8316,7 +8303,7 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
                 RecordAbilityBattle(targetBattler, gBattleMons[targetBattler].ability);
                 gSpecialStatuses[targetBattler].lightningRodRedirected = TRUE;
             }
-            else if (gMovesInfo[move].type == TYPE_WATER
+            else if (moveType == TYPE_WATER
                 && IsAbilityOnOpposingSide(gBattlerAttacker, ABILITY_STORM_DRAIN)
                 && GetBattlerAbility(targetBattler) != ABILITY_STORM_DRAIN)
             {
@@ -8338,7 +8325,7 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
         side = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
         if (IsAffectedByFollowMe(gBattlerAttacker, side, move))
             targetBattler = gSideTimers[side].followmeTarget;
-        else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & MOVE_TARGET_RANDOM)
+        else if (IsDoubleBattle() && moveTarget & MOVE_TARGET_RANDOM)
             targetBattler = SetRandomTarget(gBattlerAttacker);
         else
             targetBattler = GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker)));
@@ -8410,7 +8397,7 @@ u8 IsMonDisobedient(void)
     // is not obedient
     if (gCurrentMove == MOVE_RAGE)
         gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_RAGE;
-    if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP && (gCurrentMove == MOVE_SNORE || gCurrentMove == MOVE_SLEEP_TALK))
+    if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP && (gMovesInfo[gCurrentMove].effect == EFFECT_SNORE || gMovesInfo[gCurrentMove].effect == EFFECT_SLEEP_TALK))
     {
         gBattlescriptCurrInstr = BattleScript_IgnoresWhileAsleep;
         return 1;
@@ -8906,10 +8893,7 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         basePower = gBattleStruct->presentBasePower;
         break;
     case EFFECT_TRIPLE_KICK:
-        if (gMultiHitCounter == 0) // Calc damage with max BP for move consideration
-            basePower *= 6;
-        else
-            basePower *= 1 + gMovesInfo[move].strikeCount - gMultiHitCounter;
+        basePower *= 1 + gMovesInfo[move].strikeCount - gMultiHitCounter;
         break;
     case EFFECT_SPIT_UP:
         basePower = 100 * gDisableStructs[battlerAtk].stockpileCounter;
@@ -9094,7 +9078,7 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         basePower = (basePower > 350) ? 350 : basePower;
         break;
     case EFFECT_FICKLE_BEAM:
-        if (RandomPercentage(RNG_FICKLE_BEAM, 30))
+        if (gBattleStruct->fickleBeamBoosted)
             basePower *= 2;
         break;
     case EFFECT_TERA_BLAST:
@@ -9807,7 +9791,7 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
         break;
     case ABILITY_PURIFYING_SALT:
-        if (gMovesInfo[move].type == TYPE_GHOST)
+        if (moveType == TYPE_GHOST)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
         break;
     }
@@ -9898,7 +9882,9 @@ static inline uq4_12_t GetParentalBondModifier(u32 battlerAtk)
 
 static inline uq4_12_t GetSameTypeAttackBonusModifier(u32 battlerAtk, u32 moveType, u32 move, u32 abilityAtk)
 {
-    if (gBattleStruct->pledgeMove && IS_BATTLER_OF_TYPE(BATTLE_PARTNER(battlerAtk), moveType))
+    if (moveType == TYPE_MYSTERY)
+        return UQ_4_12(1.0);
+    else if (gBattleStruct->pledgeMove && IS_BATTLER_OF_TYPE(BATTLE_PARTNER(battlerAtk), moveType))
         return (abilityAtk == ABILITY_ADAPTABILITY) ? UQ_4_12(2.0) : UQ_4_12(1.5);
     else if (!IS_BATTLER_OF_TYPE(battlerAtk, moveType) || move == MOVE_STRUGGLE || move == MOVE_NONE)
         return UQ_4_12(1.0);
@@ -10003,7 +9989,7 @@ static inline uq4_12_t GetScreensModifier(u32 move, u32 battlerAtk, u32 battlerD
     if (isCrit || abilityAtk == ABILITY_INFILTRATOR || gProtectStructs[battlerAtk].confusionSelfDmg)
         return UQ_4_12(1.0);
     if (reflect || lightScreen || auroraVeil)
-        return (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) ? UQ_4_12(0.667) : UQ_4_12(0.5);
+        return (IsDoubleBattle()) ? UQ_4_12(0.667) : UQ_4_12(0.5);
     return UQ_4_12(1.0);
 }
 
@@ -10501,7 +10487,7 @@ uq4_12_t CalcTypeEffectivenessMultiplier(u32 move, u32 moveType, u32 battlerAtk,
 uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef)
 {
     uq4_12_t modifier = UQ_4_12(1.0);
-    u8 moveType = gMovesInfo[move].type;
+    u32 moveType = GetMoveType(move);
 
     if (move != MOVE_STRUGGLE && moveType != TYPE_MYSTERY)
     {
@@ -11807,7 +11793,7 @@ void SetShellSideArmCategory(void)
 
 bool32 CanTargetPartner(u32 battlerAtk, u32 battlerDef)
 {
-    return (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+    return (IsDoubleBattle()
          && IsBattlerAlive(BATTLE_PARTNER(battlerDef))
          && battlerDef != BATTLE_PARTNER(battlerAtk));
 }

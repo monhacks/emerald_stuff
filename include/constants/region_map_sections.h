@@ -142,7 +142,7 @@
 #define MAPSEC_ROCK_TUNNEL                  0x8A
 #define MAPSEC_SEAFOAM_ISLANDS              0x8B
 #define MAPSEC_POKEMON_TOWER                0x8C
-#define MAPSEC_ROUTE_4_POKECENTER            0x8D
+#define MAPSEC_ROUTE_4_POKECENTER           0x8D
 #define MAPSEC_POWER_PLANT                  0x8E
 #define MAPSEC_ONE_ISLAND                   0x8F
 #define MAPSEC_TWO_ISLAND                   0x90

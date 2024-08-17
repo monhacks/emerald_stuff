@@ -161,11 +161,10 @@ static int XOptions_ProcessInput(int x, int selection);
 static int ProcessInput_Options_Two(int selection);
 static int ProcessInput_Options_Three(int selection);
 static int ProcessInput_Options_Four(int selection);
-static int ProcessInput_Options_Eleven(int selection);
 static int ProcessInput_Sound(int selection);
 static int ProcessInput_FrameType(int selection);
 static const u8 *const OptionTextDescription(void);
-static const u8 *const OptionTextRight(u8 menuItem);
+static const u8 *OptionTextRight(u8 menuItem);
 static u8 MenuItemCount(void);
 static u8 MenuItemCancel(void);
 static void DrawDescriptionText(void);
@@ -178,7 +177,6 @@ static void DrawChoices_BattleScene(int selection, int y);
 static void DrawChoices_BattleStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
-static void DrawChoices_BarSpeed(int selection, int y); //HP and EXP
 static void DrawChoices_LevelScaling(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
@@ -274,10 +272,11 @@ static const u8 *const sOptionMenuItemsNamesCustom[MENUITEM_CUSTOM_COUNT] =
     [MENUITEM_CUSTOM_CANCEL]      = gText_OptionMenuSave,
 };
 
-static const u8 *const OptionTextRight(u8 menuItem)
+static const u8 *OptionTextRight(u8 menuItem)
 {
     switch (sOptions->submenu)
     {
+    default:
     case MENU_MAIN:     return sOptionMenuItemsNamesMain[menuItem];
     case MENU_CUSTOM:   return sOptionMenuItemsNamesCustom[menuItem];
     }
@@ -288,28 +287,36 @@ static bool8 CheckConditions(int selection)
 {
     switch (sOptions->submenu)
     {
+    default:
+        return FALSE;
     case MENU_MAIN:
         switch(selection)
         {
-        case MENUITEM_MAIN_TEXTSPEED:       return TRUE;
-        case MENUITEM_MAIN_BATTLESCENE:     return TRUE;
-        case MENUITEM_MAIN_BATTLESTYLE:     return TRUE;
-        case MENUITEM_MAIN_SOUND:           return TRUE;
-        case MENUITEM_MAIN_BUTTONMODE:      return TRUE;
-        case MENUITEM_MAIN_FRAMETYPE:       return TRUE;
-        case MENUITEM_MAIN_CANCEL:          return TRUE;
-        case MENUITEM_MAIN_COUNT:           return TRUE;
+        case MENUITEM_MAIN_TEXTSPEED:       
+        case MENUITEM_MAIN_BATTLESCENE:     
+        case MENUITEM_MAIN_BATTLESTYLE:     
+        case MENUITEM_MAIN_SOUND:           
+        case MENUITEM_MAIN_BUTTONMODE:      
+        case MENUITEM_MAIN_FRAMETYPE:       
+        case MENUITEM_MAIN_CANCEL:          
+        case MENUITEM_MAIN_COUNT:           
+            return TRUE;
+        default:        
+            return FALSE;
         }
     case MENU_CUSTOM:
         switch(selection)
         {
-        case MENUITEM_CUSTOM_BATTLE_SPEED:       return TRUE;
-        case MENUITEM_CUSTOM_LEVEL_SCALING:      return TRUE;
-        case MENUITEM_CUSTOM_FONT:               return TRUE;
-        case MENUITEM_CUSTOM_MATCHCALL:          return TRUE;
-        case MENUITEM_CUSTOM_BATTLE_INTRO:       return TRUE;
-        case MENUITEM_CUSTOM_CANCEL:             return TRUE;
-        case MENUITEM_CUSTOM_COUNT:              return TRUE;
+        case MENUITEM_CUSTOM_BATTLE_SPEED:       
+        case MENUITEM_CUSTOM_LEVEL_SCALING:      
+        case MENUITEM_CUSTOM_FONT:               
+        case MENUITEM_CUSTOM_MATCHCALL:          
+        case MENUITEM_CUSTOM_BATTLE_INTRO:       
+        case MENUITEM_CUSTOM_CANCEL:             
+        case MENUITEM_CUSTOM_COUNT:              
+            return TRUE;
+        default:    
+            return FALSE;
         }
     }
 }
@@ -395,16 +402,22 @@ static const u8 *const OptionTextDescription(void)
 
     switch (sOptions->submenu)
     {
+    default:
+        return sText_Empty;
     case MENU_MAIN:
-        if (!CheckConditions(menuItem))
-            return sOptionMenuItemDescriptionsDisabledMain[menuItem];
+        if (menuItem >= MENUITEM_MAIN_COUNT)
+            return sText_Empty;
+        //else if (!CheckConditions(menuItem))
+        //    return sOptionMenuItemDescriptionsDisabledMain[menuItem];
         selection = sOptions->sel[menuItem];
         if (menuItem == MENUITEM_MAIN_TEXTSPEED || menuItem == MENUITEM_MAIN_FRAMETYPE)
             selection = 0;
         return sOptionMenuItemDescriptionsMain[menuItem][selection];
     case MENU_CUSTOM:
-        if (!CheckConditions(menuItem))
-            return sOptionMenuItemDescriptionsDisabledMain[menuItem];
+        if (menuItem >= MENUITEM_CUSTOM_COUNT)
+            return sText_Empty;
+       // else if (!CheckConditions(menuItem))
+       //     return sOptionMenuItemDescriptionsDisabledCustom[menuItem];
         selection = sOptions->sel_custom[menuItem];
         if (menuItem == MENUITEM_CUSTOM_BATTLE_SPEED)
             selection = 0;
@@ -416,8 +429,11 @@ static u8 MenuItemCount(void)
 {
     switch (sOptions->submenu)
     {
-    case MENU_MAIN:     return MENUITEM_MAIN_COUNT;
-    case MENU_CUSTOM:   return MENUITEM_CUSTOM_COUNT;
+    default:
+    case MENU_MAIN:    
+        return MENUITEM_MAIN_COUNT;
+    case MENU_CUSTOM:   
+        return MENUITEM_CUSTOM_COUNT;
     }
 }
 
@@ -425,8 +441,11 @@ static u8 MenuItemCancel(void)
 {
     switch (sOptions->submenu)
     {
-    case MENU_MAIN:     return MENUITEM_MAIN_CANCEL;
-    case MENU_CUSTOM:   return MENUITEM_CUSTOM_CANCEL;
+    default:
+    case MENU_MAIN:     
+        return MENUITEM_MAIN_CANCEL;
+    case MENU_CUSTOM:   
+        return MENUITEM_CUSTOM_CANCEL;
     }
 }
 
@@ -608,7 +627,7 @@ static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, 
 
 void CB2_InitOptionPlusMenu(void)
 {
-    u32 i, taskId;
+    u32 i;
     switch (gMain.state)
     {
     default:
@@ -711,7 +730,7 @@ void CB2_InitOptionPlusMenu(void)
         gMain.state++;
         break;
     case 10:
-        taskId = CreateTask(Task_OptionMenuFadeIn, 0);
+        CreateTask(Task_OptionMenuFadeIn, 0);
         
         sOptions->arrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 240 / 2, 20, 110, MENUITEM_MAIN_COUNT - 1, 110, 110, 0);
 
@@ -763,7 +782,6 @@ static void Task_OptionMenuFadeIn(u8 taskId)
 
 static void Task_OptionMenuProcessInput(u8 taskId)
 {
-    //int i = 0;
     u8 optionsToDraw = min(OPTIONS_ON_SCREEN , MenuItemCount());
     if (JOY_NEW(A_BUTTON))
     {
@@ -1036,11 +1054,6 @@ static int ProcessInput_Options_Four(int selection)
     return XOptions_ProcessInput(4, selection);
 }
 
-static int ProcessInput_Options_Eleven(int selection)
-{
-    return XOptions_ProcessInput(11, selection);
-}
-
 // Process Input functions ****SPECIFIC****
 static int UNUSED ProcessInput_Sound(int selection)
 {
@@ -1126,7 +1139,9 @@ static void ReDrawAll(void)
     else
     {
         if (sOptions->arrowTaskId == TASK_NONE)
-            sOptions->arrowTaskId = sOptions->arrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 240 / 2, 20, 110, MenuItemCount() - 1, 110, 110, 0);
+        {
+            sOptions->arrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 240 / 2, 20, 110, MenuItemCount() - 1, 110, 110, 0);
+        }
 
     }
 
