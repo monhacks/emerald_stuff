@@ -1081,7 +1081,7 @@ static void ShowPostBattleHintText(void)
             textIndex = sPyramidFloorTemplates[id].numTrainers;
             for (i = 0; i < MAX_PYRAMID_TRAINERS; i++)
             {
-                if (gBitTable[i] & gSaveBlock1Ptr->frontier.pyramidTrainerFlags)
+                if ((1u << i) & gSaveBlock1Ptr->frontier.pyramidTrainerFlags)
                     textIndex--;
             }
             i = 1;
@@ -1330,7 +1330,7 @@ u16 LocalIdToPyramidTrainerId(u8 localId)
 
 bool8 GetBattlePyramidTrainerFlag(u8 eventId)
 {
-    return gSaveBlock1Ptr->frontier.pyramidTrainerFlags & gBitTable[gObjectEvents[eventId].localId - 1];
+    return gSaveBlock1Ptr->frontier.pyramidTrainerFlags & ((1u << gObjectEvents[eventId].localId) - 1);
 }
 
 void MarkApproachingPyramidTrainersAsBattled(void)
@@ -1350,7 +1350,7 @@ static void MarkPyramidTrainerAsBattled(u16 trainerId)
     for (i = 0; i < MAX_PYRAMID_TRAINERS; i++)
     {
         if (gSaveBlock1Ptr->frontier.trainerIds[i] == trainerId)
-            gSaveBlock1Ptr->frontier.pyramidTrainerFlags |= gBitTable[i];
+            gSaveBlock1Ptr->frontier.pyramidTrainerFlags |= 1u << i;
     }
 
     gObjectEvents[gSelectedObjectEvent].movementType = MOVEMENT_TYPE_WANDER_AROUND;
@@ -1918,12 +1918,12 @@ static void SetPyramidObjectPositionsUniformly(u8 objType)
             {
                 if (bits & 1)
                 {
-                    if (!(gBitTable[squareId] & gSaveBlock1Ptr->frontier.pyramidRandoms[3]))
+                    if (!((1u << squareId) & gSaveBlock1Ptr->frontier.pyramidRandoms[3]))
                         bits |= 2;
                 }
                 else
                 {
-                    if (gBitTable[squareId] & gSaveBlock1Ptr->frontier.pyramidRandoms[3])
+                    if ((1u << squareId) & gSaveBlock1Ptr->frontier.pyramidRandoms[3])
                         bits |= 2;
                 }
                 if (++squareId >= NUM_PYRAMID_FLOOR_SQUARES)
