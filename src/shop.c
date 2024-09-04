@@ -658,6 +658,7 @@ static void Task_ShopMenu(u8 taskId)
 }
 
 #define tItemCount  data[1]
+#define tItemId     data[5]
 #define tListTaskId data[7]
 #define tCallbackHi data[8]
 #define tCallbackLo data[9]
@@ -1560,6 +1561,7 @@ static void BuyMenuTryMakePurchase(u8 taskId)
     {
         if (AddBagItem(sShopData->currentItemId, tItemCount) == TRUE)
         {
+            GetSetItemObtained(sShopData->currentItemId, FLAG_SET_ITEM_OBTAINED);
             RecordItemPurchase(taskId);
             BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, BuyMenuSubtractMoney);
         }

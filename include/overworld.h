@@ -165,4 +165,12 @@ void ClearLinkPlayerObjectEvents(void);
 void CB2_ReturnToFullScreenStartMenu(void);
 u8 GetCurrentRegion(void);
 
+// Item Description Headers
+enum ItemObtainFlags
+{
+    FLAG_GET_ITEM_OBTAINED,
+    FLAG_SET_ITEM_OBTAINED,
+};
+bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId);
+
 #endif // GUARD_OVERWORLD_H

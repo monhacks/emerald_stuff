@@ -1567,7 +1567,7 @@
 	@ Prepares to start a wild battle against a 'species' at 'level' holding 'item' with moves 'move1' 'move2' 'move3' move4' ability 'ability' and 'isShiny'.
 	@ Running this command will not affect normal wild battles. You start the prepared battle with dowildbattle.
 	.macro setwildbattle2 species:req, level:req, item=ITEM_NONE, abilityNum:req, move1:req, move2:req, move3:req, move4:req, isShiny:req
-	.byte 0xeb
+	.byte 0xe9
 	.2byte \species
 	.byte \level
 	.2byte \item
@@ -2167,11 +2167,11 @@
 
 	@ re-calculates mon party
     .macro calculatemonstats
-    .byte 0xea
+    .byte 0xe8
     .endm
 
 	.macro _dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req argv:vararg
-	.byte 0xec
+	.byte 0xea
 	.2byte \left
 	.2byte \top
 	.byte \ignoreBPress
@@ -2193,7 +2193,7 @@
 	.endm
 
 	.macro dynmultipush name:req, id:req
-	.byte 0xed
+	.byte 0xeb
 	.4byte \name
 	.2byte \id
 	.endm
@@ -2637,4 +2637,21 @@
 	@ When OW_USE_FAKE_RTC and OW_FLAG_PAUSE_TIME is assigned, this macro will resume the flow of time if paused, and stop the flow of time otherwise.
 	.macro togglefakertc
 	callnative Script_ToggleFakeRtc
+	.endm
+
+	@ ============================ @
+	@ ITEM DESCRIPTION HEADER MACROS
+	@ Used with OW_SHOW_ITEM_DESCRIPTIONS config
+	.macro showitemdescription
+	callnative ScriptShowItemDescription
+	.byte 0
+	.endm
+
+	.macro showberrydescription
+	callnative ScriptShowItemDescription
+	.byte 1
+	.endm
+
+	.macro hideitemdescription
+	callnative ScriptHideItemDescription
 	.endm

@@ -529,8 +529,9 @@ static void SetArenaData(void)
 
 static void SaveArenaChallenge(void)
 {
+    ClearEnemyPartyAfterChallenge();
     gSaveBlock1Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock1Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
 }

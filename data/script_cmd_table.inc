@@ -232,12 +232,10 @@ gScriptCmdTable::
 	.4byte ScrCmd_questmenu                 @ 0xe5
     .4byte ScrCmd_subquestmenu              @ 0xe6
     .4byte ScrCmd_returnqueststate          @ 0xe7
-	.4byte ScrCmd_showitemdesc              @ 0xe8
-	.4byte ScrCmd_hideitemdesc              @ 0xe9
-	.4byte ScrCmd_calculatemonstats  		@ 0xea
-	.4byte ScrCmd_setwildbattle2			@ 0xeb
-	.4byte ScrCmd_dynmultichoice            @ 0xec
-	.4byte ScrCmd_dynmultipush              @ 0xed
+	.4byte ScrCmd_calculatemonstats  		@ 0xe8
+	.4byte ScrCmd_setwildbattle2			@ 0xe9
+	.4byte ScrCmd_dynmultichoice            @ 0xea
+	.4byte ScrCmd_dynmultipush              @ 0xeb
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

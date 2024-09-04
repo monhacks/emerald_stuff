@@ -268,8 +268,9 @@ static void SetBattleFactoryData(void)
 
 static void SaveFactoryChallenge(void)
 {
+    ClearEnemyPartyAfterChallenge();
     gSaveBlock1Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock1Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
 }
@@ -429,9 +430,6 @@ static void SetPlayerAndOpponentParties(void)
             ivs = gSaveBlock1Ptr->frontier.rentalMons[i].ivs;
             
             CreateFacilityMon(&gFacilityTrainerMons[monId], monLevel, ivs, OT_ID_PLAYER_ID, FLAG_FRONTIER_MON_FACTORY, &gPlayerParty[i]);
-            SetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY,
-                    &gSaveBlock1Ptr->frontier.rentalMons[i].personality);
-            CalculateMonStats(&gPlayerParty[i]);
         }
     }
 
@@ -443,12 +441,7 @@ static void SetPlayerAndOpponentParties(void)
         {
             monId = gSaveBlock1Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
             ivs = gSaveBlock1Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs;
-            CreateFacilityMon(&gFacilityTrainerMons[monId],
-                    monLevel, ivs, OT_ID_PLAYER_ID, FLAG_FRONTIER_MON_FACTORY,
-                    &gEnemyParty[i]);
-            SetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY,
-                    &gSaveBlock1Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].personality);
-            CalculateMonStats(&gPlayerParty[i]);
+            CreateFacilityMon(&gFacilityTrainerMons[monId], monLevel, ivs, OT_ID_PLAYER_ID, FLAG_FRONTIER_MON_FACTORY, &gEnemyParty[i]);
         }
         break;
     }

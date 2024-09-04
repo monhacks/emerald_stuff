@@ -444,7 +444,7 @@
 #define STRINGID_WATERSPORTENDS                       442
 #define STRINGID_GRAVITYENDS                          443
 #define STRINGID_AQUARINGHEAL                         444
-#define STRINGID_AURORAVEILENDS                       445
+#define STRINGID_AURORAVEILENDS                       445 // Unused
 #define STRINGID_ELECTRICTERRAINENDS                  446
 #define STRINGID_MISTYTERRAINENDS                     447
 #define STRINGID_PSYCHICTERRAINENDS                   448
