@@ -111,7 +111,8 @@
     "Route40",
     "Route39",
     "LehtiTown",
-    "LehtiRoad"
+    "LehtiRoad",
+    "LehtiRoad2"
   ],
   "gMapGroup_IndoorLehti": [
     "LehtiTown_PlayersHouse_1F",

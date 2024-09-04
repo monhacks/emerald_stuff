@@ -80,6 +80,7 @@
 #define MAP_ROUTE39                  (71 | (0 << 8))
 #define MAP_LEHTI_TOWN               (72 | (0 << 8))
 #define MAP_LEHTI_ROAD               (73 | (0 << 8))
+#define MAP_LEHTI_ROAD2              (74 | (0 << 8))
 
 // gMapGroup_IndoorLehti
 #define MAP_LEHTI_TOWN_PLAYERS_HOUSE_1F (0 | (1 << 8))

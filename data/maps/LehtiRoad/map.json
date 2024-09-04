@@ -17,6 +17,11 @@
       "map": "MAP_LEHTI_TOWN",
       "offset": -16,
       "direction": "right"
+    },
+    {
+      "map": "MAP_LEHTI_ROAD2",
+      "offset": -6,
+      "direction": "down"
     }
   ],
   "object_events": [
